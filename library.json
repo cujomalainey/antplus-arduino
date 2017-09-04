@@ -1,0 +1,19 @@
+{
+  "name": "ANT+",
+  "keywords": "ant, protocol, radio, rf, ant+, fitness, sports",
+  "description": "Adds support for ANT+ network devices",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/cujomalainey/antplus-arduino.git"
+  },
+  "version": "0.1.0",
+  "frameworks": "arduino",
+  "platforms": "atmelavr, teensy",
+  "dependencies":
+  [
+      {
+          "name":"ANT"
+      }
+  ]
+ }
