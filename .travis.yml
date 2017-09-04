@@ -34,12 +34,11 @@ cache:
         - "~/.platformio"
 
 env:
-    - PLATFORMIO_CI_SRC=path/to/test/file.c
-    - PLATFORMIO_CI_SRC=examples/file.ino
-    - PLATFORMIO_CI_SRC=path/to/test/directory
+    - PLATFORMIO_CI_SRC=examples/HRSensor/HRMonitor.ino
+    - PLATFORMIO_CI_SRC=examples/HRMonitor/HRMonitor.ino
 
 install:
     - pip install -U platformio
 
 script:
-    - platformio ci --lib="." --board=ID_1 --board=ID_2 --board=ID_N
+    - platformio ci --lib="." --board=teensy31
