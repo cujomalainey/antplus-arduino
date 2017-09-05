@@ -3,7 +3,7 @@ An Implementation of the Ant+ Network on top of ant-arduino
 
 ## Status
 
-[![Build Status](https://travis-ci.org/cujomalainey/antplus-arduino.svg?branch=master)](https://travis-ci.org/cujomalainey/antplus-arduino)
+[![Build Status](https://travis-ci.org/cujomalainey/antplus-arduino.svg?branch=master)](https://travis-ci.org/cujomalainey/antplus-arduino) [![CircleCI](https://circleci.com/gh/cujomalainey/antplus-arduino.svg?style=svg)](https://circleci.com/gh/cujomalainey/antplus-arduino)
 
 ## News
 
