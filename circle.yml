@@ -2,6 +2,7 @@ dependencies:
     pre:
         # Install the latest stable PlatformIO
         - sudo pip install -U platformio
+        - platformio platform install teensy
 
 test:
     override:
