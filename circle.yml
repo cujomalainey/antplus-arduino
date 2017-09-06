@@ -6,6 +6,6 @@ dependencies:
 
 test:
     override:
-        - platformio test -e teensy31
+        - platformio remote test -e teensy31
    
           
