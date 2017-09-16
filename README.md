@@ -3,7 +3,7 @@ An Implementation of the Ant+ Network on top of ant-arduino
 
 ## Status
 
-[![Build Status](https://travis-ci.org/cujomalainey/antplus-arduino.svg?branch=master)](https://travis-ci.org/cujomalainey/antplus-arduino) 
+[![Build Status](https://travis-ci.org/cujomalainey/antplus-arduino.svg?branch=master)](https://travis-ci.org/cujomalainey/antplus-arduino)
 
 ## News
 
@@ -13,7 +13,7 @@ An Implementation of the Ant+ Network on top of ant-arduino
 
 * v0.1.0 Build Initial Framework with HR profile slave
 * v0.2.0 Build Framework for Channel Master with HR master
-* v0.3.0 Build Callback system into framework
+* v0.3.0 Build support for non-ANT+ channel interfacing
 * v1.0.0 Finalize and verify system
 * v1.X.X Adding more profiles
 
