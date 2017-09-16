@@ -9,7 +9,7 @@
   },
   "version": "0.1.0",
   "frameworks": "arduino",
-  "platforms": "atmelavr, teensy",
+  "platforms": "atmelavr, atmelsam, espressif32, espressif8266, intel_arc32, microchippic32, nordicnrf51, nordicnrf52, ststm32, timsp430, teensy",
   "dependencies":
   [
       {
