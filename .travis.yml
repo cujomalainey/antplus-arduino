@@ -34,8 +34,8 @@ cache:
         - "~/.platformio"
 
 env:
-    - PLATFORMIO_CI_SRC=examples/HRSensor/HRSensor.ino
-    - PLATFORMIO_CI_SRC=examples/HRMonitor/HRMonitor.ino
+    - PLATFORMIO_CI_SRC=examples/HeartRateSensor/HeartRateSensor.ino
+    - PLATFORMIO_CI_SRC=examples/HeartRateMonitor/HeartRateMonitor.ino
 
 install:
     - pip install -U platformio
