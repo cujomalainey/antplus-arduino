@@ -67,3 +67,5 @@ Questions about this project should be posted to http://groups.google.com/group/
 At the current time there is zero support for commercial usage. Contact me via email if you are looking to use this code commercially.
 
 If you are looking for commercial support for ANT radios go to thisisant.com
+
+NOTE: This library is not ANT+ certified and does not intend to be. It is meant to be tool to get quick and easy access to sensors in the ANT+ network. There are edge cases where it will fail to meet the spec of the ANT+ protocol.
