@@ -41,4 +41,4 @@ install:
     - pip install -U platformio
 
 script:
-    - platformio ci --lib="." --board=teensy31
+    - platformio ci --lib="." --board=teensy31 --project-option="lib_deps=ANT"
