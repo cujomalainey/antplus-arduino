@@ -2,11 +2,15 @@
 #define ANTPLUS_ANTROUTER_h
 
 #include <ANTPLUS_defines.h>
+#include <BaseClasses/ANTPLUS_BaseProfile.h>
 
 #include "ANT.h"
 
-class AntRouter {
+class AntPlusRouter {
 public:
+    AntPlusRouter();
+    AntPlusRouter(BaseAntWithCallbacks& driver);
+    AntPlusRouter(BaseAntWithCallbacks& driver, const uint8_t* key);
     void setDriver(BaseAntWithCallbacks& driver);
     void setAntPlusNetworkKey(const uint8_t* key);
     void setProfile(uint8_t channel, BaseProfile& profile);

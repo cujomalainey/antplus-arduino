@@ -1,1 +1,7 @@
-// TODO
+#ifndef ANTPLUS_DEFINES_h
+#define ANTPLUS_DEFINES_h
+
+// Misc
+#define ANTPLUS_MAX_CHANNELS_POSSIBLE 15
+
+#endif // ANTPLUS_DEFINES_h
