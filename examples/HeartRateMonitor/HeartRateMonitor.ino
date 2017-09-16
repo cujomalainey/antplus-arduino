@@ -26,7 +26,7 @@ ProfileHRMonitor hr = ProfileHRMonitor(WILDCARD_DEVICE);
 void setup() {
     Serial1.begin(BAUD_RATE);
     ant.setSerial(Serial1);
-    router.setDriver(ant);
+    router.setDriver(ant); // never touch ant again
     router.setAntPlusNetworkKey(NETWORK_KEY);
     router.setProfile(CHANNEL_0, hr);
     // Delay after initial setup to wait for user to connect on serial
