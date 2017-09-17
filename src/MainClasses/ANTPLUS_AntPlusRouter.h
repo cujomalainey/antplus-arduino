@@ -1,10 +1,13 @@
-#ifndef ANTPLUS_ANTROUTER_h
-#define ANTPLUS_ANTROUTER_h
+#ifndef ANTPLUS_ANTPLUSROUTER_h
+#define ANTPLUS_ANTPLUSROUTER_h
 
 #include <ANTPLUS_defines.h>
 #include <BaseClasses/ANTPLUS_BaseProfile.h>
 
 #include "ANT.h"
+
+// Handle circular dependency
+class BaseProfile;
 
 class AntPlusRouter {
 public:
@@ -39,6 +42,6 @@ private:
     BaseAntWithCallbacks* _ant;
     BaseProfile* profiles[ANTPLUS_MAX_CHANNELS_POSSIBLE]; // Might be less, need to check on startup
     uint8_t _maxChannels;
-}
+};
 
-#endif // ANTPLUS_ANTROUTER_h
+#endif // ANTPLUS_ANTPLUSROUTER_h
