@@ -14,13 +14,14 @@ public:
     AntPlusRouter();
     AntPlusRouter(BaseAntWithCallbacks& driver);
     AntPlusRouter(BaseAntWithCallbacks& driver, const uint8_t* key);
-    void setDriver(BaseAntWithCallbacks& driver);
+    uint8_t setDriver(BaseAntWithCallbacks& driver);
     void setAntPlusNetworkKey(const uint8_t* key);
     void setProfile(uint8_t channel, BaseProfile& profile);
     void send(AntRequest& msg);
     uint8_t getMaxChannels();
     void loop();
     void reset();
+    void resetRadio(uint8_t waitForStartup);
 private:
     // Driver callbacks
     void onPacketError(uint8_t error, uintptr_t data);
@@ -39,9 +40,11 @@ private:
     void onSelectiveDataUpdateMaskSetting(SelectiveDataUpdateMaskSetting& msg, uintptr_t data);
     void onStartUpMessage(StartUpMessage& msg, uintptr_t data);
 
-    BaseAntWithCallbacks* _ant;
+    BaseAntWithCallbacks* _ant = NULL;
     BaseProfile* profiles[ANTPLUS_MAX_CHANNELS_POSSIBLE]; // Might be less, need to check on startup
     uint8_t _maxChannels;
+    const uint8_t* _networkKey = NULL;
+    uint8_t _radioStarted = 0;
 };
 
 #endif // ANTPLUS_ANTPLUSROUTER_h
