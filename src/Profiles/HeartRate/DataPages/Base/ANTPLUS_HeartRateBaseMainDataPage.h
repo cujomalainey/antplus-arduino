@@ -6,7 +6,11 @@
 #include "ANT.h"
 
 class HeartRateBaseMainDataPage : public BaseDataPage, public BroadcastData {
-
+public:
+    uint8_t getPageChangeToggle();
+    uint16_t getHeartBeatEventTime();
+    uint8_t getHeartBeatCount();
+    uint8_t getComputedHeartRate();
 }
 
 #endif // ANTPLUS_HEARTRATEBASEMAINDATAPAGE_h
