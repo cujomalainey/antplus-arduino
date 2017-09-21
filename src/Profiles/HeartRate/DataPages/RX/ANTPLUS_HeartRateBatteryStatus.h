@@ -5,8 +5,9 @@
 
 #include "ANT.h"
 
-class HeartRateBaseMainDataPage : public HeartRateBatteryStatus {
+class HeartRateBatteryStatus : public HeartRateBaseMainDataPage {
 public:
+    HeartRateBatteryStatus();
     uint8_t getBatteryLevel();
     uint8_t getFractionalBatteryVoltage();
     uint8_t getCoarseBatteryVolage();
