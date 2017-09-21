@@ -3,8 +3,6 @@
 
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 
-#include "ANT.h"
-
 class HeartRateBatteryStatus : public HeartRateBaseMainDataPage {
 public:
     HeartRateBatteryStatus();
