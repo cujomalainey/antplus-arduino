@@ -1,13 +1,13 @@
 #ifndef ANTPLUS_HEARTRATEDEFAULT_h
 #define ANTPLUS_HEARTRATEDEFAULT_h
 
-#include <BaseClasses/ANTPLUS_BaseDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 
 #include "ANT.h"
 
 class HeartRateDefault : public HeartRateBaseMainDataPage {
 public:
     HeartRateDefault();
-}
+};
 
 #endif // ANTPLUS_HEARTRATEDEFAULT_h

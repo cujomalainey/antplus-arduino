@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_HEARTRATESWIMINTERVALSUMMARY_h
 #define ANTPLUS_HEARTRATESWIMINTERVALSUMMARY_h
 
-#include <BaseClasses/ANTPLUS_BaseDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 
 #include "ANT.h"
 
@@ -11,6 +11,6 @@ public:
     uint8_t getIntervalAverageHeartRate();
     uint8_t getIntervalMaximumHeartRate();
     uint8_t getSessionAverageHeartRate();
-}
+};
 
 #endif // ANTPLUS_HEARTRATESWIMINTERVALSUMMARY_h

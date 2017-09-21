@@ -11,6 +11,6 @@ public:
     uint16_t getHeartBeatEventTime();
     uint8_t getHeartBeatCount();
     uint8_t getComputedHeartRate();
-}
+};
 
 #endif // ANTPLUS_HEARTRATEBASEMAINDATAPAGE_h

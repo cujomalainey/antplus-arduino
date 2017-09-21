@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_HEARTRATEMANUFACTURERINFORMATION_h
 #define ANTPLUS_HEARTRATEMANUFACTURERINFORMATION_h
 
-#include <BaseClasses/ANTPLUS_BaseDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 
 #include "ANT.h"
 
@@ -10,6 +10,6 @@ public:
     HeartRateManufacturerInformation();
     uint8_t getManufacturerIdLsb();
     uint16_t getSerialNumber();
-}
+};
 
 #endif // ANTPLUS_HEARTRATEMANUFACTURERINFORMATION_h

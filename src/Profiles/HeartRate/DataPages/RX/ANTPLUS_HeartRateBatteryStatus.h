@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_HEARTRATEBATTERYSTATUS_h
 #define ANTPLUS_HEARTRATEBATTERYSTATUS_h
 
-#include <BaseClasses/ANTPLUS_BaseDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 
 #include "ANT.h"
 
@@ -12,6 +12,6 @@ public:
     uint8_t getFractionalBatteryVoltage();
     uint8_t getCoarseBatteryVolage();
     uint8_t getBatteryStatus();
-}
+};
 
 #endif // ANTPLUS_HEARTRATEBATTERYSTATUS_h

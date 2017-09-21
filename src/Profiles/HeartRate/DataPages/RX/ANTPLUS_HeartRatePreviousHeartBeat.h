@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_HEARTRATEPREVIOUSHEARTBEAT_h
 #define ANTPLUS_HEARTRATEPREVIOUSHEARTBEAT_h
 
-#include <BaseClasses/ANTPLUS_BaseDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 
 #include "ANT.h"
 
@@ -10,6 +10,6 @@ public:
     HeartRatePreviousHeartBeat();
     uint8_t getManufacturerSpecific();
     uint16_t getPreviousHeartBeatEventTime();
-}
+};
 
 #endif // ANTPLUS_HEARTRATEPREVIOUSHEARTBEAT_h

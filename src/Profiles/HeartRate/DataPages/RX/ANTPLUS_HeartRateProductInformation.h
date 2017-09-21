@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_HEARTRATEPRODUCTIONINFORMATION_h
 #define ANTPLUS_HEARTRATEPRODUCTIONINFORMATION_h
 
-#include <BaseClasses/ANTPLUS_BaseDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 
 #include "ANT.h"
 
@@ -11,6 +11,6 @@ public:
     uint8_t getHardwareVersion();
     uint8_t getSoftwareVersion();
     uint8_t getModelNumber();
-}
+};
 
 #endif // ANTPLUS_HEARTRATEPRODUCTIONINFORMATION_h
