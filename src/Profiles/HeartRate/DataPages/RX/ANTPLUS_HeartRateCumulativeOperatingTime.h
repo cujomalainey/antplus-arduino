@@ -6,8 +6,7 @@
 class HeartRateCumulativeOperatingTime : public HeartRateBaseMainDataPage {
 public:
     HeartRateCumulativeOperatingTime();
-    uint8_t getFeaturesSupported();
-    uint8_t getFeaturesEnabled();
+    uint32_t getCumulativeOperatingTime(); // only 24 bits
 };
 
 #endif // ANTPLUS_HEARTRATECUMULITIVEOPERATINGTIME_h

@@ -4,10 +4,6 @@ HeartRateCumulativeOperatingTime::HeartRateCumulativeOperatingTime() : HeartRate
     // TODO
 }
 
-uint8_t HeartRateCumulativeOperatingTime::getFeaturesSupported() {
-    // TODO
-}
-
-uint8_t HeartRateCumulativeOperatingTime::getFeaturesEnabled() {
+uint32_t HeartRateCumulativeOperatingTime::getCumulativeOperatingTime() {
     // TODO
 }
