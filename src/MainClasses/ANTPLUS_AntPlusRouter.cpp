@@ -1,5 +1,4 @@
 #include <MainClasses/ANTPLUS_AntPlusRouter.h>
-#include <ANTPLUS_defines.h>
 
 AntPlusRouter::AntPlusRouter() {
     // TODO
