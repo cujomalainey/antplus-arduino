@@ -1,17 +1,17 @@
 #include <Profiles/HeartRate/DataPages/RX/ANTPLUS_HeartRateProductInformation.h>
 
-HeartRateProductionInformation::HeartRateProductionInformation() {
+HeartRateProductInformation::HeartRateProductInformation() {
     // TODO
 }
 
-uint8_t HeartRateProductionInformation::getHardwareVersion() {
+uint8_t HeartRateProductInformation::getHardwareVersion() {
     // TODO
 }
 
-uint8_t HeartRateProductionInformation::getSoftwareVersion() {
+uint8_t HeartRateProductInformation::getSoftwareVersion() {
     // TODO
 }
 
-uint8_t HeartRateProductionInformation::getModelNumber() {
+uint8_t HeartRateProductInformation::getModelNumber() {
     // TODO
 }

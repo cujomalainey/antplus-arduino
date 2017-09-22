@@ -8,7 +8,8 @@
 // Common page 76
 
 class ModeSettings : public BaseDataPage, public BroadcastData {
-// TODO
+    ModeSettings();
+    uint8_t getSportMode();
 };
 
 #endif // ANTPLUS_MODESETTINGS_h

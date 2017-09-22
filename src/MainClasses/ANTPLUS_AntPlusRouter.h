@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_ANTPLUSROUTER_h
 #define ANTPLUS_ANTPLUSROUTER_h
 
-#include <ANTPLUS_defines.h>
+#include <ANTPLUS_Defines.h>
 #include <BaseClasses/ANTPLUS_BaseProfile.h>
 
 #include "ANT.h"

@@ -3,9 +3,9 @@
 
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 
-class HeartRateProductionInformation : public HeartRateBaseMainDataPage {
+class HeartRateProductInformation : public HeartRateBaseMainDataPage {
 public:
-    HeartRateProductionInformation();
+    HeartRateProductInformation();
     uint8_t getHardwareVersion();
     uint8_t getSoftwareVersion();
     uint8_t getModelNumber();
