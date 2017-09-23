@@ -9,4 +9,8 @@ Code accidentally implemented in monitor, storing here for later
 bool ProfileHeartRateMonitor::handleCapabilities(HeartRateBaseMainDataPage& dataPage) {
     // TODO
 }
+
+bool ProfileHeartRateMonitor::handleRequestDataPage(HeartRateBaseMainDataPage& dataPage) {
+    // TODO
+}
 */

@@ -74,7 +74,3 @@ bool ProfileHeartRateMonitor::handleSwimIntervalSummary(HeartRateBaseMainDataPag
 bool ProfileHeartRateMonitor::handleModeSettings(HeartRateBaseMainDataPage& dataPage) {
     // TODO
 }
-
-bool ProfileHeartRateMonitor::handleRequestDataPage(HeartRateBaseMainDataPage& dataPage) {
-    // TODO
-}
