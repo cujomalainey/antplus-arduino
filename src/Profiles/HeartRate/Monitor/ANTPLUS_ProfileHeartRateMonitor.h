@@ -11,7 +11,6 @@ class ProfileHeartRateMonitor : public BaseSlaveProfile {
 public:
     ProfileHeartRateMonitor(uint8_t channelId);
     void onHeartRateBatteryStatus(void (*func)(HeartRateBatteryStatus&, uintptr_t), uintptr_t data = 0) { _onBatteryStatus.set(func, data); }
-    void onHeartRateCapabilities(void (*func)(HeartRateCapabilities&, uintptr_t), uintptr_t data = 0) { _onHeartRateCapabilities.set(func, data); }
     void onHeartRateCumulativeOperatingTime(void (*func)(HeartRateCumulativeOperatingTime&, uintptr_t), uintptr_t data = 0) { _onHeartRateCumulativeOperatingTime.set(func, data); }
     void onHeartRateDefault(void (*func)(HeartRateDefault&, uintptr_t), uintptr_t data = 0) { _onHeartRateDefault.set(func, data); }
     void onHeartRateManufacturerInformation(void (*func)(HeartRateManufacturerInformation&, uintptr_t), uintptr_t data = 0) { _onHeartRateManufacturerInformation.set(func, data); }
@@ -31,7 +30,6 @@ public:
 
 private:
     bool handleBatteryStatus(HeartRateBaseMainDataPage& dataPage);
-    bool handleCapabilities(HeartRateBaseMainDataPage& dataPage);
     bool handleCumulativeOperatingTime(HeartRateBaseMainDataPage& dataPage);
     bool handleDefault(HeartRateBaseMainDataPage& dataPage);
     bool handleManufacturerInformation(HeartRateBaseMainDataPage& dataPage);
@@ -41,7 +39,6 @@ private:
     bool handleModeSettings(HeartRateBaseMainDataPage& dataPage);
     bool handleRequestDataPage(HeartRateBaseMainDataPage& dataPage);
     Callback<HeartRateBatteryStatus&> _onBatteryStatus;
-    Callback<HeartRateCapabilities&> _onHeartRateCapabilities;
     Callback<HeartRateCumulativeOperatingTime&> _onHeartRateCumulativeOperatingTime;
     Callback<HeartRateDefault&> _onHeartRateDefault;
     Callback<HeartRateManufacturerInformation&> _onHeartRateManufacturerInformation;

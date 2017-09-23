@@ -41,10 +41,6 @@ bool ProfileHeartRateMonitor::handleBatteryStatus(HeartRateBaseMainDataPage& dat
     // TODO
 }
 
-bool ProfileHeartRateMonitor::handleCapabilities(HeartRateBaseMainDataPage& dataPage) {
-    // TODO
-}
-
 bool ProfileHeartRateMonitor::handleCumulativeOperatingTime(HeartRateBaseMainDataPage& dataPage) {
     // TODO
 }
