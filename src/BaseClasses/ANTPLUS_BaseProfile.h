@@ -27,6 +27,12 @@ public:
      * is a manufacturer defined page
      */
     void onOtherDataPage(); // TODO fill in params
+    /**
+     * Opens radio channel for RX/TX
+     */
+    virtual void begin() = 0;
+    virtual void stop() = 0;
+
     /******************************************
      *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
      ******************************************/
@@ -34,11 +40,20 @@ public:
     virtual void onAdvancedBurstData(AdvancedBurstData& msg) {}
     virtual void onBroadcastData(BroadcastData& msg) {}
     virtual void onBurstTransferData(BurstTransferData& msg) {}
-    void setChannelStatus(uint8_t status);
     void setRouter(AntPlusRouter router);
+    void setChannelStatus(uint8_t status);
+    void setChannelId(uint16_t channelId);
+    void setDeviceType(uint8_t deviceType);
+    void setTransmissionType(uint8_t transmissionType);
+protected:
+    void pushChannelConfig();
+    void openChannel();
+    void closeChannel();
 private:
-    uint8_t _channelId;
     AntPlusRouter* _router;
+    uint16_t _channelId;
+    uint8_t _deviceType;
+    uint8_t _transmissionType;
 };
 
 #endif // ANTPLUS_BASEPROFILE_h

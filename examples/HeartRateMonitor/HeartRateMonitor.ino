@@ -35,7 +35,7 @@ void setup() {
 
     Serial.begin(BAUD_RATE);
     Serial.println("Running");
-    hr.connect();
+    hr.begin();
     // wait for pair to complete
     while(hr.getChannelStatus() == CHANNEL_STATUS_SEARCHING) {router.loop();};
     // print channel status

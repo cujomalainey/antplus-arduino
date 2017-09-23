@@ -3,10 +3,6 @@
 
 class BaseMasterProfile : public BaseProfile {
 public:
-    /**
-     * Open channel and begin transmission pattern
-     */
-    void transmit() = 0;
     // TODO add callback structure and handler for next datapage
 private:
     /**
