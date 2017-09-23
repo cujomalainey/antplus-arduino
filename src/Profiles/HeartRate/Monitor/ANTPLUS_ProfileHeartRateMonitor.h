@@ -21,8 +21,25 @@ public:
     void onModeSettings(void (*func)(ModeSettings&, uintptr_t), uintptr_t data = 0) { _onModeSettings.set(func, data); }
     void onRequestDataPage(void (*func)(RequestDataPage&, uintptr_t), uintptr_t data = 0) { _onRequestDataPage.set(func, data); }
 
-    void connect();
+    void begin();
+    void stop();
+
+    /******************************************
+     *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
+     ******************************************/
+    void onBroadcastData(BroadcastData& msg);
+
 private:
+    bool handleBatteryStatus(HeartRateBaseMainDataPage& dataPage);
+    bool handleCapabilities(HeartRateBaseMainDataPage& dataPage);
+    bool handleCumulativeOperatingTime(HeartRateBaseMainDataPage& dataPage);
+    bool handleDefault(HeartRateBaseMainDataPage& dataPage);
+    bool handleManufacturerInformation(HeartRateBaseMainDataPage& dataPage);
+    bool handlePreviousHeartBeat(HeartRateBaseMainDataPage& dataPage);
+    bool handleProductInformation(HeartRateBaseMainDataPage& dataPage);
+    bool handleSwimIntervalSummary(HeartRateBaseMainDataPage& dataPage);
+    bool handleModeSettings(HeartRateBaseMainDataPage& dataPage);
+    bool handleRequestDataPage(HeartRateBaseMainDataPage& dataPage);
     Callback<HeartRateBatteryStatus&> _onBatteryStatus;
     Callback<HeartRateCapabilities&> _onHeartRateCapabilities;
     Callback<HeartRateCumulativeOperatingTime&> _onHeartRateCumulativeOperatingTime;
