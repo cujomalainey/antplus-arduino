@@ -53,5 +53,6 @@ void BaseProfile::openChannel() {
 }
 
 void BaseProfile::closeChannel() {
+    CloseChannel cc;
     // TODO
 }
