@@ -48,14 +48,16 @@ void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
         break;
     // TODO mode settings
     }
+    // TODO handle nothing called
 }
 
 void ProfileHeartRateMonitor::begin() {
-    // TODO
+    pushChannelConfig();
+    openChannel();
 }
 
 void ProfileHeartRateMonitor::stop() {
-    // TODO
+    closeChannel();
 }
 
 bool ProfileHeartRateMonitor::handleBatteryStatus(HeartRateBaseMainDataPage& dataPage) {
