@@ -28,9 +28,9 @@ void setup() {
     ant.setSerial(Serial1);
     delay(10000);
 
-    router.setDriver(ant); // never touch ant again
+    router.setDriver(&ant); // never touch ant again
     router.setAntPlusNetworkKey(NETWORK_KEY);
-    router.setProfile(CHANNEL_0, hr);
+    router.setProfile(CHANNEL_0, &hr);
     // Delay after initial setup to wait for user to connect on serial
 
     Serial.begin(BAUD_RATE);

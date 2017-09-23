@@ -12,17 +12,18 @@ class BaseProfile;
 class AntPlusRouter {
 public:
     AntPlusRouter();
-    AntPlusRouter(BaseAntWithCallbacks& driver);
-    AntPlusRouter(BaseAntWithCallbacks& driver, const uint8_t* key);
-    uint8_t setDriver(BaseAntWithCallbacks& driver);
+    AntPlusRouter(BaseAntWithCallbacks* driver);
+    AntPlusRouter(BaseAntWithCallbacks* driver, const uint8_t* key);
+    uint8_t setDriver(BaseAntWithCallbacks* driver);
     void setAntPlusNetworkKey(const uint8_t* key);
-    void setProfile(uint8_t channel, BaseProfile& profile);
+    void setProfile(uint8_t channel, BaseProfile* profile);
     void send(AntRequest& msg);
     uint8_t getMaxChannels();
     void loop();
     void reset();
     void resetRadio(uint8_t waitForStartup);
 private:
+    void pushNetworkKey();
     // Driver callbacks
     void onPacketError(uint8_t error, uintptr_t data);
     void onAcknowledgedData(AcknowledgedData& msg, uintptr_t data);
@@ -41,7 +42,7 @@ private:
     void onStartUpMessage(StartUpMessage& msg, uintptr_t data);
 
     BaseAntWithCallbacks* _ant = NULL;
-    BaseProfile* profiles[ANTPLUS_MAX_CHANNELS_POSSIBLE]; // Might be less, need to check on startup
+    BaseProfile* _profiles[ANTPLUS_MAX_CHANNELS_POSSIBLE]; // Might be less, need to check on startup
     uint8_t _maxChannels;
     const uint8_t* _networkKey = NULL;
     uint8_t _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
