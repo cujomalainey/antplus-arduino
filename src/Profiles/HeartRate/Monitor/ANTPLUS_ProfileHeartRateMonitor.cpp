@@ -6,26 +6,32 @@ ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint8_t channelId) : BaseSlaveP
 }
 
 void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
+    HeartRateBaseMainDataPage dp; // TODO finish cast from msg here
     uint8_t dataPage = 0;
     bool called = false;
     switch (dataPage) {
     case ANTPLUS_HEARTRATE_DATAPAGE_DEFAULT_NUMBER:
+        called = handleDefault(dp);
         break;
     case ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER:
+        called = handleCumulativeOperatingTime(dp);
         break;
     case ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER:
+        called = handleManufacturerInformation(dp);
         break;
     case ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER:
+        called = handleProductInformation(dp);
         break;
     case ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_NUMBER:
+        called = handlePreviousHeartBeat(dp);
         break;
     case ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_NUMBER:
-        break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER:
+        called = handleSwimIntervalSummary(dp);
         break;
     case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER:
-        // called = handleBatteryStatus(dp);
+        called = handleBatteryStatus(dp);
         break;
+    // TODO mode settings
     }
 }
 
