@@ -24,3 +24,20 @@ void BaseProfile::setDeviceType(uint8_t deviceType) {
 void BaseProfile::setTransmissionType(uint8_t transmissionType) {
     // TODO
 }
+
+void BaseProfile::pushChannelConfig() {
+    AssignChannel ac;
+    ChannelId ci;
+    ChannelPeriod cp;
+    ChannelRfFrequency crf;
+    // TODO
+}
+
+void BaseProfile::openChannel() {
+    OpenChannel oc;
+    // TODO
+}
+
+void BaseProfile::closeChannel() {
+    // TODO
+}
