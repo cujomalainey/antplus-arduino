@@ -7,7 +7,7 @@
 
 // Common Page 70
 
-class RequestDataPage : public BaseDataPage, public BroadcastData {
+class RequestDataPage : public BaseDataPage, public AcknowledgedData {
     RequestDataPage();
     // TODO
 };
