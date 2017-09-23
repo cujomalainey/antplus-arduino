@@ -11,6 +11,7 @@ class BaseProfile {
 public:
     BaseProfile();
     BaseProfile(uint8_t deviceNumber);
+    BaseProfile(uint8_t deviceNumber, uint8_t transmissionType);
     /**
      * Returns the last Channel status byte recieved
      */
@@ -29,9 +30,25 @@ public:
      */
     void onOtherDataPage(); // TODO fill in params
     /**
-     * Set the channel Id, wildcard is 0
+     * Set the channel deviceNumber, wildcard for searching is 0
      */
     void setDeviceNumber(uint16_t deviceNumber);
+    /**
+     * Set the channel transmission type, wildcard for searching is 0
+     */
+    void setTransmissionType(uint8_t transmissionType);
+    /**
+     * Get the channel device number, used to identify device after search
+     * Wait till channelStatus() has paired with a device before checking
+     * this field.
+     */
+    uint16_t getDeviceNumber();
+    /**
+     * Get the channel transmision type, used to identify device after search
+     * Wait till channelStatus() has paired with a device before checking
+     * this field.
+     */
+    uint8_t getTransmissionType();
     /**
      * Opens radio channel for RX/TX
      */
@@ -51,7 +68,6 @@ public:
     void setRouter(AntPlusRouter router);
     void setChannelNumber(uint8_t channel);
     void setChannelStatus(uint8_t status);
-    void setTransmissionType(uint8_t transmissionType);
     void setSearchTimeout(uint8_t seconds);
 protected:
     void setChannelType(uint8_t channelType);
