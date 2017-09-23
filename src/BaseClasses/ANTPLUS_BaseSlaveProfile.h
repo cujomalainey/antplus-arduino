@@ -5,7 +5,8 @@
 
 class BaseSlaveProfile : public BaseProfile {
 public:
-    BaseSlaveProfile(uint8_t channelId);
+    BaseSlaveProfile();
+    BaseSlaveProfile(uint16_t deviceNumber);
 
 private:
 };

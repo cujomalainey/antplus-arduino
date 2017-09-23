@@ -1,8 +1,8 @@
 #include <BaseClasses/ANTPLUS_BaseProfile.h>
 #include <ANTPLUS_PrivateDefines.h>
 
-BaseProfile::BaseProfile(uint8_t channelId) {
-    // TODO
+BaseProfile::BaseProfile(uint8_t deviceNumber) {
+
 }
 
 uint8_t BaseProfile::getChannelStatus() {

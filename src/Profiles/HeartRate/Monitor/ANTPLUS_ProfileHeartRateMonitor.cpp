@@ -1,8 +1,7 @@
 #include <Profiles/HeartRate/Monitor/ANTPLUS_ProfileHeartRateMonitor.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
-ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint8_t channelId) : BaseSlaveProfile(channelId) {
-    setChannelId(channelId);
+ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
 }
 
 void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {

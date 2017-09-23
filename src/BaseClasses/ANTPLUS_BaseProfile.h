@@ -9,7 +9,8 @@ class AntPlusRouter;
 
 class BaseProfile {
 public:
-    BaseProfile(uint8_t channelId);
+    BaseProfile();
+    BaseProfile(uint8_t deviceNumber);
     /**
      * Returns the last Channel status byte recieved
      */

@@ -9,7 +9,8 @@
 
 class ProfileHeartRateMonitor : public BaseSlaveProfile {
 public:
-    ProfileHeartRateMonitor(uint8_t channelId);
+    ProfileHeartRateMonitor();
+    ProfileHeartRateMonitor(uint16_t deviceNumber);
     void onHeartRateBatteryStatus(void (*func)(HeartRateBatteryStatus&, uintptr_t), uintptr_t data = 0) { _onBatteryStatus.set(func, data); }
     void onHeartRateCumulativeOperatingTime(void (*func)(HeartRateCumulativeOperatingTime&, uintptr_t), uintptr_t data = 0) { _onHeartRateCumulativeOperatingTime.set(func, data); }
     void onHeartRateDefault(void (*func)(HeartRateDefault&, uintptr_t), uintptr_t data = 0) { _onHeartRateDefault.set(func, data); }
