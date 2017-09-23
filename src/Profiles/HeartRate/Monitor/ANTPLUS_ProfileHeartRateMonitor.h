@@ -3,7 +3,7 @@
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
 #include <Profiles/HeartRate/DataPages/ANTPLUS_ProfileHeartRateDataPages.h>
-#include <CommonDataPages/ANTPLUS_CommonHeaders.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
 #include "ANT.h"
 
