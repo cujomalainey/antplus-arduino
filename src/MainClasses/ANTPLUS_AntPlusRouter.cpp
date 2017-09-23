@@ -1,4 +1,5 @@
 #include <MainClasses/ANTPLUS_AntPlusRouter.h>
+#include <MainClasses/ANTPLUS_CallbackWorkAround.h>
 
 AntPlusRouter::AntPlusRouter() {
     // TODO
@@ -14,15 +15,27 @@ AntPlusRouter::AntPlusRouter(BaseAntWithCallbacks* driver, const uint8_t* key) {
 }
 
 uint8_t AntPlusRouter::setDriver(BaseAntWithCallbacks* driver) {
-    // TODO
     _ant = driver;
     // register callbacks
+    _ant->onPacketError(onPacketErrorCallback, (uintptr_t)this);
+    _ant->onAcknowledgedData(onAcknowledgedDataCallback, (uintptr_t)this);
+    _ant->onAdvancedBurstData(onAdvancedBurstDataCallback, (uintptr_t)this);
+    _ant->onBroadcastData(onBroadcastDataCallback, (uintptr_t)this);
+    _ant->onBurstTransferData(onBurstTransferDataCallback, (uintptr_t)this);
+    _ant->onAdvancedBurstCapabilitiesConfiguration(onAdvancedBurstCapabilitiesConfigurationCallback, (uintptr_t)this);
+    _ant->onAntVersion(onAntVersionCallback, (uintptr_t)this);
+    _ant->onCapabilities(onCapabilitiesCallback, (uintptr_t)this);
+    _ant->onChannelEventResponse(onChannelEventResponseCallback, (uintptr_t)this);
+    _ant->onChannelIdResponse(onChannelIdResponseCallback, (uintptr_t)this);
+    _ant->onChannelStatus(onChannelStatusCallback, (uintptr_t)this);
+    _ant->onEncryptionModeParameters(onEncryptionModeParametersCallback, (uintptr_t)this);
+    _ant->onEventFilter(onEventFilterCallback, (uintptr_t)this);
+    _ant->onSelectiveDataUpdateMaskSetting(onSelectiveDataUpdateMaskSettingCallback, (uintptr_t)this);
+    _ant->onStartUpMessage(onStartUpMessageCallback, (uintptr_t)this);
     resetRadio(ANTPLUS_RESET_WAIT_FOR_STARTUP);
     delay(1000); // TODO replace with lock waiting for startup
     pushNetworkKey();
     // get max channels
-    // check if network key is set, if yes, push network key
-    // check if any profiles set, push if found to corresponding channels
     return 0;
 }
 
@@ -46,19 +59,15 @@ void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
 }
 
 void AntPlusRouter::send(AntRequest& msg) {
-    // TODO
+    _ant->send(msg);
 }
 
-/**
- * Returns the maximum number of channels the radio
- * connected can support
- */
 uint8_t AntPlusRouter::getMaxChannels() {
     return _maxChannels;
 }
 
 void AntPlusRouter::loop() {
-    // TODO
+    _ant->loop();
 }
 
 void AntPlusRouter::reset() {
@@ -74,74 +83,74 @@ void AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
 }
 
-void AntPlusRouter::onPacketError(uint8_t error, uintptr_t data) {
+void AntPlusRouter::onPacketError(uint8_t error) {
     // TODO
 }
 
-void AntPlusRouter::onAcknowledgedData(AcknowledgedData& msg, uintptr_t data) {
+void AntPlusRouter::onAcknowledgedData(AcknowledgedData& msg) {
     uint8_t channel = msg.getChannelNumber();
     if (_profiles[channel]) {
         _profiles[channel]->onAcknowledgedData(msg);
     }
 }
 
-void AntPlusRouter::onAdvancedBurstData(AdvancedBurstData& msg, uintptr_t data) {
+void AntPlusRouter::onAdvancedBurstData(AdvancedBurstData& msg) {
     uint8_t channel = msg.getChannelNumber();
     if (_profiles[channel]) {
         _profiles[channel]->onAdvancedBurstData(msg);
     }
 }
 
-void AntPlusRouter::onBroadcastData(BroadcastData& msg, uintptr_t data) {
+void AntPlusRouter::onBroadcastData(BroadcastData& msg) {
     uint8_t channel = msg.getChannelNumber();
     if (_profiles[channel]) {
         _profiles[channel]->onBroadcastData(msg);
     }
 }
 
-void AntPlusRouter::onBurstTransferData(BurstTransferData& msg, uintptr_t data) {
+void AntPlusRouter::onBurstTransferData(BurstTransferData& msg) {
     uint8_t channel = msg.getChannelNumber();
     if (_profiles[channel]) {
         _profiles[channel]->onBurstTransferData(msg);
     }
 }
 
-void AntPlusRouter::onAdvancedBurstCapabilitiesConfiguration(AdvancedBurstCapabilitiesConfiguration& msg, uintptr_t data) {
+void AntPlusRouter::onAdvancedBurstCapabilitiesConfiguration(AdvancedBurstCapabilitiesConfiguration& msg) {
     // TODO
 }
 
-void AntPlusRouter::onAntVersion(AntVersion& msg, uintptr_t data) {
+void AntPlusRouter::onAntVersion(AntVersion& msg) {
     // TODO
 }
 
-void AntPlusRouter::onCapabilities(Capabilities& msg, uintptr_t data) {
+void AntPlusRouter::onCapabilities(Capabilities& msg) {
+    _maxChannels = msg.getMaxChannels();
+}
+
+void AntPlusRouter::onChannelEventResponse(ChannelEventResponse& msg) {
     // TODO
 }
 
-void AntPlusRouter::onChannelEventResponse(ChannelEventResponse& msg, uintptr_t data) {
+void AntPlusRouter::onChannelIdResponse(ChannelIdResponse& msg) {
     // TODO
 }
 
-void AntPlusRouter::onChannelIdResponse(ChannelIdResponse& msg, uintptr_t data) {
+void AntPlusRouter::onChannelStatus(ChannelStatus& msg) {
     // TODO
 }
 
-void AntPlusRouter::onChannelStatus(ChannelStatus& msg, uintptr_t data) {
+void AntPlusRouter::onEncryptionModeParameters(EncryptionModeParameters& msg) {
     // TODO
 }
 
-void AntPlusRouter::onEncryptionModeParameters(EncryptionModeParameters& msg, uintptr_t data) {
+void AntPlusRouter::onEventFilter(EventFilter& msg) {
     // TODO
 }
 
-void AntPlusRouter::onEventFilter(EventFilter& msg, uintptr_t data) {
+void AntPlusRouter::onSelectiveDataUpdateMaskSetting(SelectiveDataUpdateMaskSetting& msg) {
     // TODO
 }
 
-void AntPlusRouter::onSelectiveDataUpdateMaskSetting(SelectiveDataUpdateMaskSetting& msg, uintptr_t data) {
-    // TODO
-}
-
-void AntPlusRouter::onStartUpMessage(StartUpMessage& msg, uintptr_t data) {
+void AntPlusRouter::onStartUpMessage(StartUpMessage& msg) {
     // TODO
 }

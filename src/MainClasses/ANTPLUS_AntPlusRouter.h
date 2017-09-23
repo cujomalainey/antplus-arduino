@@ -18,32 +18,39 @@ public:
     void setAntPlusNetworkKey(const uint8_t* key);
     void setProfile(uint8_t channel, BaseProfile* profile);
     void send(AntRequest& msg);
+    /**
+     * Returns the maximum number of channels the radio
+     * connected can support
+     */
     uint8_t getMaxChannels();
     void loop();
     void reset();
     void resetRadio(uint8_t waitForStartup);
+    /******************************************
+     *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
+     ******************************************/
+    void onPacketError(uint8_t error);
+    void onAcknowledgedData(AcknowledgedData& msg);
+    void onAdvancedBurstData(AdvancedBurstData& msg);
+    void onBroadcastData(BroadcastData& msg);
+    void onBurstTransferData(BurstTransferData& msg);
+    void onAdvancedBurstCapabilitiesConfiguration(AdvancedBurstCapabilitiesConfiguration& msg);
+    void onAntVersion(AntVersion& msg);
+    void onCapabilities(Capabilities& msg);
+    void onChannelEventResponse(ChannelEventResponse& msg);
+    void onChannelIdResponse(ChannelIdResponse& msg);
+    void onChannelStatus(ChannelStatus& msg);
+    void onEncryptionModeParameters(EncryptionModeParameters& msg);
+    void onEventFilter(EventFilter& msg);
+    void onSelectiveDataUpdateMaskSetting(SelectiveDataUpdateMaskSetting& msg);
+    void onStartUpMessage(StartUpMessage& msg);
 private:
     void pushNetworkKey();
     // Driver callbacks
-    void onPacketError(uint8_t error, uintptr_t data);
-    void onAcknowledgedData(AcknowledgedData& msg, uintptr_t data);
-    void onAdvancedBurstData(AdvancedBurstData& msg, uintptr_t data);
-    void onBroadcastData(BroadcastData& msg, uintptr_t data);
-    void onBurstTransferData(BurstTransferData& msg, uintptr_t data);
-    void onAdvancedBurstCapabilitiesConfiguration(AdvancedBurstCapabilitiesConfiguration& msg, uintptr_t data);
-    void onAntVersion(AntVersion& msg, uintptr_t data);
-    void onCapabilities(Capabilities& msg, uintptr_t data);
-    void onChannelEventResponse(ChannelEventResponse& msg, uintptr_t data);
-    void onChannelIdResponse(ChannelIdResponse& msg, uintptr_t data);
-    void onChannelStatus(ChannelStatus& msg, uintptr_t data);
-    void onEncryptionModeParameters(EncryptionModeParameters& msg, uintptr_t data);
-    void onEventFilter(EventFilter& msg, uintptr_t data);
-    void onSelectiveDataUpdateMaskSetting(SelectiveDataUpdateMaskSetting& msg, uintptr_t data);
-    void onStartUpMessage(StartUpMessage& msg, uintptr_t data);
 
     BaseAntWithCallbacks* _ant = NULL;
     BaseProfile* _profiles[ANTPLUS_MAX_CHANNELS_POSSIBLE]; // Might be less, need to check on startup
-    uint8_t _maxChannels;
+    uint8_t _maxChannels = 0;
     const uint8_t* _networkKey = NULL;
     uint8_t _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
 };
