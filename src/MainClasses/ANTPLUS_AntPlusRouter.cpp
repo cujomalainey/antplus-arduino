@@ -57,7 +57,7 @@ void AntPlusRouter::reset() {
 
 void AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     ResetSystem rs;
-    _ant.send(rs);
+    _ant->send(rs);
     for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
         profiles[i] = NULL;
     }
@@ -77,9 +77,9 @@ void AntPlusRouter::onAdvancedBurstData(AdvancedBurstData& msg, uintptr_t data) 
 }
 
 void AntPlusRouter::onBroadcastData(BroadcastData& msg, uintptr_t data) {
-    uint8_t channel = msg.getChannel();
+    uint8_t channel = msg.getChannelNumber();
     if (profiles[channel]) {
-        profiles[channel].onBroadcastData(msg);
+        profiles[channel]->onBroadcastData(msg);
     }
 }
 
