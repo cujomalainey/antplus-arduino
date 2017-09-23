@@ -1,6 +1,9 @@
 #ifndef ANTPLUS_HEARTRATEPROFILE_h
 #define ANTPLUS_HEARTRATEPROFILE_h
 
+// General Definitions
+#include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
+
 // Datapages
 #include <Profiles/HeartRate/DataPages/ANTPLUS_ProfileHeartRateDataPages.h>
 
