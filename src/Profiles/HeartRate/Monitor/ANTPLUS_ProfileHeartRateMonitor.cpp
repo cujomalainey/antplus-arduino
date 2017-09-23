@@ -1,6 +1,16 @@
 #include <Profiles/HeartRate/Monitor/ANTPLUS_ProfileHeartRateMonitor.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
+ProfileHeartRateMonitor::ProfileHeartRateMonitor() : BaseSlaveProfile() {
+    // TODO remove magic numbers
+    setDeviceNumber(0);
+    setChannelType(CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE);
+    setDeviceType(120);
+    setTransmissionType(0);
+    setChannelPeriod(8070);
+    setSearchTimeout(30);
+}
+
 ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
     // TODO remove magic numbers
     setChannelType(CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE);
