@@ -44,7 +44,7 @@ private:
     BaseProfile* profiles[ANTPLUS_MAX_CHANNELS_POSSIBLE]; // Might be less, need to check on startup
     uint8_t _maxChannels;
     const uint8_t* _networkKey = NULL;
-    uint8_t _radioStarted = 0;
+    uint8_t _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
 };
 
 #endif // ANTPLUS_ANTPLUSROUTER_h

@@ -52,11 +52,16 @@ void AntPlusRouter::loop() {
 }
 
 void AntPlusRouter::reset() {
-    // TODO
+    _ant = NULL;
 }
 
 void AntPlusRouter::resetRadio(uint8_t waitForStartup) {
-    // TODO
+    ResetSystem rs;
+    _ant.send(rs);
+    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
+        profiles[i] = NULL;
+    }
+    _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
 }
 
 void AntPlusRouter::onPacketError(uint8_t error, uintptr_t data) {
@@ -72,7 +77,10 @@ void AntPlusRouter::onAdvancedBurstData(AdvancedBurstData& msg, uintptr_t data) 
 }
 
 void AntPlusRouter::onBroadcastData(BroadcastData& msg, uintptr_t data) {
-    // TODO
+    uint8_t channel = msg.getChannel();
+    if (profiles[channel]) {
+        profiles[channel].onBroadcastData(msg);
+    }
 }
 
 void AntPlusRouter::onBurstTransferData(BurstTransferData& msg, uintptr_t data) {
