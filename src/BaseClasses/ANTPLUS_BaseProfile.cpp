@@ -56,8 +56,8 @@ void BaseProfile::pushChannelConfig() {
 }
 
 void BaseProfile::openChannel() {
-    OpenChannel oc;
-    // TODO
+    OpenChannel oc = OpenChannel(_channel);
+    _router->send(oc);
 }
 
 void BaseProfile::closeChannel() {
