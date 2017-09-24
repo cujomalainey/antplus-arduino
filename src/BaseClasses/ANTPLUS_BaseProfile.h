@@ -65,7 +65,7 @@ public:
     virtual void onAdvancedBurstData(AdvancedBurstData& msg) {}
     virtual void onBroadcastData(BroadcastData& msg) {}
     virtual void onBurstTransferData(BurstTransferData& msg) {}
-    void setRouter(AntPlusRouter router);
+    void setRouter(AntPlusRouter* router);
     void setChannelNumber(uint8_t channel);
     // TODO this should probably have the whole message passed in so
     // profiles like bikelights don't get confused.

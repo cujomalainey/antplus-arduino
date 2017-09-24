@@ -10,8 +10,8 @@ uint8_t BaseProfile::getChannelStatus() {
     return 0;
 }
 
-void BaseProfile::setRouter(AntPlusRouter router) {
-    // TODO
+void BaseProfile::setRouter(AntPlusRouter* router) {
+    _router = router;
 }
 
 void BaseProfile::setChannelNumber(uint8_t channel) {
@@ -49,6 +49,10 @@ void BaseProfile::pushChannelConfig() {
     ChannelPeriod cp = ChannelPeriod(_channel, _channelPeriod);
     ChannelRfFrequency crf = ChannelRfFrequency(_channel, ANTPLUS_CHANNEL_FREQUENCY);
     // TODO add set timeout
+    _router->send(ac);
+    _router->send(ci);
+    _router->send(cp);
+    _router->send(crf);
 }
 
 void BaseProfile::openChannel() {

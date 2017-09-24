@@ -42,7 +42,7 @@ uint8_t AntPlusRouter::setDriver(BaseAntWithCallbacks* driver) {
 void AntPlusRouter::pushNetworkKey() {
     if (_ant && _networkKey) {
         SetNetworkKey snk = SetNetworkKey(ANTPLUS_NETWORKKEY_INDEX, (uint8_t*)_networkKey);
-        _ant->send(snk);
+        send(snk);
     }
 }
 
@@ -56,6 +56,7 @@ void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
     channel = min(channel, _maxChannels - 1);
     // TODO close channel to make sure it hasn't been randomly replaced
     _profiles[channel] = profile;
+    profile->setRouter(this);
 }
 
 void AntPlusRouter::send(AntRequest& msg) {
@@ -72,11 +73,16 @@ void AntPlusRouter::loop() {
 
 void AntPlusRouter::reset() {
     _ant = NULL;
+    _networkKey = NULL;
+    // TODO
+    // disconnect profiles
+    // Reset max channels
+    // reset system state
 }
 
 void AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     ResetSystem rs;
-    _ant->send(rs);
+    send(rs);
     for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
         _profiles[i] = NULL;
     }
