@@ -5,8 +5,6 @@
  * to it and then reads the information
  * out via the serial port.
  *
- * TODO this example is incomplete
- *
  * Author Curtis Malainey
  ************************************/
 #include <Arduino.h>
@@ -23,6 +21,11 @@ AntWithCallbacks ant = AntWithCallbacks();
 AntPlusRouter router = AntPlusRouter();
 ProfileHeartRateMonitor hr = ProfileHeartRateMonitor(WILDCARD_DEVICE);
 
+void previousHeartBeatDataPageHandler(HeartRatePreviousHeartBeat& dp, uintptr_t data) {
+    Serial.print("HR: ");
+    Serial.println(dp.getComputedHeartRate());
+}
+
 void setup() {
     Serial1.begin(BAUD_RATE);
     ant.setSerial(Serial1);
@@ -35,6 +38,7 @@ void setup() {
 
     Serial.begin(BAUD_RATE);
     Serial.println("Running");
+    hr.onHeartRatePreviousHeartBeat(previousHeartBeatDataPageHandler, NULL);
     hr.begin();
     // wait for pair to complete
     while(hr.getChannelStatus() == CHANNEL_STATUS_SEARCHING) {router.loop();};
@@ -45,5 +49,3 @@ void setup() {
 void loop() {
     router.loop();
 }
-
-// add profile callbacks here
