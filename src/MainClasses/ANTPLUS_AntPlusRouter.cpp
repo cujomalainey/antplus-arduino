@@ -53,7 +53,7 @@ void AntPlusRouter::setAntPlusNetworkKey(const uint8_t* key) {
 
 void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
     // restrict user to maximum number of channels
-    channel = min(channel, _maxChannels - 1);
+    // channel = min(channel, _maxChannels - 1); TODO, wait till we set this
     // TODO close channel to make sure it hasn't been randomly replaced
     _profiles[channel] = profile;
     profile->setRouter(this);
