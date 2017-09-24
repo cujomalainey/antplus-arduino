@@ -69,7 +69,8 @@ bool ProfileHeartRateMonitor::handleCumulativeOperatingTime(HeartRateBaseMainDat
 }
 
 bool ProfileHeartRateMonitor::handleDefault(HeartRateBaseMainDataPage& dataPage) {
-    // TODO
+    HeartRateDefault dp = HeartRateDefault(dataPage);
+    return _onHeartRateDefault.call(dp);
 }
 
 bool ProfileHeartRateMonitor::handleManufacturerInformation(HeartRateBaseMainDataPage& dataPage) {
@@ -77,7 +78,8 @@ bool ProfileHeartRateMonitor::handleManufacturerInformation(HeartRateBaseMainDat
 }
 
 bool ProfileHeartRateMonitor::handlePreviousHeartBeat(HeartRateBaseMainDataPage& dataPage) {
-    // TODO
+    HeartRatePreviousHeartBeat dp = HeartRatePreviousHeartBeat(dataPage);
+    return _onHeartRatePreviousHeartBeat.call(dp);
 }
 
 bool ProfileHeartRateMonitor::handleProductInformation(HeartRateBaseMainDataPage& dataPage) {
