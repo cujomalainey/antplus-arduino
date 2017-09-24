@@ -3,7 +3,11 @@
 
 HeartRateBaseMainDataPage::HeartRateBaseMainDataPage(BroadcastData& dp) {
     setFrameData(dp.getFrameData());
-    // dp.setCommon(this); TODO
+    setMsgId(dp.getMsgId());
+    setAvailable(dp.isAvailable());
+    setChecksum(dp.getChecksum());
+    setErrorCode(dp.getErrorCode());
+    setLength(dp.getLength());
 }
 
 uint8_t HeartRateBaseMainDataPage::getDataPageNumber() {
