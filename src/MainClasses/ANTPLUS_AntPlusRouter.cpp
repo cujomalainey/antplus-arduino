@@ -84,7 +84,7 @@ void AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     ResetSystem rs;
     for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
         if (_profiles[i]) {
-            _profiles[i].stop();
+            _profiles[i]->stop();
         }
     }
     send(rs);
