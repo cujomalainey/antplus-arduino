@@ -8,6 +8,7 @@ An Implementation of the Ant+ Network on top of ant-arduino
 ## News
 
 * 9/4/2017 Project Started
+* 9/24/2017 Proof of concept complete (for system design)
 
 ## Roadmap
 
@@ -35,6 +36,47 @@ To add ANT support to a new sketch, add "#include <ANTPLUS.h>" (without quotes) 
 ## Hardware
 
 See [ant-arduino](https://github.com/cujomalainey/ant-arduino)
+
+## Support ANT+ Profiles
+
+This library aims to support all ANT+ devices. This goal will take time but here is the current status of the profiles supported. Note: not all of these sub-lists are filled in due lack of research on the profiles, they will be filled in when implementation starts.
+
+* BicyclePower
+* Bicycle Speed and Cadence
+  * [ ] Cadence Monitor
+  * [ ] Cadence Sensor
+  * [ ] Combined Monitor
+  * [ ] Combined Sensor
+  * [ ] Speed Monitor
+  * [ ] Speed Sensor
+* Bike Lights
+  * [ ] Bike Light
+  * [ ] Bike Light Remote
+* Bike Radar
+  * [ ] Radar Monitor
+  * [ ] Radar Sensor
+* Blood Pressure
+* Controls
+* Dropper Seatpost
+* Environment
+  * [ ] Environment Monitor
+  * [ ] Environment Sensor
+* Fitness Equipment
+* Geocache
+* Heart rate
+  * [x] HR Monitor
+  * [ ] HR Sensor
+* Light Electric Vehicle
+* Multi-Sport Speed and Distance
+* Muscle Oxygen
+* Racquet
+* Running Dynamics (not yet released)
+* Shifting
+* Stride Based Speed and Distance
+* Suspension
+* Sync
+* Tracker
+* Weight Scale
 
 ## Installation
 
