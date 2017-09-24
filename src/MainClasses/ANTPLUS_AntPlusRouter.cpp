@@ -82,10 +82,12 @@ void AntPlusRouter::reset() {
 
 void AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     ResetSystem rs;
-    send(rs);
     for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
-        _profiles[i] = NULL;
+        if (_profiles[i]) {
+            _profiles[i].stop();
+        }
     }
+    send(rs);
     _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
 }
 
