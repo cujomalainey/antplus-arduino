@@ -1,6 +1,6 @@
 #include <Profiles/HeartRate/DataPages/RX/ANTPLUS_HeartRateCapabilities.h>
 
-HeartRateCapabilities::HeartRateCapabilities() : HeartRateBaseMainDataPage() {
+HeartRateCapabilities::HeartRateCapabilities(BroadcastData& dp) : HeartRateBaseMainDataPage(dp) {
     // TODO
 }
 

@@ -5,7 +5,7 @@
 
 class HeartRatePreviousHeartBeat : public HeartRateBaseMainDataPage {
 public:
-    HeartRatePreviousHeartBeat();
+    HeartRatePreviousHeartBeat(BroadcastData& dp);
     uint8_t getManufacturerSpecific();
     uint16_t getPreviousHeartBeatEventTime();
 };

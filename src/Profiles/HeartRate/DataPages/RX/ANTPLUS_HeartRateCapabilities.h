@@ -5,7 +5,7 @@
 
 class HeartRateCapabilities : public HeartRateBaseMainDataPage {
 public:
-    HeartRateCapabilities();
+    HeartRateCapabilities(BroadcastData& dp);
     uint8_t getFeaturesSupported();
     uint8_t getFeaturesEnabled();
 };

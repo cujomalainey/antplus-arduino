@@ -5,7 +5,7 @@
 
 class HeartRateBatteryStatus : public HeartRateBaseMainDataPage {
 public:
-    HeartRateBatteryStatus();
+    HeartRateBatteryStatus(BroadcastData& dp);
     uint8_t getBatteryLevel();
     uint8_t getFractionalBatteryVoltage();
     uint8_t getCoarseBatteryVolage();

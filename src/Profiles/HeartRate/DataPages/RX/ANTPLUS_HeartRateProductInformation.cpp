@@ -1,6 +1,6 @@
 #include <Profiles/HeartRate/DataPages/RX/ANTPLUS_HeartRateProductInformation.h>
 
-HeartRateProductInformation::HeartRateProductInformation() {
+HeartRateProductInformation::HeartRateProductInformation(BroadcastData& dp) : HeartRateBaseMainDataPage(dp) {
     // TODO
 }
 

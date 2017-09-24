@@ -5,7 +5,7 @@
 
 class HeartRateDefault : public HeartRateBaseMainDataPage {
 public:
-    HeartRateDefault();
+    HeartRateDefault(BroadcastData& dp);
 };
 
 #endif // ANTPLUS_HEARTRATEDEFAULT_h

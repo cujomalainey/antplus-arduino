@@ -5,7 +5,7 @@
 
 class HeartRateSwimIntervalSummary : public HeartRateBaseMainDataPage {
 public:
-    HeartRateSwimIntervalSummary();
+    HeartRateSwimIntervalSummary(BroadcastData& dp);
     uint8_t getIntervalAverageHeartRate();
     uint8_t getIntervalMaximumHeartRate();
     uint8_t getSessionAverageHeartRate();

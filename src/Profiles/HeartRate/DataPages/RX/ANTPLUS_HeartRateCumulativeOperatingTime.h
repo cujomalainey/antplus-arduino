@@ -5,7 +5,7 @@
 
 class HeartRateCumulativeOperatingTime : public HeartRateBaseMainDataPage {
 public:
-    HeartRateCumulativeOperatingTime();
+    HeartRateCumulativeOperatingTime(BroadcastData& dp);
     uint32_t getCumulativeOperatingTime(); // only 24 bits
 };
 

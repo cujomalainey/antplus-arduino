@@ -1,8 +1,9 @@
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
-HeartRateBaseMainDataPage::HeartRateBaseMainDataPage() {
-
+HeartRateBaseMainDataPage::HeartRateBaseMainDataPage(BroadcastData& dp) {
+    setFrameData(dp.getFrameData());
+    // dp.setCommon(this); TODO
 }
 
 uint8_t HeartRateBaseMainDataPage::getDataPageNumber() {
