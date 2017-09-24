@@ -21,9 +21,10 @@ ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint16_t deviceNumber) : BaseSl
 }
 
 void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
-    HeartRateBaseMainDataPage dp; // TODO finish cast from msg here
-    uint8_t dataPage = 0;
+    HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
+    uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
+    // TODO Add general callback here
     switch (dataPage) {
     case ANTPLUS_HEARTRATE_DATAPAGE_DEFAULT_NUMBER:
         called = handleDefault(dp);
