@@ -10,10 +10,10 @@ public:
     uint8_t getFractionalBatteryVoltage();
     uint8_t getCoarseBatteryVolage();
     uint8_t getBatteryStatus();
-    void getBatteryLevel(uint8_t level);
-    void getFractionalBatteryVoltage(uint8_t voltage);
-    void getCoarseBatteryVolage(uint8_t voltage);
-    void getBatteryStatus(uint8_t status);
+    void setBatteryLevel(uint8_t level);
+    void setFractionalBatteryVoltage(uint8_t voltage);
+    void setCoarseBatteryVolage(uint8_t voltage);
+    void setBatteryStatus(uint8_t status);
 };
 
 #endif // ANTPLUS_HEARTRATEBATTERYSTATUSMSG_h
