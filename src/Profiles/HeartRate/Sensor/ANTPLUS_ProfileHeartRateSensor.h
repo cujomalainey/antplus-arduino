@@ -1,11 +1,21 @@
-// TODO
-/*
-Code accidentally implemented in monitor, storing here for later
+#ifndef ANTPLUS_PROFILEHEARTRATESENSOR_h
+#define ANTPLUS_PROFILEHEARTRATESENSOR_h
 
-void onHeartRateCapabilities(void (*func)(HeartRateCapabilities&, uintptr_t), uintptr_t data = 0) { _onHeartRateCapabilities.set(func, data); }
-void onRequestDataPage(void (*func)(RequestDataPage&, uintptr_t), uintptr_t data = 0) { _onRequestDataPage.set(func, data); }
-bool handleCapabilities(HeartRateBaseMainDataPage& dataPage);
-bool handleRequestDataPage(HeartRateBaseMainDataPage& dataPage);
-Callback<HeartRateCapabilities&> _onHeartRateCapabilities;
-Callback<RequestDataPage&> _onRequestDataPage;
-*/
+#include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
+
+class ProfileHeartRateSensor : BaseMasterProfile {
+public:
+    void onHeartRateCapabilities(void (*func)(HeartRateCapabilities&, uintptr_t), uintptr_t data = 0) { _onHeartRateCapabilities.set(func, data); }
+    void onRequestDataPage(void (*func)(RequestDataPage&, uintptr_t), uintptr_t data = 0) { _onRequestDataPage.set(func, data); }
+    void begin();
+    void stop();
+protected:
+    void transmitNextDataPage();
+private:
+    bool handleCapabilities(HeartRateBaseMainDataPage& dataPage);
+    bool handleRequestDataPage(HeartRateBaseMainDataPage& dataPage);
+    Callback<HeartRateCapabilities&> _onHeartRateCapabilities;
+    Callback<RequestDataPage&> _onRequestDataPage;
+};
+
+#endif // ANTPLUS_PROFILEHEARTRATESENSOR_h
