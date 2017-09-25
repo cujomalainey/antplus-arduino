@@ -7,7 +7,7 @@
 
 // Common page 76
 
-class ModeSettings : public BaseDataPage, public BroadcastData {
+class ModeSettings : public BaseDataPage<BroadcastData> {
     ModeSettings();
     uint8_t getSportMode();
 };

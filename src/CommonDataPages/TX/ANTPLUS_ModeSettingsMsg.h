@@ -1,13 +1,13 @@
 #ifndef ANTPLUS_MODESETTINGSMSG_h
 #define ANTPLUS_MODESETTINGSMSG_h
 
-#include <BaseClasses/ANTPLUS_BaseDataPage.h>
+#include <BaseClasses/ANTPLUS_BaseDataPageMsg.h>
 
 #include "ANT.h"
 
 // Common page 76
 
-class ModeSettingsMsg : public BaseDataPage, public BroadcastDataMsg {
+class ModeSettingsMsg : public BaseDataPageMsg<BroadcastDataMsg> {
 // TODO
 };
 

@@ -1,11 +1,11 @@
 #ifndef ANTPLUS_HEARTRATEBASEMAINDATAPAGEMSG_h
 #define ANTPLUS_HEARTRATEBASEMAINDATAPAGEMSG_h
 
-#include <BaseClasses/ANTPLUS_BaseDataPage.h>
+#include <BaseClasses/ANTPLUS_BaseDataPageMsg.h>
 
 #include "ANT.h"
 
-class HeartRateBaseMainDataPageMsg : public BaseDataPage, public BroadcastDataMsg {
+class HeartRateBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg> {
 public:
     HeartRateBaseMainDataPageMsg();
     uint8_t getPageChangeToggle();

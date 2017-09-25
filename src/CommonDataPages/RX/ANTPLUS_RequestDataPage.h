@@ -7,8 +7,8 @@
 
 // Common Page 70
 
-class RequestDataPage : public BaseDataPage, public AcknowledgedData {
-    RequestDataPage();
+class RequestDataPage : public BaseDataPage<AcknowledgedData> {
+    RequestDataPage(AcknowledgedData& dp);
     // TODO
 };
 

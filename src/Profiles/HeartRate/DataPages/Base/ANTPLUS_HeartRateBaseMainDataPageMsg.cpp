@@ -1,6 +1,6 @@
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPageMsg.h>
 
-HeartRateBaseMainDataPageMsg::HeartRateBaseMainDataPageMsg() {
+HeartRateBaseMainDataPageMsg::HeartRateBaseMainDataPageMsg() : BaseDataPageMsg<BroadcastDataMsg>() {
     // TODO
 }
 

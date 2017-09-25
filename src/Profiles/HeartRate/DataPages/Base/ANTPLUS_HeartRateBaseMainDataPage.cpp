@@ -1,13 +1,8 @@
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
-HeartRateBaseMainDataPage::HeartRateBaseMainDataPage(BroadcastData& dp) {
-    setFrameData(dp.getFrameData());
-    setMsgId(dp.getMsgId());
-    setAvailable(dp.isAvailable());
-    setChecksum(dp.getChecksum());
-    setErrorCode(dp.getErrorCode());
-    setLength(dp.getLength());
+HeartRateBaseMainDataPage::HeartRateBaseMainDataPage(BroadcastData& dp) : BaseDataPage<BroadcastData>(dp) {
+
 }
 
 uint8_t HeartRateBaseMainDataPage::getDataPageNumber() {

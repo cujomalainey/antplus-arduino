@@ -5,7 +5,7 @@
 
 #include "ANT.h"
 
-class HeartRateBaseMainDataPage : public BaseDataPage, public BroadcastData {
+class HeartRateBaseMainDataPage : public BaseDataPage<BroadcastData> {
 public:
     HeartRateBaseMainDataPage(BroadcastData& dp);
     uint8_t getDataPageNumber();

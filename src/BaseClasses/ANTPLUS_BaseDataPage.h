@@ -1,11 +1,12 @@
 #ifndef ANTPLUS_BASEDATAPAGE_h
 #define ANTPLUS_BASEDATAPAGE_h
 
-#include <inttypes.h>
+#include <BaseClasses/ANTPlUS_CoreDataPage.h>
 
-class BaseDataPage {
+template<class T>
+class BaseDataPage : public CoreDataPage<T> {
 public:
-    virtual uint8_t getDataPageNumber() = 0;
+    BaseDataPage<T>(T& msg);
 };
 
 #endif // ANTPLUS_BASEDATAPAGE_h
