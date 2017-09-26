@@ -8,8 +8,14 @@
 // Common Page 70
 
 class RequestDataPage : public BaseDataPage<AcknowledgedData> {
+public:
     RequestDataPage(AcknowledgedData& dp);
-    // TODO
+    uint16_t getSlaveSerialNumber();
+    uint8_t getDescriptorByte1();
+    uint8_t getDescriptorByte2();
+    uint8_t getRequestedTransmissionResponse();
+    uint8_t getRequestedPageNumber();
+    uint8_t getCommandType();
 };
 
 #endif // ANTPLUS_REQUESTDATAPAGE_h
