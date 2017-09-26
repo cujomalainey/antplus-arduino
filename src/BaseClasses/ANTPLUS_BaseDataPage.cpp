@@ -3,7 +3,7 @@
 #include "ANT.h"
 
 template<class T>
-BaseDataPage<T>::BaseDataPage(T& msg) : CoreDataPage<T>() {
+BaseDataPage<T>::BaseDataPage(AntRxDataResponse& msg) : CoreDataPage<T>() {
     this->setFrameData(msg.getFrameData());
     this->setMsgId(msg.getMsgId());
     this->setAvailable(msg.isAvailable());

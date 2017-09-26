@@ -1,7 +1,7 @@
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
-HeartRateBaseMainDataPage::HeartRateBaseMainDataPage(BroadcastData& dp) : BaseDataPage<BroadcastData>(dp) {
+HeartRateBaseMainDataPage::HeartRateBaseMainDataPage(AntRxDataResponse& dp) : BaseDataPage<BroadcastData>(dp) {
 
 }
 

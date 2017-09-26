@@ -1,6 +1,6 @@
 #include <Profiles/HeartRate/DataPages/RX/ANTPLUS_HeartRateSwimIntervalSummary.h>
 
-HeartRateSwimIntervalSummary::HeartRateSwimIntervalSummary(BroadcastData& dp) : HeartRateBaseMainDataPage(dp) {
+HeartRateSwimIntervalSummary::HeartRateSwimIntervalSummary(AntRxDataResponse& dp) : HeartRateBaseMainDataPage(dp) {
     // TODO
 }
 

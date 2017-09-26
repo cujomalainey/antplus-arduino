@@ -5,7 +5,7 @@
 
 class HeartRateProductInformation : public HeartRateBaseMainDataPage {
 public:
-    HeartRateProductInformation(BroadcastData& dp);
+    HeartRateProductInformation(AntRxDataResponse& dp);
     uint8_t getHardwareVersion();
     uint8_t getSoftwareVersion();
     uint8_t getModelNumber();

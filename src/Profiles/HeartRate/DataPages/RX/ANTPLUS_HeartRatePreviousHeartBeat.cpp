@@ -1,6 +1,6 @@
 #include <Profiles/HeartRate/DataPages/RX/ANTPLUS_HeartRatePreviousHeartBeat.h>
 
-HeartRatePreviousHeartBeat::HeartRatePreviousHeartBeat(BroadcastData& dp) : HeartRateBaseMainDataPage(dp) {
+HeartRatePreviousHeartBeat::HeartRatePreviousHeartBeat(AntRxDataResponse& dp) : HeartRateBaseMainDataPage(dp) {
     // TODO
 }
 

@@ -7,7 +7,7 @@
 
 class HeartRateBaseMainDataPage : public BaseDataPage<BroadcastData> {
 public:
-    HeartRateBaseMainDataPage(BroadcastData& dp);
+    HeartRateBaseMainDataPage(AntRxDataResponse& dp);
     uint8_t getDataPageNumber();
     uint8_t getPageChangeToggle();
     uint16_t getHeartBeatEventTime();

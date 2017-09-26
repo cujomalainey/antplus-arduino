@@ -5,7 +5,7 @@
 
 class HeartRateManufacturerInformation : public HeartRateBaseMainDataPage {
 public:
-    HeartRateManufacturerInformation(BroadcastData& dp);
+    HeartRateManufacturerInformation(AntRxDataResponse& dp);
     uint8_t getManufacturerIdLsb();
     uint16_t getSerialNumber();
 };

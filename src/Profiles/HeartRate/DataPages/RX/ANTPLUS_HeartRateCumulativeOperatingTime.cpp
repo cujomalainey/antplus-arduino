@@ -1,6 +1,6 @@
 #include <Profiles/HeartRate/DataPages/RX/ANTPLUS_HeartRateCumulativeOperatingTime.h>
 
-HeartRateCumulativeOperatingTime::HeartRateCumulativeOperatingTime(BroadcastData& dp) : HeartRateBaseMainDataPage(dp) {
+HeartRateCumulativeOperatingTime::HeartRateCumulativeOperatingTime(AntRxDataResponse& dp) : HeartRateBaseMainDataPage(dp) {
     // TODO
 }
 
