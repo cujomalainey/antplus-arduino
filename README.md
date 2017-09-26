@@ -35,7 +35,7 @@ To add ANT support to a new sketch, add "#include <ANTPLUS.h>" (without quotes) 
 
 ## Hardware
 
-See [ant-arduino](https://github.com/cujomalainey/ant-arduino)
+See [ant-arduino](https://github.com/cujomalainey/ant-arduino#hardware)
 
 ## Support ANT+ Profiles
 
@@ -99,7 +99,7 @@ Uploading sketches with a Leonardo is as simple as connecting the Arduino to you
 
 ## Configuration
 
-See [ant-arduino](https://github.com/cujomalainey/ant-arduino)
+See [ant-arduino](https://github.com/cujomalainey/ant-arduino#configuration)
 
 ## Questions/Feedback
 
