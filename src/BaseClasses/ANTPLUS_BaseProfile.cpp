@@ -34,6 +34,10 @@ void BaseProfile::setSearchTimeout(uint8_t seconds) {
     // TODO
 }
 
+void BaseProfile::callOnOtherDataPage(AntRxDataResponse& msg) {
+    _onOtherDataPage.call(msg);
+}
+
 void BaseProfile::setChannelType(uint8_t channelType) {
     _channelType = channelType;
 }

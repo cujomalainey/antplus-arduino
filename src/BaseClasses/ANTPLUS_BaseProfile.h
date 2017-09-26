@@ -17,18 +17,15 @@ public:
      */
     uint8_t getChannelStatus();
     /**
-     * Called on every message incoming
+     * Called on every message incoming before any other predefined callback is called
      */
-    void onDataPage(); // TODO fill in params
+    void onDataPage(void (*func)(AntRxDataResponse&, uintptr_t), uintptr_t data = 0) { _onDataPage.set(func, data); }
     /**
-     * Called if datapage recieved is not defined in the profile
+     * Called if datapage has no callback defined or is an unknown datapage
+     * Most profiles require a device to ignore unkown datapage, make sure
+     * you are familiar with what to do according to your profile.
      */
-    void onUnknownDataPage(); // TODO fill in params
-    /**
-     * Called if datapage has no callback defined or
-     * is a manufacturer defined page
-     */
-    void onOtherDataPage(); // TODO fill in params
+    void onOtherDataPage(void (*func)(AntRxDataResponse&, uintptr_t), uintptr_t data = 0) { _onOtherDataPage.set(func, data); }
     /**
      * Set the channel deviceNumber, wildcard for searching is 0
      */
@@ -61,10 +58,10 @@ public:
     /******************************************
      *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
      ******************************************/
-    virtual void onAcknowledgedData(AcknowledgedData& msg) {}
-    virtual void onAdvancedBurstData(AdvancedBurstData& msg) {}
-    virtual void onBroadcastData(BroadcastData& msg) {}
-    virtual void onBurstTransferData(BurstTransferData& msg) {}
+    virtual void onAcknowledgedData(AcknowledgedData& msg) {_onDataPage.call(msg);}
+    virtual void onAdvancedBurstData(AdvancedBurstData& msg) {_onDataPage.call(msg);}
+    virtual void onBroadcastData(BroadcastData& msg) {_onDataPage.call(msg);}
+    virtual void onBurstTransferData(BurstTransferData& msg) {_onDataPage.call(msg);}
     void setRouter(AntPlusRouter* router);
     void setChannelNumber(uint8_t channel);
     // TODO this should probably have the whole message passed in so
@@ -74,6 +71,7 @@ public:
     void setChannelStatus(uint8_t status);
     void setSearchTimeout(uint8_t seconds);
 protected:
+    void callOnOtherDataPage(AntRxDataResponse& msg);
     void setChannelType(uint8_t channelType);
     void setChannelPeriod(uint16_t channelPeriod);
     void setDeviceType(uint8_t deviceType);
@@ -82,6 +80,8 @@ protected:
     void closeChannel();
 private:
     AntPlusRouter* _router;
+    Callback<AntRxDataResponse&> _onDataPage;
+    Callback<AntRxDataResponse&> _onOtherDataPage;
     uint8_t _channel;
     uint8_t _channelType = 0;
     uint16_t _channelPeriod = 0;
