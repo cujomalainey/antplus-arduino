@@ -65,6 +65,6 @@ void BaseProfile::openChannel() {
 }
 
 void BaseProfile::closeChannel() {
-    CloseChannel cc;
-    // TODO
+    CloseChannel cc = CloseChannel(_channel);
+    _router->send(cc);
 }
