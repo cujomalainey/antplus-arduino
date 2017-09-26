@@ -26,7 +26,9 @@ void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
     HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
-    // TODO Add general callback here
+
+    BaseProfile::onBroadcastData(msg);
+
     switch (dataPage) {
     case ANTPLUS_HEARTRATE_DATAPAGE_DEFAULT_NUMBER:
         called = handleDefault(dp);
@@ -55,7 +57,7 @@ void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
     }
 
     if (!called) {
-        // TODO handle nothing called
+        callOnOtherDataPage(msg);
     }
 }
 
