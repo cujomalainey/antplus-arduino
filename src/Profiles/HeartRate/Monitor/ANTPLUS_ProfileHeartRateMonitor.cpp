@@ -1,6 +1,7 @@
 #include <Profiles/HeartRate/Monitor/ANTPLUS_ProfileHeartRateMonitor.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 #include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 
 ProfileHeartRateMonitor::ProfileHeartRateMonitor() : BaseSlaveProfile() {
     // TODO remove magic numbers
@@ -48,7 +49,9 @@ void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
     case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER:
         called = handleBatteryStatus(dp);
         break;
-    // TODO mode settings
+    case ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_NUMBER:
+        called = handleModeSettings(dp);
+        break;
     }
 
     if (!called) {
