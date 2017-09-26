@@ -8,7 +8,8 @@
 // Common page 76
 
 class ModeSettings : public BaseDataPage<BroadcastData> {
-    ModeSettings();
+public:
+    ModeSettings(BroadcastData& dp);
     uint8_t getSportMode();
 };
 
