@@ -7,7 +7,7 @@ template<class T>
 class CoreDataPage : public T {
 public:
     CoreDataPage();
-    virtual uint8_t getDataPageNumber() = 0;
+    virtual uint8_t getDataPageNumber();
 };
 
 #endif // ANTPLUS_COREDATAPAGE_h
