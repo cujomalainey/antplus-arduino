@@ -1,5 +1,6 @@
 #include <Profiles/HeartRate/Monitor/ANTPLUS_ProfileHeartRateMonitor.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
+#include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
 
 ProfileHeartRateMonitor::ProfileHeartRateMonitor() : BaseSlaveProfile() {
     // TODO remove magic numbers
@@ -49,7 +50,10 @@ void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
         break;
     // TODO mode settings
     }
-    // TODO handle nothing called
+
+    if (!called) {
+        // TODO handle nothing called
+    }
 }
 
 void ProfileHeartRateMonitor::begin() {
@@ -62,11 +66,13 @@ void ProfileHeartRateMonitor::stop() {
 }
 
 bool ProfileHeartRateMonitor::handleBatteryStatus(HeartRateBaseMainDataPage& dataPage) {
-    // TODO
+    HeartRateBatteryStatus dp = HeartRateBatteryStatus(dataPage);
+    return _onHeartRateBatteryStatus.call(dp);
 }
 
 bool ProfileHeartRateMonitor::handleCumulativeOperatingTime(HeartRateBaseMainDataPage& dataPage) {
-    // TODO
+    HeartRateCumulativeOperatingTime dp = HeartRateCumulativeOperatingTime(dataPage);
+    return _onHeartRateCumulativeOperatingTime.call(dp);
 }
 
 bool ProfileHeartRateMonitor::handleDefault(HeartRateBaseMainDataPage& dataPage) {
@@ -75,7 +81,8 @@ bool ProfileHeartRateMonitor::handleDefault(HeartRateBaseMainDataPage& dataPage)
 }
 
 bool ProfileHeartRateMonitor::handleManufacturerInformation(HeartRateBaseMainDataPage& dataPage) {
-    // TODO
+    HeartRateManufacturerInformation dp = HeartRateManufacturerInformation(dataPage);
+    return _onHeartRateManufacturerInformation.call(dp);
 }
 
 bool ProfileHeartRateMonitor::handlePreviousHeartBeat(HeartRateBaseMainDataPage& dataPage) {
@@ -84,13 +91,16 @@ bool ProfileHeartRateMonitor::handlePreviousHeartBeat(HeartRateBaseMainDataPage&
 }
 
 bool ProfileHeartRateMonitor::handleProductInformation(HeartRateBaseMainDataPage& dataPage) {
-    // TODO
+    HeartRateProductInformation dp = HeartRateProductInformation(dataPage);
+    return _onHeartRateProductInformation.call(dp);
 }
 
 bool ProfileHeartRateMonitor::handleSwimIntervalSummary(HeartRateBaseMainDataPage& dataPage) {
-    // TODO
+    HeartRateSwimIntervalSummary dp = HeartRateSwimIntervalSummary(dataPage);
+    return _onHeartRateSwimIntervalSummary.call(dp);
 }
 
 bool ProfileHeartRateMonitor::handleModeSettings(HeartRateBaseMainDataPage& dataPage) {
-    // TODO
+    ModeSettings dp = ModeSettings(dataPage);
+    return _onModeSettings.call(dp);
 }
