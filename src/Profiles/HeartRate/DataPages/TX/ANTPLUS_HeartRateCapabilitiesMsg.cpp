@@ -2,7 +2,8 @@
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
 HeartRateCapabilitiesMsg::HeartRateCapabilitiesMsg() : HeartRateBaseMainDataPageMsg() {
-
+    // TODO Magic Numbers
+    _buffer[0] = ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER;
 }
 
 uint8_t HeartRateCapabilitiesMsg::getFeaturesSupported() {
