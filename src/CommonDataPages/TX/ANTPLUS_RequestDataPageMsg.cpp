@@ -1,53 +1,72 @@
 #include <CommonDataPages/TX/ANTPLUS_RequestDataPageMsg.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 
 RequestDataPageMsg::RequestDataPageMsg() : BaseDataPageMsg() {
-    // TODO
+    setDataBuffer(_buffer);
+    setDescriptorByte1(ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_DESCRIPTORBYTE1_INVALID);
+    setDescriptorByte2(ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_DESCRIPTORBYTE2_INVALID);
 }
 
 uint16_t RequestDataPageMsg::getSlaveSerialNumber() {
-    // TODO
+    // TODO Magic numbers
+    return _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_SLAVESERIALNUMBER_LSB_BYTE] | (_buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_SLAVESERIALNUMBER_MSB_BYTE] << 8);
 }
 
 uint8_t RequestDataPageMsg::getDescriptorByte1() {
-    // TODO
+    return _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_DESCRIPTORBYTE1_BYTE];
 }
 
 uint8_t RequestDataPageMsg::getDescriptorByte2() {
-    // TODO
+    return _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_DESCRIPTORBYTE2_BYTE];
 }
 
-uint8_t RequestDataPageMsg::getRequestedTransmissionResponse() {
-    // TODO
+uint8_t RequestDataPageMsg::getRequestedTransmissionResponseCount() {
+    return _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_BYTE] & ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_COUNT_MASK;
+}
+
+uint8_t RequestDataPageMsg::getRequestedTransmissionUseAcknowledged() {
+    return _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_BYTE] & ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_USEACKNOWLEDGED_MASK;
 }
 
 uint8_t RequestDataPageMsg::getRequestedPageNumber() {
-    // TODO
+    return _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDPAGENUMBER_BYTE];
 }
 
 uint8_t RequestDataPageMsg::getCommandType() {
-    // TODO
+    return _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_COMMANDTYPE_BYTE];
 }
 
 void RequestDataPageMsg::setSlaveSerialNumber(uint16_t serialNumber) {
-    // TODO
+    // TODO magic numbers
+    _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_SLAVESERIALNUMBER_LSB_BYTE] = serialNumber & 0xFF;
+    _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_SLAVESERIALNUMBER_MSB_BYTE] = serialNumber >> 8;
 }
 
 void RequestDataPageMsg::setDescriptorByte1(uint8_t descriptorByte) {
-    // TODO
+    _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_DESCRIPTORBYTE1_BYTE] = descriptorByte;
 }
 
 void RequestDataPageMsg::setDescriptorByte2(uint8_t descriptorByte) {
-    // TODO
+    _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_DESCRIPTORBYTE2_BYTE] = descriptorByte;
 }
 
-void RequestDataPageMsg::setRequestedTransmissionResponse(uint8_t transmissionResponse) {
-    // TODO
+void RequestDataPageMsg::setRequestedTransmissionResponseCount(uint8_t count) {
+     uint8_t temp = _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_BYTE] & ~ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_COUNT_MASK;
+     _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_BYTE] = temp | (count & ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_COUNT_MASK);
+}
+
+void RequestDataPageMsg::setRequestedTransmissionUseAcknowledged(uint8_t useAcknowledged) {
+    uint8_t temp = _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_BYTE] & ~ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_USEACKNOWLEDGED_MASK;
+    _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_BYTE] = temp | (useAcknowledged & ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_USEACKNOWLEDGED_MASK);
 }
 
 void RequestDataPageMsg::setRequestedPageNumber(uint8_t pageNumber) {
-    // TODO
+    _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDPAGENUMBER_BYTE] = pageNumber;
 }
 
 void RequestDataPageMsg::setCommandType(uint8_t commandType) {
-    // TODO
+    if (commandType != ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_COMMANDTYPE_REQUESTDATAPAGEFROMSLAVE) {
+        setSlaveSerialNumber(ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_SLAVESERIALNUMBER_INVALID);
+    }
+    _buffer[ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_COMMANDTYPE_BYTE] = commandType;
 }
