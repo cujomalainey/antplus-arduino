@@ -6,8 +6,7 @@ BaseProfile::BaseProfile(uint8_t deviceNumber) {
 }
 
 uint8_t BaseProfile::getChannelStatus() {
-    // TODO
-    return 0;
+    return _channelStatus;
 }
 
 void BaseProfile::setRouter(AntPlusRouter* router) {
@@ -67,4 +66,19 @@ void BaseProfile::openChannel() {
 void BaseProfile::closeChannel() {
     CloseChannel cc = CloseChannel(_channel);
     _router->send(cc);
+}
+
+void BaseProfile::onChannelEventResponse(ChannelEventResponse& msg)
+{
+    uint8_t event = msg.getCode();
+    // TODO maybe define an explicit state enum?
+    switch (event) {
+    case STATUS_EVENT_CHANNEL_CLOSED:
+        _channelStatus = STATUS_EVENT_CHANNEL_CLOSED;
+        break;
+    case STATUS_EVENT_RX_FAIL_GO_TO_SEARCH:
+        _channelStatus = STATUS_EVENT_RX_FAIL_GO_TO_SEARCH;
+        break;
+    }
+    _onChannelEvent.call(msg);
 }

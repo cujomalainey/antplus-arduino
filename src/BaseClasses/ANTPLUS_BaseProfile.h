@@ -13,19 +13,19 @@ public:
     BaseProfile(uint8_t deviceNumber);
     BaseProfile(uint8_t deviceNumber, uint8_t transmissionType);
     /**
-     * Returns the last Channel status byte recieved
-     */
-    uint8_t getChannelStatus();
-    /**
      * Called on every message incoming before any other predefined callback is called
      */
     void onDataPage(void (*func)(AntRxDataResponse&, uintptr_t), uintptr_t data = 0) { _onDataPage.set(func, data); }
     /**
      * Called if datapage has no callback defined or is an unknown datapage
-     * Most profiles require a device to ignore unkown datapage, make sure
+     * Most profiles require a device to ignore unkown datapages, make sure
      * you are familiar with what to do according to your profile.
      */
     void onOtherDataPage(void (*func)(AntRxDataResponse&, uintptr_t), uintptr_t data = 0) { _onOtherDataPage.set(func, data); }
+    /**
+     * Callback when an even on the radio occurs
+     */
+    void onChannelEvent(void (*func)(ChannelEventResponse&, uintptr_t), uintptr_t data = 0) { _onChannelEvent.set(func, data); }
     /**
      * Set the channel deviceNumber, wildcard for searching is 0
      */
@@ -34,6 +34,10 @@ public:
      * Set the channel transmission type, wildcard for searching is 0
      */
     void setTransmissionType(uint8_t transmissionType);
+    /**
+     * Returns the last Channel status byte recieved
+     */
+    uint8_t getChannelStatus();
     /**
      * Get the channel device number, used to identify device after search
      * Wait till channelStatus() has paired with a device before checking
@@ -58,10 +62,11 @@ public:
     /******************************************
      *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
      ******************************************/
-    virtual void onAcknowledgedData(AcknowledgedData& msg) {_onDataPage.call(msg);}
-    virtual void onAdvancedBurstData(AdvancedBurstData& msg) {_onDataPage.call(msg);}
-    virtual void onBroadcastData(BroadcastData& msg) {_onDataPage.call(msg);}
-    virtual void onBurstTransferData(BurstTransferData& msg) {_onDataPage.call(msg);}
+    virtual void onAcknowledgedData(AcknowledgedData& msg) { _onDataPage.call(msg); }
+    virtual void onAdvancedBurstData(AdvancedBurstData& msg) { _onDataPage.call(msg); }
+    virtual void onBroadcastData(BroadcastData& msg) { _onDataPage.call(msg); }
+    virtual void onBurstTransferData(BurstTransferData& msg) { _onDataPage.call(msg); }
+    virtual void onChannelEventResponse(ChannelEventResponse& msg);
     void setRouter(AntPlusRouter* router);
     void setChannelNumber(uint8_t channel);
     // TODO this should probably have the whole message passed in so
@@ -82,9 +87,11 @@ private:
     AntPlusRouter* _router;
     Callback<AntRxDataResponse&> _onDataPage;
     Callback<AntRxDataResponse&> _onOtherDataPage;
+    Callback<ChannelEventResponse&> _onChannelEvent;
     uint8_t _channel;
     uint8_t _channelType = 0;
     uint16_t _channelPeriod = 0;
+    uint8_t _channelStatus = 0;
     uint16_t _deviceNumber = 0;
     uint8_t _deviceType = 0;
     uint8_t _transmissionType = 0;
