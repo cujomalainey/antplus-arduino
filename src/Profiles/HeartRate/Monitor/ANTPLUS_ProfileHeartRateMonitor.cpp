@@ -10,7 +10,8 @@ ProfileHeartRateMonitor::ProfileHeartRateMonitor() : BaseSlaveProfile() {
     setDeviceType(120);
     setTransmissionType(0);
     setChannelPeriod(8070);
-    setSearchTimeout(30);
+    // 30 / 2.5 = 12
+    setSearchTimeout(12);
 }
 
 ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
@@ -19,7 +20,8 @@ ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint16_t deviceNumber) : BaseSl
     setDeviceType(120);
     setTransmissionType(0);
     setChannelPeriod(8070);
-    setSearchTimeout(30);
+    // 30 / 2.5 = 12
+    setSearchTimeout(12);
 }
 
 void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {

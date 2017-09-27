@@ -74,7 +74,7 @@ public:
     // Alternative is classes requiring 2 channels will register a child
     // profile into the following slots and redirect all traffic back
     void setChannelStatus(uint8_t status);
-    void setSearchTimeout(uint8_t seconds);
+    void setSearchTimeout(uint8_t counts);
 protected:
     void callOnOtherDataPage(AntRxDataResponse& msg);
     void setChannelType(uint8_t channelType);
@@ -95,6 +95,7 @@ private:
     uint16_t _deviceNumber = 0;
     uint8_t _deviceType = 0;
     uint8_t _transmissionType = 0;
+    uint8_t _searchTimeout = 0;
 };
 
 #endif // ANTPLUS_BASEPROFILE_h

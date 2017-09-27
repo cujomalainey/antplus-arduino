@@ -29,8 +29,8 @@ void BaseProfile::setTransmissionType(uint8_t transmissionType) {
     _transmissionType = transmissionType;
 }
 
-void BaseProfile::setSearchTimeout(uint8_t seconds) {
-    // TODO
+void BaseProfile::setSearchTimeout(uint8_t counts) {
+    _searchTimeout = counts;
 }
 
 void BaseProfile::callOnOtherDataPage(AntRxDataResponse& msg) {
@@ -51,11 +51,13 @@ void BaseProfile::pushChannelConfig() {
     ChannelId ci = ChannelId(_channel, _deviceNumber, _deviceType, 0x80 & _deviceType, _transmissionType);
     ChannelPeriod cp = ChannelPeriod(_channel, _channelPeriod);
     ChannelRfFrequency crf = ChannelRfFrequency(_channel, ANTPLUS_CHANNEL_FREQUENCY);
-    // TODO add set timeout
+    SearchTimeout st = SearchTimeout(_channel, _searchTimeout);
+
     _router->send(ac);
     _router->send(ci);
     _router->send(cp);
     _router->send(crf);
+    _router->send(st);
 }
 
 void BaseProfile::openChannel() {
