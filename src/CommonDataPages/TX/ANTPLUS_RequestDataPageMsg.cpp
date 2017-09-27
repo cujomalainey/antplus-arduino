@@ -5,6 +5,8 @@ RequestDataPageMsg::RequestDataPageMsg() : BaseDataPageMsg() {
     setDataBuffer(_buffer);
     setDescriptorByte1(ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_DESCRIPTORBYTE1_INVALID);
     setDescriptorByte2(ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_DESCRIPTORBYTE2_INVALID);
+    // TODO Magic numbers
+    _buffer[0] = ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER;
 }
 
 uint16_t RequestDataPageMsg::getSlaveSerialNumber() {
