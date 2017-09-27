@@ -1,37 +1,41 @@
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPageMsg.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
 HeartRateBaseMainDataPageMsg::HeartRateBaseMainDataPageMsg() : BaseDataPageMsg<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
 }
 
 uint8_t HeartRateBaseMainDataPageMsg::getPageChangeToggle() {
-    // TODO
+    return (_buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_BYTE] & ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_MASK) >> ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_SHIFT;
 }
 
 uint16_t HeartRateBaseMainDataPageMsg::getHeartBeatEventTime() {
-    // TODO
+    return (_buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMEMSB_BYTE] << ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMEMSB_SHIFT) | _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMELSB_BYTE];
 }
 
 uint8_t HeartRateBaseMainDataPageMsg::getHeartBeatCount() {
-    // TODO
+    return _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATCOUNT_BYTE];
 }
 
 uint8_t HeartRateBaseMainDataPageMsg::getComputedHeartRate() {
-    // TODO
+    return _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_COMPUTEDHEARTRATE_BYTE];
 }
 
 void HeartRateBaseMainDataPageMsg::setPageChangeToggle(uint8_t toggle) {
-    // TODO
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_BYTE] = _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_BYTE] & ~ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_MASK;
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_BYTE] |= toggle ? ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_MASK : 0;
 }
 
 void HeartRateBaseMainDataPageMsg::setHeartBeatEventTime(uint16_t time) {
-    // TODO
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMEMSB_BYTE] = time >> ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMEMSB_SHIFT;
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMELSB_BYTE] = time & 0xFF;
+    // TODO magic numbers
 }
 
 void HeartRateBaseMainDataPageMsg::setHeartBeatCount(uint8_t count) {
-    // TODO
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATCOUNT_BYTE] = count;
 }
 
 void HeartRateBaseMainDataPageMsg::setComputedHeartRate(uint8_t heartRate) {
-    // TODO
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_COMPUTEDHEARTRATE_BYTE] = heartRate;
 }
