@@ -16,6 +16,8 @@ public:
     void setHeartBeatEventTime(uint16_t time);
     void setHeartBeatCount(uint8_t count);
     void setComputedHeartRate(uint8_t heartRate);
+protected:
+    uint8_t _buffer[MESSAGE_SIZE];
 };
 
 #endif // ANTPLUS_HEARTRATEBASEMAINDATAPAGEMSG_h

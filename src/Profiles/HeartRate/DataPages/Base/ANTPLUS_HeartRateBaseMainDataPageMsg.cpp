@@ -1,7 +1,7 @@
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPageMsg.h>
 
 HeartRateBaseMainDataPageMsg::HeartRateBaseMainDataPageMsg() : BaseDataPageMsg<BroadcastDataMsg>() {
-    // TODO
+    setDataBuffer(_buffer);
 }
 
 uint8_t HeartRateBaseMainDataPageMsg::getPageChangeToggle() {
