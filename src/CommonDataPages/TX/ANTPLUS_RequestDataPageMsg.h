@@ -16,12 +16,12 @@ public:
     uint8_t getRequestedTransmissionResponse();
     uint8_t getRequestedPageNumber();
     uint8_t getCommandType();
-    void getSlaveSerialNumber(uint16_t serialNumber);
-    void getDescriptorByte1(uint8_t descriptorByte);
-    void getDescriptorByte2(uint8_t descriptorByte);
-    void getRequestedTransmissionResponse(uint8_t transmissionResponse);
-    void getRequestedPageNumber(uint8_t pageNumber);
-    void getCommandType(uint8_t commandType);
+    void setSlaveSerialNumber(uint16_t serialNumber);
+    void setDescriptorByte1(uint8_t descriptorByte);
+    void setDescriptorByte2(uint8_t descriptorByte);
+    void setRequestedTransmissionResponse(uint8_t transmissionResponse);
+    void setRequestedPageNumber(uint8_t pageNumber);
+    void setCommandType(uint8_t commandType);
 };
 
 #endif // ANTPLUS_REQUESTDATAPAGEMSG_h
