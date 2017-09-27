@@ -39,44 +39,7 @@ See [ant-arduino](https://github.com/cujomalainey/ant-arduino#hardware)
 
 ## Support ANT+ Profiles
 
-This library aims to support all ANT+ devices. This goal will take time but here is the current status of the profiles supported. Note: not all of these sub-lists are filled in due lack of research on the profiles, they will be filled in when implementation starts.
-
-* BicyclePower
-* Bicycle Speed and Cadence
-  * [ ] Cadence Monitor
-  * [ ] Cadence Sensor
-  * [ ] Combined Monitor
-  * [ ] Combined Sensor
-  * [ ] Speed Monitor
-  * [ ] Speed Sensor
-* Bike Lights
-  * [ ] Bike Light
-  * [ ] Bike Light Remote
-* Bike Radar
-  * [ ] Radar Monitor
-  * [ ] Radar Sensor
-* Blood Pressure
-* Controls
-* Dropper Seatpost
-* Environment
-  * [ ] Environment Monitor
-  * [ ] Environment Sensor
-* Fitness Equipment
-* Geocache
-* Heart rate
-  * [x] HR Monitor
-  * [ ] HR Sensor
-* Light Electric Vehicle
-* Multi-Sport Speed and Distance
-* Muscle Oxygen
-* Racquet
-* Running Dynamics (not yet released)
-* Shifting
-* Stride Based Speed and Distance
-* Suspension
-* Sync
-* Tracker
-* Weight Scale
+This library aims to support all ANT+ devices. This goal will take time but its an attainable one. Check out the [wiki](https://github.com/cujomalainey/antplus-arduino/wiki/Profile-Support) for the list of profiles implemented and their verions.
 
 ## Installation
 
