@@ -51,6 +51,9 @@ void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
     case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER:
         called = handleBatteryStatus(dp);
         break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER:
+        called = handleCapabilities(dp);
+        break;
     case ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_NUMBER:
         called = handleModeSettings(dp);
         break;
@@ -103,6 +106,11 @@ bool ProfileHeartRateMonitor::handleProductInformation(HeartRateBaseMainDataPage
 bool ProfileHeartRateMonitor::handleSwimIntervalSummary(HeartRateBaseMainDataPage& dataPage) {
     HeartRateSwimIntervalSummary dp = HeartRateSwimIntervalSummary(dataPage);
     return _onHeartRateSwimIntervalSummary.call(dp);
+}
+
+bool ProfileHeartRateMonitor::handleCapabilities(HeartRateBaseMainDataPage& dataPage) {
+    HeartRateCapabilities dp = HeartRateCapabilities(dataPage);
+    return _onHeartRateCapabilities.call(dp);
 }
 
 bool ProfileHeartRateMonitor::handleModeSettings(HeartRateBaseMainDataPage& dataPage) {
