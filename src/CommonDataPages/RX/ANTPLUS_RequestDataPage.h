@@ -9,7 +9,7 @@
 
 class RequestDataPage : public BaseDataPage<AcknowledgedData> {
 public:
-    RequestDataPage(AcknowledgedData& dp);
+    RequestDataPage(AntRxDataResponse& dp);
     uint16_t getSlaveSerialNumber();
     uint8_t getDescriptorByte1();
     uint8_t getDescriptorByte2();
