@@ -6,25 +6,25 @@ HeartRateProductInformationMsg::HeartRateProductInformationMsg() : HeartRateBase
 }
 
 uint8_t HeartRateProductInformationMsg::getHardwareVersion() {
-    // TODO
+    return _buffer[ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_HARDWAREVERSION_BYTE];
 }
 
 uint8_t HeartRateProductInformationMsg::getSoftwareVersion() {
-    // TODO
+    return _buffer[ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_SOFTWAREVERSION_BYTE];
 }
 
 uint8_t HeartRateProductInformationMsg::getModelNumber() {
-    // TODO
+    return _buffer[ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_MODELNUMBER_BYTE];
 }
 
 void HeartRateProductInformationMsg::setHardwareVersion(uint8_t hwVersion) {
-    // TODO
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_HARDWAREVERSION_BYTE] = hwVersion;
 }
 
 void HeartRateProductInformationMsg::setSoftwareVersion(uint8_t swVersion) {
-    // TODO
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_SOFTWAREVERSION_BYTE] = swVersion;
 }
 
 void HeartRateProductInformationMsg::setModelNumber(uint8_t modelNumber) {
-    // TODO
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_MODELNUMBER_BYTE] = modelNumber;
 }

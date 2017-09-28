@@ -1,17 +1,18 @@
 #include <Profiles/HeartRate/DataPages/RX/ANTPLUS_HeartRateProductInformation.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
 HeartRateProductInformation::HeartRateProductInformation(AntRxDataResponse& dp) : HeartRateBaseMainDataPage(dp) {
 
 }
 
 uint8_t HeartRateProductInformation::getHardwareVersion() {
-    // TODO
+    return getData(ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_HARDWAREVERSION_BYTE);
 }
 
 uint8_t HeartRateProductInformation::getSoftwareVersion() {
-    // TODO
+    return getData(ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_SOFTWAREVERSION_BYTE);
 }
 
 uint8_t HeartRateProductInformation::getModelNumber() {
-    // TODO
+    return getData(ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_MODELNUMBER_BYTE);
 }
