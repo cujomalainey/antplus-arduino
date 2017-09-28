@@ -2,6 +2,8 @@
 #define ANTPLUS_PROFILEHEARTRATESENSOR_h
 
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
+#include <Profiles/HeartRate/DataPages/ANTPLUS_ProfileHeartRateDataPages.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
 class ProfileHeartRateSensor : BaseMasterProfile {
 public:
@@ -9,6 +11,11 @@ public:
     void onRequestDataPage(void (*func)(RequestDataPage&, uintptr_t), uintptr_t data = 0) { _onRequestDataPage.set(func, data); }
     void begin();
     void stop();
+    /******************************************
+     *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
+     ******************************************/
+    void onAcknowledgedData(AcknowledgedData& msg);
+    void onBroadcastData(BroadcastData& msg);
 protected:
     void transmitNextDataPage();
 private:
