@@ -1,4 +1,5 @@
 #include <BaseClasses/ANTPLUS_CoreDataPage.h>
+#include <ANTPLUS_PrivateDefines.h>
 
 #include "ANT.h"
 
@@ -9,9 +10,8 @@ CoreDataPage<T>::CoreDataPage() : T() {
 
 template<class T>
 uint8_t CoreDataPage<T>::getDataPageNumber() {
-    // TODO remove magic number
     // TODO handle shared channels
-    return this->getData(0);
+    return this->getData(ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 
 template class CoreDataPage<BroadcastData>;

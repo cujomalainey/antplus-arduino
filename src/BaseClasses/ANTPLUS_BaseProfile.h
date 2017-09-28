@@ -9,9 +9,7 @@ class AntPlusRouter;
 
 class BaseProfile {
 public:
-    BaseProfile();
-    BaseProfile(uint8_t deviceNumber);
-    BaseProfile(uint8_t deviceNumber, uint8_t transmissionType);
+    BaseProfile(uint16_t deviceNumber, uint8_t transmissionType);
     /**
      * Called on every message incoming before any other predefined callback is called
      */
@@ -26,6 +24,7 @@ public:
      * Callback when an even on the radio occurs
      */
     void onChannelEvent(void (*func)(ChannelEventResponse&, uintptr_t), uintptr_t data = 0) { _onChannelEvent.set(func, data); }
+    // TODO on channel config change callback (used for when wildcarding to identify when actual information has been found)
     /**
      * Set the channel deviceNumber, wildcard for searching is 0
      */

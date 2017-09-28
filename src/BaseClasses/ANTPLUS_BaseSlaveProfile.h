@@ -7,6 +7,7 @@ class BaseSlaveProfile : public BaseProfile {
 public:
     BaseSlaveProfile();
     BaseSlaveProfile(uint16_t deviceNumber);
+    BaseSlaveProfile(uint16_t deviceNumber, uint8_t transmissionType);
 
 private:
 };

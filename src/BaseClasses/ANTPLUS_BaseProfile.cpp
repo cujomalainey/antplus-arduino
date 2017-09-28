@@ -1,8 +1,9 @@
 #include <BaseClasses/ANTPLUS_BaseProfile.h>
 #include <ANTPLUS_PrivateDefines.h>
 
-BaseProfile::BaseProfile(uint8_t deviceNumber) {
-
+BaseProfile::BaseProfile(uint16_t deviceNumber, uint8_t transmissionType) {
+    setDeviceNumber(deviceNumber);
+    setTransmissionType(transmissionType);
 }
 
 uint8_t BaseProfile::getChannelStatus() {
@@ -47,8 +48,7 @@ void BaseProfile::setChannelPeriod(uint16_t channelPeriod) {
 
 void BaseProfile::pushChannelConfig() {
     AssignChannel ac = AssignChannel(_channel, _channelType, ANTPLUS_NETWORKKEY_INDEX);
-    // TODO deal with magic numbers
-    ChannelId ci = ChannelId(_channel, _deviceNumber, _deviceType, 0x80 & _deviceType, _transmissionType);
+    ChannelId ci = ChannelId(_channel, _deviceNumber, _deviceType, ANTPLUS_PAIRING_BIT_MASK & _deviceType, _transmissionType);
     ChannelPeriod cp = ChannelPeriod(_channel, _channelPeriod);
     ChannelRfFrequency crf = ChannelRfFrequency(_channel, ANTPLUS_CHANNEL_FREQUENCY);
     SearchTimeout st = SearchTimeout(_channel, _searchTimeout);

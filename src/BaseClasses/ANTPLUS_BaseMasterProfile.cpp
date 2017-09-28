@@ -1,6 +1,6 @@
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
 
-BaseMasterProfile::BaseMasterProfile(uint16_t deviceNumber) : BaseProfile(deviceNumber) {
+BaseMasterProfile::BaseMasterProfile(uint16_t deviceNumber, uint8_t transmissionType) : BaseProfile(deviceNumber, transmissionType) {
 
 }
 

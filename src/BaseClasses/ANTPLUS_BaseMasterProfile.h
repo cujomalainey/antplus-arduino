@@ -5,7 +5,7 @@
 
 class BaseMasterProfile : public BaseProfile {
 public:
-    BaseMasterProfile(uint16_t deviceNumber);
+    BaseMasterProfile(uint16_t deviceNumber, uint8_t transmissionType);
     /******************************************
      *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
      ******************************************/
