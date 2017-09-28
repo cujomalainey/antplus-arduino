@@ -1,17 +1,18 @@
 #include <Profiles/HeartRate/DataPages/RX/ANTPLUS_HeartRateSwimIntervalSummary.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
 HeartRateSwimIntervalSummary::HeartRateSwimIntervalSummary(AntRxDataResponse& dp) : HeartRateBaseMainDataPage(dp) {
 
 }
 
 uint8_t HeartRateSwimIntervalSummary::getIntervalAverageHeartRate() {
-    // TODO
+    return getData(ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_INTERVALAVERAGEHEARTRATE_BYTE);
 }
 
 uint8_t HeartRateSwimIntervalSummary::getIntervalMaximumHeartRate() {
-    // TODO
+    return getData(ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_INTERVALMAXIMUMHEARTRATE_BYTE);
 }
 
 uint8_t HeartRateSwimIntervalSummary::getSessionAverageHeartRate() {
-    // TODO
+    return getData(ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_SESSIONAVERAGEHEARTRATE_BYTE);
 }
