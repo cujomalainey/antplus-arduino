@@ -1,7 +1,8 @@
 #include <Profiles/HeartRate/DataPages/TX/ANTPLUS_HeartRateManufacturerInformationMsg.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
-HeartRateManufacturerInformationMsg::HeartRateManufacturerInformationMsg() : HeartRateBaseMainDataPageMsg() {
-    // TODO
+HeartRateManufacturerInformationMsg::HeartRateManufacturerInformationMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER) {
+
 }
 
 uint8_t HeartRateManufacturerInformationMsg::getManufacturerIdLsb() {

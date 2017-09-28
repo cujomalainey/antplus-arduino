@@ -1,7 +1,8 @@
 #include <Profiles/HeartRate/DataPages/TX/ANTPLUS_HeartRateBatteryStatusMsg.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
-HeartRateBatteryStatusMsg::HeartRateBatteryStatusMsg() : HeartRateBaseMainDataPageMsg() {
-    // TODO
+HeartRateBatteryStatusMsg::HeartRateBatteryStatusMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER) {
+
 }
 
 uint8_t HeartRateBatteryStatusMsg::getBatteryLevel() {

@@ -1,7 +1,8 @@
 #include <Profiles/HeartRate/DataPages/TX/ANTPLUS_HeartRateSwimIntervalSummaryMsg.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
-HeartRateSwimIntervalSummaryMsg::HeartRateSwimIntervalSummaryMsg() : HeartRateBaseMainDataPageMsg() {
-    // TODO
+HeartRateSwimIntervalSummaryMsg::HeartRateSwimIntervalSummaryMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_NUMBER) {
+
 }
 
 uint8_t HeartRateSwimIntervalSummaryMsg::getIntervalAverageHeartRate() {

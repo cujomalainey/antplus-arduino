@@ -7,7 +7,7 @@
 
 class HeartRateBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg> {
 public:
-    HeartRateBaseMainDataPageMsg();
+    HeartRateBaseMainDataPageMsg(uint8_t dataPageNumber);
     uint8_t getPageChangeToggle();
     uint16_t getHeartBeatEventTime();
     uint8_t getHeartBeatCount();

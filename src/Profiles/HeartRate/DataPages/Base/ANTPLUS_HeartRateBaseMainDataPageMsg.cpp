@@ -1,8 +1,10 @@
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPageMsg.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
+#include <ANTPLUS_PrivateDefines.h>
 
-HeartRateBaseMainDataPageMsg::HeartRateBaseMainDataPageMsg() : BaseDataPageMsg<BroadcastDataMsg>() {
+HeartRateBaseMainDataPageMsg::HeartRateBaseMainDataPageMsg(uint8_t dataPageNumber) : BaseDataPageMsg<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
+    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = dataPageNumber;
 }
 
 uint8_t HeartRateBaseMainDataPageMsg::getPageChangeToggle() {

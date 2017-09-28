@@ -1,7 +1,8 @@
 #include <Profiles/HeartRate/DataPages/TX/ANTPLUS_HeartRateProductInformationMsg.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
-HeartRateProductInformationMsg::HeartRateProductInformationMsg() : HeartRateBaseMainDataPageMsg() {
-    // TODO
+HeartRateProductInformationMsg::HeartRateProductInformationMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER) {
+
 }
 
 uint8_t HeartRateProductInformationMsg::getHardwareVersion() {
