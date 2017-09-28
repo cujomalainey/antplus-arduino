@@ -31,6 +31,7 @@ public:
     void onBroadcastData(BroadcastData& msg);
 
 private:
+    void setChannelConfig();
     bool handleBatteryStatus(HeartRateBaseMainDataPage& dataPage);
     bool handleCapabilities(HeartRateBaseMainDataPage& dataPage);
     bool handleCumulativeOperatingTime(HeartRateBaseMainDataPage& dataPage);

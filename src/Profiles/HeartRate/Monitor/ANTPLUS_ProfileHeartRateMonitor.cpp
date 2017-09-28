@@ -4,24 +4,15 @@
 #include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 
 ProfileHeartRateMonitor::ProfileHeartRateMonitor() : BaseSlaveProfile() {
-    // TODO remove magic numbers
-    setDeviceNumber(0);
-    setChannelType(CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE);
-    setDeviceType(120);
-    setTransmissionType(0);
-    setChannelPeriod(8070);
-    // 30 / 2.5 = 12
-    setSearchTimeout(12);
+    setChannelConfig();
 }
 
 ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
-    // TODO remove magic numbers
-    setChannelType(CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE);
-    setDeviceType(120);
-    setTransmissionType(0);
-    setChannelPeriod(8070);
-    // 30 / 2.5 = 12
-    setSearchTimeout(12);
+    setChannelConfig();
+}
+
+ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint16_t deviceNumber, uint8_t transmissionType) : BaseSlaveProfile(deviceNumber, transmissionType) {
+    setChannelConfig();
 }
 
 void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
@@ -73,6 +64,13 @@ void ProfileHeartRateMonitor::begin() {
 
 void ProfileHeartRateMonitor::stop() {
     closeChannel();
+}
+
+void ProfileHeartRateMonitor::setChannelConfig() {
+    setChannelType(ANTPLUS_HEARTRATE_CHANNELTYPE);
+    setDeviceType(ANTPLUS_HEARTRATE_DEVICETYPE);
+    setChannelPeriod(ANTPLUS_HEARTRATE_CHANNELPERIOD);
+    setSearchTimeout(ANTPLUS_HEARTRATE_SEARCHTIMEOUT);
 }
 
 bool ProfileHeartRateMonitor::handleBatteryStatus(HeartRateBaseMainDataPage& dataPage) {
