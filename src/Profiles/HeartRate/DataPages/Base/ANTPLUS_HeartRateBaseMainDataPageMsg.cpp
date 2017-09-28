@@ -30,8 +30,7 @@ void HeartRateBaseMainDataPageMsg::setPageChangeToggle(uint8_t toggle) {
 
 void HeartRateBaseMainDataPageMsg::setHeartBeatEventTime(uint16_t time) {
     _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMEMSB_BYTE] = time >> ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMEMSB_SHIFT;
-    _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMELSB_BYTE] = time & 0xFF;
-    // TODO magic numbers
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMELSB_BYTE] = time & ANTPLUS_DEFAULT_BYTE_MASK;
 }
 
 void HeartRateBaseMainDataPageMsg::setHeartBeatCount(uint8_t count) {
