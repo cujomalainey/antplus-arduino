@@ -2,7 +2,7 @@
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
 HeartRatePreviousHeartBeatMsg::HeartRatePreviousHeartBeatMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_NUMBER) {
-
+    setManufacturerSpecific(ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_MANUFACTURERSPECIFIC_INVALID);
 }
 
 uint8_t HeartRatePreviousHeartBeatMsg::getManufacturerSpecific() {
@@ -14,7 +14,7 @@ uint16_t HeartRatePreviousHeartBeatMsg::getPreviousHeartBeatEventTime() {
 }
 
 void HeartRatePreviousHeartBeatMsg::setManufacturerSpecific(uint8_t specificByte) {
-    // TODO
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_MANUFACTURERSPECIFIC_BYTE] = specificByte;
 }
 
 void HeartRatePreviousHeartBeatMsg::setPreviousHeartBeatEventTime(uint16_t eventTime) {
