@@ -89,6 +89,9 @@ void AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     }
     send(rs);
     _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
+    if (waitForStartup == ANTPLUS_RESET_WAIT_FOR_STARTUP) {
+        // TODO use driver wait for message once impletmented
+    }
 }
 
 void AntPlusRouter::onPacketError(uint8_t error) {
@@ -160,5 +163,5 @@ void AntPlusRouter::onSelectiveDataUpdateMaskSetting(SelectiveDataUpdateMaskSett
 }
 
 void AntPlusRouter::onStartUpMessage(StartUpMessage& msg) {
-    // TODO
+    _radioStarted = ANTPLUS_DRIVER_STATE_STARTED;
 }
