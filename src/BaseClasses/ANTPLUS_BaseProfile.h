@@ -21,7 +21,7 @@ public:
      */
     void onOtherDataPage(void (*func)(AntRxDataResponse&, uintptr_t), uintptr_t data = 0) { _onOtherDataPage.set(func, data); }
     /**
-     * Callback when an even on the radio occurs
+     * Callback when an event on this channel occurs
      */
     void onChannelEvent(void (*func)(ChannelEventResponse&, uintptr_t), uintptr_t data = 0) { _onChannelEvent.set(func, data); }
     // TODO on channel config change callback (used for when wildcarding to identify when actual information has been found)

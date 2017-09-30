@@ -1,5 +1,6 @@
 #include <MainClasses/ANTPLUS_AntPlusRouter.h>
 #include <MainClasses/ANTPLUS_CallbackWorkAround.h>
+#include <ANTPLUS_PrivateDefines.h>
 
 AntPlusRouter::AntPlusRouter() {
     // TODO
@@ -139,7 +140,14 @@ void AntPlusRouter::onCapabilities(Capabilities& msg) {
 }
 
 void AntPlusRouter::onChannelEventResponse(ChannelEventResponse& msg) {
-    // TODO
+    if (msg.getMsgId() == ANTPLUS_CHANNELEVENT_MESSAGECODE) {
+        uint8_t channel = msg.getChannelNumber();
+        if (_profiles[channel]) {
+            _profiles[channel]->onChannelEventResponse(msg);
+        }
+    } else {
+        // TODO
+    }
 }
 
 void AntPlusRouter::onChannelIdResponse(ChannelIdResponse& msg) {
