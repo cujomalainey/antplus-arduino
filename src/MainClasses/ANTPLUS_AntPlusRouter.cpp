@@ -151,7 +151,10 @@ void AntPlusRouter::onChannelEventResponse(ChannelEventResponse& msg) {
 }
 
 void AntPlusRouter::onChannelIdResponse(ChannelIdResponse& msg) {
-    // TODO
+    uint8_t channel = msg.getChannelNumber();
+    if (_profiles[channel]) {
+        _profiles[channel]->onChannelIdResponse(msg);
+    }
 }
 
 void AntPlusRouter::onChannelStatus(ChannelStatus& msg) {

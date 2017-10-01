@@ -24,7 +24,10 @@ public:
      * Callback when an event on this channel occurs
      */
     void onChannelEvent(void (*func)(ChannelEventResponse&, uintptr_t), uintptr_t data = 0) { _onChannelEvent.set(func, data); }
-    // TODO on channel config change callback (used for when wildcarding to identify when actual information has been found)
+    /**
+     * Notifies handler of channel config found after searching
+     */
+    void onChannelIdResponse(void (*func)(ChannelIdResponse&,uintptr_t), uintptr_t data = 0) { _onChannelIdResponse.set(func, data); }
     /**
      * Set the channel deviceNumber, wildcard for searching is 0
      */
@@ -66,6 +69,7 @@ public:
     virtual void onBroadcastData(BroadcastData& msg) { _onDataPage.call(msg); }
     virtual void onBurstTransferData(BurstTransferData& msg) { _onDataPage.call(msg); }
     virtual void onChannelEventResponse(ChannelEventResponse& msg);
+    virtual void onChannelIdResponse(ChannelIdResponse& msg);
     void setRouter(AntPlusRouter* router);
     void setChannelNumber(uint8_t channel);
     // TODO this should probably have the whole message passed in so
@@ -87,6 +91,7 @@ private:
     Callback<AntRxDataResponse&> _onDataPage;
     Callback<AntRxDataResponse&> _onOtherDataPage;
     Callback<ChannelEventResponse&> _onChannelEvent;
+    Callback<ChannelIdResponse&> _onChannelIdResponse;
     uint8_t _channel;
     uint8_t _channelType = 0;
     uint16_t _channelPeriod = 0;

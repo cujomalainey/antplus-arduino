@@ -9,6 +9,8 @@ public:
     BaseSlaveProfile(uint16_t deviceNumber);
     BaseSlaveProfile(uint16_t deviceNumber, uint8_t transmissionType);
 
+    // TODO add a search method
+
 private:
 };
 

@@ -70,8 +70,7 @@ void BaseProfile::closeChannel() {
     _router->send(cc);
 }
 
-void BaseProfile::onChannelEventResponse(ChannelEventResponse& msg)
-{
+void BaseProfile::onChannelEventResponse(ChannelEventResponse& msg) {
     uint8_t event = msg.getCode();
     // TODO maybe define an explicit state enum?
     switch (event) {
@@ -83,4 +82,10 @@ void BaseProfile::onChannelEventResponse(ChannelEventResponse& msg)
         break;
     }
     _onChannelEvent.call(msg);
+}
+
+void BaseProfile::onChannelIdResponse(ChannelIdResponse& msg) {
+    setDeviceNumber(msg.getDeviceNumber());
+    setTransmissionType(msg.getTransmissionType());
+    _onChannelIdResponse.call(msg);
 }
