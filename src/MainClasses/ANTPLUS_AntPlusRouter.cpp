@@ -3,7 +3,7 @@
 #include <ANTPLUS_PrivateDefines.h>
 
 AntPlusRouter::AntPlusRouter() {
-    // TODO
+
 }
 
 AntPlusRouter::AntPlusRouter(BaseAntWithCallbacks* driver) {
@@ -16,6 +16,9 @@ AntPlusRouter::AntPlusRouter(BaseAntWithCallbacks* driver, const uint8_t* key) {
 }
 
 uint8_t AntPlusRouter::setDriver(BaseAntWithCallbacks* driver) {
+    // Synchronous locking nature needed to gurantee all configs were recieved
+    RequestMessage rm = RequestMessage();
+    Capabilities cap = Capabilities();
     _ant = driver;
     // register callbacks
     _ant->onPacketError(onPacketErrorCallback, (uintptr_t)this);
@@ -37,7 +40,11 @@ uint8_t AntPlusRouter::setDriver(BaseAntWithCallbacks* driver) {
         return ANTPLUS_RESET_RADIO_FAILED;
     }
     pushNetworkKey();
-    // get max channels
+    rm.setRequestedMessage(CAPABILITIES);
+    _ant->send(rm);
+    if (_ant->waitFor(cap, ANTPLUS_DRIVER_REQUEST_TIMEOUT)) {
+        return ANTPLUS_MAX_CHANNEL_CHECK_FAILED;
+    }
     return 0;
 }
 
