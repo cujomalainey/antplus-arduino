@@ -60,14 +60,18 @@ public:
      * Close radio channel and stop transmitting
      */
     virtual void stop() = 0;
+    /**
+     * Sends a message through the connected router
+     */
+    void send(AntRequest& msg);
 
     /******************************************
      *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
      ******************************************/
-    virtual void onAcknowledgedData(AcknowledgedData& msg) { _onDataPage.call(msg); }
-    virtual void onAdvancedBurstData(AdvancedBurstData& msg) { _onDataPage.call(msg); }
-    virtual void onBroadcastData(BroadcastData& msg) { _onDataPage.call(msg); }
-    virtual void onBurstTransferData(BurstTransferData& msg) { _onDataPage.call(msg); }
+    virtual void onAcknowledgedData(AcknowledgedData& msg);
+    virtual void onAdvancedBurstData(AdvancedBurstData& msg);
+    virtual void onBroadcastData(BroadcastData& msg);
+    virtual void onBurstTransferData(BurstTransferData& msg);
     virtual void onChannelEventResponse(ChannelEventResponse& msg);
     virtual void onChannelIdResponse(ChannelIdResponse& msg);
     void setRouter(AntPlusRouter* router);
@@ -87,6 +91,7 @@ protected:
     void openChannel();
     void closeChannel();
 private:
+    void checkProfileStatus();
     AntPlusRouter* _router;
     Callback<AntRxDataResponse&> _onDataPage;
     Callback<AntRxDataResponse&> _onOtherDataPage;

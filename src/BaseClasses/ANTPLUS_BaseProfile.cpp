@@ -89,3 +89,42 @@ void BaseProfile::onChannelIdResponse(ChannelIdResponse& msg) {
     setTransmissionType(msg.getTransmissionType());
     _onChannelIdResponse.call(msg);
 }
+
+void BaseProfile::onAcknowledgedData(AcknowledgedData& msg) {
+    checkProfileStatus();
+    _onDataPage.call(msg);
+}
+
+void BaseProfile::onAdvancedBurstData(AdvancedBurstData& msg) {
+    checkProfileStatus();
+    _onDataPage.call(msg);
+}
+
+void BaseProfile::onBroadcastData(BroadcastData& msg) {
+    checkProfileStatus();
+    _onDataPage.call(msg);
+}
+
+void BaseProfile::onBurstTransferData(BurstTransferData& msg) {
+    checkProfileStatus();
+    _onDataPage.call(msg);
+}
+
+void BaseProfile::checkProfileStatus() {
+    if (!getDeviceNumber() || !getTransmissionType()) {
+        RequestMessage rm = RequestMessage(CHANNEL_ID, _channel);
+        send(rm);
+    }
+}
+
+void BaseProfile::send(AntRequest& msg) {
+    _router->send(msg);
+}
+
+uint8_t BaseProfile::getTransmissionType() {
+    return _transmissionType;
+}
+
+uint16_t BaseProfile::getDeviceNumber() {
+    return _deviceNumber;
+}
