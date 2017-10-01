@@ -1,16 +1,17 @@
 #include <Profiles/HeartRate/DataPages/TX/ANTPLUS_HeartRatePreviousHeartBeatMsg.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
+#include <ANTPLUS_PrivateDefines.h>
 
 HeartRatePreviousHeartBeatMsg::HeartRatePreviousHeartBeatMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_NUMBER) {
     setManufacturerSpecific(ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_MANUFACTURERSPECIFIC_INVALID);
 }
 
 uint8_t HeartRatePreviousHeartBeatMsg::getManufacturerSpecific() {
-    // TODO
+    return _buffer[ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_MANUFACTURERSPECIFIC_BYTE];
 }
 
 uint16_t HeartRatePreviousHeartBeatMsg::getPreviousHeartBeatEventTime() {
-    // TODO
+    return _buffer[ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_PREVIOUSHEARTBEATEVENTTIMELSB_BYTE] | (_buffer[ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_PREVIOUSHEARTBEATEVENTTIMEMSB_BYTE] << ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_PREVIOUSHEARTBEATEVENTTIMEMSB_SHIFT);
 }
 
 void HeartRatePreviousHeartBeatMsg::setManufacturerSpecific(uint8_t specificByte) {
@@ -18,5 +19,6 @@ void HeartRatePreviousHeartBeatMsg::setManufacturerSpecific(uint8_t specificByte
 }
 
 void HeartRatePreviousHeartBeatMsg::setPreviousHeartBeatEventTime(uint16_t eventTime) {
-    // TODO
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_PREVIOUSHEARTBEATEVENTTIMELSB_BYTE] = eventTime & ANTPLUS_DEFAULT_BYTE_MASK;
+    _buffer[ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_PREVIOUSHEARTBEATEVENTTIMEMSB_BYTE] = eventTime >> ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_PREVIOUSHEARTBEATEVENTTIMEMSB_SHIFT;
 }
