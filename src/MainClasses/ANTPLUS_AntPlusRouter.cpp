@@ -172,7 +172,10 @@ void AntPlusRouter::onChannelIdResponse(ChannelIdResponse& msg) {
 }
 
 void AntPlusRouter::onChannelStatus(ChannelStatus& msg) {
-    // TODO
+    uint8_t channel = msg.getChannelNumber();
+    if (_profiles[channel]) {
+        _profiles[channel]->onChannelStatus(msg);
+    }
 }
 
 void AntPlusRouter::onEncryptionModeParameters(EncryptionModeParameters& msg) {

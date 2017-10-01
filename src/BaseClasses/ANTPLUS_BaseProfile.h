@@ -74,6 +74,7 @@ public:
     virtual void onBurstTransferData(BurstTransferData& msg);
     virtual void onChannelEventResponse(ChannelEventResponse& msg);
     virtual void onChannelIdResponse(ChannelIdResponse& msg);
+    virtual void onChannelStatus(ChannelStatus& msg);
     void setRouter(AntPlusRouter* router);
     void setChannelNumber(uint8_t channel);
     // TODO this should probably have the whole message passed in so
@@ -90,6 +91,7 @@ protected:
     void pushChannelConfig();
     void openChannel();
     void closeChannel();
+    void loop();
 private:
     void checkProfileStatus();
     AntPlusRouter* _router;

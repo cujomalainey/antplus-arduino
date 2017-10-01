@@ -62,25 +62,26 @@ void BaseProfile::pushChannelConfig() {
 
 void BaseProfile::openChannel() {
     OpenChannel oc = OpenChannel(_channel);
+    _channelStatus = CHANNEL_STATUS_SEARCHING;
     _router->send(oc);
 }
 
 void BaseProfile::closeChannel() {
     CloseChannel cc = CloseChannel(_channel);
+    _channelStatus = CHANNEL_STATUS_ASSIGNED;
     _router->send(cc);
 }
 
 void BaseProfile::onChannelEventResponse(ChannelEventResponse& msg) {
     uint8_t event = msg.getCode();
-    // TODO maybe define an explicit state enum?
+
     switch (event) {
     case STATUS_EVENT_CHANNEL_CLOSED:
-        _channelStatus = STATUS_EVENT_CHANNEL_CLOSED;
-        break;
     case STATUS_EVENT_RX_FAIL_GO_TO_SEARCH:
-        _channelStatus = STATUS_EVENT_RX_FAIL_GO_TO_SEARCH;
+        _channelStatus = CHANNEL_STATUS_ASSIGNED;
         break;
     }
+
     _onChannelEvent.call(msg);
 }
 
@@ -110,9 +111,17 @@ void BaseProfile::onBurstTransferData(BurstTransferData& msg) {
     _onDataPage.call(msg);
 }
 
+void BaseProfile::onChannelStatus(ChannelStatus& msg) {
+    _channelStatus = msg.getChannelState();
+}
+
 void BaseProfile::checkProfileStatus() {
     if (!getDeviceNumber() || !getTransmissionType()) {
         RequestMessage rm = RequestMessage(CHANNEL_ID, _channel);
+        send(rm);
+    }
+    if (_channelStatus == CHANNEL_STATUS_SEARCHING) {
+        RequestMessage rm = RequestMessage(CHANNEL_STATUS, _channel);
         send(rm);
     }
 }
@@ -127,4 +136,8 @@ uint8_t BaseProfile::getTransmissionType() {
 
 uint16_t BaseProfile::getDeviceNumber() {
     return _deviceNumber;
+}
+
+void BaseProfile::loop() {
+    _router->loop();
 }
