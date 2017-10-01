@@ -25,7 +25,7 @@ public:
     uint8_t getMaxChannels();
     void loop();
     void reset();
-    void resetRadio(uint8_t waitForStartup);
+    uint8_t resetRadio(uint8_t waitForStartup);
     /******************************************
      *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
      ******************************************/

@@ -33,8 +33,9 @@ uint8_t AntPlusRouter::setDriver(BaseAntWithCallbacks* driver) {
     _ant->onEventFilter(onEventFilterCallback, (uintptr_t)this);
     _ant->onSelectiveDataUpdateMaskSetting(onSelectiveDataUpdateMaskSettingCallback, (uintptr_t)this);
     _ant->onStartUpMessage(onStartUpMessageCallback, (uintptr_t)this);
-    resetRadio(ANTPLUS_RESET_WAIT_FOR_STARTUP);
-    delay(1000); // TODO replace with lock waiting for startup
+    if (resetRadio(ANTPLUS_RESET_WAIT_FOR_STARTUP)) {
+        return ANTPLUS_RESET_RADIO_FAILED;
+    }
     pushNetworkKey();
     // get max channels
     return 0;
@@ -81,7 +82,7 @@ void AntPlusRouter::reset() {
     // reset system state
 }
 
-void AntPlusRouter::resetRadio(uint8_t waitForStartup) {
+uint8_t AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     ResetSystem rs;
     for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
         if (_profiles[i]) {
@@ -91,8 +92,14 @@ void AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     send(rs);
     _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
     if (waitForStartup == ANTPLUS_RESET_WAIT_FOR_STARTUP) {
-        // TODO use driver wait for message once impletmented
+        StartUpMessage sm = StartUpMessage();
+        if (_ant->waitFor(sm, ANTPLUS_DRIVER_RESET_TIMEOUT)) {
+            onStartUpMessage(sm);
+        } else {
+            return ANTPLUS_RESET_RADIO_FAILED;
+        }
     }
+    return 0;
 }
 
 void AntPlusRouter::onPacketError(uint8_t error) {
@@ -175,4 +182,5 @@ void AntPlusRouter::onSelectiveDataUpdateMaskSetting(SelectiveDataUpdateMaskSett
 
 void AntPlusRouter::onStartUpMessage(StartUpMessage& msg) {
     _radioStarted = ANTPLUS_DRIVER_STATE_STARTED;
+    // TODO handle radio crash
 }
