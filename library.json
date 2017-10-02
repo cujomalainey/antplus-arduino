@@ -1,7 +1,7 @@
 {
   "name": "ANT+",
   "keywords": "ant, protocol, radio, rf, ant+, fitness, sports",
-  "description": "Adds support for ANT+ network devices",
+  "description": "Implements the ANT+ network on top the ANT driver for communication with ANT+ devices. Enables support for integration into various sports sensors/devices.",
   "repository":
   {
     "type": "git",
