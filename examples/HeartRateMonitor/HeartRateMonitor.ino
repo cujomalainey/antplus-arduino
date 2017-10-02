@@ -60,8 +60,8 @@ void setup() {
     // wait for pair to complete
     uint8_t status = hr.waitForPair();
     // print channel status
-    printStatus(status);
     Serial.println("===========================");
+    printStatus(status);
     Serial.print("Device Number: ");
     Serial.println(hr.getDeviceNumber());
     Serial.print("Transmisison Type: ");
