@@ -57,6 +57,10 @@ void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
     }
 }
 
+void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
+    // TODO
+}
+
 void ProfileHeartRateMonitor::begin() {
     pushChannelConfig();
     openChannel();

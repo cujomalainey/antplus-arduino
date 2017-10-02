@@ -29,6 +29,7 @@ public:
      *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
      ******************************************/
     void onBroadcastData(BroadcastData& msg);
+    void onAcknowledgedData(AcknowledgedData& msg);
 
 private:
     void setChannelConfig();
