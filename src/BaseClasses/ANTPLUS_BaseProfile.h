@@ -77,8 +77,6 @@ public:
     virtual void onChannelStatus(ChannelStatus& msg);
     void setRouter(AntPlusRouter* router);
     void setChannelNumber(uint8_t channel);
-    // TODO this should probably have the whole message passed in so
-    // profiles like bikelights don't get confused.
     // Alternative is classes requiring 2 channels will register a child
     // profile into the following slots and redirect all traffic back
     void setChannelStatus(uint8_t status);

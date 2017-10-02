@@ -24,9 +24,38 @@ An Implementation of the Ant+ Network on top of ant-arduino
 I have created several sketches of configuring the radio with the ant-arduino library. You can find these in the examples folder. Here's an example of configuring a channel with a NRF51 radio:
 
 ```
+AntWithCallbacks ant = AntWithCallbacks();
+AntPlusRouter router = AntPlusRouter();
+ProfileHeartRateMonitor hr = ProfileHeartRateMonitor(WILDCARD_DEVICE);
 
+void previousHeartBeatDataPageHandler(HeartRatePreviousHeartBeat& dp, uintptr_t data) {
+    Serial.print("HR: ");
+    Serial.println(dp.getComputedHeartRate());
+}
 
-// Wait for the responses
+void setup() {
+    Serial1.begin(BAUD_RATE);
+    ant.setSerial(Serial1);
+    delay(10000);
+
+    router.setDriver(&ant); // never touch ant again
+    router.setAntPlusNetworkKey(NETWORK_KEY);
+    router.setProfile(CHANNEL_0, &hr);
+    // Delay after initial setup to wait for user to connect on serial
+
+    Serial.begin(BAUD_RATE);
+    Serial.println("Running");
+    hr.onHeartRatePreviousHeartBeat(previousHeartBeatDataPageHandler, NULL);
+    hr.begin();
+    // wait for pair to complete
+    while(hr.getChannelStatus() == CHANNEL_STATUS_SEARCHING) {router.loop();};
+    // print channel status
+    // get sensor serial number
+}
+
+void loop() {
+    router.loop();
+}
 ```
 
 See the examples folder for the full source. There are more examples in the download.
