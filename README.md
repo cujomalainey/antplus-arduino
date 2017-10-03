@@ -48,9 +48,7 @@ void setup() {
     hr.onHeartRatePreviousHeartBeat(previousHeartBeatDataPageHandler, NULL);
     hr.begin();
     // wait for pair to complete
-    while(hr.getChannelStatus() == CHANNEL_STATUS_SEARCHING) {router.loop();};
-    // print channel status
-    // get sensor serial number
+    hr.waitForPair();
 }
 
 void loop() {
