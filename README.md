@@ -1,5 +1,5 @@
 # antplus-arduino
-An Implementation of the Ant+ Network on top of ant-arduino
+An Implementation of the Ant+ Network on top of [ant-arduino](https://github.com/cujomalainey/ant-arduino)
 
 ## Status
 
