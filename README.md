@@ -7,9 +7,9 @@ An Implementation of the Ant+ Network on top of [ant-arduino](https://github.com
 
 ## News
 
-* 9/4/2017 Project Started
-* 9/24/2017 Proof of concept complete (for system design)
 * 10/1/2017 v0.1.0 Version released, library added to managers
+* 9/24/2017 Proof of concept complete (for system design)
+* 9/4/2017 Project Started
 
 ## Roadmap
 
