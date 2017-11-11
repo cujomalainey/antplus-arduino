@@ -141,3 +141,12 @@ uint16_t BaseProfile::getDeviceNumber() {
 void BaseProfile::loop() {
     _router->loop();
 }
+
+void BaseProfile::begin() {
+    pushChannelConfig();
+    openChannel();
+}
+
+void BaseProfile::stop() {
+    closeChannel();
+}
