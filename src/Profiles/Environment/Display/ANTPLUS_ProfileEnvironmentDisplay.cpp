@@ -1,5 +1,5 @@
-#include <Profiles/HeartRate/Monitor/ANTPLUS_ProfileEnvironmentDisplay.h>
-#include <Profiles/HeartRate/ANTPLUS_EnvironmentPrivateDefines.h>
+#include <Profiles/Environment/Display/ANTPLUS_ProfileEnvironmentDisplay.h>
+#include <Profiles/Environment/ANTPLUS_EnvironmentPrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 
 ProfileEnvironmentDisplay::ProfileEnvironmentDisplay() : BaseSlaveProfile() {
