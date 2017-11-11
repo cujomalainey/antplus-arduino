@@ -56,19 +56,26 @@ public:
     /**
      * Opens radio channel for RX/TX
      */
-    virtual void begin() = 0;
+    virtual void begin();
     /**
      * Close radio channel and stop transmitting
      */
-    virtual void stop() = 0;
+    virtual void stop();
     /**
      * Sends a message through the connected router
      */
     void send(AntRequest& msg);
 
-    /******************************************
-     *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
-     ******************************************/
+protected:
+    void callOnOtherDataPage(AntRxDataResponse& msg);
+    void setChannelType(uint8_t channelType);
+    void setChannelPeriod(uint16_t channelPeriod);
+    void setDeviceType(uint8_t deviceType);
+    void pushChannelConfig();
+    void openChannel();
+    void closeChannel();
+    void loop();
+    friend class AntPlusRouter;
     virtual void onAcknowledgedData(AcknowledgedData& msg);
     virtual void onAdvancedBurstData(AdvancedBurstData& msg);
     virtual void onBroadcastData(BroadcastData& msg);
@@ -82,15 +89,6 @@ public:
     // profile into the following slots and redirect all traffic back
     void setChannelStatus(uint8_t status);
     void setSearchTimeout(uint8_t counts);
-protected:
-    void callOnOtherDataPage(AntRxDataResponse& msg);
-    void setChannelType(uint8_t channelType);
-    void setChannelPeriod(uint16_t channelPeriod);
-    void setDeviceType(uint8_t deviceType);
-    void pushChannelConfig();
-    void openChannel();
-    void closeChannel();
-    void loop();
 private:
     void checkProfileStatus();
     AntPlusRouter* _router;
