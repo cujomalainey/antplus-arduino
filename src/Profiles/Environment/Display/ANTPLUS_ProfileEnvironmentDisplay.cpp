@@ -15,7 +15,7 @@ ProfileEnvironmentDisplay::ProfileEnvironmentDisplay(uint16_t deviceNumber, uint
 }
 
 void ProfileEnvironmentDisplay::onBroadcastData(BroadcastData& msg) {
-    EnvironmentBaseMainDataPage dp = EnvironmentBaseMainDataPage(msg);
+    EnvironmentBaseDataPage dp = EnvironmentBaseDataPage(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
@@ -33,7 +33,7 @@ void ProfileEnvironmentDisplay::onAcknowledgedData(AcknowledgedData& msg) {
     // TODO
 }
 
-void ProfileHeartRateMonitor::setChannelConfig() {
+void ProfileEnvironmentDisplay::setChannelConfig() {
     setChannelType(ANTPLUS_ENVIRONMENT_CHANNELTYPE);
     setDeviceType(ANTPLUS_ENVIRONMENT_DEVICETYPE);
     setChannelPeriod(ANTPLUS_ENVIRONMENT_CHANNELPERIOD);

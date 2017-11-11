@@ -14,9 +14,6 @@ public:
     ProfileEnvironmentDisplay(uint16_t deviceNumber, uint8_t transmissionType);
     void onEnvironmentGeneralInformation(void (*func)(EnvironmentGeneralInformation&, uintptr_t), uintptr_t data = 0) { _onEnvironmentGeneralInformation.set(func, data); }
 
-    void begin();
-    void stop();
-
 private:
     void setChannelConfig();
     void onBroadcastData(BroadcastData& msg);
