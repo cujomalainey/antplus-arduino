@@ -22,17 +22,11 @@ public:
     void onHeartRateSwimIntervalSummary(void (*func)(HeartRateSwimIntervalSummary&, uintptr_t), uintptr_t data = 0) { _onHeartRateSwimIntervalSummary.set(func, data); }
     void onModeSettings(void (*func)(ModeSettings&, uintptr_t), uintptr_t data = 0) { _onModeSettings.set(func, data); }
 
-    void begin();
-    void stop();
-
-    /******************************************
-     *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
-     ******************************************/
+private:
+    void setChannelConfig();
     void onBroadcastData(BroadcastData& msg);
     void onAcknowledgedData(AcknowledgedData& msg);
 
-private:
-    void setChannelConfig();
     bool handleBatteryStatus(HeartRateBaseMainDataPage& dataPage);
     bool handleCapabilities(HeartRateBaseMainDataPage& dataPage);
     bool handleCumulativeOperatingTime(HeartRateBaseMainDataPage& dataPage);

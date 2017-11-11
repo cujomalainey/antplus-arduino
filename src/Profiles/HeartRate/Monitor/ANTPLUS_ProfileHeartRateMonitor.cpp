@@ -61,14 +61,6 @@ void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
     // TODO
 }
 
-void ProfileHeartRateMonitor::begin() {
-    pushChannelConfig();
-    openChannel();
-}
-
-void ProfileHeartRateMonitor::stop() {
-    closeChannel();
-}
 
 void ProfileHeartRateMonitor::setChannelConfig() {
     setChannelType(ANTPLUS_HEARTRATE_CHANNELTYPE);
