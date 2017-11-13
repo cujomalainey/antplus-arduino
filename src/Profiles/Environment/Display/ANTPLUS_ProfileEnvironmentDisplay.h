@@ -1,5 +1,5 @@
-#ifndef ANTPLUS_PROFILEHEARTRATEMONITOR_h
-#define ANTPLUS_PROFILEHEARTRATEMONITOR_h
+#ifndef ANTPLUS_PROFILEENVIRONMENTMONITOR_h
+#define ANTPLUS_PROFILEENVIRONMENTMONITOR_h
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
 #include <Profiles/Environment/DataPages/ANTPLUS_ProfileEnvironmentDataPages.h>
@@ -29,4 +29,4 @@ private:
     Callback<ProductInformation&> _onProductInformation;
 };
 
-#endif // ANTPLUS_PROFILEHEARTRATEMONITOR_h
+#endif // ANTPLUS_PROFILEENVIRONMENTMONITOR_h
