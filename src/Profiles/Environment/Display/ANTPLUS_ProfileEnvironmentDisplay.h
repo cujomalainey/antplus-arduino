@@ -13,6 +13,7 @@ public:
     ProfileEnvironmentDisplay(uint16_t deviceNumber);
     ProfileEnvironmentDisplay(uint16_t deviceNumber, uint8_t transmissionType);
     void onEnvironmentGeneralInformation(void (*func)(EnvironmentGeneralInformation&, uintptr_t), uintptr_t data = 0) { _onEnvironmentGeneralInformation.set(func, data); }
+    void onManufacturersInformation(void (*func)(ManufacturerInformation&, uintptr_t), uintptr_t data = 0) { _onManufacturersInformation.set(func, data); }
 
 private:
     void setChannelConfig();
