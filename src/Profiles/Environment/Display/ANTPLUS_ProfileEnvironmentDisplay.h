@@ -13,7 +13,9 @@ public:
     ProfileEnvironmentDisplay(uint16_t deviceNumber);
     ProfileEnvironmentDisplay(uint16_t deviceNumber, uint8_t transmissionType);
     void onEnvironmentGeneralInformation(void (*func)(EnvironmentGeneralInformation&, uintptr_t), uintptr_t data = 0) { _onEnvironmentGeneralInformation.set(func, data); }
+    void onEnvironmentTemperature(void (*func)(EnvironmentTemperature&, uintptr_t), uintptr_t data = 0) { _onEnvironmentTemperature.set(func, data); }
     void onManufacturersInformation(void (*func)(ManufacturersInformation&, uintptr_t), uintptr_t data = 0) { _onManufacturersInformation.set(func, data); }
+    void onProductInformation(void (*func)(ProductInformation&, uintptr_t), uintptr_t data = 0) { _onProductInformation.set(func, data); }
 
 private:
     void setChannelConfig();
@@ -22,7 +24,9 @@ private:
 
     bool handleGeneralInformation(EnvironmentGeneralInformation& dataPage);
     Callback<EnvironmentGeneralInformation&> _onEnvironmentGeneralInformation;
+    Callback<EnvironmentTemperature&> _onEnvironmentTemperature;
     Callback<ManufacturersInformation&> _onManufacturersInformation;
+    Callback<ProductInformation&> _onProductInformation;
 };
 
 #endif // ANTPLUS_PROFILEHEARTRATEMONITOR_h
