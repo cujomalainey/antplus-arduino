@@ -1,20 +1,27 @@
 #include <Profiles/Environment/DataPages/RX/ANTPLUS_EnvironmentTemperature.h>
+#include <Profiles/Environment/ANTPLUS_EnvironmentPrivateDefines.h>
 
 EnvironmentTemperature::EnvironmentTemperature(AntRxDataResponse& dp) : EnvironmentBaseDataPage(dp) {
 }
 
 uint8_t EnvironmentTemperature::getEventCount() {
-    // TODO
+    return getData(ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_EVENTCOUNT_BYTE);
 }
 
 uint16_t EnvironmentTemperature::get24HourLow() {
-    // TODO
-}
+    uint16_t low = (getData(ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_24HOURLOW_MSB_BYTE) & ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_24HOURLOW_MSB_MASK) << ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_24HOURLOW_MSB_SHIFT;
+    low |= getData(ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_24HOURLOW_LSB_BYTE);
+    return low;
+    }
 
 uint16_t EnvironmentTemperature::get24HourHigh() {
-    // TODO
+    uint16_t high = getData(ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_24HOURHIGH_LSB_BYTE) & ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_24HOURHIGH_LSB_MASK;
+    high |= getData(ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_24HOURHIGH_MSB_BYTE) << ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_24HOURHIGH_MSB_SHIFT;
+    return high;
 }
 
 uint16_t EnvironmentTemperature::getCurrentTemp() {
-    // TODO
+    uint16_t current = getData(ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_CURRENTTEMP_LSB_BYTE);
+    current |= getData(ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_CURRENTTEMP_MSB_BYTE) << ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_CURRENTTEMP_MSB_SHIFT;
+    return current;
 }
