@@ -5,3 +5,6 @@
 
 .DS_Store
 .tags*
+tags
+# testing file
+src/main.cpp
