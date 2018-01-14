@@ -18,7 +18,7 @@ const uint8_t NETWORK_KEY[] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77}; 
 
 AntWithCallbacks ant = AntWithCallbacks();
 AntPlusRouter router = AntPlusRouter();
-ProfileHeartRateMonitor hr = ProfileHeartRateMonitor();
+ProfileHeartRateDisplay hr = ProfileHeartRateDisplay();
 
 void heartRateBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data);
 void batteryStatusDataPageHandler(HeartRateBatteryStatus& msg, uintptr_t data);

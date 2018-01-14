@@ -1,21 +1,21 @@
-#include <Profiles/HeartRate/Monitor/ANTPLUS_ProfileHeartRateMonitor.h>
+#include <Profiles/HeartRate/Display/ANTPLUS_ProfileHeartRateDisplay.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 #include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 
-ProfileHeartRateMonitor::ProfileHeartRateMonitor() : BaseSlaveProfile() {
+ProfileHeartRateDisplay::ProfileHeartRateDisplay() : BaseSlaveProfile() {
     setChannelConfig();
 }
 
-ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
+ProfileHeartRateDisplay::ProfileHeartRateDisplay(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
     setChannelConfig();
 }
 
-ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint16_t deviceNumber, uint8_t transmissionType) : BaseSlaveProfile(deviceNumber, transmissionType) {
+ProfileHeartRateDisplay::ProfileHeartRateDisplay(uint16_t deviceNumber, uint8_t transmissionType) : BaseSlaveProfile(deviceNumber, transmissionType) {
     setChannelConfig();
 }
 
-void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
+void ProfileHeartRateDisplay::onBroadcastData(BroadcastData& msg) {
     HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
@@ -57,59 +57,59 @@ void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
     }
 }
 
-void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
+void ProfileHeartRateDisplay::onAcknowledgedData(AcknowledgedData& msg) {
     // TODO
 }
 
 
-void ProfileHeartRateMonitor::setChannelConfig() {
+void ProfileHeartRateDisplay::setChannelConfig() {
     setChannelType(ANTPLUS_HEARTRATE_CHANNELTYPE);
     setDeviceType(ANTPLUS_HEARTRATE_DEVICETYPE);
     setChannelPeriod(ANTPLUS_HEARTRATE_CHANNELPERIOD);
     setSearchTimeout(ANTPLUS_HEARTRATE_SEARCHTIMEOUT);
 }
 
-bool ProfileHeartRateMonitor::handleBatteryStatus(HeartRateBaseMainDataPage& dataPage) {
+bool ProfileHeartRateDisplay::handleBatteryStatus(HeartRateBaseMainDataPage& dataPage) {
     HeartRateBatteryStatus dp = HeartRateBatteryStatus(dataPage);
     return _onHeartRateBatteryStatus.call(dp);
 }
 
-bool ProfileHeartRateMonitor::handleCumulativeOperatingTime(HeartRateBaseMainDataPage& dataPage) {
+bool ProfileHeartRateDisplay::handleCumulativeOperatingTime(HeartRateBaseMainDataPage& dataPage) {
     HeartRateCumulativeOperatingTime dp = HeartRateCumulativeOperatingTime(dataPage);
     return _onHeartRateCumulativeOperatingTime.call(dp);
 }
 
-bool ProfileHeartRateMonitor::handleDefault(HeartRateBaseMainDataPage& dataPage) {
+bool ProfileHeartRateDisplay::handleDefault(HeartRateBaseMainDataPage& dataPage) {
     HeartRateDefault dp = HeartRateDefault(dataPage);
     return _onHeartRateDefault.call(dp);
 }
 
-bool ProfileHeartRateMonitor::handleManufacturerInformation(HeartRateBaseMainDataPage& dataPage) {
+bool ProfileHeartRateDisplay::handleManufacturerInformation(HeartRateBaseMainDataPage& dataPage) {
     HeartRateManufacturerInformation dp = HeartRateManufacturerInformation(dataPage);
     return _onHeartRateManufacturerInformation.call(dp);
 }
 
-bool ProfileHeartRateMonitor::handlePreviousHeartBeat(HeartRateBaseMainDataPage& dataPage) {
+bool ProfileHeartRateDisplay::handlePreviousHeartBeat(HeartRateBaseMainDataPage& dataPage) {
     HeartRatePreviousHeartBeat dp = HeartRatePreviousHeartBeat(dataPage);
     return _onHeartRatePreviousHeartBeat.call(dp);
 }
 
-bool ProfileHeartRateMonitor::handleProductInformation(HeartRateBaseMainDataPage& dataPage) {
+bool ProfileHeartRateDisplay::handleProductInformation(HeartRateBaseMainDataPage& dataPage) {
     HeartRateProductInformation dp = HeartRateProductInformation(dataPage);
     return _onHeartRateProductInformation.call(dp);
 }
 
-bool ProfileHeartRateMonitor::handleSwimIntervalSummary(HeartRateBaseMainDataPage& dataPage) {
+bool ProfileHeartRateDisplay::handleSwimIntervalSummary(HeartRateBaseMainDataPage& dataPage) {
     HeartRateSwimIntervalSummary dp = HeartRateSwimIntervalSummary(dataPage);
     return _onHeartRateSwimIntervalSummary.call(dp);
 }
 
-bool ProfileHeartRateMonitor::handleCapabilities(HeartRateBaseMainDataPage& dataPage) {
+bool ProfileHeartRateDisplay::handleCapabilities(HeartRateBaseMainDataPage& dataPage) {
     HeartRateCapabilities dp = HeartRateCapabilities(dataPage);
     return _onHeartRateCapabilities.call(dp);
 }
 
-bool ProfileHeartRateMonitor::handleModeSettings(HeartRateBaseMainDataPage& dataPage) {
+bool ProfileHeartRateDisplay::handleModeSettings(HeartRateBaseMainDataPage& dataPage) {
     ModeSettings dp = ModeSettings(dataPage);
     return _onModeSettings.call(dp);
 }
