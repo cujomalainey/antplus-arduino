@@ -22,7 +22,8 @@ private:
     void onBroadcastData(BroadcastData& msg);
     void onAcknowledgedData(AcknowledgedData& msg);
 
-    bool handleGeneralInformation(EnvironmentGeneralInformation& dataPage);
+    bool handleGeneralInformation(EnvironmentBaseDataPage& dataPage);
+    bool handleTemperature(EnvironmentBaseDataPage& dataPage);
     Callback<EnvironmentGeneralInformation&> _onEnvironmentGeneralInformation;
     Callback<EnvironmentTemperature&> _onEnvironmentTemperature;
     Callback<ManufacturersInformation&> _onManufacturersInformation;

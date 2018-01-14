@@ -23,8 +23,10 @@ void ProfileEnvironmentDisplay::onBroadcastData(BroadcastData& msg) {
 
     switch (dataPage) {
         case ANTPLUS_ENVIRONMENT_DATAPAGE_GENERALINFORMATION_NUMBER:
+            called = handleGeneralInformation(dp);
             break;
         case ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_NUMBER:
+            called = handleTemperature(dp);
             break;
     }
 
@@ -42,4 +44,14 @@ void ProfileEnvironmentDisplay::setChannelConfig() {
     setDeviceType(ANTPLUS_ENVIRONMENT_DEVICETYPE);
     setChannelPeriod(ANTPLUS_ENVIRONMENT_CHANNELPERIOD);
     setSearchTimeout(ANTPLUS_ENVIRONMENT_SEARCHTIMEOUT);
+}
+
+bool ProfileEnvironmentDisplay::handleGeneralInformation(EnvironmentBaseDataPage& dataPage) {
+    EnvironmentGeneralInformation dp = EnvironmentGeneralInformation(dataPage);
+    return _onEnvironmentGeneralInformation.call(dp);
+}
+
+bool ProfileEnvironmentDisplay::handleTemperature(EnvironmentBaseDataPage& dataPage) {
+    EnvironmentTemperature dp = EnvironmentTemperature(dataPage);
+    return _onEnvironmentTemperature.call(dp);
 }
