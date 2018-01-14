@@ -47,9 +47,6 @@ void ProfileHeartRateDisplay::onBroadcastData(BroadcastData& msg) {
     case ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER:
         called = handleCapabilities(dp);
         break;
-    case ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_NUMBER:
-        called = handleModeSettings(dp);
-        break;
     }
 
     if (!called) {
@@ -107,9 +104,4 @@ bool ProfileHeartRateDisplay::handleSwimIntervalSummary(HeartRateBaseMainDataPag
 bool ProfileHeartRateDisplay::handleCapabilities(HeartRateBaseMainDataPage& dataPage) {
     HeartRateCapabilities dp = HeartRateCapabilities(dataPage);
     return _onHeartRateCapabilities.call(dp);
-}
-
-bool ProfileHeartRateDisplay::handleModeSettings(HeartRateBaseMainDataPage& dataPage) {
-    ModeSettings dp = ModeSettings(dataPage);
-    return _onModeSettings.call(dp);
 }
