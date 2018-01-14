@@ -22,6 +22,10 @@ void ProfileEnvironmentDisplay::onBroadcastData(BroadcastData& msg) {
     BaseProfile::onBroadcastData(msg);
 
     switch (dataPage) {
+        case ANTPLUS_ENVIRONMENT_DATAPAGE_GENERALINFORMATION_NUMBER:
+            break;
+        case ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_NUMBER:
+            break;
     }
 
     if (!called) {
