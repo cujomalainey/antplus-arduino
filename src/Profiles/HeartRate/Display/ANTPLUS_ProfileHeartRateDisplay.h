@@ -20,7 +20,6 @@ public:
     void onHeartRatePreviousHeartBeat(void (*func)(HeartRatePreviousHeartBeat&, uintptr_t), uintptr_t data = 0) { _onHeartRatePreviousHeartBeat.set(func, data); }
     void onHeartRateProductInformation(void (*func)(HeartRateProductInformation&, uintptr_t), uintptr_t data = 0) { _onHeartRateProductInformation.set(func, data); }
     void onHeartRateSwimIntervalSummary(void (*func)(HeartRateSwimIntervalSummary&, uintptr_t), uintptr_t data = 0) { _onHeartRateSwimIntervalSummary.set(func, data); }
-    void onModeSettings(void (*func)(ModeSettings&, uintptr_t), uintptr_t data = 0) { _onModeSettings.set(func, data); }
 
 private:
     void setChannelConfig();
@@ -35,7 +34,6 @@ private:
     bool handlePreviousHeartBeat(HeartRateBaseMainDataPage& dataPage);
     bool handleProductInformation(HeartRateBaseMainDataPage& dataPage);
     bool handleSwimIntervalSummary(HeartRateBaseMainDataPage& dataPage);
-    bool handleModeSettings(HeartRateBaseMainDataPage& dataPage);
     Callback<HeartRateBatteryStatus&> _onHeartRateBatteryStatus;
     Callback<HeartRateCapabilities&> _onHeartRateCapabilities;
     Callback<HeartRateCumulativeOperatingTime&> _onHeartRateCumulativeOperatingTime;
@@ -44,7 +42,6 @@ private:
     Callback<HeartRatePreviousHeartBeat&> _onHeartRatePreviousHeartBeat;
     Callback<HeartRateProductInformation&> _onHeartRateProductInformation;
     Callback<HeartRateSwimIntervalSummary&> _onHeartRateSwimIntervalSummary;
-    Callback<ModeSettings&> _onModeSettings;
 };
 
 #endif // ANTPLUS_PROFILEHEARTRATEMONITOR_h
