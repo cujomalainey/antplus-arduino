@@ -9,6 +9,6 @@
 
 // Profile Classes
 #include <Profiles/HeartRate/Display/ANTPLUS_ProfileHeartRateDisplay.h>
-#include <Profiles/HeartRate/Sensor/ANTPLUS_ProfileHeartRateSensor.h>
+#include <Profiles/HeartRate/Monitor/ANTPLUS_ProfileHeartRateMonitor.h>
 
 #endif // ANTPLUS_HEARTRATEPROFILE_h

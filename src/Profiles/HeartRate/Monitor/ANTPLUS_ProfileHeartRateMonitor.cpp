@@ -1,8 +1,8 @@
-#include <Profiles/HeartRate/Sensor/ANTPLUS_ProfileHeartRateSensor.h>
+#include <Profiles/HeartRate/Monitor/ANTPLUS_ProfileHeartRateMonitor.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 
-void ProfileHeartRateSensor::onBroadcastData(BroadcastData& msg) {
+void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
     HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
@@ -21,7 +21,7 @@ void ProfileHeartRateSensor::onBroadcastData(BroadcastData& msg) {
     }
 }
 
-void ProfileHeartRateSensor::onAcknowledgedData(AcknowledgedData& msg) {
+void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
     HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
@@ -40,12 +40,12 @@ void ProfileHeartRateSensor::onAcknowledgedData(AcknowledgedData& msg) {
     }
 }
 
-bool ProfileHeartRateSensor::handleCapabilities(HeartRateBaseMainDataPage& dataPage) {
+bool ProfileHeartRateMonitor::handleCapabilities(HeartRateBaseMainDataPage& dataPage) {
     HeartRateCapabilities dp = HeartRateCapabilities(dataPage);
     return _onHeartRateCapabilities.call(dp);
 }
 
-bool ProfileHeartRateSensor::handleRequestDataPage(HeartRateBaseMainDataPage& dataPage) {
+bool ProfileHeartRateMonitor::handleRequestDataPage(HeartRateBaseMainDataPage& dataPage) {
     RequestDataPage dp = RequestDataPage(dataPage);
     return _onRequestDataPage.call(dp);
 }
