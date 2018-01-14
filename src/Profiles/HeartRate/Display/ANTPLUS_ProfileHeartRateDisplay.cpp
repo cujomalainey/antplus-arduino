@@ -1,0 +1,115 @@
+#include <Profiles/HeartRate/Display/ANTPLUS_ProfileHeartRateDisplay.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
+#include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
+
+ProfileHeartRateDisplay::ProfileHeartRateDisplay() : BaseSlaveProfile() {
+    setChannelConfig();
+}
+
+ProfileHeartRateDisplay::ProfileHeartRateDisplay(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
+    setChannelConfig();
+}
+
+ProfileHeartRateDisplay::ProfileHeartRateDisplay(uint16_t deviceNumber, uint8_t transmissionType) : BaseSlaveProfile(deviceNumber, transmissionType) {
+    setChannelConfig();
+}
+
+void ProfileHeartRateDisplay::onBroadcastData(BroadcastData& msg) {
+    HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
+    uint8_t dataPage = dp.getDataPageNumber();
+    bool called = false;
+
+    BaseProfile::onBroadcastData(msg);
+
+    switch (dataPage) {
+    case ANTPLUS_HEARTRATE_DATAPAGE_DEFAULT_NUMBER:
+        called = handleDefault(dp);
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER:
+        called = handleCumulativeOperatingTime(dp);
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER:
+        called = handleManufacturerInformation(dp);
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER:
+        called = handleProductInformation(dp);
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_NUMBER:
+        called = handlePreviousHeartBeat(dp);
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_NUMBER:
+        called = handleSwimIntervalSummary(dp);
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER:
+        called = handleBatteryStatus(dp);
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER:
+        called = handleCapabilities(dp);
+        break;
+    case ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_NUMBER:
+        called = handleModeSettings(dp);
+        break;
+    }
+
+    if (!called) {
+        callOnOtherDataPage(msg);
+    }
+}
+
+void ProfileHeartRateDisplay::onAcknowledgedData(AcknowledgedData& msg) {
+    // TODO
+}
+
+
+void ProfileHeartRateDisplay::setChannelConfig() {
+    setChannelType(ANTPLUS_HEARTRATE_CHANNELTYPE);
+    setDeviceType(ANTPLUS_HEARTRATE_DEVICETYPE);
+    setChannelPeriod(ANTPLUS_HEARTRATE_CHANNELPERIOD);
+    setSearchTimeout(ANTPLUS_HEARTRATE_SEARCHTIMEOUT);
+}
+
+bool ProfileHeartRateDisplay::handleBatteryStatus(HeartRateBaseMainDataPage& dataPage) {
+    HeartRateBatteryStatus dp = HeartRateBatteryStatus(dataPage);
+    return _onHeartRateBatteryStatus.call(dp);
+}
+
+bool ProfileHeartRateDisplay::handleCumulativeOperatingTime(HeartRateBaseMainDataPage& dataPage) {
+    HeartRateCumulativeOperatingTime dp = HeartRateCumulativeOperatingTime(dataPage);
+    return _onHeartRateCumulativeOperatingTime.call(dp);
+}
+
+bool ProfileHeartRateDisplay::handleDefault(HeartRateBaseMainDataPage& dataPage) {
+    HeartRateDefault dp = HeartRateDefault(dataPage);
+    return _onHeartRateDefault.call(dp);
+}
+
+bool ProfileHeartRateDisplay::handleManufacturerInformation(HeartRateBaseMainDataPage& dataPage) {
+    HeartRateManufacturerInformation dp = HeartRateManufacturerInformation(dataPage);
+    return _onHeartRateManufacturerInformation.call(dp);
+}
+
+bool ProfileHeartRateDisplay::handlePreviousHeartBeat(HeartRateBaseMainDataPage& dataPage) {
+    HeartRatePreviousHeartBeat dp = HeartRatePreviousHeartBeat(dataPage);
+    return _onHeartRatePreviousHeartBeat.call(dp);
+}
+
+bool ProfileHeartRateDisplay::handleProductInformation(HeartRateBaseMainDataPage& dataPage) {
+    HeartRateProductInformation dp = HeartRateProductInformation(dataPage);
+    return _onHeartRateProductInformation.call(dp);
+}
+
+bool ProfileHeartRateDisplay::handleSwimIntervalSummary(HeartRateBaseMainDataPage& dataPage) {
+    HeartRateSwimIntervalSummary dp = HeartRateSwimIntervalSummary(dataPage);
+    return _onHeartRateSwimIntervalSummary.call(dp);
+}
+
+bool ProfileHeartRateDisplay::handleCapabilities(HeartRateBaseMainDataPage& dataPage) {
+    HeartRateCapabilities dp = HeartRateCapabilities(dataPage);
+    return _onHeartRateCapabilities.call(dp);
+}
+
+bool ProfileHeartRateDisplay::handleModeSettings(HeartRateBaseMainDataPage& dataPage) {
+    ModeSettings dp = ModeSettings(dataPage);
+    return _onModeSettings.call(dp);
+}
