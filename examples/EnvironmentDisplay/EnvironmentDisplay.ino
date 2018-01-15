@@ -93,11 +93,21 @@ void temperatureDataPageHandler(EnvironmentTemperature& msg, uintptr_t data) {
 }
 
 void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data) {
-    // TODO
+    Serial.print("HW Revision: ");
+    Serial.println(msg.getHWRevision());
+    Serial.print("ManufacturerID: ");
+    Serial.println(msg.getManufacturerID());
+    Serial.print("Model Number: ");
+    Serial.println(msg.getModelNumber());
 }
 
 void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data) {
-    // TODO
+    Serial.print("SW Revision Supplemental: ");
+    Serial.println(msg.getSWRevisionSupplemental());
+    Serial.print("SW Revision Main: ");
+    Serial.println(msg.getSWRevisionMain());
+    Serial.print("Serial Number: ");
+    Serial.println(msg.getSerialNumber());
 }
 
 void printStatus(uint8_t status) {
