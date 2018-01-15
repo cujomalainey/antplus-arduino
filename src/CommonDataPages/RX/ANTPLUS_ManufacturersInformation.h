@@ -9,8 +9,10 @@
 
 class ManufacturersInformation : public BaseDataPage<BroadcastData> {
 public:
-    ManufacturersInformation(BroadcastData& dp);
-    // TODO
+    ManufacturersInformation(AntRxDataResponse& dp);
+    uint8_t getHWRevision();
+    uint16_t getManufacturerID();
+    uint16_t getModelNumber();
 };
 
 #endif // ANTPLUS_MANUFACTURERSINFORMATION_h

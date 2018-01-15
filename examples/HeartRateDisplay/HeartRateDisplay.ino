@@ -1,7 +1,7 @@
 /***********************************
- * AntPlus HRMonitor example
+ * AntPlus HRDisplay example
  *
- * Finds a nearby HR sensor, pairs
+ * Finds a nearby HR Monitor, pairs
  * to it and then reads the information
  * out via the serial port.
  *

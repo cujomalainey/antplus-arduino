@@ -9,8 +9,10 @@
 
 class ProductInformation : public BaseDataPage<BroadcastData> {
 public:
-    ProductInformation(BroadcastData& dp);
-    // TODO
+    ProductInformation(AntRxDataResponse& dp);
+    uint8_t getSWRevisionSupplemental();
+    uint8_t getSWRevisionMain();
+    uint32_t getSerialNumber();
 };
 
 #endif // AANTPLUS_PRODUCTINFORMATION_h

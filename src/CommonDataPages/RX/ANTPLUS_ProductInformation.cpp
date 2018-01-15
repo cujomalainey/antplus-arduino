@@ -1,7 +1,22 @@
 #include <CommonDataPages/RX/ANTPLUS_ProductInformation.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
-ProductInformation::ProductInformation(BroadcastData& dp) : BaseDataPage<BroadcastData>(dp) {
+ProductInformation::ProductInformation(AntRxDataResponse& dp) : BaseDataPage<BroadcastData>(dp) {
 
 }
 
+uint8_t ProductInformation::getSWRevisionSupplemental() {
+    return getData(ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_SWREVISIONSUPPLEMENTAL_BYTE);
+}
+
+uint8_t ProductInformation::getSWRevisionMain() {
+    return getData(ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_SWREVISIONMAIN_BYTE);
+}
+
+uint32_t ProductInformation::getSerialNumber() {
+    uint32_t temp = getData(ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_SERIALNUMBER_LSB_BYTE);
+    temp |= getData(ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_SERIALNUMBER_MIDLSB_BYTE) << ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_SERIALNUMBER_MIDLSB_SHIFT;
+    temp |= getData(ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_SERIALNUMBER_MIDMSB_BYTE) << ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_SERIALNUMBER_MIDMSB_SHIFT;
+    temp |= getData(ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_SERIALNUMBER_MSB_BYTE) << ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_SERIALNUMBER_MSB_SHIFT;
+    return temp;
+}
