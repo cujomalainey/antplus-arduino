@@ -1,5 +1,5 @@
 #include <CommonDataPages/RX/ANTPLUS_RequestDataPage.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 RequestDataPage::RequestDataPage(AntRxDataResponse& dp) : BaseDataPage<AcknowledgedData>(dp) {
 

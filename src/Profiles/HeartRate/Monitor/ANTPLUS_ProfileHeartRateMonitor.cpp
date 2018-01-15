@@ -1,6 +1,6 @@
 #include <Profiles/HeartRate/Monitor/ANTPLUS_ProfileHeartRateMonitor.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
     HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);

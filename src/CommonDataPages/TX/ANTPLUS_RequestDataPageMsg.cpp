@@ -1,5 +1,5 @@
 #include <CommonDataPages/TX/ANTPLUS_RequestDataPageMsg.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 RequestDataPageMsg::RequestDataPageMsg() : BaseDataPageMsg() {
