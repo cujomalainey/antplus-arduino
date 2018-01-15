@@ -28,11 +28,12 @@ void ProfileEnvironmentDisplay::onBroadcastData(BroadcastData& msg) {
         case ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_NUMBER:
             called = handleTemperature(dp);
             break;
-        case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSIDENTIFICATION_NUMBER:
-            // TODO
+        case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
+            // Called Manufacturers Identification in Environment Profile PDF
+            called = handleManufacturersInformation(dp);
             break;
         case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
-            // TODO
+            called = handleProductInformation(dp);
             break;
     }
 
@@ -60,4 +61,9 @@ bool ProfileEnvironmentDisplay::handleGeneralInformation(EnvironmentBaseDataPage
 bool ProfileEnvironmentDisplay::handleTemperature(EnvironmentBaseDataPage& dataPage) {
     EnvironmentTemperature dp = EnvironmentTemperature(dataPage);
     return _onEnvironmentTemperature.call(dp);
+}
+
+bool ProfileEnvironmentDisplay::handleManufacturersInformation(EnvironmentBaseDataPage& dataPage) {
+    ManufacturersInformation dp = ManufacturersInformation(dataPage);
+    return _onManufacturersInformation.call(dp);
 }

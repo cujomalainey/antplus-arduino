@@ -24,6 +24,8 @@ private:
 
     bool handleGeneralInformation(EnvironmentBaseDataPage& dataPage);
     bool handleTemperature(EnvironmentBaseDataPage& dataPage);
+    bool handleManufacturersInformation(EnvironmentBaseDataPage& dataPage);
+    bool handleProductInformation(EnvironmentBaseDataPage& dataPage);
     Callback<EnvironmentGeneralInformation&> _onEnvironmentGeneralInformation;
     Callback<EnvironmentTemperature&> _onEnvironmentTemperature;
     Callback<ManufacturersInformation&> _onManufacturersInformation;
