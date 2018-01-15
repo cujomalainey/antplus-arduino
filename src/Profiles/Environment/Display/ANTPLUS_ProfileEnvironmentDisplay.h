@@ -1,5 +1,5 @@
-#ifndef ANTPLUS_PROFILEENVIRONMENTMONITOR_h
-#define ANTPLUS_PROFILEENVIRONMENTMONITOR_h
+#ifndef ANTPLUS_PROFILEENVIRONMENTDISPLAY_h
+#define ANTPLUS_PROFILEENVIRONMENTDISPLAY_h
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
 #include <Profiles/Environment/DataPages/ANTPLUS_ProfileEnvironmentDataPages.h>
@@ -30,4 +30,4 @@ private:
     Callback<ProductInformation&> _onProductInformation;
 };
 
-#endif // ANTPLUS_PROFILEENVIRONMENTMONITOR_h
+#endif // ANTPLUS_PROFILEENVIRONMENTDISPLAY_h

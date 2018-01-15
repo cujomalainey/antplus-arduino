@@ -29,8 +29,10 @@ void ProfileEnvironmentDisplay::onBroadcastData(BroadcastData& msg) {
             called = handleTemperature(dp);
             break;
         case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSIDENTIFICATION_NUMBER:
+            // TODO
             break;
         case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
+            // TODO
             break;
     }
 
