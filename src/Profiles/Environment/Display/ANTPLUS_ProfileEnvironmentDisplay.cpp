@@ -1,6 +1,6 @@
 #include <Profiles/Environment/Display/ANTPLUS_ProfileEnvironmentDisplay.h>
 #include <Profiles/Environment/ANTPLUS_EnvironmentPrivateDefines.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 ProfileEnvironmentDisplay::ProfileEnvironmentDisplay() : BaseSlaveProfile() {
     setChannelConfig();
