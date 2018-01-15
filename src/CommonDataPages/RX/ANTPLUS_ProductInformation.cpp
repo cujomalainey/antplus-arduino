@@ -1,7 +1,7 @@
 #include <CommonDataPages/RX/ANTPLUS_ProductInformation.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
-ProductInformation::ProductInformation(BroadcastData& dp) : BaseDataPage<BroadcastData>(dp) {
+ProductInformation::ProductInformation(AntRxDataResponse& dp) : BaseDataPage<BroadcastData>(dp) {
 
 }
 

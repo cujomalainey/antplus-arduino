@@ -1,7 +1,7 @@
 #include <CommonDataPages/RX/ANTPLUS_ManufacturersInformation.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
-ManufacturersInformation::ManufacturersInformation(BroadcastData& dp) : BaseDataPage<BroadcastData>(dp) {
+ManufacturersInformation::ManufacturersInformation(AntRxDataResponse& dp) : BaseDataPage<BroadcastData>(dp) {
 
 }
 

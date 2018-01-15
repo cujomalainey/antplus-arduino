@@ -9,7 +9,7 @@
 
 class ManufacturersInformation : public BaseDataPage<BroadcastData> {
 public:
-    ManufacturersInformation(BroadcastData& dp);
+    ManufacturersInformation(AntRxDataResponse& dp);
     uint8_t getHWRevision();
     uint16_t getManufacturerID();
     uint16_t getModelNumber();
