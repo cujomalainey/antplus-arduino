@@ -67,3 +67,8 @@ bool ProfileEnvironmentDisplay::handleManufacturersInformation(EnvironmentBaseDa
     ManufacturersInformation dp = ManufacturersInformation(dataPage);
     return _onManufacturersInformation.call(dp);
 }
+
+bool ProfileEnvironmentDisplay::handleProductInformation(EnvironmentBaseDataPage& dataPage) {
+    ProductInformation dp = ProductInformation(dataPage);
+    return _onProductInformation.call(dp);
+}
