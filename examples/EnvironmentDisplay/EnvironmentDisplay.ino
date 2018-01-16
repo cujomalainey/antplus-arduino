@@ -89,7 +89,7 @@ void temperatureDataPageHandler(EnvironmentTemperature& msg, uintptr_t data) {
     Serial.print("24h High (C): ");
     Serial.println(msg.get24HourHigh()*0.1);
     Serial.print("Current Temp (C): ");
-    Serial.println(msg.getCurrentTemp()*1.01);
+    Serial.println(msg.getCurrentTemp()*0.01);
 }
 
 void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data) {
