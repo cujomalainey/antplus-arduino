@@ -22,6 +22,8 @@ private:
     void onBroadcastData(BroadcastData& msg);
     void onAcknowledgedData(AcknowledgedData& msg);
 
+    bool handleDataPage(EnvironmentBaseDataPage& dp);
+
     bool handleGeneralInformation(EnvironmentBaseDataPage& dataPage);
     bool handleTemperature(EnvironmentBaseDataPage& dataPage);
     bool handleManufacturersInformation(EnvironmentBaseDataPage& dataPage);

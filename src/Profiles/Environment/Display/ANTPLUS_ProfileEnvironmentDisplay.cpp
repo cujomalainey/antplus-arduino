@@ -16,10 +16,15 @@ ProfileEnvironmentDisplay::ProfileEnvironmentDisplay(uint16_t deviceNumber, uint
 
 void ProfileEnvironmentDisplay::onBroadcastData(BroadcastData& msg) {
     EnvironmentBaseDataPage dp = EnvironmentBaseDataPage(msg);
+    BaseProfile::onBroadcastData(msg);
+    if(!handleDataPage(dp)) {
+        callOnOtherDataPage(msg);
+    }
+}
+
+bool ProfileEnvironmentDisplay::handleDataPage(EnvironmentBaseDataPage& dp) {
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
-
-    BaseProfile::onBroadcastData(msg);
 
     switch (dataPage) {
         case ANTPLUS_ENVIRONMENT_DATAPAGE_GENERALINFORMATION_NUMBER:
@@ -36,14 +41,15 @@ void ProfileEnvironmentDisplay::onBroadcastData(BroadcastData& msg) {
             called = handleProductInformation(dp);
             break;
     }
-
-    if (!called) {
-        callOnOtherDataPage(msg);
-    }
+    return called;
 }
 
 void ProfileEnvironmentDisplay::onAcknowledgedData(AcknowledgedData& msg) {
-    // TODO
+    EnvironmentBaseDataPage dp = EnvironmentBaseDataPage(msg);
+    BaseProfile::onAcknowledgedData(msg);
+    if(!handleDataPage(dp)) {
+        callOnOtherDataPage(msg);
+    }
 }
 
 void ProfileEnvironmentDisplay::setChannelConfig() {
