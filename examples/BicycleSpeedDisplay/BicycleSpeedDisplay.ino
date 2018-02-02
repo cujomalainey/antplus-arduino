@@ -143,19 +143,19 @@ void bicycleSpeedFlags(uint8_t flags) {
 
 void bicycleSpeedBatteryStatus(uint8_t flags) {
     switch (flags) {
-        case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_NEW:
-            Serial.println("New");
-        case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_GOOD:
-            Serial.println("Good");
-        case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_OK:
-            Serial.println("Ok");
-        case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_LOW:
-            Serial.println("Low");
-        case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_CRITICAL:
-            Serial.println("Critical");
-        case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_INVALID:
-            Serial.println("Invalid");
-        default:
-            Serial.println("Reserved/Unknown");
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_NEW:
+        Serial.println("New");
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_GOOD:
+        Serial.println("Good");
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_OK:
+        Serial.println("Ok");
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_LOW:
+        Serial.println("Low");
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_CRITICAL:
+        Serial.println("Critical");
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_INVALID:
+        Serial.println("Invalid");
+    default:
+        Serial.println("Reserved/Unknown");
     }
 }
