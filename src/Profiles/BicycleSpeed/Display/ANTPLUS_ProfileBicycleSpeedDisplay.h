@@ -24,6 +24,7 @@ private:
     void onBroadcastData(BroadcastData& msg);
     void onAcknowledgedData(AcknowledgedData& msg);
 
+    bool handleDataPage(BicycleSpeedBaseMainDataPage& dataPage);
     bool handleBatteryStatus(BicycleSpeedBaseMainDataPage& dataPage);
     bool handleCumulativeOperatingTime(BicycleSpeedBaseMainDataPage& dataPage);
     bool handleDefault(BicycleSpeedBaseMainDataPage& dataPage);

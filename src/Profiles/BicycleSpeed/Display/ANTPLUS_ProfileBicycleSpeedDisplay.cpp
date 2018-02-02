@@ -17,10 +17,15 @@ ProfileBicycleSpeedDisplay::ProfileBicycleSpeedDisplay(uint16_t deviceNumber, ui
 
 void ProfileBicycleSpeedDisplay::onBroadcastData(BroadcastData& msg) {
     BicycleSpeedBaseMainDataPage dp = BicycleSpeedBaseMainDataPage(msg);
+    BaseProfile::onBroadcastData(msg);
+    if (!handleDataPage(dp)) {
+        callOnOtherDataPage(msg);
+    }
+}
+
+bool ProfileBicycleSpeedDisplay::handleDataPage(BicycleSpeedBaseMainDataPage& dp) {
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
-
-    BaseProfile::onBroadcastData(msg);
 
     switch (dataPage) {
     case ANTPLUS_BICYCLESPEED_DATAPAGE_DEFAULT_NUMBER:
@@ -43,13 +48,15 @@ void ProfileBicycleSpeedDisplay::onBroadcastData(BroadcastData& msg) {
         break;
     }
 
-    if (!called) {
-        callOnOtherDataPage(msg);
-    }
+    return called;
 }
 
 void ProfileBicycleSpeedDisplay::onAcknowledgedData(AcknowledgedData& msg) {
-    // TODO
+    BicycleSpeedBaseMainDataPage dp = BicycleSpeedBaseMainDataPage(msg);
+    BaseProfile::onAcknowledgedData(msg);
+    if (!handleDataPage(dp)) {
+        callOnOtherDataPage(msg);
+    }
 }
 
 
