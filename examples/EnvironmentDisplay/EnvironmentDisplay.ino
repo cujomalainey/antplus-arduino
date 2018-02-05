@@ -60,6 +60,7 @@ void loop() {
 }
 
 void generalInformationDataPageHandler(EnvironmentGeneralInformation& msg, uintptr_t data) {
+    Serial.println("===========================");
     Serial.print("Local Time: ");
     Serial.println(msg.getTransmissionInfoLocalTime());
     Serial.print("UTC Time: ");
@@ -82,6 +83,7 @@ void generalInformationDataPageHandler(EnvironmentGeneralInformation& msg, uintp
 }
 
 void temperatureDataPageHandler(EnvironmentTemperature& msg, uintptr_t data) {
+    Serial.println("===========================");
     Serial.print("Event Count: ");
     Serial.println(msg.getEventCount());
     Serial.print("24h Low (C): ");
@@ -93,6 +95,7 @@ void temperatureDataPageHandler(EnvironmentTemperature& msg, uintptr_t data) {
 }
 
 void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data) {
+    Serial.println("===========================");
     Serial.print("HW Revision: ");
     Serial.println(msg.getHWRevision());
     Serial.print("ManufacturerID: ");
@@ -102,6 +105,7 @@ void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uint
 }
 
 void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data) {
+    Serial.println("===========================");
     Serial.print("SW Revision Supplemental: ");
     Serial.println(msg.getSWRevisionSupplemental());
     Serial.print("SW Revision Main: ");
