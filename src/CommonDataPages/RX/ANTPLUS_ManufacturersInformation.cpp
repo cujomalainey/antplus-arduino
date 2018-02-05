@@ -1,1 +1,18 @@
-// TODO
+#include <CommonDataPages/RX/ANTPLUS_ManufacturersInformation.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+
+ManufacturersInformation::ManufacturersInformation(AntRxDataResponse& dp) : BaseDataPage<BroadcastData>(dp) {
+
+}
+
+uint8_t ManufacturersInformation::getHWRevision() {
+    return getData(ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_HWREVISION_BYTE);
+}
+
+uint16_t ManufacturersInformation::getManufacturerID() {
+    return getData(ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_MANUFACTURERID_LSB_BYTE) | (getData(ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_MANUFACTURERID_MSB_BYTE) << ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_MANUFACTURERID_MSB_SHIFT);
+}
+
+uint16_t ManufacturersInformation::getModelNumber() {
+    return getData(ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_MODELNUMBER_LSB_BYTE) | (getData(ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_MODELNUMBER_MSB_BYTE) << ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_MODELNUMBER_MSB_SHIFT);
+}

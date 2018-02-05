@@ -3,5 +3,8 @@
 .ycm*
 *.swp
 
+# used for testing
+src/main.cpp
 .DS_Store
 .tags*
+tags

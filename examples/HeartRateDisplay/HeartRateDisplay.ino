@@ -1,7 +1,7 @@
 /***********************************
- * AntPlus HRMonitor example
+ * AntPlus HRDisplay example
  *
- * Finds a nearby HR sensor, pairs
+ * Finds a nearby HR Monitor, pairs
  * to it and then reads the information
  * out via the serial port.
  *
@@ -18,7 +18,7 @@ const uint8_t NETWORK_KEY[] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77}; 
 
 AntWithCallbacks ant = AntWithCallbacks();
 AntPlusRouter router = AntPlusRouter();
-ProfileHeartRateMonitor hr = ProfileHeartRateMonitor();
+ProfileHeartRateDisplay hr = ProfileHeartRateDisplay();
 
 void heartRateBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data);
 void batteryStatusDataPageHandler(HeartRateBatteryStatus& msg, uintptr_t data);
@@ -29,7 +29,6 @@ void manufacturerInformationDataPageHandler(HeartRateManufacturerInformation& ms
 void previousHeartBeatDataPageHandler(HeartRatePreviousHeartBeat& msg, uintptr_t data);
 void productInformationDataPageHandler(HeartRateProductInformation& msg, uintptr_t data);
 void swimIntervalSummary(HeartRateSwimIntervalSummary& msg, uintptr_t data);
-void modeSettings(ModeSettings& msg, uintptr_t data);
 
 void heartRateFeatures(uint8_t bitfield);
 void printStatus(uint8_t status);
@@ -55,7 +54,6 @@ void setup() {
     hr.onHeartRatePreviousHeartBeat(previousHeartBeatDataPageHandler);
     hr.onHeartRateProductInformation(productInformationDataPageHandler);
     hr.onHeartRateSwimIntervalSummary(swimIntervalSummary);
-    hr.onModeSettings(modeSettings);
     hr.begin();
     // wait for pair to complete
     uint8_t status = hr.waitForPair();
@@ -129,22 +127,6 @@ void swimIntervalSummary(HeartRateSwimIntervalSummary& msg, uintptr_t data) {
     Serial.println(msg.getIntervalMaximumHeartRate());
     Serial.print("Session Average Heart Rate: ");
     Serial.println(msg.getSessionAverageHeartRate());
-}
-
-void modeSettings(ModeSettings& msg, uintptr_t data) {
-    Serial.print("Sports Mode: ");
-    uint8_t sportMode = msg.getSportMode();
-    switch (sportMode) {
-        case 0x01:
-        Serial.println("Running");
-        break;
-        case 0x02:
-        Serial.println("Cycling");
-        break;
-        case 0x05:
-        Serial.println("Swimming");
-        break;
-    }
 }
 
 void heartRateBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
