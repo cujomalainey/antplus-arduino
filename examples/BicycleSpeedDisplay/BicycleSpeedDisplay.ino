@@ -137,25 +137,33 @@ void printStatus(uint8_t status) {
 
 void bicycleSpeedFlags(uint8_t flags) {
     if (flags & ANTPLUS_BICYCLESPEED_DATAPAGE_MOTIONANDSPEED_FLAGS_STOPINDICATOR) {
-        Serial.println("Motion Stopped");
+        Serial.print("Motion Stopped");
     }
+    Serial.println();
 }
 
 void bicycleSpeedBatteryStatus(uint8_t flags) {
     switch (flags) {
     case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_NEW:
         Serial.println("New");
+        break;
     case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_GOOD:
         Serial.println("Good");
+        break;
     case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_OK:
         Serial.println("Ok");
+        break;
     case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_LOW:
         Serial.println("Low");
+        break;
     case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_CRITICAL:
         Serial.println("Critical");
+        break;
     case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERSTATUS_BATTERYSTATUS_INVALID:
         Serial.println("Invalid");
+        break;
     default:
         Serial.println("Reserved/Unknown");
+        break;
     }
 }
