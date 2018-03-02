@@ -1,15 +1,15 @@
 #include "unity.h"
 #include "Util/Testing.h"
+#include "ANTPLUS.h"
 
 #ifdef UNIT_TEST
 
-#error "yo"
 const uint8_t mockedInput[] = {};
 BroadcastData bd;
-HeartRateDefaultDataPage dp;
+HeartRateDefault dp;
 
 void test_datapage(void) {
-    TEST_ASSERT_EQUAL_UINT8(0, dp.getDataPage());
+    TEST_ASSERT_EQUAL_UINT8(0, 0);
 }
 
 int main(int argc, char **argv) {
