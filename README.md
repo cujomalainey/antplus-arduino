@@ -76,7 +76,7 @@ Arduino 1.5 and later
 
 Arduino now includes a library manager for easier library installation. From the Sketch menu select include library->Manage Libraries, then type "antplus-arduino" in the filter and install.
 
-Prior to Arduino 1.5 installation is a manual
+Prior to Arduino 1.5 installation is manual
 
 Download a .zip or .tar.gz release from github. Determine the location of your sketchbook by selecting "preferences" on the Arduino menu. Create a "libraries" folder in your sketchbook and unzip the release file in that location.
 
