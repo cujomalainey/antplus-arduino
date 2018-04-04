@@ -66,7 +66,7 @@ See [ant-arduino](https://github.com/cujomalainey/ant-arduino#hardware)
 
 ## Support ANT+ Profiles
 
-This library aims to support all ANT+ devices. This goal will take time but its an attainable one. Check out the [wiki](https://github.com/cujomalainey/antplus-arduino/wiki/Profile-Support) for the list of profiles implemented and their verions.
+This library aims to support all ANT+ devices. This goal will take time but its an attainable one. Check out the [wiki](https://github.com/cujomalainey/antplus-arduino/wiki/Profile-Support) for the list of profiles implemented and their versions.
 
 ## Installation
 
