@@ -11,13 +11,10 @@ public:
     void onRequestDataPage(void (*func)(RequestDataPage&, uintptr_t), uintptr_t data = 0) { _onRequestDataPage.set(func, data); }
     void begin();
     void stop();
-    /******************************************
-     *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
-     ******************************************/
-    void onAcknowledgedData(AcknowledgedData& msg);
-    void onBroadcastData(BroadcastData& msg);
 protected:
     void transmitNextDataPage();
+    void onAcknowledgedData(AcknowledgedData& msg);
+    void onBroadcastData(BroadcastData& msg);
 private:
     bool handleCapabilities(HeartRateBaseMainDataPage& dataPage);
     bool handleRequestDataPage(HeartRateBaseMainDataPage& dataPage);
