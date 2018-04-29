@@ -13,7 +13,7 @@ BaseSlaveProfile::BaseSlaveProfile(uint16_t deviceNumber, uint8_t transmissionTy
 
 }
 
-void BaseSlaveProfile::searchForDevices(uint16_t* buffer) {
+uint8_t BaseSlaveProfile::searchForDevices(uint16_t* buffer) {
     // TODO
 }
 

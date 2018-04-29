@@ -14,7 +14,7 @@ public:
      *
      * Any non-0 entry after the function returned is a nearby device
      */
-    void searchForDevices(uint16_t* buffer);
+    uint8_t searchForDevices(uint16_t* buffer);
     /**
      * Will return once the device either pairs or timesout its search
      */
