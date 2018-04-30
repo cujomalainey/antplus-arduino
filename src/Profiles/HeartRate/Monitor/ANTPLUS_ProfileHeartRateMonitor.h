@@ -7,8 +7,11 @@
 
 class ProfileHeartRateMonitor : BaseMasterProfile {
 public:
-    void onHeartRateCapabilities(void (*func)(HeartRateCapabilities&, uintptr_t), uintptr_t data = 0) { _onHeartRateCapabilities.set(func, data); }
+    void createHeartRateDefault(void (*func)(HeartRateDefault&, uintptr_t), uintptr_t data = 0) { _createHeartRateDefault.set(func, data); }
+    void createHeartRateCapabilities(void (*func)(HeartRateCapabilities&, uintptr_t), uintptr_t data = 0) { _createHeartRateCapabilities.set(func, data); }
+    void createHeartRateBatteryStatus(void (*func)(HeartRateBatteryStatus&, uintptr_t), uintptr_t data = 0) { _createHeartRateBatteryStatus.set(func, data); }
     void onRequestDataPage(void (*func)(RequestDataPage&, uintptr_t), uintptr_t data = 0) { _onRequestDataPage.set(func, data); }
+    void onModeSettings(void (*func)(ModeSettings&, uintptr_t), uintptr_t data = 0) { _onModeSettings.set(func, data); }
     void begin();
     void stop();
 protected:
@@ -16,10 +19,17 @@ protected:
     void onAcknowledgedData(AcknowledgedData& msg);
     void onBroadcastData(BroadcastData& msg);
 private:
-    bool handleCapabilities(HeartRateBaseMainDataPage& dataPage);
+    void transmitPrimaryDataPage();
+    void transmitBackgroundDataPage();
+    void transmitRequestedDataPage();
+    bool handleModeSettings(HeartRateBaseMainDataPage& dataPage);
     bool handleRequestDataPage(HeartRateBaseMainDataPage& dataPage);
-    Callback<HeartRateCapabilities&> _onHeartRateCapabilities;
     Callback<RequestDataPage&> _onRequestDataPage;
+    Callback<ModeSettings&> _onModeSettings;
+    Callback<HeartRateDefault&> _createHeartRateDefault;
+    Callback<HeartRateCapabilities&> _createHeartRateCapabilities;
+    Callback<HeartRateBatteryStatus&> _createHeartRateBatteryStatus;
+    uint8_t _requestedCount = 0;
 };
 
 #endif // ANTPLUS_PROFILEHEARTRATESENSOR_h
