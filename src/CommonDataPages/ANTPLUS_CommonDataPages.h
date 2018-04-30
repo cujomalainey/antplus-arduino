@@ -14,6 +14,7 @@
 #include <CommonDataPages/RX/ANTPLUS_MultiComponentSystemProductInformation.h>
 #include <CommonDataPages/RX/ANTPLUS_OpenChannelCommand.h>
 #include <CommonDataPages/RX/ANTPLUS_PairedDevices.h>
+#include <CommonDataPages/RX/ANTPLUS_ProductInformation.h>
 #include <CommonDataPages/RX/ANTPLUS_RequestDataPage.h>
 #include <CommonDataPages/RX/ANTPLUS_SubfieldData.h>
 #include <CommonDataPages/RX/ANTPLUS_TimeAndDate.h>
@@ -31,6 +32,7 @@
 #include <CommonDataPages/TX/ANTPLUS_MultiComponentSystemProductInformationMsg.h>
 #include <CommonDataPages/TX/ANTPLUS_OpenChannelCommandMsg.h>
 #include <CommonDataPages/TX/ANTPLUS_PairedDevicesMsg.h>
+#include <CommonDataPages/TX/ANTPLUS_ProductInformationMsg.h>
 #include <CommonDataPages/TX/ANTPLUS_RequestDataPageMsg.h>
 #include <CommonDataPages/TX/ANTPLUS_SubfieldDataMsg.h>
 #include <CommonDataPages/TX/ANTPLUS_TimeAndDateMsg.h>

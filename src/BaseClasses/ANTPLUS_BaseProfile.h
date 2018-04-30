@@ -31,7 +31,6 @@ public:
     /**
      * Set the channel deviceNumber, wildcard for searching is 0
      */
-    // TODO add a callback for channel closed
     void setDeviceNumber(uint16_t deviceNumber);
     /**
      * Set the channel transmission type, wildcard for searching is 0
