@@ -1,8 +1,23 @@
 #include <Profiles/HeartRate/Monitor/ANTPLUS_ProfileHeartRateMonitor.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
-ProfileHeartRateMonitor::ProfileHeartRateMonitor(uint16_t deviceNumber, uint8_t transmissionType) : BaseMasterProfile(deviceNumber, transmissionType), _nextBackgroundPage(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER) {
+ProfileHeartRateMonitor::ProfileHeartRateMonitor(
+        uint16_t deviceNumber,
+        uint8_t transmissionType) :
+    BaseMasterProfile(deviceNumber, transmissionType),
+    _nextBackgroundPage(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER),
+    _flags(0) {
+}
+
+ProfileHeartRateMonitor::ProfileHeartRateMonitor(
+        uint16_t deviceNumber,
+        uint8_t transmissionType,
+        uint32_t flags) :
+    BaseMasterProfile(deviceNumber, transmissionType),
+    _nextBackgroundPage(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER),
+    _flags(flags) {
 }
 
 void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
@@ -45,7 +60,9 @@ void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
 
 void ProfileHeartRateMonitor::transmitNextDataPage() {
     static uint8_t patternStep = 0;
-    if (_requestedCount > 0) {
+    if (isRequestedPagePending()) {
+        transmitRequestedDataPage();
+    } else {
         if (patternStep++ < 64) {
             transmitPrimaryDataPage();
         } else {
@@ -54,9 +71,6 @@ void ProfileHeartRateMonitor::transmitNextDataPage() {
                 patternStep = 0;
             }
         }
-    } else {
-        transmitRequestedDataPage();
-        _requestedCount--;
     }
 }
 
@@ -64,10 +78,10 @@ void ProfileHeartRateMonitor::transmitPrimaryDataPage() {
     if (_sportsMode == ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_SPORTSMODE_SWIMMING) {
         transmitHeartRateSwimIntervalSummaryMsg();
     } else {
-        if (_useDefaultDataPage) {
-            transmitHeartRateDefaultMsg();
-        } else {
+        if (_flags & ANTPLUS_HEARTRATE_FLAGS_PREVIOUSHEARTBEAT_SUPPORTED) {
             transmitHeartRatePreviousHeartBeatMsg();
+        } else {
+            transmitHeartRateDefaultMsg();
         }
     }
 }
@@ -85,21 +99,28 @@ void ProfileHeartRateMonitor::transmitBackgroundDataPage() {
         break;
     }
 
-    if (_requestedCount == 68) {
-        _nextBackgroundPage++;
-        if (_nextBackgroundPage == 4) {
-            if (_useCumulativeOperatingTime) {
-                _nextBackgroundPage = ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER;
-            } else {
-                _nextBackgroundPage = ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER;
-            }
-        }
+    _nextBackgroundPage = getNextBackgroundPage(_nextBackgroundPage);
+}
+
+uint8_t ProfileHeartRateMonitor::getNextBackgroundPage(uint8_t currentPage) {
+    if ((currentPage < ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_CUMULATIVEOPERATINGTIME_SUPPORTED)) {
+        return ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER;
+    } else if (currentPage < ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER) {
+        return ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER;
+    } else if (currentPage < ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER) {
+        return ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER;
+    } else if ((currentPage < ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_CAPABILITIES_SUPPORTED)) {
+        return ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER;
+    } else if ((currentPage < ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_BATTERYSTATUS_SUPPORTED)) {
+        return ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER;
+    } else {
+        return getNextBackgroundPage(0);
     }
 }
 
 void ProfileHeartRateMonitor::transmitRequestedDataPage() {
-    _requestedCount--;
-    switch (_requestedPage) {
+    uint8_t requestedPage = getRequestedPage();
+    switch (requestedPage) {
     case ANTPLUS_HEARTRATE_DATAPAGE_DEFAULT_NUMBER:
         transmitHeartRateDefaultMsg();
         break;
@@ -176,8 +197,25 @@ void ProfileHeartRateMonitor::transmitHeartRateBatteryStatusMsg() {
 }
 
 void ProfileHeartRateMonitor::transmitHeartRateMsg(HeartRateBaseMainDataPageMsg& msg) {
-    // TODO set page toggle
+    uint8_t toggle = _toggleStep++;
+    toggle /= 4;
+    _toggleStep = _toggleStep % 8;
+    msg.setPageChangeToggle(toggle);
+    // TODO handle requested acknowledged types, even though it shouldnt happen
     send(msg);
+}
+
+bool ProfileHeartRateMonitor::isDataPageValid(uint8_t dataPage) {
+    // TODO
+    return true;
+}
+
+void ProfileHeartRateMonitor::begin() {
+    // TODO
+}
+
+void ProfileHeartRateMonitor::stop() {
+    // TODO
 }
 
 bool ProfileHeartRateMonitor::handleModeSettings(HeartRateBaseMainDataPage& dataPage) {
@@ -187,11 +225,5 @@ bool ProfileHeartRateMonitor::handleModeSettings(HeartRateBaseMainDataPage& data
 
 bool ProfileHeartRateMonitor::handleRequestDataPage(HeartRateBaseMainDataPage& dataPage) {
     RequestDataPage dp(dataPage);
-    // NOTE, according to the HR profile, we should ignore the use acknowledged bit and use
-    // only broadcast messages which makes handling requests easier
-    if (dp.getRequestedPageNumber() < 8 && (dp.getRequestedPageNumber() != ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_NUMBER || _sportsMode == ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_SPORTSMODE_SWIMMING)) {
-        _requestedCount = dp.getRequestedPageCount();
-        _requestedPage = dp.getRequestedPageNumber();
-    }
     return _onRequestDataPage.call(dp);
 }
