@@ -8,7 +8,7 @@ public:
     HeartRateBatteryStatusMsg();
     uint8_t getBatteryLevel();
     uint8_t getFractionalBatteryVoltage();
-    uint8_t getCoarseBatteryVolage();
+    uint8_t getCoarseBatteryVoltage();
     uint8_t getBatteryStatus();
     void setBatteryLevel(uint8_t level);
     void setFractionalBatteryVoltage(uint8_t voltage);

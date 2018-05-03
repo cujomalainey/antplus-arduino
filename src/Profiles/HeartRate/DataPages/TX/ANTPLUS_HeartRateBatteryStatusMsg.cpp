@@ -13,7 +13,7 @@ uint8_t HeartRateBatteryStatusMsg::getFractionalBatteryVoltage() {
     return _buffer[ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_FRACTIONALBATTERYVOLTAGE_BYTE];
 }
 
-uint8_t HeartRateBatteryStatusMsg::getCoarseBatteryVolage() {
+uint8_t HeartRateBatteryStatusMsg::getCoarseBatteryVoltage() {
     return _buffer[ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_COARSEBATTERYVOLTAGE_BYTE] & ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_COARSEBATTERYVOLTAGE_MASK;
 }
 
