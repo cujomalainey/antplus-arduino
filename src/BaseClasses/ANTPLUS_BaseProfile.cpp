@@ -75,6 +75,7 @@ void BaseProfile::closeChannel() {
 void BaseProfile::onChannelEventResponse(ChannelEventResponse& msg) {
     uint8_t event = msg.getCode();
 
+    // TODO this looks weird to me
     switch (event) {
     case STATUS_EVENT_CHANNEL_CLOSED:
     case STATUS_EVENT_RX_FAIL_GO_TO_SEARCH:
