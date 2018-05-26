@@ -61,13 +61,13 @@ void BaseProfile::pushChannelConfig() {
 }
 
 void BaseProfile::openChannel() {
-    OpenChannel oc = OpenChannel(_channel);
+    OpenChannel oc(_channel);
     _channelStatus = CHANNEL_STATUS_SEARCHING;
     _router->send(oc);
 }
 
 void BaseProfile::closeChannel() {
-    CloseChannel cc = CloseChannel(_channel);
+    CloseChannel cc(_channel);
     _channelStatus = CHANNEL_STATUS_ASSIGNED;
     _router->send(cc);
 }
@@ -118,11 +118,11 @@ void BaseProfile::onChannelStatus(ChannelStatus& msg) {
 
 void BaseProfile::checkProfileStatus() {
     if (!getDeviceNumber() || !getTransmissionType()) {
-        RequestMessage rm = RequestMessage(CHANNEL_ID, _channel);
+        RequestMessage rm(CHANNEL_ID, _channel);
         send(rm);
     }
     if (_channelStatus == CHANNEL_STATUS_SEARCHING) {
-        RequestMessage rm = RequestMessage(CHANNEL_STATUS, _channel);
+        RequestMessage rm(CHANNEL_STATUS, _channel);
         send(rm);
     }
 }
