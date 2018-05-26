@@ -67,7 +67,7 @@ void printDpMsg(int dp, const char* s) {
     Serial.print("Sending DataPage: ");
     Serial.print(dp);
     Serial.print(" - ");
-    Serial.print(s);
+    Serial.println(s);
 }
 
 void batteryStatusDataPageHandler(HeartRateBatteryStatusMsg& msg, uintptr_t data) {
