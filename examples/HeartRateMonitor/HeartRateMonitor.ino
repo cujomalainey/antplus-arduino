@@ -59,85 +59,48 @@ void setup() {
 }
 
 void loop() {
+    // Call this very frequently
     router.loop();
 }
 
+void printDpMsg(int dp, const char* s) {
+    Serial.print("Sending DataPage: ");
+    Serial.print(dp);
+    Serial.print(" - ");
+    Serial.print(s);
+}
+
 void batteryStatusDataPageHandler(HeartRateBatteryStatusMsg& msg, uintptr_t data) {
-    Serial.print("Battery Level: ");
-    Serial.println(msg.getBatteryLevel());
-    Serial.print("Fractional Battery Voltage: ");
-    Serial.println(msg.getFractionalBatteryVoltage());
-    Serial.print("Coarse Battery Voltage: ");
-    Serial.println(msg.getCoarseBatteryVoltage());
-    Serial.print("Battery Status: ");
-    Serial.println(msg.getBatteryStatus());
+    printDpMsg(7, "Battery Status");
 }
 
 void capabilitiesDataPageHandler(HeartRateCapabilitiesMsg& msg, uintptr_t data) {
-    Serial.print("Features Supported: ");
-    heartRateFeatures(msg.getFeaturesSupported());
-    Serial.print("Features Enabled: ");
-    heartRateFeatures(msg.getFeaturesEnabled());
+    printDpMsg(6, "Capabilities");
 }
 
 void cumulativeOperatingTimeDataPageHandler(HeartRateCumulativeOperatingTimeMsg& msg, uintptr_t data) {
-    Serial.print("Cumulative Operating Time: ");
-    Serial.println(msg.getCumulativeOperatingTime());
+    printDpMsg(1, "Cumulative Operating Time");
 }
 
 void defaultDataPageHandler(HeartRateDefaultMsg& msg, uintptr_t data) {
     // All fields are reserved
+    printDpMsg(0, "Default");
 }
 
 void manufacturerInformationDataPageHandler(HeartRateManufacturerInformationMsg& msg, uintptr_t data) {
-    Serial.print("Manufacturer ID LSB: ");
-    Serial.println(msg.getManufacturerIdLsb());
-    Serial.print("Serial Number: ");
-    Serial.println(msg.getSerialNumber());
+    printDpMsg(2, "Manufacturer Information");
 }
 
 void previousHeartBeatDataPageHandler(HeartRatePreviousHeartBeatMsg& dp, uintptr_t data) {
-    Serial.print("Manufacturer Specific Byte: ");
-    Serial.println(dp.getManufacturerSpecific());
-    Serial.print("Previous Heart Beat Event Time: ");
-    Serial.println(dp.getPreviousHeartBeatEventTime());
+    printDpMsg(4, "Previous Heart Beat");
 }
 
 void productInformationDataPageHandler(HeartRateProductInformationMsg& msg, uintptr_t data) {
-    Serial.print("Hardware Version: ");
-    Serial.println(msg.getHardwareVersion());
-    Serial.print("Software Version: ");
-    Serial.println(msg.getSoftwareVersion());
-    Serial.print("Model Number: ");
-    Serial.println(msg.getModelNumber());
+    printDpMsg(3, "Product Information");
 }
 
 void swimIntervalSummary(HeartRateSwimIntervalSummaryMsg& msg, uintptr_t data) {
-    Serial.print("Interval Average Heart Rate: ");
-    Serial.println(msg.getIntervalAverageHeartRate());
-    Serial.print("Interval Maximum Heart Rate: ");
-    Serial.println(msg.getIntervalMaximumHeartRate());
-    Serial.print("Session Average Heart Rate: ");
-    Serial.println(msg.getSessionAverageHeartRate());
-}
-
-void heartRateFeatures(uint8_t bitfield) {
-    if (bitfield & ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_FEATURES_EXTENDEDRUNNING) {
-        Serial.print("Extended Running ");
-    }
-    if (bitfield & ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_FEATURES_EXTENDEDCYCLING) {
-        Serial.print("Extended Cycling ");
-    }
-    if (bitfield & ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_FEATURES_EXTENDEDSWIMMING) {
-        Serial.print("Extended Swimming ");
-    }
-    if (bitfield & ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_FEATURES_MANUFACTURER1) {
-        Serial.print("Manufacturer Bit 1 ");
-    }
-    if (bitfield & ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_FEATURES_MANUFACTURER2) {
-        Serial.print("Manufacturer Bit 2 ");
-    }
-    Serial.println();
+    printDpMsg(5, "Swim Interval");
 }
 
 void printStatus(uint8_t status) {

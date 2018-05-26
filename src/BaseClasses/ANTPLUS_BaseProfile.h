@@ -64,7 +64,6 @@ public:
      * Sends a message through the connected router
      */
     void send(AntRequest& msg);
-
 protected:
     void callOnOtherDataPage(AntRxDataResponse& msg);
     void setChannelType(uint8_t channelType);

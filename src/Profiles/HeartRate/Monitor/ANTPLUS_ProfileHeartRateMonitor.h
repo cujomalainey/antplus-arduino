@@ -58,20 +58,13 @@ public:
      * (such as a switch) to force a mode change
      */
     void setSportsMode(uint8_t mode) { _sportsMode = mode; }
-    /**
-     * Sets up the profile and begins broadcast pattern
-     */
-    void begin();
-    /**
-     * Closes channel and stops transmissions
-     */
-    void stop();
 protected:
     void transmitNextDataPage();
     void onAcknowledgedData(AcknowledgedData& msg);
     void onBroadcastData(BroadcastData& msg);
     bool isDataPageValid(uint8_t dataPage);
 private:
+    void setChannelConfig();
     void transmitPrimaryDataPage();
     void transmitBackgroundDataPage();
     void transmitRequestedDataPage();

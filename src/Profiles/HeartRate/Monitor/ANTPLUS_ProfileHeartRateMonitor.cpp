@@ -9,6 +9,7 @@ ProfileHeartRateMonitor::ProfileHeartRateMonitor(
     BaseMasterProfile(deviceNumber, transmissionType),
     _nextBackgroundPage(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER),
     _flags(0) {
+    setChannelConfig();
 }
 
 ProfileHeartRateMonitor::ProfileHeartRateMonitor(
@@ -18,6 +19,7 @@ ProfileHeartRateMonitor::ProfileHeartRateMonitor(
     BaseMasterProfile(deviceNumber, transmissionType),
     _nextBackgroundPage(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER),
     _flags(flags) {
+    setChannelConfig();
 }
 
 void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
@@ -210,14 +212,6 @@ bool ProfileHeartRateMonitor::isDataPageValid(uint8_t dataPage) {
     return true;
 }
 
-void ProfileHeartRateMonitor::begin() {
-    // TODO
-}
-
-void ProfileHeartRateMonitor::stop() {
-    // TODO
-}
-
 bool ProfileHeartRateMonitor::handleModeSettings(HeartRateBaseMainDataPage& dataPage) {
     ModeSettings dp(dataPage);
     return _onModeSettings.call(dp);
@@ -226,4 +220,11 @@ bool ProfileHeartRateMonitor::handleModeSettings(HeartRateBaseMainDataPage& data
 bool ProfileHeartRateMonitor::handleRequestDataPage(HeartRateBaseMainDataPage& dataPage) {
     RequestDataPage dp(dataPage);
     return _onRequestDataPage.call(dp);
+}
+
+void ProfileHeartRateMonitor::setChannelConfig() {
+    setChannelType(ANTPLUS_HEARTRATE_MONITOR_CHANNELTYPE);
+    setDeviceType(ANTPLUS_HEARTRATE_DEVICETYPE);
+    setChannelPeriod(ANTPLUS_HEARTRATE_CHANNELPERIOD);
+    setSearchTimeout(ANTPLUS_HEARTRATE_SEARCHTIMEOUT);
 }
