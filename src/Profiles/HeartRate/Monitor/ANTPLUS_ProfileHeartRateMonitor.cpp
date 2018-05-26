@@ -70,6 +70,7 @@ void ProfileHeartRateMonitor::transmitNextDataPage() {
         } else {
             transmitBackgroundDataPage();
             if (patternStep > 67) {
+                _nextBackgroundPage = getNextBackgroundPage(_nextBackgroundPage);
                 patternStep = 0;
             }
         }
@@ -100,8 +101,6 @@ void ProfileHeartRateMonitor::transmitBackgroundDataPage() {
         transmitHeartRateProductInformationMsg();
         break;
     }
-
-    _nextBackgroundPage = getNextBackgroundPage(_nextBackgroundPage);
 }
 
 uint8_t ProfileHeartRateMonitor::getNextBackgroundPage(uint8_t currentPage) {
@@ -116,6 +115,7 @@ uint8_t ProfileHeartRateMonitor::getNextBackgroundPage(uint8_t currentPage) {
     } else if ((currentPage < ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_BATTERYSTATUS_SUPPORTED)) {
         return ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER;
     } else {
+        // Reached end of the loop, start again
         return getNextBackgroundPage(0);
     }
 }
