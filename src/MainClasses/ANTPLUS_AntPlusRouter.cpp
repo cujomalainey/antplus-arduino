@@ -154,7 +154,7 @@ void AntPlusRouter::onCapabilities(Capabilities& msg) {
 }
 
 void AntPlusRouter::onChannelEventResponse(ChannelEventResponse& msg) {
-    if (msg.getMsgId() == ANTPLUS_CHANNELEVENT_MESSAGECODE) {
+    if (msg.getResponseMsgId() == ANTPLUS_CHANNELEVENT_MESSAGECODE) {
         uint8_t channel = msg.getChannelNumber();
         if (_profiles[channel]) {
             _profiles[channel]->onChannelEventResponse(msg);
