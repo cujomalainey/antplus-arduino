@@ -47,11 +47,11 @@ void BaseProfile::setChannelPeriod(uint16_t channelPeriod) {
 }
 
 void BaseProfile::pushChannelConfig() {
-    AssignChannel ac = AssignChannel(_channel, _channelType, ANTPLUS_NETWORKKEY_INDEX);
-    ChannelId ci = ChannelId(_channel, _deviceNumber, _deviceType, ANTPLUS_PAIRING_BIT_MASK & _deviceType, _transmissionType);
-    ChannelPeriod cp = ChannelPeriod(_channel, _channelPeriod);
-    ChannelRfFrequency crf = ChannelRfFrequency(_channel, ANTPLUS_CHANNEL_FREQUENCY);
-    SearchTimeout st = SearchTimeout(_channel, _searchTimeout);
+    AssignChannel ac(_channel, _channelType, ANTPLUS_NETWORKKEY_INDEX);
+    ChannelId ci(_channel, _deviceNumber, _deviceType, ANTPLUS_PAIRING_BIT_MASK & _deviceType, _transmissionType);
+    ChannelPeriod cp(_channel, _channelPeriod);
+    ChannelRfFrequency crf(_channel, ANTPLUS_CHANNEL_FREQUENCY);
+    SearchTimeout st(_channel, _searchTimeout);
 
     _router->send(ac);
     _router->send(ci);
