@@ -127,6 +127,16 @@ void BaseProfile::checkProfileStatus() {
     }
 }
 
+void BaseProfile::send(AcknowledgedDataMsg& msg) {
+    msg.setChannelNumber(_channel);
+    _router->send(msg);
+}
+
+void BaseProfile::send(BroadcastDataMsg& msg) {
+    msg.setChannel(_channel);
+    _router->send(msg);
+}
+
 void BaseProfile::send(AntRequest& msg) {
     _router->send(msg);
 }
