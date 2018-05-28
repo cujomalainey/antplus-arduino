@@ -203,8 +203,13 @@ void ProfileHeartRateMonitor::transmitHeartRateMsg(HeartRateBaseMainDataPageMsg&
     toggle /= 4;
     _toggleStep = _toggleStep % 8;
     msg.setPageChangeToggle(toggle);
-    // TODO handle requested acknowledged types, even though it shouldnt happen
-    send(msg);
+    if (isRequestedPageAcknowledged()) {
+        AcknowledgedDataMsg ack;
+        ack.setDataBuffer(msg.getDataBuffer());
+        send(ack);
+    } else {
+        send(msg);
+    }
 }
 
 bool ProfileHeartRateMonitor::isDataPageValid(uint8_t dataPage) {
