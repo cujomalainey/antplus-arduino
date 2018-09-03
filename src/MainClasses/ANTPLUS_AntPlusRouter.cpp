@@ -69,7 +69,9 @@ void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
 }
 
 void AntPlusRouter::send(AntRequest& msg) {
-    _ant->send(msg);
+    if (_ant) {
+        _ant->send(msg);
+    }
 }
 
 uint8_t AntPlusRouter::getMaxChannels() {
