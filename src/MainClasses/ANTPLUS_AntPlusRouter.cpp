@@ -80,7 +80,7 @@ void AntPlusRouter::removeProfile(uint8_t channel) {
     }
 }
 
-void AntPlusRoute::removeAllProfiles() {
+void AntPlusRouter::removeAllProfiles() {
     for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
         removeProfile(i);
     }
