@@ -68,6 +68,18 @@ void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
     profile->setRouter(this);
 }
 
+void AntPlusRouter::removeProfile(uint8_t channel) {
+    if (_profiles[channel]) {
+        _profiles[channel]->stop();
+        _profiles[channel]->setChannelNumber(0);
+        _profiles[channel]->setRouter(NULL);
+        _profiles[channel] = NULL;
+        UnAssignChannel uc;
+        uc.setChannel(channel);
+        send(uc);
+    }
+}
+
 void AntPlusRouter::send(AntRequest& msg) {
     if (_ant) {
         _ant->send(msg);

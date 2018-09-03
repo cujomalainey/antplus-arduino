@@ -28,6 +28,16 @@ public:
      * Associates a profile with a channel
      */
     void setProfile(uint8_t channel, BaseProfile* profile);
+    /**
+     * Stops a provile at the given channel
+     * Unassigns channel
+     * Removes the profile from index
+     */
+    void removeProfile(uint8_t channel);
+    /**
+     * Send an ANT message to the associated router.
+     * Do not use until a router has been associated.
+     */
     void send(AntRequest& msg);
     /**
      * Returns the maximum number of channels the radio
