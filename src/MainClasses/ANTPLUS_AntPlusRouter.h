@@ -30,7 +30,7 @@ public:
     void setProfile(uint8_t channel, BaseProfile* profile);
     /**
      * Associates a profile with the next lowest available channel
-     * returns associated channel, if all channels full then it 
+     * returns associated channel, if all channels full then it
      * returns TODO
      */
     uint8_t addProfileToNextChannel(BaseProfile* profile);
