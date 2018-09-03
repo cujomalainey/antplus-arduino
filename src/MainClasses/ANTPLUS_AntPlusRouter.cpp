@@ -97,7 +97,7 @@ uint8_t AntPlusRouter::addProfileToNextChannel(BaseProfile* profile) {
             return i;
         }
     }
-    return 255; //TODO change this to a define
+    return ANTPLUS_NO_MORE_CHANNELS;
 }
 
 void AntPlusRouter::loop() {

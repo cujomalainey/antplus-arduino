@@ -31,7 +31,7 @@ public:
     /**
      * Associates a profile with the next lowest available channel
      * returns associated channel, if all channels full then it
-     * returns TODO
+     * returns ANTPLUS_NO_MORE_CHANNELS
      */
     uint8_t addProfileToNextChannel(BaseProfile* profile);
     /**
