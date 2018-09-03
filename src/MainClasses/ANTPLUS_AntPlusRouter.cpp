@@ -107,10 +107,16 @@ void AntPlusRouter::loop() {
 void AntPlusRouter::reset() {
     _ant = NULL;
     _networkKey = NULL;
-    // TODO
-    // disconnect profiles
-    // Reset max channels
-    // reset system state
+    _maxChannels = 0;
+    resetRadio(ANTPLUS_RESET_WAIT_FOR_STARTUP);
+    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
+        if (_profiles[i]) {
+            // profile stopped in resetRadio
+            _profiles[i]->setChannelNumber(0);
+            _profiles[i]->setRouter(NULL);
+            _profiles[i] = NULL;
+        }
+    }
 }
 
 uint8_t AntPlusRouter::resetRadio(uint8_t waitForStartup) {
