@@ -90,6 +90,16 @@ uint8_t AntPlusRouter::getMaxChannels() {
     return _maxChannels;
 }
 
+uint8_t AntPlusRouter::addProfileToNextChannel(BaseProfile* profile) {
+    for (uint8_t i = 0; i < _maxChannels; i++) {
+        if (!_profiles[i]) {
+            setProfile(i, profile);
+            return i;
+        }
+    }
+    return 255; //TODO change this to a define
+}
+
 void AntPlusRouter::loop() {
     _ant->loop();
 }
