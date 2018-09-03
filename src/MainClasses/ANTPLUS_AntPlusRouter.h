@@ -14,8 +14,19 @@ public:
     AntPlusRouter();
     AntPlusRouter(BaseAntWithCallbacks* driver);
     AntPlusRouter(BaseAntWithCallbacks* driver, const uint8_t* key);
+    /**
+     * Give the router a driver to use (Ant, NativeAnt, SpiAnt)
+     */
     uint8_t setDriver(BaseAntWithCallbacks* driver);
+    /**
+     * Give the router the ANT+ network key
+     * HINT: you get this number from http://www.thisisant.com/developer/ant-plus/ant-plus-basics/network-keys/
+     * DO NOT STORE THIS KEY PUBLICLY
+     */
     void setAntPlusNetworkKey(const uint8_t* key);
+    /**
+     * Associates a profile with a channel
+     */
     void setProfile(uint8_t channel, BaseProfile* profile);
     void send(AntRequest& msg);
     /**
@@ -23,8 +34,20 @@ public:
      * connected can support
      */
     uint8_t getMaxChannels();
+    /**
+     * Process any incoming messages and forward them
+     * to the registered callbacks
+     */
     void loop();
+    /**
+     * Reset the whole system back to its defaults
+     * This does not remove callbacks or the driver
+     * but does reset the driver and the radio.
+     */
     void reset();
+    /**
+     * Stops all profiles and resets the radio
+     */
     uint8_t resetRadio(uint8_t waitForStartup);
     /******************************************
      *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
