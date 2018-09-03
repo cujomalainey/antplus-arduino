@@ -35,11 +35,17 @@ public:
      */
     uint8_t addProfileToNextChannel(BaseProfile* profile);
     /**
-     * Stops a provile at the given channel
+     * Stops a profile at the given channel
      * Unassigns channel
      * Removes the profile from index
      */
     void removeProfile(uint8_t channel);
+    /**
+     * Stops all profiles
+     * Unassigns all channels
+     * Removes all profiles from index
+     */
+    void removeAllProfiles();
     /**
      * Send an ANT message to the associated router.
      * Do not use until a router has been associated.
