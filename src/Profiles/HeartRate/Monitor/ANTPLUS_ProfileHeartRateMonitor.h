@@ -5,19 +5,16 @@
 #include <Profiles/HeartRate/DataPages/ANTPLUS_ProfileHeartRateDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
-class ProfileHeartRateSensor : BaseMasterProfile {
+class ProfileHeartRateMonitor : BaseMasterProfile {
 public:
     void onHeartRateCapabilities(void (*func)(HeartRateCapabilities&, uintptr_t), uintptr_t data = 0) { _onHeartRateCapabilities.set(func, data); }
     void onRequestDataPage(void (*func)(RequestDataPage&, uintptr_t), uintptr_t data = 0) { _onRequestDataPage.set(func, data); }
     void begin();
     void stop();
-    /******************************************
-     *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
-     ******************************************/
-    void onAcknowledgedData(AcknowledgedData& msg);
-    void onBroadcastData(BroadcastData& msg);
 protected:
     void transmitNextDataPage();
+    void onAcknowledgedData(AcknowledgedData& msg);
+    void onBroadcastData(BroadcastData& msg);
 private:
     bool handleCapabilities(HeartRateBaseMainDataPage& dataPage);
     bool handleRequestDataPage(HeartRateBaseMainDataPage& dataPage);

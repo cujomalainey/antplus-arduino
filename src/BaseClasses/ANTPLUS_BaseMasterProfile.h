@@ -6,14 +6,11 @@
 class BaseMasterProfile : public BaseProfile {
 public:
     BaseMasterProfile(uint16_t deviceNumber, uint8_t transmissionType);
-    /******************************************
-     *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
-     ******************************************/
+protected:
     /**
      * Used to catch EVENT_TX and continue transmission pattern
      */
     virtual void onChannelEventResponse(ChannelEventResponse& msg);
-protected:
     /**
      * This function, when called, will transmit the next message in the broadcast pattern
      */

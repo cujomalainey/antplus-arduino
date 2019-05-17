@@ -68,12 +68,42 @@ void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
     profile->setRouter(this);
 }
 
+void AntPlusRouter::removeProfile(uint8_t channel) {
+    if (_profiles[channel]) {
+        _profiles[channel]->stop();
+        _profiles[channel]->setChannelNumber(0);
+        _profiles[channel]->setRouter(NULL);
+        _profiles[channel] = NULL;
+        UnAssignChannel uc;
+        uc.setChannel(channel);
+        send(uc);
+    }
+}
+
+void AntPlusRouter::removeAllProfiles() {
+    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
+        removeProfile(i);
+    }
+}
+
 void AntPlusRouter::send(AntRequest& msg) {
-    _ant->send(msg);
+    if (_ant) {
+        _ant->send(msg);
+    }
 }
 
 uint8_t AntPlusRouter::getMaxChannels() {
     return _maxChannels;
+}
+
+uint8_t AntPlusRouter::addProfileToNextChannel(BaseProfile* profile) {
+    for (uint8_t i = 0; i < _maxChannels; i++) {
+        if (!_profiles[i]) {
+            setProfile(i, profile);
+            return i;
+        }
+    }
+    return ANTPLUS_NO_MORE_CHANNELS;
 }
 
 void AntPlusRouter::loop() {
@@ -83,10 +113,16 @@ void AntPlusRouter::loop() {
 void AntPlusRouter::reset() {
     _ant = NULL;
     _networkKey = NULL;
-    // TODO
-    // disconnect profiles
-    // Reset max channels
-    // reset system state
+    _maxChannels = 0;
+    resetRadio(ANTPLUS_RESET_WAIT_FOR_STARTUP);
+    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
+        if (_profiles[i]) {
+            // profile stopped in resetRadio
+            _profiles[i]->setChannelNumber(0);
+            _profiles[i]->setRouter(NULL);
+            _profiles[i] = NULL;
+        }
+    }
 }
 
 uint8_t AntPlusRouter::resetRadio(uint8_t waitForStartup) {
@@ -154,7 +190,7 @@ void AntPlusRouter::onCapabilities(Capabilities& msg) {
 }
 
 void AntPlusRouter::onChannelEventResponse(ChannelEventResponse& msg) {
-    if (msg.getMsgId() == ANTPLUS_CHANNELEVENT_MESSAGECODE) {
+    if (msg.getResponseMsgId() == ANTPLUS_CHANNELEVENT_MESSAGECODE) {
         uint8_t channel = msg.getChannelNumber();
         if (_profiles[channel]) {
             _profiles[channel]->onChannelEventResponse(msg);

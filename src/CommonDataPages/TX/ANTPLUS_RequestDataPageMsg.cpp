@@ -1,4 +1,5 @@
 #include <CommonDataPages/TX/ANTPLUS_RequestDataPageMsg.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 

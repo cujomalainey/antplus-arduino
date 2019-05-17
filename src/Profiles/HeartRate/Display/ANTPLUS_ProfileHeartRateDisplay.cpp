@@ -1,7 +1,7 @@
 #include <Profiles/HeartRate/Display/ANTPLUS_ProfileHeartRateDisplay.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 #include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 ProfileHeartRateDisplay::ProfileHeartRateDisplay() : BaseSlaveProfile() {
     setChannelConfig();
