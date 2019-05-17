@@ -16,3 +16,5 @@ uint8_t CoreDataPage<T>::getDataPageNumber() {
 
 template class CoreDataPage<BroadcastData>;
 template class CoreDataPage<AcknowledgedData>;
+template class CoreDataPage<BroadcastDataMsg>;
+template class CoreDataPage<AcknowledgedDataMsg>;
