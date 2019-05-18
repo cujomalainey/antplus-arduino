@@ -4,23 +4,29 @@
 
 #ifdef UNIT_TEST
 
-const uint8_t mockedInput[] = {};
-BroadcastData bd;
-HeartRateDefault dp;
+uint8_t mockedInput[] = {0, 0x80, 0xFF, 0xFF, 0xFF, 0xAB, 0xCD, 0x12, 0x45};
+HeartRateDefault *dp;
 
 void test_datapage(void) {
-    TEST_ASSERT_EQUAL_UINT8(0, 0);
+    TEST_ASSERT_EQUAL_UINT8(0, dp->getDataPageNumber());
+}
+
+void test_pageChangeToggle(void) {
+    TEST_ASSERT_EQUAL_UINT8(1, dp->getPageChangeToggle());
 }
 
 int main(int argc, char **argv) {
-    bd = BroadcastData();
+    BroadcastData bd;
+    bd.setFrameData(mockedInput);
+    dp = new HeartRateDefault(bd);
     // force data into buffer for testing purposes
-    memcpy(bd.getData(), mockedInput, sizeof(mockedInput));
-    dp = HeartRateDefaultDataPage(bd);
 
     UNITY_BEGIN();
     RUN_TEST(test_datapage);
+    RUN_TEST(test_pageChangeToggle);
     UNITY_END();
+
+    return 0;
 }
 
 #endif // UNIT_TEST
