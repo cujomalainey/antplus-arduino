@@ -35,6 +35,12 @@ public:
      */
     uint8_t addProfileToNextChannel(BaseProfile* profile);
     /**
+     * Stops a profile if the given profile is present
+     * Unassigns channel
+     * Removes the profile from index
+     */
+    void removeProfile(BaseProfile *profile);
+    /**
      * Stops a profile at the given channel
      * Unassigns channel
      * Removes the profile from index
