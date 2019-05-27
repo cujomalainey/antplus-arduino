@@ -39,7 +39,7 @@ public:
      * Unassigns channel
      * Removes the profile from index
      */
-    void removeProfile(uint8_t channel);
+    void removeProfileByChannel(uint8_t channel);
     /**
      * Stops all profiles
      * Unassigns all channels
