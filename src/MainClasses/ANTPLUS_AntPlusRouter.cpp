@@ -45,6 +45,8 @@ uint8_t AntPlusRouter::setDriver(BaseAntWithCallbacks* driver) {
     if (_ant->waitFor(cap, ANTPLUS_DRIVER_REQUEST_TIMEOUT)) {
         return ANTPLUS_MAX_CHANNEL_CHECK_FAILED;
     }
+    _ant->getResponse().getCapabilitiesMsg(cap);
+    onCapabilities(cap);
     return 0;
 }
 
