@@ -53,6 +53,8 @@ void printStatus(uint8_t status);
 void flipProfile();
 
 void setup() {
+    Serial.begin(BAUD_RATE);
+    Serial.println("Running");
     Serial1.begin(BAUD_RATE);
     ant.setSerial(Serial1);
     // Delay after initial setup to wait for user to connect on serial
@@ -60,8 +62,6 @@ void setup() {
     router.setDriver(&ant); // never touch ant again
     router.setAntPlusNetworkKey(NETWORK_KEY);
 
-    Serial.begin(BAUD_RATE);
-    Serial.println("Running");
     bikeSpeed.onDataPage(bicycleSpeedBaseDataPageHandler);
     bikeSpeed.onBicycleSpeedBatteryStatus(batteryStatusDataPageHandler);
     bikeSpeed.onBicycleSpeedMotionAndSpeed(motionAndSpeedDataPageHandler);
@@ -90,6 +90,8 @@ void loop() {
 }
 
 void flipProfile() {
+    uint8_t status;
+    Serial.println("===========================");
     if (isHrProfileRunning) {
         // stop will be called by remove profile as well if you forget
         hr.stop();
@@ -99,8 +101,7 @@ void flipProfile() {
         Serial.print("Profile added to channel: ");
         Serial.println(CHANNEL_0);
         bikeSpeed.begin();
-        uint8_t status = bikeSpeed.waitForPair();
-        printStatus(status);
+        status = bikeSpeed.waitForPair();
     } else {
         bikeSpeed.stop();
         // remove by channel index
@@ -109,9 +110,9 @@ void flipProfile() {
         Serial.print("Profile added to channel: ");
         Serial.println(channel);
         hr.begin();
-        uint8_t status = hr.waitForPair();
-        printStatus(status);
+        status = hr.waitForPair();
     }
+    printStatus(status);
     isHrProfileRunning = !isHrProfileRunning;
 }
 
