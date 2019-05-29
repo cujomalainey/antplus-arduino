@@ -17,8 +17,8 @@ AntPlusRouter::AntPlusRouter(BaseAntWithCallbacks* driver, const uint8_t* key) {
 
 uint8_t AntPlusRouter::setDriver(BaseAntWithCallbacks* driver) {
     // Synchronous locking nature needed to gurantee all configs were recieved
-    RequestMessage rm = RequestMessage();
-    Capabilities cap = Capabilities();
+    RequestMessage rm;
+    Capabilities cap;
     _ant = driver;
     // register callbacks
     _ant->onPacketError(onPacketErrorCallback, (uintptr_t)this);
