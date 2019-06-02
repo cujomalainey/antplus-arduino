@@ -146,6 +146,10 @@ uint8_t AntPlusRouter::resetRadio(uint8_t waitForStartup) {
             _profiles[i]->stop();
         }
     }
+    // purge buffer of any left over messages
+    do {
+        _ant->readPacket();
+    } while (_ant->getResponse().isAvailable());
     send(rs);
     _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
     if (waitForStartup == ANTPLUS_RESET_WAIT_FOR_STARTUP) {
