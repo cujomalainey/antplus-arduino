@@ -154,10 +154,14 @@ void BaseProfile::loop() {
 }
 
 void BaseProfile::begin() {
+    if (!_router)
+        return;
     pushChannelConfig();
     openChannel();
 }
 
 void BaseProfile::stop() {
+    if (!_router)
+        return;
     closeChannel();
 }
