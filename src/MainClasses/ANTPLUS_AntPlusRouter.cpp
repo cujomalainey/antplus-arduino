@@ -67,6 +67,7 @@ void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
     if (channel >= ANTPLUS_MAX_CHANNELS_POSSIBLE)
         return;
     // TODO close channel to make sure it hasn't been randomly replaced
+    profile->setChannelNumber(channel);
     _profiles[channel] = profile;
     profile->setRouter(this);
 }
