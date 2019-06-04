@@ -94,6 +94,7 @@ private:
     uint8_t _sportsMode = ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_SPORTSMODE_RUNNING;
     uint32_t _flags = 0;
     uint8_t _toggleStep = 0;
+    uint8_t _patternStep = 0;
 };
 
 #endif // ANTPLUS_PROFILEHEARTRATEMONITOR_h

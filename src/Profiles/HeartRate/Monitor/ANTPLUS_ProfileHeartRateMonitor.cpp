@@ -61,17 +61,16 @@ void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
 }
 
 void ProfileHeartRateMonitor::transmitNextDataPage() {
-    static uint8_t patternStep = 0;
     if (isRequestedPagePending()) {
         transmitRequestedDataPage();
     } else {
-        if (patternStep++ < 64) {
+        if (_patternStep++ < 64) {
             transmitPrimaryDataPage();
         } else {
             transmitBackgroundDataPage();
-            if (patternStep > 67) {
+            if (_patternStep > 67) {
                 _nextBackgroundPage = getNextBackgroundPage(_nextBackgroundPage);
-                patternStep = 0;
+                _patternStep = 0;
             }
         }
     }
