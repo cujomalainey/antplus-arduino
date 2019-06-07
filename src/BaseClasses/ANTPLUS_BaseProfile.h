@@ -61,10 +61,17 @@ public:
      */
     virtual void stop();
     /**
+     * Sends a message and sets the associated channel in the message
+     */
+    void send(AcknowledgedDataMsg& msg);
+    /**
+     * Sends a message and sets the associated channel in the message
+     */
+    void send(BroadcastDataMsg& msg);
+    /**
      * Sends a message through the connected router
      */
     void send(AntRequest& msg);
-
 protected:
     void callOnOtherDataPage(AntRxDataResponse& msg);
     void setChannelType(uint8_t channelType);
