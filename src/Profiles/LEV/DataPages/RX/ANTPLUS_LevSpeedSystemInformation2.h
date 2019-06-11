@@ -1,11 +1,11 @@
-#ifndef ANTPLUS_LEVSPEEDSYSINFO2_h
-#define ANTPLUS_LEVSPEEDSYSINFO2_h
+#ifndef ANTPLUS_LEVSPEEDSYSTEMINFORMATION2_h
+#define ANTPLUS_LEVSPEEDSYSTEMINFORMATION2_h
 
 #include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseMainDataPage.h>
 
-class LevSpeedSysinfo2 : public LevBaseMainDataPage {
+class LevSpeedSystemInformation2 : public LevBaseMainDataPage {
 public:
-    LevSpeedSysinfo2(AntRxDataResponse& dp);
+    LevSpeedSystemInformation2(AntRxDataResponse& dp);
     uint8_t getBatterySOC();
     uint8_t getTravelModeState();
     uint8_t getSystemState();
@@ -14,4 +14,4 @@ public:
     uint16_t getSpeed(); // in 1/10 km/h
 };
 
-#endif // ANTPLUS_LEVSPEEDSYSINFO2_h
+#endif // ANTPLUS_LEVSPEEDSYSTEMINFORMATION2_h

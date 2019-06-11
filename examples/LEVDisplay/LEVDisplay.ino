@@ -23,10 +23,10 @@ AntPlusRouter router = AntPlusRouter();
 ProfileLevDisplay lev = ProfileLevDisplay();
 
 void levBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data);
-void levSpeedSysinfo1Handler(LevSpeedSysinfo1& msg, uintptr_t data);
-void levSpeedDist1Handler(LevSpeedDist1& msg, uintptr_t data);
-void levSpeedDist2Handler(LevSpeedDist2& msg, uintptr_t data);
-void levSpeedSysinfo2Handler(LevSpeedSysinfo2& msg, uintptr_t data);
+void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_t data);
+void levSpeedDistanceInformationHandler(LevSpeedDistanceInformation& msg, uintptr_t data);
+void levAltSpeedDistanceInformationHandler(LevAltSpeedDistanceInformation& msg, uintptr_t data);
+void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_t data);
 void levBatteryInfo(LevBatteryInfo& msg, uintptr_t data);
 void levAntChannelEvent(ChannelEventResponse& msg, uintptr_t data);
 
@@ -49,12 +49,12 @@ void setup() {
 
 	// setup lev display
     lev.onDataPage(levBaseDataPageHandler);
-	lev.onLevSpeedSysinfo1(levSpeedSysinfo1Handler);
-	lev.onLevSpeedDist1(levSpeedDist1Handler);
-	lev.onLevSpeedDist2(levSpeedDist2Handler);
-	lev.onLevSpeedSysinfo2(levSpeedSysinfo2Handler);
+	lev.onLevSpeedSystemInformation1(levSpeedSystemInformation1Handler);
+	lev.onLevSpeedDistanceInformation(levSpeedDistanceInformationHandler);
+	lev.onLevAltSpeedDistanceInformation(levAltSpeedDistanceInformationHandler);
+	lev.onLevSpeedSystemInformation2(levSpeedSystemInformation2Handler);
 	lev.onLevBatteryInfo(levBatteryInfo);
-	lev.onLevCaps(levCaps);
+	lev.onLevCapabilities(levCapabilities);
 	lev.onManufacturersInformation(manufacturersInformationDataPageHandler);
 	lev.onProductInformation(productInformationDataPageHandler);
 	lev.onChannelEvent(levAntChannelEvent);
@@ -78,8 +78,7 @@ void loop() {
 }
 
 void levAntChannelEvent(ChannelEventResponse& msg, uintptr_t data) {
-	if (msg.getCode() == STATUS_EVENT_CHANNEL_CLOSED)
-	{
+	if (msg.getCode() == STATUS_EVENT_CHANNEL_CLOSED) {
 		Serial.println("channel closed - reconnect");
 		lev.begin();
 	}
@@ -90,20 +89,11 @@ void levBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
     Serial.println("===========================");
     Serial.print("DataPage: ");
     Serial.println(dp.getDataPageNumber());
-
-	// debug
-	int l = msg.getDataLength();
-	uint8_t * buf = msg.getData();
-	for (int i = 0; i < l; i++)
-	{
-		Serial.print(buf[i], HEX); Serial.print(" ");
-	}
-	Serial.println("");
 }
 
-void levSpeedSysinfo1Handler(LevSpeedSysinfo1& msg, uintptr_t data) {
+void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_t data) {
 	Serial.print("Temp state: ");
-	Serial.println(msg.getTempState());
+	Serial.println(msg.getTemperatureState());
 	Serial.print("Travel mode state: ");
 	Serial.println(msg.getTravelModeState());
 	Serial.print("System state: ");
@@ -118,9 +108,9 @@ void levSpeedSysinfo1Handler(LevSpeedSysinfo1& msg, uintptr_t data) {
 	Serial.println(msg.getSpeed() % 10);
 }
 
-void levSpeedDist1Handler(LevSpeedDist1& msg, uintptr_t data) {
+void levSpeedDistanceInformationHandler(LevSpeedDistanceInformation& msg, uintptr_t data) {
 	Serial.print("Total dist: ");
-	Serial.println((float)msg.getTotalDist() / 100);
+	Serial.println((float)msg.getOdometer() / 100);
 	Serial.print("Remaining range: ");
 	Serial.println(msg.getRemainingRange());
 	Serial.print("Speed: ");
@@ -129,9 +119,9 @@ void levSpeedDist1Handler(LevSpeedDist1& msg, uintptr_t data) {
 	Serial.println(msg.getSpeed() % 10);
 }
 
-void levSpeedDist2Handler(LevSpeedDist2& msg, uintptr_t data) {
+void levAltSpeedDistanceInformationHandler(LevAltSpeedDistanceInformation& msg, uintptr_t data) {
 	Serial.print("Total dist: ");
-	Serial.println((float)msg.getTotalDist() / 100);
+	Serial.println((float)msg.getOdometer() / 100);
 	Serial.print("Fuel consumption: ");
 	Serial.println(msg.getFuelConsumption());
 	Serial.print("Speed: ");
@@ -140,7 +130,7 @@ void levSpeedDist2Handler(LevSpeedDist2& msg, uintptr_t data) {
 	Serial.println(msg.getSpeed() % 10);
 }
 
-void levSpeedSysinfo2Handler(LevSpeedSysinfo2& msg, uintptr_t data) {
+void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_t data) {
 	Serial.print("Battery SOC: ");
 	Serial.println(msg.getBatterySOC());
 	Serial.print("Travel mode state: ");
@@ -168,7 +158,7 @@ void levBatteryInfo(LevBatteryInfo& msg, uintptr_t data) {
 	Serial.println(msg.getDistanceOnCurrentCharge());
 }
 
-void levCaps(LevCaps& msg, uintptr_t data) {
+void levCapabilities(LevCapabilities& msg, uintptr_t data) {
 	Serial.print("Travel modes supported: ");
 	Serial.println(msg.getTravelModesSupported());
 	Serial.print("Wheel circumference: ");

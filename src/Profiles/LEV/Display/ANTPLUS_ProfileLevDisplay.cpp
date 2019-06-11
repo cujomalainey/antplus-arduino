@@ -50,23 +50,23 @@ bool ProfileLevDisplay::handleDataPage(LevBaseMainDataPage& dp) {
 
 	switch (dataPage) {
 
-	case ANTPLUS_LEV_DATAPAGE_SPEEDSYSINFO1_NUMBER:
-		called = handleSpeedSysinfo1(dp);
+	case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_NUMBER:
+		called = handleSpeedSystemInformation1(dp);
 		break;
-	case ANTPLUS_LEV_DATAPAGE_SPEEDDIST1_NUMBER:
-		called = handleSpeedDist1(dp);
+	case ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_NUMBER:
+		called = handleSpeedDistanceInformation(dp);
 		break;
-	case ANTPLUS_LEV_DATAPAGE_SPEEDDIST2_NUMBER:
-		called = handleSpeedDist2(dp);
+	case ANTPLUS_LEV_DATAPAGE_ALTSPEEDDISTANCEINFORMATION_NUMBER:
+		called = handleAltSpeedDistanceInformation(dp);
 		break;
-	case ANTPLUS_LEV_DATAPAGE_SPEEDSYSINFO2_NUMBER:
-		called = handleSpeedSysinfo2(dp);
+	case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION2_NUMBER:
+		called = handleSpeedSystemInformation2(dp);
 		break;
 	case ANTPLUS_LEV_DATAPAGE_BATTERYINFO_NUMBER:
 		called = handleBatteryInfo(dp);
 		break;
-	case ANTPLUS_LEV_DATAPAGE_CAPS_NUMBER:
-		called = handleCaps(dp);
+	case ANTPLUS_LEV_DATAPAGE_CAPABILITIES_NUMBER:
+		called = handleCapabilities(dp);
 		break;
 	case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
 		// Called Manufacturers Identification in Environment Profile PDF
@@ -79,24 +79,24 @@ bool ProfileLevDisplay::handleDataPage(LevBaseMainDataPage& dp) {
     return called;
 }
 
-bool ProfileLevDisplay::handleSpeedSysinfo1(LevBaseMainDataPage& dataPage) {
-	LevSpeedSysinfo1 dp = LevSpeedSysinfo1(dataPage);
-	return _onLevSpeedSysinfo1.call(dp);
+bool ProfileLevDisplay::handleSpeedSystemInformation1(LevBaseMainDataPage& dataPage) {
+	LevSpeedSystemInformation1 dp = LevSpeedSystemInformation1(dataPage);
+	return _onLevSpeedSystemInformation1.call(dp);
 }
 
-bool ProfileLevDisplay::handleSpeedDist1(LevBaseMainDataPage& dataPage) {
-	LevSpeedDist1 dp = LevSpeedDist1(dataPage);
-	return _onLevSpeedDist1.call(dp);
+bool ProfileLevDisplay::handleSpeedDistanceInformation(LevBaseMainDataPage& dataPage) {
+	LevSpeedDistanceInformation dp = LevSpeedDistanceInformation(dataPage);
+	return _onLevSpeedDistanceInformation.call(dp);
 }
 
-bool ProfileLevDisplay::handleSpeedDist2(LevBaseMainDataPage& dataPage) {
-	LevSpeedDist2 dp = LevSpeedDist2(dataPage);
-	return _onLevSpeedDist2.call(dp);
+bool ProfileLevDisplay::handleAltSpeedDistanceInformation(LevBaseMainDataPage& dataPage) {
+	LevAltSpeedDistanceInformation dp = LevAltSpeedDistanceInformation(dataPage);
+	return _onLevAltSpeedDistanceInformation.call(dp);
 }
 
-bool ProfileLevDisplay::handleSpeedSysinfo2(LevBaseMainDataPage& dataPage) {
-	LevSpeedSysinfo2 dp = LevSpeedSysinfo2(dataPage);
-	return _onLevSpeedSysinfo2.call(dp);
+bool ProfileLevDisplay::handleSpeedSystemInformation2(LevBaseMainDataPage& dataPage) {
+	LevSpeedSystemInformation2 dp = LevSpeedSystemInformation2(dataPage);
+	return _onLevSpeedSystemInformation2.call(dp);
 }
 
 bool ProfileLevDisplay::handleBatteryInfo(LevBaseMainDataPage& dataPage) {
@@ -104,9 +104,9 @@ bool ProfileLevDisplay::handleBatteryInfo(LevBaseMainDataPage& dataPage) {
 	return _onLevBatteryInfo.call(dp);
 }
 
-bool ProfileLevDisplay::handleCaps(LevBaseMainDataPage& dataPage) {
-	LevCaps dp = LevCaps(dataPage);
-	return _onLevCaps.call(dp);
+bool ProfileLevDisplay::handleCapabilities(LevBaseMainDataPage& dataPage) {
+	LevCapabilities dp = LevCapabilities(dataPage);
+	return _onLevCapabilities.call(dp);
 }
 
 bool ProfileLevDisplay::handleManufacturersInformation(LevBaseMainDataPage& dataPage) {

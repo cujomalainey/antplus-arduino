@@ -6,5 +6,5 @@ LevBaseMainDataPage::LevBaseMainDataPage(AntRxDataResponse& dp) : BaseDataPage<B
 }
 
 uint8_t LevBaseMainDataPage::getDataPageNumber() {
-    return getData(ANTPLUS_LEV_DATAPAGEBASE_DATAPAGE_BYTE) & ANTPLUS_LEV_DATAPAGEBASE_DATAPAGE_MASK;
+    return getData(ANTPLUS_LEV_DATAPAGEBASE_DATAPAGE_BYTE);
 }
