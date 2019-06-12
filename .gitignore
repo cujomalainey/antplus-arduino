@@ -8,15 +8,3 @@ src/main.cpp
 .DS_Store
 .tags*
 tags
-examples/LEVDisplay/__vm/.LEVDisplay.vsarduino.h
-examples/LEVDisplay/__vm/Compile.vmps.xml
-examples/LEVDisplay/__vm/Configuration.Release.vmps.xml
-*.vcxproj
-*.filters
-*.user
-examples/LEVDisplay/__vm/Upload.vmps.xml
-*.d
-*.o
-*.buildinfo
-*.elf
-*.hex
