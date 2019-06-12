@@ -92,16 +92,16 @@ void levBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
 }
 
 void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_t data) {
-    Serial.print("Temp state: ");
-    Serial.println(msg.getTemperatureState());
+    Serial.print("Temperature state: ");
+    Serial.println(msg.getTemperatureState());      // TODO enums for temperature state
     Serial.print("Travel mode state: ");
-    Serial.println(msg.getTravelModeState());
+    Serial.println(msg.getTravelModeState());       // TODO decode travel mode state
     Serial.print("System state: ");
-    Serial.println(msg.getSystemState());
+    Serial.println(msg.getSystemState());           // TODO enums for system state
     Serial.print("Gear state: ");
-    Serial.println(msg.getGearState());
+    Serial.println(msg.getGearState());             // TODO decode gear state
     Serial.print("Gear error: ");
-    Serial.println(msg.getErrorMessage());
+    Serial.println(msg.getErrorMessage());          // TODO enums for error message
     Serial.print("Speed: ");
     Serial.print(msg.getSpeed()/10);
     Serial.print(".");
@@ -112,7 +112,7 @@ void levSpeedDistanceInformationHandler(LevSpeedDistanceInformation& msg, uintpt
     Serial.print("Total dist: ");
     Serial.println((float)msg.getOdometer() / 100);
     Serial.print("Remaining range: ");
-    Serial.println(msg.getRemainingRange());
+    Serial.println(msg.getRemainingRange());        // TODO 0 = unknown
     Serial.print("Speed: ");
     Serial.print(msg.getSpeed() / 10);
     Serial.print(".");
@@ -123,7 +123,7 @@ void levAltSpeedDistanceInformationHandler(LevAltSpeedDistanceInformation& msg, 
     Serial.print("Total dist: ");
     Serial.println((float)msg.getOdometer() / 100);
     Serial.print("Fuel consumption: ");
-    Serial.println(msg.getFuelConsumption());
+    Serial.println(msg.getFuelConsumption());       // TODO 0 = unknown
     Serial.print("Speed: ");
     Serial.print(msg.getSpeed() / 10);
     Serial.print(".");
@@ -134,11 +134,11 @@ void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_
     Serial.print("Battery SOC: ");
     Serial.println(msg.getBatterySOC());
     Serial.print("Travel mode state: ");
-    Serial.println(msg.getTravelModeState());
+    Serial.println(msg.getTravelModeState());        // TODO decode travel mode state
     Serial.print("System state: ");
-    Serial.println(msg.getSystemState());
+    Serial.println(msg.getSystemState());            // TODO enums for system state
     Serial.print("Gear state: ");
-    Serial.println(msg.getGearState());
+    Serial.println(msg.getGearState());              // TODO decode gear state
     Serial.print("Percent Assist: ");
     Serial.println(msg.getPercentAssist());
     Serial.print("Speed: ");
@@ -151,16 +151,16 @@ void levBatteryInfo(LevBatteryInfo& msg, uintptr_t data) {
     Serial.print("Charging Cycle Count: ");
     Serial.println(msg.getChargingCycleCount());
     Serial.print("Fuel consumption: ");
-    Serial.println(msg.getFuelConsumption());
+    Serial.println(msg.getFuelConsumption());            // TODO 0 = unknown
     Serial.print("Battery voltage: ");
-    Serial.println(msg.getBatteryVoltage());
+    Serial.println(msg.getBatteryVoltage());             // TODO 0 = unknown
     Serial.print("Distance on current charge: ");
-    Serial.println(msg.getDistanceOnCurrentCharge());
+    Serial.println(msg.getDistanceOnCurrentCharge());    // TODO 0 = unknown
 }
 
 void levCapabilities(LevCapabilities& msg, uintptr_t data) {
     Serial.print("Travel modes supported: ");
-    Serial.println(msg.getTravelModesSupported());
+    Serial.println(msg.getTravelModesSupported());       // TODO decode travel modes supported
     Serial.print("Wheel circumference: ");
     Serial.println(msg.getWheelCircumference());
 }

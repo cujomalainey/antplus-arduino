@@ -7,13 +7,12 @@ LevBatteryInfo::LevBatteryInfo(AntRxDataResponse& dp) : LevBaseMainDataPage(dp) 
 
 uint16_t LevBatteryInfo::getChargingCycleCount()
 {
-    return (uint16_t)getData(2) + (((uint16_t)getData(3) & 0x0F) << 8);
+    return (uint16_t)getData(2) + (((uint16_t)getData(3) & 0x0F) << 8); // TODO test
 }
 
 uint16_t LevBatteryInfo::getFuelConsumption()
 {
-    uint16_t c = (uint16_t)getData(3) + (((uint16_t)getData(4) & 0x0F) << 8);
-    return c >> 4;
+    return ((getData(3) & 0xF0) << 4) + getData(4);  // TODO test
 }
 
 uint8_t LevBatteryInfo::getBatteryVoltage()
@@ -23,5 +22,5 @@ uint8_t LevBatteryInfo::getBatteryVoltage()
 
 uint16_t LevBatteryInfo::getDistanceOnCurrentCharge()
 {
-    return (uint16_t)getData(6) + (((uint16_t)getData(7) & 0x0F) << 8);
+    return getData(6) + (getData(7) << 8); // TODO test
 }

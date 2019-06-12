@@ -8,7 +8,7 @@ public:
     LevBatteryInfo(AntRxDataResponse& dp);
     uint16_t getChargingCycleCount();
     uint16_t getFuelConsumption();
-    uint8_t getBatteryVoltage();
+    uint8_t getBatteryVoltage(); // TODO special value 0x00 = unknown
     uint16_t getDistanceOnCurrentCharge();
 };
 
