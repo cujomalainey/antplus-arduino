@@ -25,7 +25,7 @@ uint8_t LevSpeedSystemInformation1::getGearState()
     return getData(4);
 }
 
-uint8_t LevSpeedSystemInformation1::getError()
+uint8_t LevSpeedSystemInformation1::getErrorMessage()
 {
     return getData(5);
 }

@@ -101,7 +101,7 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
     Serial.print("Gear state: ");
     Serial.println(msg.getGearState());
     Serial.print("Gear error: ");
-    Serial.println(msg.getError());
+    Serial.println(msg.getErrorMessage());
     Serial.print("Speed: ");
     Serial.print(msg.getSpeed()/10);
     Serial.print(".");

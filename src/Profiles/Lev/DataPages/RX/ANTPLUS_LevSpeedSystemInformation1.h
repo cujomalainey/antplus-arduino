@@ -10,7 +10,7 @@ public:
     uint8_t getTravelModeState();
     uint8_t getSystemState();
     uint8_t getGearState();
-    uint8_t getError();
+    uint8_t getErrorMessage();
     uint16_t getSpeed(); // in 1/10 km/h
 };
 
