@@ -2,7 +2,7 @@
 #define ANTPLUS_LEVPROFILE_h
 
 // General Definitions
-// todo
+// TODO
 
 // Datapages
 #include <Profiles/Lev/DataPages/ANTPLUS_ProfileLevDataPages.h>

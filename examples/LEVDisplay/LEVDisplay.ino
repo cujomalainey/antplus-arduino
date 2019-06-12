@@ -47,24 +47,24 @@ void setup() {
     Serial.begin(BAUD_RATE);
     Serial.println("Running");
 
-	// setup lev display
+    // setup lev display
     lev.onDataPage(levBaseDataPageHandler);
-	lev.onLevSpeedSystemInformation1(levSpeedSystemInformation1Handler);
-	lev.onLevSpeedDistanceInformation(levSpeedDistanceInformationHandler);
-	lev.onLevAltSpeedDistanceInformation(levAltSpeedDistanceInformationHandler);
-	lev.onLevSpeedSystemInformation2(levSpeedSystemInformation2Handler);
-	lev.onLevBatteryInfo(levBatteryInfo);
-	lev.onLevCapabilities(levCapabilities);
-	lev.onManufacturersInformation(manufacturersInformationDataPageHandler);
-	lev.onProductInformation(productInformationDataPageHandler);
-	lev.onChannelEvent(levAntChannelEvent);
-	lev.begin();
-	delay(100); // wait for module initialization
+    lev.onLevSpeedSystemInformation1(levSpeedSystemInformation1Handler);
+    lev.onLevSpeedDistanceInformation(levSpeedDistanceInformationHandler);
+    lev.onLevAltSpeedDistanceInformation(levAltSpeedDistanceInformationHandler);
+    lev.onLevSpeedSystemInformation2(levSpeedSystemInformation2Handler);
+    lev.onLevBatteryInfo(levBatteryInfo);
+    lev.onLevCapabilities(levCapabilities);
+    lev.onManufacturersInformation(manufacturersInformationDataPageHandler);
+    lev.onProductInformation(productInformationDataPageHandler);
+    lev.onChannelEvent(levAntChannelEvent);
+    lev.begin();
+    delay(100); // wait for module initialization
 
     // wait for pair to complete
     uint8_t status = lev.waitForPair();
 
-	// print channel status
+    // print channel status
     Serial.println("===========================");
     printStatus(status);
     Serial.print("Device Number: ");
@@ -78,130 +78,130 @@ void loop() {
 }
 
 void levAntChannelEvent(ChannelEventResponse& msg, uintptr_t data) {
-	if (msg.getCode() == STATUS_EVENT_CHANNEL_CLOSED) {
-		Serial.println("channel closed - reconnect");
-		lev.begin();
-	}
+    if (msg.getCode() == STATUS_EVENT_CHANNEL_CLOSED) {
+        Serial.println("channel closed - reconnect");
+        lev.begin();
+    }
 }
 
 void levBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
-	LevBaseMainDataPage dp = LevBaseMainDataPage(msg);
+    LevBaseMainDataPage dp = LevBaseMainDataPage(msg);
     Serial.println("===========================");
     Serial.print("DataPage: ");
     Serial.println(dp.getDataPageNumber());
 }
 
 void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_t data) {
-	Serial.print("Temp state: ");
-	Serial.println(msg.getTemperatureState());
-	Serial.print("Travel mode state: ");
-	Serial.println(msg.getTravelModeState());
-	Serial.print("System state: ");
-	Serial.println(msg.getSystemState());
-	Serial.print("Gear state: ");
-	Serial.println(msg.getGearState());
-	Serial.print("Gear error: ");
-	Serial.println(msg.getError());
-	Serial.print("Speed: ");
-	Serial.print(msg.getSpeed()/10);
-	Serial.print(".");
-	Serial.println(msg.getSpeed() % 10);
+    Serial.print("Temp state: ");
+    Serial.println(msg.getTemperatureState());
+    Serial.print("Travel mode state: ");
+    Serial.println(msg.getTravelModeState());
+    Serial.print("System state: ");
+    Serial.println(msg.getSystemState());
+    Serial.print("Gear state: ");
+    Serial.println(msg.getGearState());
+    Serial.print("Gear error: ");
+    Serial.println(msg.getError());
+    Serial.print("Speed: ");
+    Serial.print(msg.getSpeed()/10);
+    Serial.print(".");
+    Serial.println(msg.getSpeed() % 10);
 }
 
 void levSpeedDistanceInformationHandler(LevSpeedDistanceInformation& msg, uintptr_t data) {
-	Serial.print("Total dist: ");
-	Serial.println((float)msg.getOdometer() / 100);
-	Serial.print("Remaining range: ");
-	Serial.println(msg.getRemainingRange());
-	Serial.print("Speed: ");
-	Serial.print(msg.getSpeed() / 10);
-	Serial.print(".");
-	Serial.println(msg.getSpeed() % 10);
+    Serial.print("Total dist: ");
+    Serial.println((float)msg.getOdometer() / 100);
+    Serial.print("Remaining range: ");
+    Serial.println(msg.getRemainingRange());
+    Serial.print("Speed: ");
+    Serial.print(msg.getSpeed() / 10);
+    Serial.print(".");
+    Serial.println(msg.getSpeed() % 10);
 }
 
 void levAltSpeedDistanceInformationHandler(LevAltSpeedDistanceInformation& msg, uintptr_t data) {
-	Serial.print("Total dist: ");
-	Serial.println((float)msg.getOdometer() / 100);
-	Serial.print("Fuel consumption: ");
-	Serial.println(msg.getFuelConsumption());
-	Serial.print("Speed: ");
-	Serial.print(msg.getSpeed() / 10);
-	Serial.print(".");
-	Serial.println(msg.getSpeed() % 10);
+    Serial.print("Total dist: ");
+    Serial.println((float)msg.getOdometer() / 100);
+    Serial.print("Fuel consumption: ");
+    Serial.println(msg.getFuelConsumption());
+    Serial.print("Speed: ");
+    Serial.print(msg.getSpeed() / 10);
+    Serial.print(".");
+    Serial.println(msg.getSpeed() % 10);
 }
 
 void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_t data) {
-	Serial.print("Battery SOC: ");
-	Serial.println(msg.getBatterySOC());
-	Serial.print("Travel mode state: ");
-	Serial.println(msg.getTravelModeState());
-	Serial.print("System state: ");
-	Serial.println(msg.getSystemState());
-	Serial.print("Gear state: ");
-	Serial.println(msg.getGearState());
-	Serial.print("Percent Assist: ");
-	Serial.println(msg.getPercentAssist());
-	Serial.print("Speed: ");
-	Serial.print(msg.getSpeed() / 10);
-	Serial.print(".");
-	Serial.println(msg.getSpeed() % 10);
+    Serial.print("Battery SOC: ");
+    Serial.println(msg.getBatterySOC());
+    Serial.print("Travel mode state: ");
+    Serial.println(msg.getTravelModeState());
+    Serial.print("System state: ");
+    Serial.println(msg.getSystemState());
+    Serial.print("Gear state: ");
+    Serial.println(msg.getGearState());
+    Serial.print("Percent Assist: ");
+    Serial.println(msg.getPercentAssist());
+    Serial.print("Speed: ");
+    Serial.print(msg.getSpeed() / 10);
+    Serial.print(".");
+    Serial.println(msg.getSpeed() % 10);
 }
 
 void levBatteryInfo(LevBatteryInfo& msg, uintptr_t data) {
-	Serial.print("Charging Cycle Count: ");
-	Serial.println(msg.getChargingCycleCount());
-	Serial.print("Fuel consumption: ");
-	Serial.println(msg.getFuelConsumption());
-	Serial.print("Battery voltage: ");
-	Serial.println(msg.getBatteryVoltage());
-	Serial.print("Distance on current charge: ");
-	Serial.println(msg.getDistanceOnCurrentCharge());
+    Serial.print("Charging Cycle Count: ");
+    Serial.println(msg.getChargingCycleCount());
+    Serial.print("Fuel consumption: ");
+    Serial.println(msg.getFuelConsumption());
+    Serial.print("Battery voltage: ");
+    Serial.println(msg.getBatteryVoltage());
+    Serial.print("Distance on current charge: ");
+    Serial.println(msg.getDistanceOnCurrentCharge());
 }
 
 void levCapabilities(LevCapabilities& msg, uintptr_t data) {
-	Serial.print("Travel modes supported: ");
-	Serial.println(msg.getTravelModesSupported());
-	Serial.print("Wheel circumference: ");
-	Serial.println(msg.getWheelCircumference());
+    Serial.print("Travel modes supported: ");
+    Serial.println(msg.getTravelModesSupported());
+    Serial.print("Wheel circumference: ");
+    Serial.println(msg.getWheelCircumference());
 }
 
 void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data) {
-	Serial.print("DataPage: ");
-	Serial.println(msg.getDataPageNumber());
-	Serial.print("HW Revision: ");
-	Serial.println(msg.getHWRevision());
-	Serial.print("ManufacturerID: ");
-	Serial.println(msg.getManufacturerID());
-	Serial.print("Model Number: ");
-	Serial.println(msg.getModelNumber());
+    Serial.print("DataPage: ");
+    Serial.println(msg.getDataPageNumber());
+    Serial.print("HW Revision: ");
+    Serial.println(msg.getHWRevision());
+    Serial.print("ManufacturerID: ");
+    Serial.println(msg.getManufacturerID());
+    Serial.print("Model Number: ");
+    Serial.println(msg.getModelNumber());
 }
 
 void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data) {
-	Serial.print("DataPage: ");
-	Serial.println(msg.getDataPageNumber());
-	Serial.print("SW Revision Supplemental: ");
-	Serial.println(msg.getSWRevisionSupplemental());
-	Serial.print("SW Revision Main: ");
-	Serial.println(msg.getSWRevisionMain());
-	Serial.print("Serial Number: ");
-	Serial.println(msg.getSerialNumber());
+    Serial.print("DataPage: ");
+    Serial.println(msg.getDataPageNumber());
+    Serial.print("SW Revision Supplemental: ");
+    Serial.println(msg.getSWRevisionSupplemental());
+    Serial.print("SW Revision Main: ");
+    Serial.println(msg.getSWRevisionMain());
+    Serial.print("Serial Number: ");
+    Serial.println(msg.getSerialNumber());
 }
 
 void printStatus(uint8_t status) {
-	Serial.print("Channel Status: ");
-	switch (status) {
-	case CHANNEL_STATUS_UNASSIGNED:
-		Serial.println("Unassigned");
-		break;
-	case CHANNEL_STATUS_ASSIGNED:
-		Serial.println("Assigned");
-		break;
-	case CHANNEL_STATUS_SEARCHING:
-		Serial.println("Searching");
-		break;
-	case CHANNEL_STATUS_TRACKING:
-		Serial.println("Tracking");
-		break;
-	}
+    Serial.print("Channel Status: ");
+    switch (status) {
+    case CHANNEL_STATUS_UNASSIGNED:
+        Serial.println("Unassigned");
+        break;
+    case CHANNEL_STATUS_ASSIGNED:
+        Serial.println("Assigned");
+        break;
+    case CHANNEL_STATUS_SEARCHING:
+        Serial.println("Searching");
+        break;
+    case CHANNEL_STATUS_TRACKING:
+        Serial.println("Tracking");
+        break;
+    }
 }
 
