@@ -69,7 +69,6 @@ bool ProfileLevDisplay::handleDataPage(LevBaseMainDataPage& dp) {
         called = handleCapabilities(dp);
         break;
     case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
-        // Called Manufacturers Identification in Environment Profile PDF
         called = handleManufacturersInformation(dp);
         break;
     case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
