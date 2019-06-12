@@ -1,4 +1,7 @@
+#include <BaseClasses/ANTPLUS_BaseDataPage.h>
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/RX/ANTPLUS_RequestDataPage.h>
 
 BaseMasterProfile::BaseMasterProfile(uint16_t deviceNumber, uint8_t transmissionType) : BaseProfile(deviceNumber, transmissionType) {
 }
@@ -14,8 +17,8 @@ void BaseMasterProfile::onChannelEventResponse(ChannelEventResponse& msg) {
 }
 
 void BaseMasterProfile::onAcknowledgedData(AcknowledgedData& msg) {
-    BaseDataPage bdp(msg);
-    if (msg.getDataPageNumber() == ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER) {
+    BaseDataPage<AcknowledgedData> bdp(msg);
+    if (bdp.getDataPageNumber() == ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER) {
         RequestDataPage rdp(msg);
         _requestedPage = rdp.getRequestedPageNumber();
         if (rdp.transmitTillAcknowledged()) {
