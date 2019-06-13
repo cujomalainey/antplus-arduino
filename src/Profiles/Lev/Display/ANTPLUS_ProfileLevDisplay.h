@@ -22,9 +22,6 @@ public:
     void onManufacturersInformation(void(*func)(ManufacturersInformation&, uintptr_t), uintptr_t data = 0) { _onManufacturersInformation.set(func, data); }
     void onProductInformation(void(*func)(ProductInformation&, uintptr_t), uintptr_t data = 0) { _onProductInformation.set(func, data); }
 
-protected:
-    // virtual void onChannelEventResponse(ChannelEventResponse& msg);
-
 private:
     void setChannelConfig();
     void onBroadcastData(BroadcastData& msg);

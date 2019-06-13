@@ -16,7 +16,7 @@ ProfileLevDisplay::ProfileLevDisplay(uint16_t deviceNumber, uint8_t transmission
 }
 
 void ProfileLevDisplay::setChannelConfig() {
-    setChannelType(ANTPLUS_LEV_CHANNELTYPE);
+    setChannelType(ANTPLUS_LEV_DISPLAY_CHANNELTYPE);
     setDeviceType(ANTPLUS_LEV_DEVICETYPE);
     setChannelPeriod(ANTPLUS_LEV_CHANNELPERIOD);
     setSearchTimeout(ANTPLUS_LEV_SEARCHTIMEOUT);
@@ -37,12 +37,6 @@ void ProfileLevDisplay::onAcknowledgedData(AcknowledgedData& msg) {
         callOnOtherDataPage(msg);
     }
 }
-
-/*
-void ProfileLevDisplay::onChannelEventResponse(ChannelEventResponse& msg) {
-    Serial.print("lev event: ");
-    Serial.println(msg.getCode());
-}*/
 
 bool ProfileLevDisplay::handleDataPage(LevBaseMainDataPage& dp) {
     uint8_t dataPage = dp.getDataPageNumber();
