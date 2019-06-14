@@ -12,7 +12,7 @@
 #include "ANTPLUS.h"
 
 #define BAUD_RATE 9600
-#define CHANNEL_1 0
+#define CHANNEL_0 0
 
 const uint8_t NETWORK_KEY[] = { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77 };
 
@@ -29,7 +29,7 @@ void setup() {
 
     router.setDriver(&ant); // never touch ant again
     router.setAntPlusNetworkKey(NETWORK_KEY);
-    router.setProfile(CHANNEL_1, &shift);
+    router.setProfile(CHANNEL_0, &shift);
 
     Serial.begin(BAUD_RATE);
     Serial.println("Running");
@@ -47,10 +47,12 @@ void loop() {
 void shiftCreateMsgHandler(ShiftingBaseMainDataPageMsg& msg, uintptr_t data)
 {
     static int _gear = 0;
+    static int _eventCount = 0;
     msg.setTotalNumbersGearFront(1);
     msg.setTotalNumbersGearRear(10);
 
     msg.setCurrentGearFront( 1 );
     msg.setCurrentGearRear( _gear++ % 10 );
+    msg.setEventCount(_eventCount);
 }
 
