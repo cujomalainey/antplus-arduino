@@ -18,14 +18,12 @@ protected:
 
 class ShiftingBaseMainDataPageMsg : public ShiftingBaseGenericMsg {
 public:
-    ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber = ANTPLUS_SHIFTING_DATAPAGE_SHIFTSYSTEMSTATUS);
+    ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber = ANTPLUS_SHIFTING_DATAPAGE_SHIFTSYSTEMSTATUS_NUMBER);
 
     void setCurrentGearFront( uint8_t cgf );
     void setCurrentGearRear( uint8_t cgr );
     void setTotalNumbersGearFront( uint8_t tgr );
     void setTotalNumbersGearRear( uint8_t tgr );
-
-    // internal
     void setEventCount(uint8_t n);
 };
 

@@ -5,17 +5,26 @@
 ProfileShiftingShifter::ProfileShiftingShifter(	uint16_t deviceNumber, uint8_t transmissionType) :
     BaseMasterProfile(deviceNumber, transmissionType),
     _patternStep( 0 ),
-    _toggle(0),
-    _eventCount( 0 )
+    _toggle(0)
 {
     setChannelConfig();
 }
 
 void ProfileShiftingShifter::setChannelConfig() {
-    setChannelType(ANTPLUS_SHIFTING_MASTER_CHANNELTYPE);
+    setChannelType(ANTPLUS_SHIFTING_SHIFTER_CHANNELTYPE);
     setDeviceType(ANTPLUS_SHIFTING_DEVICETYPE);
     setChannelPeriod(ANTPLUS_SHIFTING_CHANNELPERIOD);
     setSearchTimeout(ANTPLUS_SHIFTING_SEARCHTIMEOUT);
+}
+
+bool ProfileShiftingShifter::isDataPageValid(uint8_t dataPage)
+{
+    switch (dataPage) {
+    case ANTPLUS_SHIFTING_DATAPAGE_SHIFTSYSTEMSTATUS_NUMBER:
+        return true;
+    // TODO other datapages
+    }
+    return false;
 }
 
 void ProfileShiftingShifter::transmitNextDataPage() {
@@ -30,10 +39,11 @@ void ProfileShiftingShifter::transmitNextDataPage() {
     else {
         // TODO manufacturer and product handling
         ShiftingBaseGenericMsg msg;
-        if (_toggle++ % 1 == 0)
+        if (_toggle++ % 2 == 0)
             msg.copyData((uint8_t*)manufacturer, MESSAGE_SIZE);
         else
             msg.copyData((uint8_t*)product, MESSAGE_SIZE);
+        // TODO battery status
         send(msg);
         _patternStep = 0;
     }
@@ -41,9 +51,6 @@ void ProfileShiftingShifter::transmitNextDataPage() {
 
 void ProfileShiftingShifter::transmitShiftingMainPageMsg() {
     ShiftingBaseMainDataPageMsg msg;
-    msg.setEventCount(_eventCount);
-    if( _patternStep % 4 == 0 ) // TODO make event count time dependent
-      _eventCount++;
     _createShiftingDataMsg.call(msg);
     send(msg);
 }

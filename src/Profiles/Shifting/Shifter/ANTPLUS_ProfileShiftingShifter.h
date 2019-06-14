@@ -8,7 +8,7 @@
 
 class ProfileShiftingShifter : public BaseMasterProfile {
 public:
-    ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType = ANTPLUS_SHIFTING_MASTER_TRANSMISSIONTYPE);
+    ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType = ANTPLUS_SHIFTING_SHIFTER_TRANSMISSIONTYPE);
 
     /**
      * Register callback to populate default data messages (Datapage 0)
@@ -17,7 +17,7 @@ public:
 
 protected:
     virtual void transmitNextDataPage();
-    virtual bool isDataPageValid(uint8_t dataPage) { return true; }
+    virtual bool isDataPageValid(uint8_t dataPage);
 
 private:
     void setChannelConfig();
@@ -25,7 +25,6 @@ private:
 
     uint8_t _patternStep;
     uint8_t _toggle;
-    uint8_t _eventCount;
 
     Callback<ShiftingBaseMainDataPageMsg&> _createShiftingDataMsg;
 };
