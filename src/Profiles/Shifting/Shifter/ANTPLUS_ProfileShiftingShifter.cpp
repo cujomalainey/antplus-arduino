@@ -2,7 +2,7 @@
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 
-ProfileShiftingShifter::ProfileShiftingShifter(	uint16_t deviceNumber, uint8_t transmissionType) :
+ProfileShiftingShifter::ProfileShiftingShifter( uint16_t deviceNumber, uint8_t transmissionType) :
     BaseMasterProfile(deviceNumber, transmissionType),
     _patternStep( 0 ),
     _toggle(0)
@@ -38,11 +38,11 @@ void ProfileShiftingShifter::transmitNextDataPage() {
     }
     else {
         // TODO manufacturer and product handling
-        ShiftingBaseGenericMsg msg;
+        ShiftingBaseMainDataPageMsg msg;
         if (_toggle++ % 2 == 0)
-            msg.copyData((uint8_t*)manufacturer, MESSAGE_SIZE);
+            msg.setDataBuffer((uint8_t*)manufacturer );
         else
-            msg.copyData((uint8_t*)product, MESSAGE_SIZE);
+            msg.setDataBuffer((uint8_t*)product);
         // TODO battery status
         send(msg);
         _patternStep = 0;
@@ -52,6 +52,7 @@ void ProfileShiftingShifter::transmitNextDataPage() {
 void ProfileShiftingShifter::transmitShiftingMainPageMsg() {
     ShiftingBaseMainDataPageMsg msg;
     _createShiftingDataMsg.call(msg);
+    msg.setDataBuffer(msg.getBuffer());
     send(msg);
 }
 

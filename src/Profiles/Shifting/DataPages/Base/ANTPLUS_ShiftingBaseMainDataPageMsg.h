@@ -6,17 +6,7 @@
 
 #include "ANT.h"
 
-class ShiftingBaseGenericMsg : public BaseDataPageMsg<BroadcastDataMsg> {
-public:
-    ShiftingBaseGenericMsg();
-
-    void copyData(uint8_t * buf, size_t len) { memcpy(_buffer, buf, len); }
-
-protected:
-    uint8_t _buffer[MESSAGE_SIZE];
-};
-
-class ShiftingBaseMainDataPageMsg : public ShiftingBaseGenericMsg {
+class ShiftingBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg> {
 public:
     ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber = ANTPLUS_SHIFTING_DATAPAGE_SHIFTSYSTEMSTATUS_NUMBER);
 
@@ -25,6 +15,11 @@ public:
     void setTotalNumbersGearFront( uint8_t tgr );
     void setTotalNumbersGearRear( uint8_t tgr );
     void setEventCount(uint8_t n);
+
+    uint8_t * getBuffer() { return _buffer; }
+
+protected:
+    uint8_t _buffer[MESSAGE_SIZE];
 };
 
 #endif // ANTPLUS_SHIFTINGBASEMAINDATAPAGEMSG_h
