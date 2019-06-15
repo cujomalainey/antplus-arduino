@@ -3,14 +3,10 @@
 #include <ANTPLUS_PrivateDefines.h>
 
 
-MuscleOxygenBaseGenericMsg::MuscleOxygenBaseGenericMsg() : BaseDataPageMsg<BroadcastDataMsg>()
+MuscleOxygenBaseMainDataPageMsg::MuscleOxygenBaseMainDataPageMsg(uint8_t dataPageNumber) : BaseDataPageMsg<BroadcastDataMsg>()
 {
     memset(_buffer, 0, MESSAGE_SIZE);
     setDataBuffer(_buffer);
-}
-
-MuscleOxygenBaseMainDataPageMsg::MuscleOxygenBaseMainDataPageMsg(uint8_t dataPageNumber) : MuscleOxygenBaseGenericMsg()
-{
     _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = dataPageNumber;
     setCapabilities();
     setNotifications();

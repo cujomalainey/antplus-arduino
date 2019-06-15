@@ -12,7 +12,7 @@
 #include "ANTPLUS.h"
 
 #define BAUD_RATE 9600
-#define CHANNEL_1 0
+#define CHANNEL_0 0
 
 const uint8_t NETWORK_KEY[] = { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77 };
 
@@ -29,7 +29,7 @@ void setup() {
 
     router.setDriver(&ant); // never touch ant again
     router.setAntPlusNetworkKey(NETWORK_KEY);
-    router.setProfile(CHANNEL_1, &moxy);
+    router.setProfile(CHANNEL_0, &moxy);
     // Delay after initial setup to wait for user to connect on serial
 
     Serial.begin(BAUD_RATE);
@@ -47,12 +47,14 @@ void loop() {
 void moxyCreateMsgHandler(MuscleOxygenBaseMainDataPageMsg& msg, uintptr_t data)
 {
     const int lo = 500, hi = 2500;
-    static uint16_t c = lo;
+    static uint16_t _c = lo;
+    static uint8_t _eventCount = 0;
 
-    // fake data 
-    msg.setTotalHemoglobinConcentration(c);
-    msg.setCurrentSaturatedHemoglobinPercentage(c++/4);
+    // demo data 
+    msg.setTotalHemoglobinConcentration(_c);
+    msg.setCurrentSaturatedHemoglobinPercentage(_c++/4);
+    msg.setEventCount(_eventCount++);
 
-    if (c > hi)
-        c = lo;
+    if (_c > hi)
+        _c = lo;
 }
