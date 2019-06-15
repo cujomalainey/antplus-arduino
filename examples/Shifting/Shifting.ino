@@ -53,6 +53,5 @@ void shiftCreateMsgHandler(ShiftingBaseMainDataPageMsg& msg, uintptr_t data)
 
     msg.setCurrentGearFront( 1 );
     msg.setCurrentGearRear( _gear++ % 10 );
-    msg.setEventCount(_eventCount);
+    msg.setEventCount(_eventCount++);
 }
-
