@@ -2,16 +2,11 @@
 #include <Profiles/Shifting/ANTPLUS_ShiftingPrivateDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
-ShiftingBaseGenericMsg::ShiftingBaseGenericMsg() : BaseDataPageMsg<BroadcastDataMsg>()
+ShiftingBaseMainDataPageMsg::ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber) : BaseDataPageMsg<BroadcastDataMsg>()
 {
     memset(_buffer, 0, MESSAGE_SIZE);
-    _buffer[2] = 0xFF;
-    setDataBuffer(_buffer);
-}
-
-ShiftingBaseMainDataPageMsg::ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber) : ShiftingBaseGenericMsg()
-{
     _buffer[ANTPLUS_SHIFTING_DATAPAGEBASE_DATAPAGE_BYTE] = dataPageNumber;
+    _buffer[2] = 0xFF;
 
     setTotalNumbersGearFront(1);
     setTotalNumbersGearRear(10);
@@ -45,4 +40,3 @@ void ShiftingBaseMainDataPageMsg::setTotalNumbersGearFront( uint8_t tgf )
     _buffer[4] &= ~0xE0;
     _buffer[4] |= tgf << 5;
 }
-
