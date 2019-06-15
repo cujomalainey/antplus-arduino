@@ -17,7 +17,7 @@ public:
 
 protected:
     virtual void transmitNextDataPage();
-    virtual bool isDataPageValid(uint8_t dataPage) { return true; }
+    virtual bool isDataPageValid(uint8_t dataPage);
 
 private:
     void setChannelConfig();
