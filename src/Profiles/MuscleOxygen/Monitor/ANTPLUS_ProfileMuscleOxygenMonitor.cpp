@@ -17,6 +17,15 @@ void ProfileMuscleOxygenMonitor::setChannelConfig() {
     setSearchTimeout(ANTPLUS_MUSCLEOXYGEN_SEARCHTIMEOUT);
 }
 
+bool ProfileMuscleOxygenMonitor::isDataPageValid(uint8_t dataPage) {
+    switch (dataPage) {
+    case ANTPLUS_MUSCLEOXYGEN_DATAPAGE_MUSCLEOXYGENDATA_NUMBER:
+        return true;
+    // TODO other datapages
+    }
+    return false;
+}
+
 void ProfileMuscleOxygenMonitor::transmitNextDataPage() {
     // some static aux messages
     const uint8_t manufacturer[]  = { 0x50, 0xFF, 0xFF, 0x01, 0x0F, 0x00, 0x85, 0x83 };
