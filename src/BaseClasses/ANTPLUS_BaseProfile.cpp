@@ -47,11 +47,11 @@ void BaseProfile::setChannelPeriod(uint16_t channelPeriod) {
 }
 
 void BaseProfile::pushChannelConfig() {
-    AssignChannel ac = AssignChannel(_channel, _channelType, ANTPLUS_NETWORKKEY_INDEX);
-    ChannelId ci = ChannelId(_channel, _deviceNumber, _deviceType, ANTPLUS_PAIRING_BIT_MASK & _deviceType, _transmissionType);
-    ChannelPeriod cp = ChannelPeriod(_channel, _channelPeriod);
-    ChannelRfFrequency crf = ChannelRfFrequency(_channel, ANTPLUS_CHANNEL_FREQUENCY);
-    SearchTimeout st = SearchTimeout(_channel, _searchTimeout);
+    AssignChannel ac(_channel, _channelType, ANTPLUS_NETWORKKEY_INDEX);
+    ChannelId ci(_channel, _deviceNumber, _deviceType, ANTPLUS_PAIRING_BIT_MASK & _deviceType, _transmissionType);
+    ChannelPeriod cp(_channel, _channelPeriod);
+    ChannelRfFrequency crf(_channel, ANTPLUS_CHANNEL_FREQUENCY);
+    SearchTimeout st(_channel, _searchTimeout);
 
     _router->send(ac);
     _router->send(ci);
@@ -61,13 +61,13 @@ void BaseProfile::pushChannelConfig() {
 }
 
 void BaseProfile::openChannel() {
-    OpenChannel oc = OpenChannel(_channel);
+    OpenChannel oc(_channel);
     _channelStatus = CHANNEL_STATUS_SEARCHING;
     _router->send(oc);
 }
 
 void BaseProfile::closeChannel() {
-    CloseChannel cc = CloseChannel(_channel);
+    CloseChannel cc(_channel);
     _channelStatus = CHANNEL_STATUS_ASSIGNED;
     _router->send(cc);
 }
@@ -75,6 +75,7 @@ void BaseProfile::closeChannel() {
 void BaseProfile::onChannelEventResponse(ChannelEventResponse& msg) {
     uint8_t event = msg.getCode();
 
+    // TODO this looks weird to me
     switch (event) {
     case STATUS_EVENT_CHANNEL_CLOSED:
     case STATUS_EVENT_RX_FAIL_GO_TO_SEARCH:
@@ -117,13 +118,23 @@ void BaseProfile::onChannelStatus(ChannelStatus& msg) {
 
 void BaseProfile::checkProfileStatus() {
     if (!getDeviceNumber() || !getTransmissionType()) {
-        RequestMessage rm = RequestMessage(CHANNEL_ID, _channel);
+        RequestMessage rm(CHANNEL_ID, _channel);
         send(rm);
     }
     if (_channelStatus == CHANNEL_STATUS_SEARCHING) {
-        RequestMessage rm = RequestMessage(CHANNEL_STATUS, _channel);
+        RequestMessage rm(CHANNEL_STATUS, _channel);
         send(rm);
     }
+}
+
+void BaseProfile::send(AcknowledgedDataMsg& msg) {
+    msg.setChannelNumber(_channel);
+    _router->send(msg);
+}
+
+void BaseProfile::send(BroadcastDataMsg& msg) {
+    msg.setChannel(_channel);
+    _router->send(msg);
 }
 
 void BaseProfile::send(AntRequest& msg) {

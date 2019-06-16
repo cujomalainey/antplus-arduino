@@ -18,10 +18,15 @@ ProfileHeartRateDisplay::ProfileHeartRateDisplay(uint16_t deviceNumber, uint8_t 
 
 void ProfileHeartRateDisplay::onBroadcastData(BroadcastData& msg) {
     HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
+    BaseSlaveProfile::onBroadcastData(msg);
+    if (!handleDataPage(dp)) {
+        callOnOtherDataPage(msg);
+    }
+}
+
+bool ProfileHeartRateDisplay::handleDataPage(HeartRateBaseMainDataPage& dp) {
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
-
-    BaseProfile::onBroadcastData(msg);
 
     switch (dataPage) {
     case ANTPLUS_HEARTRATE_DATAPAGE_DEFAULT_NUMBER:
@@ -50,18 +55,20 @@ void ProfileHeartRateDisplay::onBroadcastData(BroadcastData& msg) {
         break;
     }
 
-    if (!called) {
+    return called;
+}
+
+void ProfileHeartRateDisplay::onAcknowledgedData(AcknowledgedData& msg) {
+    HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
+    BaseSlaveProfile::onAcknowledgedData(msg);
+    if (!handleDataPage(dp)) {
         callOnOtherDataPage(msg);
     }
 }
 
-void ProfileHeartRateDisplay::onAcknowledgedData(AcknowledgedData& msg) {
-    // TODO
-}
-
 
 void ProfileHeartRateDisplay::setChannelConfig() {
-    setChannelType(ANTPLUS_HEARTRATE_CHANNELTYPE);
+    setChannelType(ANTPLUS_HEARTRATE_DISPLAY_CHANNELTYPE);
     setDeviceType(ANTPLUS_HEARTRATE_DEVICETYPE);
     setChannelPeriod(ANTPLUS_HEARTRATE_CHANNELPERIOD);
     setSearchTimeout(ANTPLUS_HEARTRATE_SEARCHTIMEOUT);

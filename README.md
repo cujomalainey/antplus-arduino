@@ -66,7 +66,7 @@ See [ant-arduino](https://github.com/cujomalainey/ant-arduino#hardware)
 
 ## Support ANT+ Profiles
 
-This library aims to support all ANT+ devices. This goal will take time but its an attainable one. Check out the [wiki](https://github.com/cujomalainey/antplus-arduino/wiki/Profile-Support) for the list of profiles implemented and their versions.
+This library aims to support all ANT+ devices. This goal will take time but its an attainable one. Check out the [wiki](https://github.com/cujomalainey/antplus-arduino/wiki/Profile-Support) for the list of profiles implemented and their verions.
 
 ## Installation
 
@@ -76,7 +76,7 @@ Arduino 1.5 and later
 
 Arduino now includes a library manager for easier library installation. From the Sketch menu select include library->Manage Libraries, then type "antplus-arduino" in the filter and install.
 
-Prior to Arduino 1.5 installation is manual
+Prior to Arduino 1.5 installation is a manual
 
 Download a .zip or .tar.gz release from github. Determine the location of your sketchbook by selecting "preferences" on the Arduino menu. Create a "libraries" folder in your sketchbook and unzip the release file in that location.
 
