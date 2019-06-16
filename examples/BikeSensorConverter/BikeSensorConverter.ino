@@ -114,7 +114,7 @@ void setup() {
     shift.begin();
     delay(500);
 
-	// uint8_t status = lev.waitForPair(); // todo no busy wait here
+    // uint8_t status = lev.waitForPair(); // todo no busy wait here
 }
 
 void loop() {
@@ -138,7 +138,7 @@ void levBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
 
 void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_t data) {
     _levData.speed = msg.getSpeed();
-	_levData.supportLevel = decodeSupportLevel(msg.getTravelModeState());
+    _levData.supportLevel = decodeSupportLevel(msg.getTravelModeState());
     _levData.changedValueMask |= SPEED | SUPPORTLEVEL;
 
     Serial.print("Temperature state: ");
@@ -189,8 +189,8 @@ void levAltSpeedDistanceInformationHandler(LevAltSpeedDistanceInformation& msg, 
 
 void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_t data) {
     _levData.batterySOC = msg.getBatterySOC();
-	_levData.supportLevel = decodeSupportLevel(msg.getTravelModeState());
-	_levData.percentAssist = msg.getPercentAssist();
+    _levData.supportLevel = decodeSupportLevel(msg.getTravelModeState());
+    _levData.percentAssist = msg.getPercentAssist();
     _levData.speed = msg.getSpeed();
     _levData.changedValueMask |= BATTERYSOC | SUPPORTLEVEL| PERCENTASSIST| SPEED;
 
@@ -223,7 +223,7 @@ void levBatteryInfo(LevBatteryInfo& msg, uintptr_t data) {
 
 void levCapabilities(LevCapabilities& msg, uintptr_t data) {
     _levData.wheelCircumference = msg.getWheelCircumference(); // in mm
-	_levData.supportLevelCount = 4; // (msg.getTravelModesSupported() >> 3) & 0x07; // 4
+    _levData.supportLevelCount = 4; // (msg.getTravelModesSupported() >> 3) & 0x07; // 4
     _levData.changedValueMask |= WHEELCIRC | SUPPORTLEVELCNT;
 
     Serial.print("Travel modes supported: ");
@@ -269,7 +269,7 @@ void moxyCreateMsgHandler(MuscleOxygenBaseMainDataPageMsg& msg, uintptr_t data)
     msg.setCurrentSaturatedHemoglobinPercentage(_levData.batterySOC * 10 + _eventCnt % 2);                              // in 0.1 % (0 - 100)-- > 0 - 1000
     msg.setTotalHemoglobinConcentration(_levData.supportLevel * 100 + min(99, _levData.percentAssist)); // in 0.01g/dl (0-40) --> 0-4000
     msg.setEventCount(_eventCnt);
-	Serial.println("new moxy values--------------");
+    Serial.println("new moxy values--------------");
 }
 
 void shiftCreateMsgHandler(ShiftingBaseMainDataPageMsg& msg, uintptr_t data)
@@ -292,14 +292,14 @@ void shiftCreateMsgHandler(ShiftingBaseMainDataPageMsg& msg, uintptr_t data)
     msg.setCurrentGearFront(_levData.supportLevel-1);
     msg.setCurrentGearRear(10 - (_levData.percentAssist / 10));
     msg.setEventCount(_eventCnt);
-	Serial.println("new shifting values---------------");
+    Serial.println("new shifting values---------------");
 }
 
 
 uint8_t decodeSupportLevel(uint8_t inValue) {
-	const uint8_t slConv[] = {0,1,1,2,2,3,3,4,4}; // specialized: 0,1,3,5
-	uint8_t sl = slConv[((inValue >> 3) & 0x07)];
-	return sl;
+    const uint8_t slConv[] = {0,1,1,2,2,3,3,4,4}; // specialized: 0,1,3,5
+    uint8_t sl = slConv[((inValue >> 3) & 0x07)];
+    return sl;
 }
 
 void printStatus(uint8_t status) {
