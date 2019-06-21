@@ -21,6 +21,8 @@ AntPlusRouter router = AntPlusRouter();
 ProfileMuscleOxygenMonitor moxy = ProfileMuscleOxygenMonitor( 7369 );
 
 void moxyCreateMsgHandler(MuscleOxygenBaseMainDataPageMsg& msg, uintptr_t data);
+void moxyCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data);
+void moxyCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data);
 
 void setup() {
     Serial2.begin(BAUD_RATE);
@@ -37,6 +39,8 @@ void setup() {
 
     // setup muscle oxygen monitor
     moxy.createMuscleOxygenDataMsg(moxyCreateMsgHandler);
+    moxy.createMuscleOxygenManufacturerInformationMsg(moxyCreateManufacturerInformationMsg);
+    moxy.createMuscleOxygenProductInformationMsg(moxyCreateProductInformationMsg);
     moxy.begin();
 }
 
@@ -57,4 +61,16 @@ void moxyCreateMsgHandler(MuscleOxygenBaseMainDataPageMsg& msg, uintptr_t data)
 
     if (_c > hi)
         _c = lo;
+}
+
+void moxyCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data) {
+    msg.setHWRevision(0x01);
+    msg.setManufacturerId(0x1234);
+    msg.setModelNumber(0x0001);
+}
+
+void moxyCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data) {
+    msg.setSerialNumber(0x12345678);
+    msg.setSWRevisionMain(0x01);
+    msg.setSWRevisionSupplemental(0x00);
 }
