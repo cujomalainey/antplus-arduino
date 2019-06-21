@@ -14,10 +14,21 @@ public:
      * Register callback to populate default data messages (Datapage 0)
      */
     void createMuscleOxygenDataMsg(void(*func)(MuscleOxygenBaseMainDataPageMsg&, uintptr_t), uintptr_t data = 0) { _createMuscleOxygenDataMsg.set(func, data); }
+    /**
+     * Register callback to populate manufacturer information data messages (Datapage 2)
+     */
+    void createMuscleOxygenManufacturerInformationMsg(void(*func)(ManufacturersInformationMsg&, uintptr_t), uintptr_t data = 0) { _createMuscleOxygenManufacturerInformationMsg.set(func, data); }
+    /**
+     * Register callback to populate product information data messages (Datapage 3)
+     */
+    void createMuscleOxygenProductInformationMsg(void(*func)(ProductInformationMsg&, uintptr_t), uintptr_t data = 0) { _createMuscleOxygenProductInformationMsg.set(func, data); }
 
 protected:
     virtual void transmitNextDataPage();
     virtual bool isDataPageValid(uint8_t dataPage);
+
+    void transmitMuscleOxygenManufacturerInformationMsg();
+    void transmitMuscleOxygenProductInformationMsg();
 
 private:
     void setChannelConfig();
@@ -27,6 +38,8 @@ private:
     uint8_t _toggle;
 
     Callback<MuscleOxygenBaseMainDataPageMsg&> _createMuscleOxygenDataMsg;
+    Callback<ManufacturersInformationMsg&> _createMuscleOxygenManufacturerInformationMsg;
+    Callback<ProductInformationMsg&> _createMuscleOxygenProductInformationMsg;
 };
 
 #endif // ANTPLUS_PROFILEMUSCLEOXYGENMONITOR_h
