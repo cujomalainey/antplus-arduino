@@ -38,7 +38,7 @@ void ProfileShiftingShifter::transmitNextDataPage() {
         else {
             transmitShiftingProductInformationMsg();
         }
-        // TODO battery status and some more pages
+        // TODO battery status and some more pages: 78, 79, and 82 every 65 pages
         _patternStep = 0;
     }
 }

@@ -2,15 +2,12 @@
 #include <Profiles/Shifting/ANTPLUS_ShiftingPrivateDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
-ShiftingBaseMainDataPageMsg::ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber) : BaseDataPageMsg<BroadcastDataMsg>()
+ShiftingBaseMainDataPageMsg::ShiftingBaseMainDataPageMsg() : BaseDataPageMsg<BroadcastDataMsg>()
 {
     memset(_buffer, 0, MESSAGE_SIZE);
     setDataBuffer(_buffer);
-    _buffer[ANTPLUS_SHIFTING_DATAPAGEBASE_DATAPAGE_BYTE] = dataPageNumber;
+    _buffer[ANTPLUS_SHIFTING_DATAPAGEBASE_DATAPAGE_BYTE] = ANTPLUS_SHIFTING_DATAPAGE_SHIFTSYSTEMSTATUS_NUMBER;
     _buffer[2] = 0xFF;
-
-    setTotalNumbersGearFront(1);
-    setTotalNumbersGearRear(10);
 }
 
 void ShiftingBaseMainDataPageMsg::setEventCount( uint8_t n )
