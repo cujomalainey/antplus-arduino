@@ -43,8 +43,12 @@ void levBatteryInfo(LevBatteryInfo& msg, uintptr_t data);
 void levAntChannelEvent(ChannelEventResponse& msg, uintptr_t data);
 
 void moxyCreateMsgHandler(MuscleOxygenBaseMainDataPageMsg& msg, uintptr_t data);
+void moxyCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data);
+void moxyCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data);
 
 void shiftCreateMsgHandler(ShiftingBaseMainDataPageMsg& msg, uintptr_t data);
+void shiftCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data);
+void shiftCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data);
 
 void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data);
 void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data);
@@ -106,11 +110,15 @@ void setup() {
 
     // setup muscle oxygen monitor
     moxy.createMuscleOxygenDataMsg(moxyCreateMsgHandler);
+    moxy.createMuscleOxygenManufacturerInformationMsg(moxyCreateManufacturerInformationMsg);
+    moxy.createMuscleOxygenProductInformationMsg(moxyCreateProductInformationMsg);
     moxy.begin();
     delay(500);
 
     // setup shifting  oxygen monitor
-    shift.createShiftingDataMsg(shiftCreateMsgHandler);
+    shift.createShiftingSystemStatusMsg(shiftCreateMsgHandler);
+    shift.createShiftingManufacturerInformationMsg(shiftCreateManufacturerInformationMsg);
+    shift.createShiftingProductInformationMsg(shiftCreateProductInformationMsg);
     shift.begin();
     delay(500);
 
@@ -272,6 +280,18 @@ void moxyCreateMsgHandler(MuscleOxygenBaseMainDataPageMsg& msg, uintptr_t data)
     Serial.println("new moxy values--------------");
 }
 
+void moxyCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data) {
+    msg.setHWRevision(0x01);
+    msg.setManufacturerId(0x1234);
+    msg.setModelNumber(0x0001);
+}
+
+void moxyCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data) {
+    msg.setSerialNumber(0x12345678);
+    msg.setSWRevisionMain(0x01);
+    msg.setSWRevisionSupplemental(0x00);
+}
+
 void shiftCreateMsgHandler(ShiftingBaseMainDataPageMsg& msg, uintptr_t data)
 {
     static uint8_t _eventCnt = 0;
@@ -295,6 +315,17 @@ void shiftCreateMsgHandler(ShiftingBaseMainDataPageMsg& msg, uintptr_t data)
     Serial.println("new shifting values---------------");
 }
 
+void shiftCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data) {
+    msg.setHWRevision(0x01);
+    msg.setManufacturerId(0x1234);
+    msg.setModelNumber(0x0002);
+}
+
+void shiftCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data) {
+    msg.setSerialNumber(0x12345678);
+    msg.setSWRevisionMain(0x01);
+    msg.setSWRevisionSupplemental(0x00);
+}
 
 uint8_t decodeSupportLevel(uint8_t inValue) {
     const uint8_t slConv[] = {0,1,1,2,2,3,3,4,4}; // specialized: 0,1,3,5

@@ -28,30 +28,37 @@ bool ProfileShiftingShifter::isDataPageValid(uint8_t dataPage)
 }
 
 void ProfileShiftingShifter::transmitNextDataPage() {
-
-    // some static aux messages (TODO preliminary solution)
-    const uint8_t manufacturer[]  = { 0x50, 0xFF, 0xFF, 0x01, 0x0F, 0x00, 0x85, 0x83 };
-    const uint8_t product[]       = { 0x51, 0xFF, 0xFF, 0x01, 0x01, 0x00, 0x00, 0x00 };
-
     if (_patternStep++ < 64) {
         transmitShiftingMainPageMsg();
     }
     else {
-        // TODO manufacturer and product handling
-        ShiftingBaseMainDataPageMsg msg;
-        if (_toggle++ % 2 == 0)
-            memcpy( msg.getDataBuffer(), manufacturer, MESSAGE_SIZE );
-        else
-			memcpy(msg.getDataBuffer(), product, MESSAGE_SIZE);
-        // TODO battery status
-        send(msg);
+
+        if (_toggle++ % 2 == 0) {
+            transmitShiftingManufacturerInformationMsg();
+        }
+        else {
+            transmitShiftingProductInformationMsg();
+        }
+        // TODO battery status and some more pages
         _patternStep = 0;
     }
 }
 
+void ProfileShiftingShifter::transmitShiftingManufacturerInformationMsg() {
+    ManufacturersInformationMsg msg;
+    _createShiftingManufacturerInformationMsg.call(msg);
+    send(msg);
+}
+
+void ProfileShiftingShifter::transmitShiftingProductInformationMsg() {
+    ProductInformationMsg msg;
+    _createShiftingProductInformationMsg.call(msg);
+   send(msg);
+}
+
 void ProfileShiftingShifter::transmitShiftingMainPageMsg() {
     ShiftingBaseMainDataPageMsg msg;
-    _createShiftingDataMsg.call(msg);
+    _createShiftingSystemStatusMsg.call(msg);
     send(msg);
 }
 

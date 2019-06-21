@@ -31,22 +31,26 @@ void ProfileMuscleOxygenMonitor::transmitNextDataPage() {
         transmitMuscleOxygenMainPageMsg();
     }
     else {
-        MuscleOxygenBaseMainDataPageMsg msg;
         if (_toggle++ % 2 == 0) {
-            ProductInformationMsg msg;
-            msg.setSerialNumber(0x12345678);
-            msg.setSWRevisionMain(1);
-            msg.setSWRevisionSupplemental(1);
+            transmitMuscleOxygenManufacturerInformationMsg();
         }
         else {
-            ManufacturersInformationMsg msg;
-            msg.setHWRevision(1);
-            msg.setManufacturerId(0x1234);
-            msg.setModelNumber(0x5678);
+            transmitMuscleOxygenProductInformationMsg();
         }
-        send(msg);
         _patternStep = 0;
     }
+}
+
+void ProfileMuscleOxygenMonitor::transmitMuscleOxygenManufacturerInformationMsg() {
+    ManufacturersInformationMsg msg;
+    _createMuscleOxygenManufacturerInformationMsg.call(msg);
+    send(msg);
+}
+
+void ProfileMuscleOxygenMonitor::transmitMuscleOxygenProductInformationMsg() {
+    ProductInformationMsg msg;
+    _createMuscleOxygenProductInformationMsg.call(msg);
+    send(msg);
 }
 
 void ProfileMuscleOxygenMonitor::transmitMuscleOxygenMainPageMsg() {
