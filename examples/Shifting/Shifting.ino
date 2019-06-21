@@ -21,6 +21,8 @@ AntPlusRouter router = AntPlusRouter();
 ProfileShiftingShifter shift = ProfileShiftingShifter( 7370 );
 
 void shiftCreateMsgHandler(ShiftingBaseMainDataPageMsg& msg, uintptr_t data);
+void shiftCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data);
+void shiftCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data);
 
 void setup() {
     Serial2.begin(BAUD_RATE);
@@ -35,7 +37,9 @@ void setup() {
     Serial.println("Running");
 
     // setup shifting monitor
-    shift.createShiftingDataMsg(shiftCreateMsgHandler);
+    shift.createShiftingSystemStatusMsg(shiftCreateMsgHandler);
+    shift.createShiftingManufacturerInformationMsg(shiftCreateManufacturerInformationMsg);
+    shift.createShiftingProductInformationMsg(shiftCreateProductInformationMsg);
     shift.begin();
     delay(100); // wait for module initialization
 }
@@ -54,4 +58,16 @@ void shiftCreateMsgHandler(ShiftingBaseMainDataPageMsg& msg, uintptr_t data)
     msg.setCurrentGearFront( 1 );
     msg.setCurrentGearRear( _gear++ % 10 );
     msg.setEventCount(_eventCount++);
+}
+
+void shiftCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data) {
+    msg.setHWRevision(0x01);
+    msg.setManufacturerId(0x1234);
+    msg.setModelNumber(0x0002);
+}
+
+void shiftCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data) {
+    msg.setSerialNumber(0x12345678);
+    msg.setSWRevisionMain(0x01);
+    msg.setSWRevisionSupplemental(0x00);
 }
