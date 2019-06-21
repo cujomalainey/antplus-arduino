@@ -37,14 +37,14 @@ void ProfileShiftingShifter::transmitNextDataPage() {
         transmitShiftingMainPageMsg();
     }
     else {
-        // TODO manufacturer and product handling
-        ShiftingBaseMainDataPageMsg msg;
-        if (_toggle++ % 2 == 0)
-            msg.setDataBuffer((uint8_t*)manufacturer );
-        else
-            msg.setDataBuffer((uint8_t*)product);
-        // TODO battery status
-        send(msg);
+
+        if (_toggle++ % 2 == 0) {
+            transmitShiftingManufacturerInformationMsg();
+        }
+        else {
+            transmitShiftingProductInformationMsg();
+        }
+        // TODO battery status and some more pages: 78, 79, and 82 every 65 pages
         _patternStep = 0;
     }
 }
