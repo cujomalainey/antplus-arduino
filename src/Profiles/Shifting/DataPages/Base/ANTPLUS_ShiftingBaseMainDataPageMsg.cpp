@@ -5,6 +5,7 @@
 ShiftingBaseMainDataPageMsg::ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber) : BaseDataPageMsg<BroadcastDataMsg>()
 {
     memset(_buffer, 0, MESSAGE_SIZE);
+    setDataBuffer(_buffer);
     _buffer[ANTPLUS_SHIFTING_DATAPAGEBASE_DATAPAGE_BYTE] = dataPageNumber;
     _buffer[2] = 0xFF;
 

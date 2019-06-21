@@ -8,3 +8,4 @@ src/main.cpp
 .DS_Store
 .tags*
 tags
+examples/BikeSensorConverter/arduino_secrets.h
