@@ -15,7 +15,6 @@ public:
     void setNotifications(uint8_t n = 0x00);
     void setCapabilities(uint8_t c = 0x06);
     void setEventCount(uint8_t n);
-    uint8_t * getBuffer() { return _buffer; }
 
 protected:
     uint8_t _buffer[MESSAGE_SIZE];
