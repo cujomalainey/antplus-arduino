@@ -8,15 +8,14 @@
 
 class ShiftingBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg> {
 public:
-    ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber = ANTPLUS_SHIFTING_DATAPAGE_SHIFTSYSTEMSTATUS_NUMBER);
+    ShiftingBaseMainDataPageMsg();
 
     void setCurrentGearFront( uint8_t cgf );
     void setCurrentGearRear( uint8_t cgr );
     void setTotalNumbersGearFront( uint8_t tgr );
     void setTotalNumbersGearRear( uint8_t tgr );
     void setEventCount(uint8_t n);
-
-    uint8_t * getBuffer() { return _buffer; }
+    // TODO there are some more parameters...
 
 protected:
     uint8_t _buffer[MESSAGE_SIZE];
