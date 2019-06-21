@@ -27,19 +27,23 @@ bool ProfileMuscleOxygenMonitor::isDataPageValid(uint8_t dataPage) {
 }
 
 void ProfileMuscleOxygenMonitor::transmitNextDataPage() {
-    // some static aux messages
-    const uint8_t manufacturer[]  = { 0x50, 0xFF, 0xFF, 0x01, 0x0F, 0x00, 0x85, 0x83 };
-    const uint8_t product[]       = { 0x51, 0xFF, 0xFF, 0x01, 0x01, 0x00, 0x00, 0x00 };
-
     if (_patternStep++ < 64) {
         transmitMuscleOxygenMainPageMsg();
     }
     else {
         MuscleOxygenBaseMainDataPageMsg msg;
-        if (_toggle++ % 2 == 0)
-            msg.setDataBuffer((uint8_t*)manufacturer);
-        else
-            msg.setDataBuffer((uint8_t*)product);
+        if (_toggle++ % 2 == 0) {
+            ProductInformationMsg msg;
+            msg.setSerialNumber(0x12345678);
+            msg.setSWRevisionMain(1);
+            msg.setSWRevisionSupplemental(1);
+        }
+        else {
+            ManufacturersInformationMsg msg;
+            msg.setHWRevision(1);
+            msg.setManufacturerId(0x1234);
+            msg.setModelNumber(0x5678);
+        }
         send(msg);
         _patternStep = 0;
     }
@@ -51,4 +55,3 @@ void ProfileMuscleOxygenMonitor::transmitMuscleOxygenMainPageMsg() {
     msg.setDataBuffer(msg.getBuffer());
     send(msg);
 }
-
