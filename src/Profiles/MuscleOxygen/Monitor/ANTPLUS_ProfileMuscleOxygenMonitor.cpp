@@ -56,6 +56,5 @@ void ProfileMuscleOxygenMonitor::transmitMuscleOxygenProductInformationMsg() {
 void ProfileMuscleOxygenMonitor::transmitMuscleOxygenMainPageMsg() {
     MuscleOxygenBaseMainDataPageMsg msg;
     _createMuscleOxygenDataMsg.call(msg);
-    msg.setDataBuffer(msg.getBuffer());
     send(msg);
 }
