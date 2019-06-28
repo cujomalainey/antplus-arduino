@@ -26,6 +26,8 @@ private:
     void onBroadcastData(BroadcastData& msg);
     void onAcknowledgedData(AcknowledgedData& msg);
 
+    bool handleDataPage(HeartRateBaseMainDataPage& dp);
+
     bool handleBatteryStatus(HeartRateBaseMainDataPage& dataPage);
     bool handleCapabilities(HeartRateBaseMainDataPage& dataPage);
     bool handleCumulativeOperatingTime(HeartRateBaseMainDataPage& dataPage);
