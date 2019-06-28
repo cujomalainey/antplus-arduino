@@ -13,10 +13,6 @@ BaseSlaveProfile::BaseSlaveProfile(uint16_t deviceNumber, uint8_t transmissionTy
 
 }
 
-void BaseSlaveProfile::searchForDevices(uint16_t* buffer) {
-    // TODO
-}
-
 uint8_t BaseSlaveProfile::waitForPair() {
     // TODO add a timeout in the event packed was dropped?
     while (getChannelStatus() == CHANNEL_STATUS_SEARCHING) {
