@@ -1,5 +1,6 @@
 #include <Profiles/HeartRate/Display/ANTPLUS_ProfileHeartRateDisplay.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
 #include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
@@ -17,10 +18,15 @@ ProfileHeartRateDisplay::ProfileHeartRateDisplay(uint16_t deviceNumber, uint8_t 
 
 void ProfileHeartRateDisplay::onBroadcastData(BroadcastData& msg) {
     HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
+    BaseSlaveProfile::onBroadcastData(msg);
+    if (!handleDataPage(dp)) {
+        callOnOtherDataPage(msg);
+    }
+}
+
+bool ProfileHeartRateDisplay::handleDataPage(HeartRateBaseMainDataPage& dp) {
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
-
-    BaseProfile::onBroadcastData(msg);
 
     switch (dataPage) {
     case ANTPLUS_HEARTRATE_DATAPAGE_DEFAULT_NUMBER:
@@ -49,13 +55,15 @@ void ProfileHeartRateDisplay::onBroadcastData(BroadcastData& msg) {
         break;
     }
 
-    if (!called) {
-        callOnOtherDataPage(msg);
-    }
+    return called;
 }
 
 void ProfileHeartRateDisplay::onAcknowledgedData(AcknowledgedData& msg) {
-    // TODO
+    HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
+    BaseSlaveProfile::onAcknowledgedData(msg);
+    if (!handleDataPage(dp)) {
+        callOnOtherDataPage(msg);
+    }
 }
 
 

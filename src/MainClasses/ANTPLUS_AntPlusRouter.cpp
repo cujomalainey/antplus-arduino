@@ -17,8 +17,8 @@ AntPlusRouter::AntPlusRouter(BaseAntWithCallbacks* driver, const uint8_t* key) {
 
 uint8_t AntPlusRouter::setDriver(BaseAntWithCallbacks* driver) {
     // Synchronous locking nature needed to gurantee all configs were recieved
-    RequestMessage rm = RequestMessage();
-    Capabilities cap = Capabilities();
+    RequestMessage rm;
+    Capabilities cap;
     _ant = driver;
     // register callbacks
     _ant->onPacketError(onPacketErrorCallback, (uintptr_t)this);
@@ -45,6 +45,8 @@ uint8_t AntPlusRouter::setDriver(BaseAntWithCallbacks* driver) {
     if (_ant->waitFor(cap, ANTPLUS_DRIVER_REQUEST_TIMEOUT)) {
         return ANTPLUS_MAX_CHANNEL_CHECK_FAILED;
     }
+    _ant->getResponse().getCapabilitiesMsg(cap);
+    onCapabilities(cap);
     return 0;
 }
 
@@ -62,18 +64,61 @@ void AntPlusRouter::setAntPlusNetworkKey(const uint8_t* key) {
 
 void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
     // restrict user to maximum number of channels
-    // channel = min(channel, _maxChannels - 1); TODO, wait till we set this
+    if (channel >= ANTPLUS_MAX_CHANNELS_POSSIBLE)
+        return;
     // TODO close channel to make sure it hasn't been randomly replaced
+    profile->setChannelNumber(channel);
     _profiles[channel] = profile;
     profile->setRouter(this);
 }
 
+void AntPlusRouter::removeProfile(BaseProfile *profile) {
+    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
+        if (_profiles[i] == profile) {
+            removeProfileByChannel(i);
+        }
+    }
+}
+
+void AntPlusRouter::removeProfileByChannel(uint8_t channel) {
+    if (channel >= ANTPLUS_MAX_CHANNELS_POSSIBLE) {
+        return;
+    }
+    if (_profiles[channel]) {
+        _profiles[channel]->stop();
+        _profiles[channel]->setChannelNumber(0);
+        _profiles[channel]->setRouter(NULL);
+        _profiles[channel] = NULL;
+        UnAssignChannel uc;
+        uc.setChannel(channel);
+        send(uc);
+    }
+}
+
+void AntPlusRouter::removeAllProfiles() {
+    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
+        removeProfileByChannel(i);
+    }
+}
+
 void AntPlusRouter::send(AntRequest& msg) {
-    _ant->send(msg);
+    if (_ant) {
+        _ant->send(msg);
+    }
 }
 
 uint8_t AntPlusRouter::getMaxChannels() {
     return _maxChannels;
+}
+
+uint8_t AntPlusRouter::addProfileToNextChannel(BaseProfile* profile) {
+    for (uint8_t i = 0; i < _maxChannels; i++) {
+        if (!_profiles[i]) {
+            setProfile(i, profile);
+            return i;
+        }
+    }
+    return ANTPLUS_NO_MORE_CHANNELS;
 }
 
 void AntPlusRouter::loop() {
@@ -81,12 +126,18 @@ void AntPlusRouter::loop() {
 }
 
 void AntPlusRouter::reset() {
+    resetRadio(ANTPLUS_RESET_WAIT_FOR_STARTUP);
     _ant = NULL;
     _networkKey = NULL;
-    // TODO
-    // disconnect profiles
-    // Reset max channels
-    // reset system state
+    _maxChannels = 0;
+    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
+        if (_profiles[i]) {
+            // profile stopped in resetRadio
+            _profiles[i]->setChannelNumber(0);
+            _profiles[i]->setRouter(NULL);
+            _profiles[i] = NULL;
+        }
+    }
 }
 
 uint8_t AntPlusRouter::resetRadio(uint8_t waitForStartup) {
@@ -96,6 +147,10 @@ uint8_t AntPlusRouter::resetRadio(uint8_t waitForStartup) {
             _profiles[i]->stop();
         }
     }
+    // purge buffer of any left over messages
+    do {
+        _ant->readPacket();
+    } while (_ant->getResponse().isAvailable());
     send(rs);
     _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
     if (waitForStartup == ANTPLUS_RESET_WAIT_FOR_STARTUP) {
@@ -154,7 +209,7 @@ void AntPlusRouter::onCapabilities(Capabilities& msg) {
 }
 
 void AntPlusRouter::onChannelEventResponse(ChannelEventResponse& msg) {
-    if (msg.getMsgId() == ANTPLUS_CHANNELEVENT_MESSAGECODE) {
+    if (msg.getResponseMsgId() == ANTPLUS_CHANNELEVENT_MESSAGECODE) {
         uint8_t channel = msg.getChannelNumber();
         if (_profiles[channel]) {
             _profiles[channel]->onChannelEventResponse(msg);

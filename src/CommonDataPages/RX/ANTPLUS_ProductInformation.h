@@ -15,4 +15,4 @@ public:
     uint32_t getSerialNumber();
 };
 
-#endif // AANTPLUS_PRODUCTINFORMATION_h
+#endif // ANTPLUS_PRODUCTINFORMATION_h

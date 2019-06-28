@@ -12,9 +12,9 @@ public:
     void begin();
     void stop();
 protected:
-    void transmitNextDataPage();
     void onAcknowledgedData(AcknowledgedData& msg);
     void onBroadcastData(BroadcastData& msg);
+    void transmitNextDataPage();
 private:
     bool handleCapabilities(HeartRateBaseMainDataPage& dataPage);
     bool handleRequestDataPage(HeartRateBaseMainDataPage& dataPage);
