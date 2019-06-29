@@ -218,22 +218,22 @@ void printStatus(uint8_t status) {
 void printTemperatureState(uint8_t temperatureState) {
     switch (temperatureState) {
     case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_UNKNOWN:
-        Serial.prinln("Unknown");
+        Serial.println("Unknown");
         break;
     case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_COLD:
-        Serial.prinln("Cold");
+        Serial.println("Cold");
         break;
     case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_COLDWARM:
-        Serial.prinln("Cold/Warm");
+        Serial.println("Cold/Warm");
         break;
     case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_WARM:
-        Serial.prinln("Warm");
+        Serial.println("Warm");
         break;
     case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_WARMHOT:
-        Serial.prinln("Warm/Hot");
+        Serial.println("Warm/Hot");
         break;
     case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_HOT:
-        Serial.prinln("Hot");
+        Serial.println("Hot");
         break;
     }
 }
