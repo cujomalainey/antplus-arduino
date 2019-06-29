@@ -256,31 +256,31 @@ void printTravelModeLevel(uint8_t level) {
 }
 
 void printSystemState(uint8_t state) {
-    Serial.print("  Right Turn Signal: ")
+    Serial.print("  Right Turn Signal: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_TURNSIGNALRIGHT) {
         Serial.println("Blinking");
     } else {
         Serial.println("Off/Unsupported");
     }
-    Serial.print("  Left Turn Signal: ")
+    Serial.print("  Left Turn Signal: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_TURNSIGNALLEFT) {
         Serial.println("Blinking");
     } else {
         Serial.println("Off/Unsupported");
     }
-    Serial.print("  Light Beam: ")
+    Serial.print("  Light Beam: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_LIGHTBEAM) {
         Serial.println("High Beam");
     } else {
         Serial.println("Low Beam/Unsupported");
     }
-    Serial.print("  Light On/Off: ")
+    Serial.print("  Light On/Off: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_LIGHTONOFF) {
         Serial.println("On");
     } else {
         Serial.println("Off/Unsupported");
     }
-    Serial.print("  Manual Throttle: ")
+    Serial.print("  Manual Throttle: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_MANUALTHROTTLE) {
         Serial.println("On");
     } else {
