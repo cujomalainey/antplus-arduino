@@ -1,7 +1,7 @@
 /**********************************************
  * AntPlus LEV Display example
  *
- * Finds a nearby LEV Sensor, pairs
+ * Finds a nearby LEV Device, pairs
  * to it and then reads the information
  * out via the serial port.
  *
@@ -91,8 +91,14 @@ void levBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
 }
 
 void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_t data) {
-    Serial.print("Temperature state: ");
-    Serial.println(msg.getTemperatureState());      // TODO enums for temperature state
+    Serial.print("Battery Temperature State: ");
+    printTemperatureState(msg.getBatteryTemperatureState());
+    Serial.print("Battery Temperature Alert: ");
+    printTemperatureAlert(msg.getBatteryTemperatureAlert());
+    Serial.print("Motor Temperature State: ");
+    printTemperatureState(msg.getMotorTemperatureState());
+    Serial.print("Motor Temperature Alert: ");
+    printTemperatureAlert(msg.getMotorTemperatureAlert());
     Serial.print("Travel mode state: ");
     Serial.println(msg.getTravelModeState());       // TODO decode travel mode state
     Serial.print("System state: ");
@@ -204,3 +210,33 @@ void printStatus(uint8_t status) {
     }
 }
 
+void printTemperatureState(uint8_t temperatureState) {
+    switch (temperatureState) {
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_UNKNOWN:
+        Serial.prinln("Unknown");
+        break;
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_COLD:
+        Serial.prinln("Cold");
+        break;
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_COLDWARM:
+        Serial.prinln("Cold/Warm");
+        break;
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_WARM:
+        Serial.prinln("Warm");
+        break;
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_WARMHOT:
+        Serial.prinln("Warm/Hot");
+        break;
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_HOT:
+        Serial.prinln("Hot");
+        break;
+    }
+}
+
+void printTemperatureAlert(uint8_t alertState) {
+    if (alertState == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_ALERT_NOALERT) {
+        Serial.println("No Alert");
+    } else if (alertState == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_ALERT_OVERHEATALERT) {
+        Serial.println("Overheat Alert!");
+    }
+}

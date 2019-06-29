@@ -6,7 +6,10 @@
 class LevSpeedSystemInformation1 : public LevBaseMainDataPage {
 public:
     LevSpeedSystemInformation1(AntRxDataResponse& dp);
-    uint8_t getTemperatureState();
+    uint8_t getBatteryTemperatureState();
+    uint8_t getBatteryTemperatureAlert();
+    uint8_t getMotorTemperatureState();
+    uint8_t getMotorTemperatureAlert();
     uint8_t getTravelModeState();
     uint8_t getSystemState();
     uint8_t getGearState();
