@@ -1,5 +1,6 @@
 #include <Profiles/Lev/Display/ANTPLUS_ProfileLevDisplay.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
+#include <Profiles/Lev/ANTPLUS_LevDefines.h>
 #include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
