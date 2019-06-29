@@ -37,7 +37,7 @@ uint8_t LevSpeedSystemInformation1::getCurrentAssistLevel()
 
 uint8_t LevSpeedSystemInformation1::getSystemState()
 {
-    return getData(3);
+    return getData(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_BYTE);
 }
 
 uint8_t LevSpeedSystemInformation1::getGearState()
