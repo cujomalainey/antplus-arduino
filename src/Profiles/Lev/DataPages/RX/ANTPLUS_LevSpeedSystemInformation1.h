@@ -10,7 +10,8 @@ public:
     uint8_t getBatteryTemperatureAlert();
     uint8_t getMotorTemperatureState();
     uint8_t getMotorTemperatureAlert();
-    uint8_t getTravelModeState();
+    uint8_t getCurrentRegenerativeLevel();
+    uint8_t getCurrentAssistLevel();
     uint8_t getSystemState();
     uint8_t getGearState();
     uint8_t getErrorMessage();

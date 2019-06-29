@@ -33,6 +33,9 @@ void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uint
 void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data);
 
 void printStatus(uint8_t status);
+void printTemperatureState(uint8_t temperatureState);
+void printTemperatureAlert(uint8_t alertState);
+void printTravelModeLevel(uint8_t level);
 
 void setup() {
     Serial2.begin(BAUD_RATE);
@@ -99,8 +102,10 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
     printTemperatureState(msg.getMotorTemperatureState());
     Serial.print("Motor Temperature Alert: ");
     printTemperatureAlert(msg.getMotorTemperatureAlert());
-    Serial.print("Travel mode state: ");
-    Serial.println(msg.getTravelModeState());       // TODO decode travel mode state
+    Serial.print("Current Regenerative Level: ");
+    printTravelModeLevel(msg.getCurrentRegenerativeLevel());
+    Serial.print("Current Assist Level: ");
+    printTravelModeLevel(msg.getCurrentAssistLevel());
     Serial.print("System state: ");
     Serial.println(msg.getSystemState());           // TODO enums for system state
     Serial.print("Gear state: ");
@@ -238,5 +243,13 @@ void printTemperatureAlert(uint8_t alertState) {
         Serial.println("No Alert");
     } else if (alertState == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_ALERT_OVERHEATALERT) {
         Serial.println("Overheat Alert!");
+    }
+}
+
+void printTravelModeLevel(uint8_t level) {
+    if(level == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TRAVELMODESTATE_OFF) {
+        Serial.println("Off");
+    } else {
+        Serial.println(level);
     }
 }
