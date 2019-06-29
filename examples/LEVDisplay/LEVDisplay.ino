@@ -36,6 +36,7 @@ void printStatus(uint8_t status);
 void printTemperatureState(uint8_t temperatureState);
 void printTemperatureAlert(uint8_t alertState);
 void printTravelModeLevel(uint8_t level);
+void printSystemState(uint8_t state);
 
 void setup() {
     Serial2.begin(BAUD_RATE);
@@ -107,7 +108,7 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
     Serial.print("Current Assist Level: ");
     printTravelModeLevel(msg.getCurrentAssistLevel());
     Serial.print("System state: ");
-    Serial.println(msg.getSystemState());           // TODO enums for system state
+    printSystemState(msg.getSystemState());
     Serial.print("Gear state: ");
     Serial.println(msg.getGearState());             // TODO decode gear state
     Serial.print("Gear error: ");
@@ -251,5 +252,38 @@ void printTravelModeLevel(uint8_t level) {
         Serial.println("Off");
     } else {
         Serial.println(level);
+    }
+}
+
+void printSystemState(uint8_t state) {
+    Serial.print("  Right Turn Signal: ")
+    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_TURNSIGNALRIGHT) {
+        Serial.println("Blinking");
+    } else {
+        Serial.println("Off/Unsupported");
+    }
+    Serial.print("  Left Turn Signal: ")
+    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_TURNSIGNALLEFT) {
+        Serial.println("Blinking");
+    } else {
+        Serial.println("Off/Unsupported");
+    }
+    Serial.print("  Light Beam: ")
+    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_LIGHTBEAM) {
+        Serial.println("High Beam");
+    } else {
+        Serial.println("Low Beam/Unsupported");
+    }
+    Serial.print("  Light On/Off: ")
+    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_LIGHTONOFF) {
+        Serial.println("On");
+    } else {
+        Serial.println("Off/Unsupported");
+    }
+    Serial.print("  Manual Throttle: ")
+    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_MANUALTHROTTLE) {
+        Serial.println("On");
+    } else {
+        Serial.println("Off/Unsupported");
     }
 }
