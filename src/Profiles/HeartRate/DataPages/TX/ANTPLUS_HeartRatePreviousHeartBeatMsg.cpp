@@ -1,5 +1,6 @@
 #include <Profiles/HeartRate/DataPages/TX/ANTPLUS_HeartRatePreviousHeartBeatMsg.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 HeartRatePreviousHeartBeatMsg::HeartRatePreviousHeartBeatMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_NUMBER) {
