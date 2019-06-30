@@ -115,13 +115,13 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
     Serial.print("Current Rear Gear: ");
     printGearState(msg.getCurrentRearGear());
     Serial.print("Manual/Auto: ");
-    if (msg.getManualAutoState() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_GEARSTATE_MANUALAUTOSTATE_AUTOMATIC) {
+    if (msg.getManualAutoState() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_GEARSTATE_MANUALAUTOSTATE_AUTOMATIC) {
         Serial.println("Automatic/Gear not available");
     } else {
         Serial.println("Manual");
     }
     Serial.print("Gear Exist: ");
-    if (msg.getGearExist() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_GEARSTATE_GEAREXIST_AVAILABLE) {
+    if (msg.getGearExist() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_GEARSTATE_GEAREXIST_AVAILABLE) {
         Serial.println("Gear is available");
     } else {
         Serial.println("Gear is not available");
@@ -233,37 +233,37 @@ void printStatus(uint8_t status) {
 
 void printTemperatureState(uint8_t temperatureState) {
     switch (temperatureState) {
-    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_UNKNOWN:
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TEMPERATURESTATE_STATE_UNKNOWN:
         Serial.println("Unknown");
         break;
-    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_COLD:
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TEMPERATURESTATE_STATE_COLD:
         Serial.println("Cold");
         break;
-    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_COLDWARM:
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TEMPERATURESTATE_STATE_COLDWARM:
         Serial.println("Cold/Warm");
         break;
-    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_WARM:
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TEMPERATURESTATE_STATE_WARM:
         Serial.println("Warm");
         break;
-    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_WARMHOT:
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TEMPERATURESTATE_STATE_WARMHOT:
         Serial.println("Warm/Hot");
         break;
-    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_STATE_HOT:
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TEMPERATURESTATE_STATE_HOT:
         Serial.println("Hot");
         break;
     }
 }
 
 void printTemperatureAlert(uint8_t alertState) {
-    if (alertState == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_ALERT_NOALERT) {
+    if (alertState == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TEMPERATURESTATE_ALERT_NOALERT) {
         Serial.println("No Alert");
-    } else if (alertState == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TEMPERATURESTATE_ALERT_OVERHEATALERT) {
+    } else if (alertState == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TEMPERATURESTATE_ALERT_OVERHEATALERT) {
         Serial.println("Overheat Alert!");
     }
 }
 
 void printTravelModeLevel(uint8_t level) {
-    if(level == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TRAVELMODESTATE_OFF) {
+    if(level == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TRAVELMODESTATE_OFF) {
         Serial.println("Off");
     } else {
         Serial.println(level);
@@ -272,31 +272,31 @@ void printTravelModeLevel(uint8_t level) {
 
 void printSystemState(uint8_t state) {
     Serial.print("Right Turn Signal: ");
-    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_TURNSIGNALRIGHT) {
+    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_SYSTEMSTATE_TURNSIGNALRIGHT) {
         Serial.println("Blinking");
     } else {
         Serial.println("Off/Unsupported");
     }
     Serial.print("Left Turn Signal: ");
-    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_TURNSIGNALLEFT) {
+    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_SYSTEMSTATE_TURNSIGNALLEFT) {
         Serial.println("Blinking");
     } else {
         Serial.println("Off/Unsupported");
     }
     Serial.print("Light Beam: ");
-    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_LIGHTBEAM) {
+    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_SYSTEMSTATE_LIGHTBEAM) {
         Serial.println("High Beam");
     } else {
         Serial.println("Low Beam/Unsupported");
     }
     Serial.print("Light On/Off: ");
-    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_LIGHTONOFF) {
+    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_SYSTEMSTATE_LIGHTONOFF) {
         Serial.println("On");
     } else {
         Serial.println("Off/Unsupported");
     }
     Serial.print("  Manual Throttle: ");
-    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_MANUALTHROTTLE) {
+    if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_SYSTEMSTATE_MANUALTHROTTLE) {
         Serial.println("On");
     } else {
         Serial.println("Off/Unsupported");
@@ -304,7 +304,7 @@ void printSystemState(uint8_t state) {
 }
 
 void printGearState(uint8_t state) {
-    if (state == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_GEARSTATE_CURRENTGEAR_NOGEAR) {
+    if (state == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_GEARSTATE_CURRENTGEAR_NOGEAR) {
         Serial.println("No gear available");
     } else {
         Serial.println(state);
