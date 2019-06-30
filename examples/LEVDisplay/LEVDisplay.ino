@@ -37,6 +37,7 @@ void printTemperatureState(uint8_t temperatureState);
 void printTemperatureAlert(uint8_t alertState);
 void printTravelModeLevel(uint8_t level);
 void printSystemState(uint8_t state);
+void printGearState(uint8_t state);
 
 void setup() {
     Serial2.begin(BAUD_RATE);
@@ -109,8 +110,22 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
     printTravelModeLevel(msg.getCurrentAssistLevel());
     Serial.print("System state: ");
     printSystemState(msg.getSystemState());
-    Serial.print("Gear state: ");
-    Serial.println(msg.getGearState());             // TODO decode gear state
+    Serial.print("Current Front Gear: ");
+    printGearState(msg.getCurrentFrontGear());
+    Serial.print("Current Rear Gear: ");
+    printGearState(msg.getCurrentRearGear());
+    Serial.print("Manual/Auto: ");
+    if (msg.getManualAutoState() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_GEARSTATE_MANUALAUTOSTATE_AUTOMATIC) {
+        Serial.println("Automatic/Gear not available");
+    } else {
+        Serial.println("Manual");
+    }
+    Serial.print("Gear Exist: ");
+    if (msg.getGearExist() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_GEARSTATE_GEAREXIST_AVAILABLE) {
+        Serial.println("Gear is available");
+    } else {
+        Serial.println("Gear is not available");
+    }
     Serial.print("Gear error: ");
     Serial.println(msg.getErrorMessage());          // TODO enums for error message
     Serial.print("Speed: ");
@@ -256,25 +271,25 @@ void printTravelModeLevel(uint8_t level) {
 }
 
 void printSystemState(uint8_t state) {
-    Serial.print("  Right Turn Signal: ");
+    Serial.print("Right Turn Signal: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_TURNSIGNALRIGHT) {
         Serial.println("Blinking");
     } else {
         Serial.println("Off/Unsupported");
     }
-    Serial.print("  Left Turn Signal: ");
+    Serial.print("Left Turn Signal: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_TURNSIGNALLEFT) {
         Serial.println("Blinking");
     } else {
         Serial.println("Off/Unsupported");
     }
-    Serial.print("  Light Beam: ");
+    Serial.print("Light Beam: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_LIGHTBEAM) {
         Serial.println("High Beam");
     } else {
         Serial.println("Low Beam/Unsupported");
     }
-    Serial.print("  Light On/Off: ");
+    Serial.print("Light On/Off: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_SYSTEMSTATE_LIGHTONOFF) {
         Serial.println("On");
     } else {
@@ -285,5 +300,13 @@ void printSystemState(uint8_t state) {
         Serial.println("On");
     } else {
         Serial.println("Off/Unsupported");
+    }
+}
+
+void printGearState(uint8_t state) {
+    if (state == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_GEARSTATE_CURRENTGEAR_NOGEAR) {
+        Serial.println("No gear available");
+    } else {
+        Serial.println(state);
     }
 }
