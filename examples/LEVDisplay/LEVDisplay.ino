@@ -96,6 +96,7 @@ void levBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
 }
 
 void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_t data) {
+    uint8_t errorCode;
     Serial.print("Battery Temperature State: ");
     printTemperatureState(msg.getBatteryTemperatureState());
     Serial.print("Battery Temperature Alert: ");
@@ -127,7 +128,28 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
         Serial.println("Gear is not available");
     }
     Serial.print("Gear error: ");
-    Serial.println(msg.getErrorMessage());          // TODO enums for error message
+    errorCode = msg.getErrorMessage();
+    switch (errorCode) {
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_ERRORMESSAGE_NOERROR:
+        Serial.println("No Error");
+        break;
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_ERRORMESSAGE_BATTERYERROR:
+        Serial.println("Battery Error");
+        break;
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_ERRORMESSAGE_DRIVETRAINERROR:
+        Serial.println("Drive Train Error");
+        break;
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_ERRORMESSAGE_BATTERYENDOFLIFE:
+        Serial.println("Battery End of Life");
+        break;
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_ERRORMESSAGE_OVERHEATING:
+        Serial.println("Overheating");
+        break;
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_ERRORMESSAGE_MANUFACTURERSPECIFIC ... UINT8_MAX:
+        Serial.print("Manufacture Specfic: ");
+        Serial.print(errorCode);
+        break;
+    }
     Serial.print("Speed: ");
     Serial.print(msg.getSpeed()/10);
     Serial.print(".");
