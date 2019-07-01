@@ -1,9 +1,9 @@
 #ifndef ANTPLUS_LEVSPEEDSYSTEMINFORMATION2_h
 #define ANTPLUS_LEVSPEEDSYSTEMINFORMATION2_h
 
-#include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseMainDataPage.h>
+#include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseSpeedSystemInformation.h>
 
-class LevSpeedSystemInformation2 : public LevBaseMainDataPage {
+class LevSpeedSystemInformation2 : public LevBaseSpeedSystemInformation {
 public:
     LevSpeedSystemInformation2(AntRxDataResponse& dp);
     uint8_t getBatterySOC();
