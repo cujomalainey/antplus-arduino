@@ -2,12 +2,8 @@
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
 /* Speed and Distance */
-LevSpeedDistanceInformation::LevSpeedDistanceInformation(AntRxDataResponse& dp) : LevBaseMainDataPage(dp) {
+LevSpeedDistanceInformation::LevSpeedDistanceInformation(AntRxDataResponse& dp) : LevBaseSpeedDistanceInformation(dp) {
     return;
-}
-
-uint32_t LevSpeedDistanceInformation::getOdometer() { // in km
-    return (uint32_t)getData(1) + ((uint32_t)getData(2) << 8) + ((uint32_t)getData(3) << 16);
 }
 
 uint16_t LevSpeedDistanceInformation::getRemainingRange() { // in km
@@ -19,13 +15,8 @@ uint16_t LevSpeedDistanceInformation::getSpeed() { // in 1/10 km/h
 }
 
 /* Alt Speed and Distance */
-LevAltSpeedDistanceInformation::LevAltSpeedDistanceInformation(AntRxDataResponse& dp) : LevBaseMainDataPage(dp) {
+LevAltSpeedDistanceInformation::LevAltSpeedDistanceInformation(AntRxDataResponse& dp) : LevBaseSpeedDistanceInformation(dp) {
     return;
-}
-
-uint32_t LevAltSpeedDistanceInformation::getOdometer() // in km
-{
-    return (uint32_t)getData(1) + ((uint32_t)getData(2) << 8) + ((uint32_t)getData(3) << 16);
 }
 
 uint16_t LevAltSpeedDistanceInformation::getFuelConsumption() // in Wh/km

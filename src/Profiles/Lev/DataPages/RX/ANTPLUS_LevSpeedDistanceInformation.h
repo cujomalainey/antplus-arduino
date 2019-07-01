@@ -1,21 +1,19 @@
 #ifndef ANTPLUS_LEVSPEEDDISTANCEINFORMATION_h
 #define ANTPLUS_LEVSPEEDDISTANCEINFORMATION_h
 
-#include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseMainDataPage.h>
+#include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseSpeedDistanceInformation.h>
 
-class LevSpeedDistanceInformation : public LevBaseMainDataPage {
+class LevSpeedDistanceInformation : public LevBaseSpeedDistanceInformation {
 public:
     LevSpeedDistanceInformation(AntRxDataResponse& dp);
-    uint32_t getOdometer(); // in km
     uint16_t getRemainingRange(); // in km
     uint16_t getSpeed();     // in 1/10 km/h
 };
 
 
-class LevAltSpeedDistanceInformation : public LevBaseMainDataPage {
+class LevAltSpeedDistanceInformation : public LevBaseSpeedDistanceInformation {
 public:
     LevAltSpeedDistanceInformation(AntRxDataResponse& dp);
-    uint32_t getOdometer(); // in km
     uint16_t getFuelConsumption(); // in Wh/km
     uint16_t getSpeed();     // in 1/10 km/h
 };
