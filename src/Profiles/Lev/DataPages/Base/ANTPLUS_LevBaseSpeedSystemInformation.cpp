@@ -29,6 +29,6 @@ uint8_t LevBaseSpeedSystemInformation::getGearExist() {
     return (getData(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_GEARSTATE_BYTE) >> ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_GEARSTATE_GEAREXIST_SHIFT) & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_GEARSTATE_GEAREXIST_MASK;
 }
 
-uint16_t LevBaseSpeedSystemInformation1::getSpeed() { // in 1/10 km/h
+uint16_t LevBaseSpeedSystemInformation::getSpeed() { // in 1/10 km/h
     return (uint16_t)getData(6) + (((uint16_t)getData(7) & 0x0F) << 8);
 }
