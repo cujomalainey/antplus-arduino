@@ -1,6 +1,9 @@
 #include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseSpeedSystemInformation.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
+LevBaseSpeedSystemInformation::LevBaseSpeedSystemInformation(AntRxDataResponse& dp) : LevBaseMainDataPage(dp) {
+}
+
 uint8_t LevBaseSpeedSystemInformation::getCurrentRegenerativeLevel() {
     return getData(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TRAVELMODESTATE_BYTE) & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_TRAVELMODESTATE_CURRENTREGENERATIVELEVEL_MASK;
 }
