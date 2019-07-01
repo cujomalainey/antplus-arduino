@@ -1,4 +1,4 @@
-#include <Profiles/Lev/DataPages/RX/ANTPLUS_LevBaseSpeedDistanceInformation.h>
+#include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseSpeedDistanceInformation.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
 /* Speed and Distance */
