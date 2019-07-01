@@ -38,6 +38,7 @@ void printTemperatureAlert(uint8_t alertState);
 void printTravelModeLevel(uint8_t level);
 void printSystemState(uint8_t state);
 void printGearState(uint8_t state);
+void printCommonSpeedSystemInformation(LevBaseSpeedSystemInformation& msg);
 
 void setup() {
     Serial2.begin(BAUD_RATE);
@@ -105,28 +106,6 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
     printTemperatureState(msg.getMotorTemperatureState());
     Serial.print("Motor Temperature Alert: ");
     printTemperatureAlert(msg.getMotorTemperatureAlert());
-    Serial.print("Current Regenerative Level: ");
-    printTravelModeLevel(msg.getCurrentRegenerativeLevel());
-    Serial.print("Current Assist Level: ");
-    printTravelModeLevel(msg.getCurrentAssistLevel());
-    Serial.print("System state: ");
-    printSystemState(msg.getSystemState());
-    Serial.print("Current Front Gear: ");
-    printGearState(msg.getCurrentFrontGear());
-    Serial.print("Current Rear Gear: ");
-    printGearState(msg.getCurrentRearGear());
-    Serial.print("Manual/Auto: ");
-    if (msg.getManualAutoState() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_GEARSTATE_MANUALAUTOSTATE_AUTOMATIC) {
-        Serial.println("Automatic/Gear not available");
-    } else {
-        Serial.println("Manual");
-    }
-    Serial.print("Gear Exist: ");
-    if (msg.getGearExist() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_GEARSTATE_GEAREXIST_AVAILABLE) {
-        Serial.println("Gear is available");
-    } else {
-        Serial.println("Gear is not available");
-    }
     Serial.print("Gear error: ");
     errorCode = msg.getErrorMessage();
     switch (errorCode) {
@@ -150,10 +129,7 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
         Serial.print(errorCode);
         break;
     }
-    Serial.print("Speed: ");
-    Serial.print(msg.getSpeed()/10);
-    Serial.print(".");
-    Serial.println(msg.getSpeed() % 10);
+    printCommonSpeedSystemInformation(msg);
 }
 
 void levSpeedDistanceInformationHandler(LevSpeedDistanceInformation& msg, uintptr_t data) {
@@ -181,18 +157,15 @@ void levAltSpeedDistanceInformationHandler(LevAltSpeedDistanceInformation& msg, 
 void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_t data) {
     Serial.print("Battery SOC: ");
     Serial.println(msg.getBatterySOC());
-    Serial.print("Travel mode state: ");
-    Serial.println(msg.getTravelModeState());        // TODO decode travel mode state
-    Serial.print("System state: ");
-    Serial.println(msg.getSystemState());            // TODO enums for system state
-    Serial.print("Gear state: ");
-    Serial.println(msg.getGearState());              // TODO decode gear state
+    Serial.print("Battery Empty Warning: ");
+    Serial.println(msg.getBatteryEmptyWarning());
     Serial.print("Percent Assist: ");
-    Serial.println(msg.getPercentAssist());
-    Serial.print("Speed: ");
-    Serial.print(msg.getSpeed() / 10);
-    Serial.print(".");
-    Serial.println(msg.getSpeed() % 10);
+    if (msg.getPercentAssist() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION2_PERCENTASSIST_UNKNOWN) {
+        Serial.println("Unknown");
+    } else {
+        Serial.println(msg.getBatteryEmptyWarning());
+    }
+    printCommonSpeedSystemInformation(msg);
 }
 
 void levBatteryInfo(LevBatteryInfo& msg, uintptr_t data) {
@@ -282,6 +255,35 @@ void printTemperatureAlert(uint8_t alertState) {
     } else if (alertState == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TEMPERATURESTATE_ALERT_OVERHEATALERT) {
         Serial.println("Overheat Alert!");
     }
+}
+
+void printCommonSpeedSystemInformation(LevBaseSpeedSystemInformation& msg) {
+    Serial.print("Current Regenerative Level: ");
+    printTravelModeLevel(msg.getCurrentRegenerativeLevel());
+    Serial.print("Current Assist Level: ");
+    printTravelModeLevel(msg.getCurrentAssistLevel());
+    Serial.print("System state: ");
+    printSystemState(msg.getSystemState());
+    Serial.print("Current Front Gear: ");
+    printGearState(msg.getCurrentFrontGear());
+    Serial.print("Current Rear Gear: ");
+    printGearState(msg.getCurrentRearGear());
+    Serial.print("Manual/Auto: ");
+    if (msg.getManualAutoState() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_GEARSTATE_MANUALAUTOSTATE_AUTOMATIC) {
+        Serial.println("Automatic/Gear not available");
+    } else {
+        Serial.println("Manual");
+    }
+    Serial.print("Gear Exist: ");
+    if (msg.getGearExist() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_GEARSTATE_GEAREXIST_AVAILABLE) {
+        Serial.println("Gear is available");
+    } else {
+        Serial.println("Gear is not available");
+    }
+    Serial.print("Speed: ");
+    Serial.print(msg.getSpeed()/10);
+    Serial.print(".");
+    Serial.println(msg.getSpeed() % 10);
 }
 
 void printTravelModeLevel(uint8_t level) {
