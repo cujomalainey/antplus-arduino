@@ -1,6 +1,8 @@
 #ifndef ANTPLUS_LEVPROFILEPRIVATEDEFINES_h
 #define ANTPLUS_LEVPROFILEPRIVATEDEFINES_h
 
+// TODO this file was defined in the format ((data >> shift) & mask) it should be ((data & mask) >> shift)
+
 /* Channel Config */
 #define ANTPLUS_LEV_DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
 #define ANTPLUS_LEV_CHANNELPERIOD 8192
