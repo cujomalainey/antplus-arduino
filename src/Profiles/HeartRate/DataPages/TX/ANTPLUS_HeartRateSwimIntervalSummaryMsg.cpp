@@ -1,5 +1,6 @@
 #include <Profiles/HeartRate/DataPages/TX/ANTPLUS_HeartRateSwimIntervalSummaryMsg.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
 
 HeartRateSwimIntervalSummaryMsg::HeartRateSwimIntervalSummaryMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_NUMBER) {
     setIntervalAverageHeartRate(ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_INTERVALAVERAGEHEARTRATE_INVALID);
