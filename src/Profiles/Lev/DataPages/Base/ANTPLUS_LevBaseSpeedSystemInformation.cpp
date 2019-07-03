@@ -33,5 +33,5 @@ uint8_t LevBaseSpeedSystemInformation::getGearExist() {
 }
 
 uint16_t LevBaseSpeedSystemInformation::getSpeed() { // in 1/10 km/h
-    return (uint16_t)getData(6) + (((uint16_t)getData(7) & 0x0F) << 8);
+    return (uint16_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_LEVSPEED_LSB_BYTE) + (((uint16_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_LEVSPEED_MSB_BYTE) & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_LEVSPEED_MSB_MASK) << ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION_LEVSPEED_MSB_SHIFT);
 }
