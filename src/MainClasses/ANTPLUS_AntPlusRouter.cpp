@@ -133,6 +133,13 @@ void AntPlusRouter::stopAllProfiles() {
     }
 }
 
+void AntPlusRouter::flushMessages() {
+    // purge buffer of any left over messages
+    do {
+        _ant->readPacket();
+    } while (_ant->getResponse().isAvailable());
+}
+
 void AntPlusRouter::reset() {
     resetRadio(ANTPLUS_RESET_WAIT_FOR_STARTUP);
     _ant = NULL;
@@ -151,14 +158,11 @@ void AntPlusRouter::reset() {
 uint8_t AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     ResetSystem rs;
     stopAllProfiles();
-    // purge buffer of any left over messages
-    do {
-        _ant->readPacket();
-    } while (_ant->getResponse().isAvailable());
+    flushMessages();
     send(rs);
     _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
     if (waitForStartup == ANTPLUS_RESET_WAIT_FOR_STARTUP) {
-        StartUpMessage sm = StartUpMessage();
+        StartUpMessage sm;
         if (_ant->waitFor(sm, ANTPLUS_DRIVER_RESET_TIMEOUT)) {
             onStartUpMessage(sm);
         } else {

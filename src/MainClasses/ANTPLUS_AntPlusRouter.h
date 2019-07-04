@@ -101,6 +101,7 @@ public:
     void onSelectiveDataUpdateMaskSetting(SelectiveDataUpdateMaskSetting& msg);
     void onStartUpMessage(StartUpMessage& msg);
 private:
+    void flushMessages();
     void pushNetworkKey();
     // Driver callbacks
 
