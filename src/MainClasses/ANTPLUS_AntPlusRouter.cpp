@@ -66,7 +66,7 @@ void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
     // restrict user to maximum number of channels
     if (channel >= ANTPLUS_MAX_CHANNELS_POSSIBLE)
         return;
-    // TODO close channel to make sure it hasn't been randomly replaced
+    removeProfileByChannel(channel);
     profile->setChannelNumber(channel);
     _profiles[channel] = profile;
     profile->setRouter(this);
