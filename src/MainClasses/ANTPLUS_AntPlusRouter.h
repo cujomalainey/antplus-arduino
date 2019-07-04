@@ -68,6 +68,10 @@ public:
      */
     void loop();
     /**
+     * Calls stop on all profiles
+     */
+    void stopAllProfiles();
+    /**
      * Reset the whole system back to its defaults
      * This does not remove callbacks but does reset
      * the driver and the radio and dissociate the

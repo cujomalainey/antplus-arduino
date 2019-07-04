@@ -125,6 +125,14 @@ void AntPlusRouter::loop() {
     _ant->loop();
 }
 
+void AntPlusRouter::stopAllProfiles() {
+    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
+        if (_profiles[i]) {
+            _profiles[i]->stop();
+        }
+    }
+}
+
 void AntPlusRouter::reset() {
     resetRadio(ANTPLUS_RESET_WAIT_FOR_STARTUP);
     _ant = NULL;
@@ -142,11 +150,7 @@ void AntPlusRouter::reset() {
 
 uint8_t AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     ResetSystem rs;
-    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
-        if (_profiles[i]) {
-            _profiles[i]->stop();
-        }
-    }
+    stopAllProfiles();
     // purge buffer of any left over messages
     do {
         _ant->readPacket();
