@@ -69,8 +69,9 @@ public:
     void loop();
     /**
      * Reset the whole system back to its defaults
-     * This does not remove callbacks or the driver
-     * but does reset the driver and the radio.
+     * This does not remove callbacks but does reset
+     * the driver and the radio and dissociate the
+     * two drivers.
      */
     void reset();
     /**
