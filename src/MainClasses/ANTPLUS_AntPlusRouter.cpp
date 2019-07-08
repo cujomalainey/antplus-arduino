@@ -172,12 +172,73 @@ uint8_t AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     return 0;
 }
 
+void AntPlusRouter::startRxSearch(void(*callback)(uint16_t, uint8_t, uint8_t, uint8_t)) {
+    UnAssignChannel uc;
+    AssignChannel ac;
+    ChannelId ci;
+    ChannelRfFrequency crf;
+    LibConfig lb;
+    OpenRxScanMode osm;
+    _searchCallback = callback;
+    stopAllProfiles();
+    uc.setChannel(0); // TODO magic number (pull from ant-arduino once define is released)
+    send(uc);
+    ac.setChannel(0);
+    ac.setChannelType(CHANNEL_TYPE_UNIDIRECTIONAL_RECEIVE);
+    ac.setChannelNetwork(ANTPLUS_NETWORKKEY_INDEX);
+    send(ac);
+    ci.setChannel(0);
+    ci.setDeviceNumber(0);
+    ci.setDeviceType(0);
+    ci.setPairingBit(false);
+    ci.setTransmissionType(0);
+    send(ci);
+    crf.setChannel(0);
+    crf.setRfFrequency(ANTPLUS_CHANNEL_FREQUENCY);
+    send(crf);
+    lb.setConfig(LIB_CONFIG_RSSI | LIB_CONFIG_CHANNEL_ID);
+    send(lb);
+    send(osm);
+}
+
+void AntPlusRouter::stopRxSearch() {
+    LibConfig lb;
+    CloseChannel cc;
+    UnAssignChannel uc;
+    cc.setChannel(0); // TODO magic number (pull from ant-arduino once define is released)
+    send(cc);
+    lb.setConfig(0);
+    send(lb);
+    flushMessages();
+    uc.setChannel(0);
+    send(uc);
+    // No need to reapply config as it will be sent on next begin call
+    _searchCallback = NULL;
+}
+
+void AntPlusRouter::doSearchCallback(AntRxDataResponse& msg) {
+    if ((msg.getFlagByte() & LIB_CONFIG_RSSI) &&
+        (msg.getFlagByte() & LIB_CONFIG_CHANNEL_ID)) {
+        _searchCallback(
+                msg.getDeviceNumber(),
+                msg.getDeviceType(),
+                msg.getTransmissionType(),
+                msg.getRSSIValue());
+    }
+}
+
 void AntPlusRouter::onPacketError(uint8_t error) {
     // TODO
 }
 
 void AntPlusRouter::onAcknowledgedData(AcknowledgedData& msg) {
     uint8_t channel = msg.getChannelNumber();
+
+    if (_searchCallback) {
+        doSearchCallback(msg);
+        return;
+    }
+
     if (_profiles[channel]) {
         _profiles[channel]->onAcknowledgedData(msg);
     }
@@ -185,6 +246,12 @@ void AntPlusRouter::onAcknowledgedData(AcknowledgedData& msg) {
 
 void AntPlusRouter::onAdvancedBurstData(AdvancedBurstData& msg) {
     uint8_t channel = msg.getChannelNumber();
+
+    if (_searchCallback) {
+        doSearchCallback(msg);
+        return;
+    }
+
     if (_profiles[channel]) {
         _profiles[channel]->onAdvancedBurstData(msg);
     }
@@ -192,6 +259,12 @@ void AntPlusRouter::onAdvancedBurstData(AdvancedBurstData& msg) {
 
 void AntPlusRouter::onBroadcastData(BroadcastData& msg) {
     uint8_t channel = msg.getChannelNumber();
+
+    if (_searchCallback) {
+        doSearchCallback(msg);
+        return;
+    }
+
     if (_profiles[channel]) {
         _profiles[channel]->onBroadcastData(msg);
     }
@@ -199,6 +272,12 @@ void AntPlusRouter::onBroadcastData(BroadcastData& msg) {
 
 void AntPlusRouter::onBurstTransferData(BurstTransferData& msg) {
     uint8_t channel = msg.getChannelNumber();
+
+    if (_searchCallback) {
+        doSearchCallback(msg);
+        return;
+    }
+
     if (_profiles[channel]) {
         _profiles[channel]->onBurstTransferData(msg);
     }
