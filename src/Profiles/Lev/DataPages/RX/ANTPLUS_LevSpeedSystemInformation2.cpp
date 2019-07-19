@@ -13,5 +13,5 @@ uint8_t LevSpeedSystemInformation2::getBatteryEmptyWarning() {
 }
 
 uint8_t LevSpeedSystemInformation2::getPercentAssist() {
-    return getData(5);
+    return getData(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION2_PERCENTASSIST_BYTE);
 }

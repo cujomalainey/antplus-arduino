@@ -22,6 +22,6 @@ uint8_t LevSpeedSystemInformation1::getMotorTemperatureAlert() {
 
 
 uint8_t LevSpeedSystemInformation1::getErrorMessage() {
-    return getData(5);
+    return getData(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_ERRORMESSAGE_BYTE);
 }
 
