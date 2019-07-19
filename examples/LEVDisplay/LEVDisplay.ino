@@ -39,6 +39,7 @@ void printTravelModeLevel(uint8_t level);
 void printSystemState(uint8_t state);
 void printGearState(uint8_t state);
 void printCommonSpeedSystemInformation(LevBaseSpeedSystemInformation& msg);
+void printCommonSpeedDistanceInformation(LevBaseSpeedDistanceInformation& msg);
 
 void setup() {
     Serial2.begin(BAUD_RATE);
@@ -133,25 +134,26 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
 }
 
 void levSpeedDistanceInformationHandler(LevSpeedDistanceInformation& msg, uintptr_t data) {
-    Serial.print("Total dist: ");
-    Serial.println((float)msg.getOdometer() / 100);
+    uint16_t remaining = msg.getRemainingRange();
     Serial.print("Remaining range: ");
-    Serial.println(msg.getRemainingRange());        // TODO 0 = unknown
-    Serial.print("Speed: ");
-    Serial.print(msg.getSpeed() / 10);
-    Serial.print(".");
-    Serial.println(msg.getSpeed() % 10);
+    if (remaining ==  ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_REMAININGRANGE_UNKNOWN) {
+        Serial.println("Unknown");
+    } else {
+        Serial.println(remaining);
+    }
+
+    printCommonSpeedDistanceInformation(msg);
 }
 
 void levAltSpeedDistanceInformationHandler(LevAltSpeedDistanceInformation& msg, uintptr_t data) {
-    Serial.print("Total dist: ");
-    Serial.println((float)msg.getOdometer() / 100);
+    uint16_t consumption = msg.getFuelConsumption();
     Serial.print("Fuel consumption: ");
-    Serial.println(msg.getFuelConsumption());       // TODO 0 = unknown
-    Serial.print("Speed: ");
-    Serial.print(msg.getSpeed() / 10);
-    Serial.print(".");
-    Serial.println(msg.getSpeed() % 10);
+    if (consumption == ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_FUELCONSUMPTION_UNKNOWN) {
+        Serial.println("Unknown");
+    } else {
+        Serial.println(consumption);
+    }
+    printCommonSpeedDistanceInformation(msg);
 }
 
 void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_t data) {
@@ -284,6 +286,15 @@ void printCommonSpeedSystemInformation(LevBaseSpeedSystemInformation& msg) {
     Serial.print(msg.getSpeed()/10);
     Serial.print(".");
     Serial.println(msg.getSpeed() % 10);
+}
+
+void printCommonSpeedDistanceInformation(LevBaseSpeedDistanceInformation& msg) {
+    Serial.print("Odometer: ");
+    Serial.println((float)msg.getOdometer() / 100);
+    Serial.print("Lev speed: ");
+    Serial.print(msg.getLevSpeed() / 10);
+    Serial.print(".");
+    Serial.println(msg.getLevSpeed() % 10);
 }
 
 void printTravelModeLevel(uint8_t level) {
