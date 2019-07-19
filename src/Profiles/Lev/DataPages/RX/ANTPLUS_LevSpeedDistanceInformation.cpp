@@ -3,20 +3,8 @@
 
 /* Speed and Distance */
 LevSpeedDistanceInformation::LevSpeedDistanceInformation(AntRxDataResponse& dp) : LevBaseSpeedDistanceInformation(dp) {
-    return;
 }
 
 uint16_t LevSpeedDistanceInformation::getRemainingRange() { // in km
-    return (uint16_t)getData(4) + (((uint16_t)getData(5) & 0x0F) << 8);
+    return (uint16_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_REMAININGRANGE_LSB_BYTE) + (((uint16_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_REMAININGRANGE_MSB_BYTE) & ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_REMAININGRANGE_MSB_MASK) << ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_REMAININGRANGE_MSB_SHIFT);
 }
-
-/* Alt Speed and Distance */
-LevAltSpeedDistanceInformation::LevAltSpeedDistanceInformation(AntRxDataResponse& dp) : LevBaseSpeedDistanceInformation(dp) {
-    return;
-}
-
-uint16_t LevAltSpeedDistanceInformation::getFuelConsumption() // in Wh/km
-{
-    return (uint16_t)getData(4) + (((uint16_t)getData(5) & 0x0F) << 8);
-}
-

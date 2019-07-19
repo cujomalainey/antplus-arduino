@@ -9,11 +9,4 @@ public:
     uint16_t getRemainingRange(); // in km
 };
 
-
-class LevAltSpeedDistanceInformation : public LevBaseSpeedDistanceInformation {
-public:
-    LevAltSpeedDistanceInformation(AntRxDataResponse& dp);
-    uint16_t getFuelConsumption(); // in Wh/km
-};
-
 #endif // ANTPLUS_LEVSPEEDDISTANCEINFORMATION_h
