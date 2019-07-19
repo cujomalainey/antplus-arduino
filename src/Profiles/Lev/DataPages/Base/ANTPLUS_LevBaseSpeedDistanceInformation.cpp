@@ -6,10 +6,10 @@ LevBaseSpeedDistanceInformation::LevBaseSpeedDistanceInformation(AntRxDataRespon
 }
 
 uint32_t LevBaseSpeedDistanceInformation::getOdometer() { // in km
-    return (uint32_t)getData(1) + ((uint32_t)getData(2) << 8) + ((uint32_t)getData(3) << 16);
+    return (uint32_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_ODOMETER_LSB_BYTE) + ((uint32_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_ODOMETER_MID_BYTE) << ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_ODOMETER_MID_SHIFT) + ((uint32_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_ODOMETER_MSB_BYTE) << ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_ODOMETER_MSB_SHIFT);
 }
 
-uint16_t LevBaseSpeedDistanceInformation::getSpeed() // in 1/10 km/h
+uint16_t LevBaseSpeedDistanceInformation::getLevSpeed() // in 1/10 km/h
 {
-    return (uint16_t)getData(6) + (((uint16_t)getData(7) & 0x0F) << 8);
+    return (uint16_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_LEVSPEED_LSB_BYTE) + (((uint16_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_LEVSPEED_MSB_BYTE) & ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_LEVSPEED_MSB_MASK) << ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_LEVSPEED_MSB_SHIFT);
 }
