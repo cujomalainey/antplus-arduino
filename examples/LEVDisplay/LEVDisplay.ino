@@ -182,10 +182,19 @@ void levBatteryInfo(LevBatteryInfo& msg, uintptr_t data) {
 }
 
 void levCapabilities(LevCapabilities& msg, uintptr_t data) {
-    Serial.print("Travel modes supported: ");
-    Serial.println(msg.getTravelModesSupported());       // TODO decode travel modes supported
+    uint16_t circumference;
+    uint8_t getNumberOfRegenerativeModesSupported();
+    Serial.print("Number Of Assist Modes Supported: ");
+    Serial.println(msg.getNumberOfAssistModesSupported());
+    Serial.print("Number Of Regenerative Modes Supported: ");
+    Serial.println(msg.getNumberOfAssistModesSupported());
     Serial.print("Wheel circumference: ");
-    Serial.println(msg.getWheelCircumference());
+    circumference = msg.getWheelCircumference();
+    if (circumference == ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_WHEELCIRCUMFERENCE_UNKOWN) {
+        Serial.println("Unknown");
+    } else {
+        Serial.println(circumference);
+    }
 }
 
 void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data) {
