@@ -1,4 +1,4 @@
-#include <Profiles/Lev/DataPages/RX/ANTPLUS_LevBatteryInfo.h>
+#include <Profiles/Lev/DataPages/RX/ANTPLUS_LevBatteryInformation.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
 LevBatteryInformation::LevBatteryInformation(AntRxDataResponse& dp) : LevBaseMainDataPage(dp) {
