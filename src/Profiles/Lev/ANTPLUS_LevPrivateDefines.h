@@ -75,7 +75,7 @@
 #define ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION2_PERCENTASSIST_BYTE                   5
 
 /* Battery Information */
-#define ANTPLUS_LEV_DATAPAGE_BATTERYINFO_NUMBER                  4
+#define ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_NUMBER                       4
 
 /* Capabilities */
 #define ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_NUMBER                                            5
