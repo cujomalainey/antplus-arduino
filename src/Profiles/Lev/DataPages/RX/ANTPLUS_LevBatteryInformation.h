@@ -3,9 +3,9 @@
 
 #include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseMainDataPage.h>
 
-class LevBatteryInfo : public LevBaseMainDataPage {
+class LevBatteryInformation : public LevBaseMainDataPage {
 public:
-    LevBatteryInfo(AntRxDataResponse& dp);
+    LevBatteryInformation(AntRxDataResponse& dp);
     uint16_t getChargingCycleCount();
     uint16_t getFuelConsumption();
     uint8_t getBatteryVoltage();
