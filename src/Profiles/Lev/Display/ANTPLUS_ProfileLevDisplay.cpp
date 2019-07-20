@@ -58,7 +58,7 @@ bool ProfileLevDisplay::handleDataPage(LevBaseMainDataPage& dp) {
         called = handleSpeedSystemInformation2(dp);
         break;
     case ANTPLUS_LEV_DATAPAGE_BATTERYINFO_NUMBER:
-        called = handleBatteryInfo(dp);
+        called = handleBatteryInformation(dp);
         break;
     case ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_NUMBER:
         called = handleCapabilities(dp);
@@ -93,9 +93,9 @@ bool ProfileLevDisplay::handleSpeedSystemInformation2(LevBaseMainDataPage& dataP
     return _onLevSpeedSystemInformation2.call(dp);
 }
 
-bool ProfileLevDisplay::handleBatteryInfo(LevBaseMainDataPage& dataPage) {
-    LevBatteryInfo dp = LevBatteryInfo(dataPage);
-    return _onLevBatteryInfo.call(dp);
+bool ProfileLevDisplay::handleBatteryInformation(LevBaseMainDataPage& dataPage) {
+    LevBatteryInformation dp = LevBatteryInformation(dataPage);
+    return _onLevBatteryInformation.call(dp);
 }
 
 bool ProfileLevDisplay::handleCapabilities(LevBaseMainDataPage& dataPage) {
