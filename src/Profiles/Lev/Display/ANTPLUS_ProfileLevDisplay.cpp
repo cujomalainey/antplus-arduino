@@ -60,7 +60,7 @@ bool ProfileLevDisplay::handleDataPage(LevBaseMainDataPage& dp) {
     case ANTPLUS_LEV_DATAPAGE_BATTERYINFO_NUMBER:
         called = handleBatteryInfo(dp);
         break;
-    case ANTPLUS_LEV_DATAPAGE_CAPABILITIES_NUMBER:
+    case ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_NUMBER:
         called = handleCapabilities(dp);
         break;
     case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
