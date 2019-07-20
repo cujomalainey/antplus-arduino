@@ -26,7 +26,7 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
 void levSpeedDistanceInformationHandler(LevSpeedDistanceInformation& msg, uintptr_t data);
 void levAltSpeedDistanceInformationHandler(LevAltSpeedDistanceInformation& msg, uintptr_t data);
 void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_t data);
-void levBatteryInfo(LevBatteryInfo& msg, uintptr_t data);
+void levBatteryInformation(LevBatteryInformation& msg, uintptr_t data);
 void levAntChannelEvent(ChannelEventResponse& msg, uintptr_t data);
 
 void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data);
@@ -59,7 +59,7 @@ void setup() {
     lev.onLevSpeedDistanceInformation(levSpeedDistanceInformationHandler);
     lev.onLevAltSpeedDistanceInformation(levAltSpeedDistanceInformationHandler);
     lev.onLevSpeedSystemInformation2(levSpeedSystemInformation2Handler);
-    lev.onLevBatteryInfo(levBatteryInfo);
+    lev.onLevBatteryInformation(levBatteryInformation);
     lev.onLevCapabilities(levCapabilities);
     lev.onManufacturersInformation(manufacturersInformationDataPageHandler);
     lev.onProductInformation(productInformationDataPageHandler);
@@ -170,7 +170,7 @@ void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_
     printCommonSpeedSystemInformation(msg);
 }
 
-void levBatteryInfo(LevBatteryInfo& msg, uintptr_t data) {
+void levBatteryInformation(LevBatteryInformation& msg, uintptr_t data) {
     uint16_t temp;
     Serial.print("Charging Cycle Count: ");
     temp = msg.getChargingCycleCount();
