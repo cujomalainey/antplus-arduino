@@ -148,7 +148,7 @@ void levSpeedDistanceInformationHandler(LevSpeedDistanceInformation& msg, uintpt
 void levAltSpeedDistanceInformationHandler(LevAltSpeedDistanceInformation& msg, uintptr_t data) {
     uint16_t consumption = msg.getFuelConsumption();
     Serial.print("Fuel consumption: ");
-    if (consumption == ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_FUELCONSUMPTION_UNKNOWN) {
+    if (consumption == ANTPLUS_LEV_DATAPAGE_ALTSPEEDDISTANCEINFORMATION_FUELCONSUMPTION_UNKNOWN) {
         Serial.println("Unknown");
     } else {
         Serial.println(consumption);
