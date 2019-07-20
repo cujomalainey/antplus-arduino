@@ -171,14 +171,35 @@ void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_
 }
 
 void levBatteryInfo(LevBatteryInfo& msg, uintptr_t data) {
+    uint16_t temp;
     Serial.print("Charging Cycle Count: ");
-    Serial.println(msg.getChargingCycleCount());
+    temp = msg.getChargingCycleCount();
+    if (temp == ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_CHARGINGCYCLECOUNT_UNKNOWN) {
+        Serial.println("Unknown");
+    } else {
+        Serial.println(temp);
+    }
     Serial.print("Fuel consumption: ");
-    Serial.println(msg.getFuelConsumption());            // TODO 0 = unknown
+    temp = msg.getFuelConsumption();
+    if (temp == ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_FUELCONSUMPTION_UNKNOWN) {
+        Serial.println("Unknown");
+    } else {
+        Serial.println(temp);
+    }
     Serial.print("Battery voltage: ");
-    Serial.println(msg.getBatteryVoltage());             // TODO 0 = unknown
+    temp = msg.getBatteryVoltage();
+    if (temp == ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_BATTERYVOLTAGE_UNKNOWN) {
+        Serial.println("Unknown");
+    } else {
+        Serial.println(temp);
+    }
     Serial.print("Distance on current charge: ");
-    Serial.println(msg.getDistanceOnCurrentCharge());    // TODO 0 = unknown
+    temp = msg.getDistanceOnCurrentCharge();
+    if (temp == ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_DISTANCEONCURRENTCHARGE_UNKNOWN) {
+        Serial.println("Unknown");
+    } else {
+        Serial.println(temp);
+    }
 }
 
 void levCapabilities(LevCapabilities& msg, uintptr_t data) {

@@ -1,5 +1,5 @@
-#ifndef ANTPLUS_LEVBATTERYINFO_h
-#define ANTPLUS_LEVBATTERYINFO_h
+#ifndef ANTPLUS_LEVBATTERYINFORMATION_h
+#define ANTPLUS_LEVBATTERYINFORMATION_h
 
 #include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseMainDataPage.h>
 
@@ -8,8 +8,8 @@ public:
     LevBatteryInfo(AntRxDataResponse& dp);
     uint16_t getChargingCycleCount();
     uint16_t getFuelConsumption();
-    uint8_t getBatteryVoltage(); // TODO special value 0x00 = unknown
+    uint8_t getBatteryVoltage();
     uint16_t getDistanceOnCurrentCharge();
 };
 
-#endif // ANTPLUS_LEVBATTERYINFO_h
+#endif // ANTPLUS_LEVBATTERYINFORMATION_h
