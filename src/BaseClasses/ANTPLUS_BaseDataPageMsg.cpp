@@ -52,14 +52,14 @@ uint32_t BaseDataPageMsg<T>::get32BitValue(uint8_t lsb_byte, uint8_t msb_byte, u
 }
 
 template<class T>
-void BaseDataPageMsg<T>::set8BitValue(uint8_t byte, uint8_t mask, uint8_t shift, uint8_t value) {
+void BaseDataPageMsg<T>::set8BitValue(uint8_t value, uint8_t byte, uint8_t mask, uint8_t shift) {
     uint8_t* buf = this->getDataBuffer();
     buf[byte] &= ~mask;
     buf[byte] |= (value << shift) & mask;
 }
 
 template<class T>
-void BaseDataPageMsg<T>::set16BitValue(uint8_t lsb_byte, uint8_t msb_byte, uint16_t mask, uint8_t shift, uint16_t value) {
+void BaseDataPageMsg<T>::set16BitValue(uint16_t value, uint8_t lsb_byte, uint8_t msb_byte, uint16_t mask, uint8_t shift) {
     uint8_t* buf = this->getDataBuffer();
     value <<= shift;
     buf[lsb_byte] &= ~((uint8_t)mask);
@@ -71,7 +71,7 @@ void BaseDataPageMsg<T>::set16BitValue(uint8_t lsb_byte, uint8_t msb_byte, uint1
 }
 
 template<class T>
-void BaseDataPageMsg<T>::set24BitValue(uint8_t lsb_byte, uint8_t msb_byte, uint32_t mask, uint8_t shift, uint32_t value) {
+void BaseDataPageMsg<T>::set24BitValue(uint32_t value, uint8_t lsb_byte, uint8_t msb_byte, uint32_t mask, uint8_t shift) {
     int8_t step = this->getByteStepDirection(lsb_byte, msb_byte);
     uint8_t* buf = this->getDataBuffer();
     value <<= shift;
@@ -88,7 +88,7 @@ void BaseDataPageMsg<T>::set24BitValue(uint8_t lsb_byte, uint8_t msb_byte, uint3
 }
 
 template<class T>
-void BaseDataPageMsg<T>::set32BitValue(uint8_t lsb_byte, uint8_t msb_byte, uint32_t mask, uint8_t shift, uint32_t value) {
+void BaseDataPageMsg<T>::set32BitValue(uint32_t value, uint8_t lsb_byte, uint8_t msb_byte, uint32_t mask, uint8_t shift) {
     int8_t step = this->getByteStepDirection(lsb_byte, msb_byte);
     uint8_t* buf = this->getDataBuffer();
     value <<= shift;
