@@ -10,5 +10,6 @@
 #include <Profiles/Lev/DataPages/RX/ANTPLUS_LevCapabilities.h>
 
 /* TX */
+#include <Profiles/Lev/DataPages/TX/ANTPLUS_LevDisplayDataMsg.h>
 
 #endif // ANTPLUS_PROFILELEVDATAPAGES_h
