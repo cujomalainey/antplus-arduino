@@ -27,6 +27,7 @@ void levSpeedDistanceInformationHandler(LevSpeedDistanceInformation& msg, uintpt
 void levAltSpeedDistanceInformationHandler(LevAltSpeedDistanceInformation& msg, uintptr_t data);
 void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_t data);
 void levBatteryInformation(LevBatteryInformation& msg, uintptr_t data);
+void levCapabilities(LevCapabilities& msg, uintptr_t data);
 void levAntChannelEvent(ChannelEventResponse& msg, uintptr_t data);
 
 void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data);
@@ -107,7 +108,7 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
     printTemperatureState(msg.getMotorTemperatureState());
     Serial.print("Motor Temperature Alert: ");
     printTemperatureAlert(msg.getMotorTemperatureAlert());
-    Serial.print("Gear error: ");
+    Serial.print("Error Message: ");
     errorCode = msg.getErrorMessage();
     switch (errorCode) {
     case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_ERRORMESSAGE_NOERROR:
@@ -127,7 +128,10 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
         break;
     case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_ERRORMESSAGE_MANUFACTURERSPECIFIC ... UINT8_MAX:
         Serial.print("Manufacture Specfic: ");
-        Serial.print(errorCode);
+        Serial.println(errorCode);
+        break;
+    default:
+        Serial.print("Unknown");
         break;
     }
     printCommonSpeedSystemInformation(msg);
@@ -157,17 +161,18 @@ void levAltSpeedDistanceInformationHandler(LevAltSpeedDistanceInformation& msg, 
 }
 
 void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_t data) {
+    uint8_t percent;
     Serial.print("Battery SOC: ");
     Serial.println(msg.getBatterySOC());
     Serial.print("Battery Empty Warning: ");
     Serial.println(msg.getBatteryEmptyWarning());
     Serial.print("Percent Assist: ");
-    if (msg.getPercentAssist() == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION2_PERCENTASSIST_UNKNOWN) {
+    percent = msg.getPercentAssist();
+    if (percent == ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION2_PERCENTASSIST_UNKNOWN) {
         Serial.println("Unknown");
     } else {
-        Serial.println(msg.getBatteryEmptyWarning());
+        Serial.println(percent);
     }
-    printCommonSpeedSystemInformation(msg);
 }
 
 void levBatteryInformation(LevBatteryInformation& msg, uintptr_t data) {
@@ -208,7 +213,7 @@ void levCapabilities(LevCapabilities& msg, uintptr_t data) {
     Serial.print("Number Of Assist Modes Supported: ");
     Serial.println(msg.getNumberOfAssistModesSupported());
     Serial.print("Number Of Regenerative Modes Supported: ");
-    Serial.println(msg.getNumberOfAssistModesSupported());
+    Serial.println(msg.getNumberOfRegenerativeModesSupported());
     Serial.print("Wheel circumference: ");
     circumference = msg.getWheelCircumference();
     if (circumference == ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_WHEELCIRCUMFERENCE_UNKOWN) {
@@ -219,8 +224,6 @@ void levCapabilities(LevCapabilities& msg, uintptr_t data) {
 }
 
 void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data) {
-    Serial.print("DataPage: ");
-    Serial.println(msg.getDataPageNumber());
     Serial.print("HW Revision: ");
     Serial.println(msg.getHWRevision());
     Serial.print("ManufacturerID: ");
@@ -230,8 +233,6 @@ void manufacturersInformationDataPageHandler(ManufacturersInformation& msg, uint
 }
 
 void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data) {
-    Serial.print("DataPage: ");
-    Serial.println(msg.getDataPageNumber());
     Serial.print("SW Revision Supplemental: ");
     Serial.println(msg.getSWRevisionSupplemental());
     Serial.print("SW Revision Main: ");
@@ -294,7 +295,7 @@ void printCommonSpeedSystemInformation(LevBaseSpeedSystemInformation& msg) {
     printTravelModeLevel(msg.getCurrentRegenerativeLevel());
     Serial.print("Current Assist Level: ");
     printTravelModeLevel(msg.getCurrentAssistLevel());
-    Serial.print("System state: ");
+    Serial.println("System state: ");
     printSystemState(msg.getSystemState());
     Serial.print("Current Front Gear: ");
     printGearState(msg.getCurrentFrontGear());
@@ -336,25 +337,25 @@ void printTravelModeLevel(uint8_t level) {
 }
 
 void printSystemState(uint8_t state) {
-    Serial.print("Right Turn Signal: ");
+    Serial.print("  Right Turn Signal: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_SYSTEMSTATE_TURNSIGNALRIGHT) {
         Serial.println("Blinking");
     } else {
         Serial.println("Off/Unsupported");
     }
-    Serial.print("Left Turn Signal: ");
+    Serial.print("  Left Turn Signal: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_SYSTEMSTATE_TURNSIGNALLEFT) {
         Serial.println("Blinking");
     } else {
         Serial.println("Off/Unsupported");
     }
-    Serial.print("Light Beam: ");
+    Serial.print("  Light Beam: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_SYSTEMSTATE_LIGHTBEAM) {
         Serial.println("High Beam");
     } else {
         Serial.println("Low Beam/Unsupported");
     }
-    Serial.print("Light On/Off: ");
+    Serial.print("  Light On/Off: ");
     if (state & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_SYSTEMSTATE_LIGHTONOFF) {
         Serial.println("On");
     } else {
