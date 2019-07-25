@@ -62,7 +62,7 @@ void LevDisplayDataMsg::setCurrentAssistLevel(uint8_t level) {
             ANTPLUS_LEV_DATAPAGE_DISPLAYDATA_CURRENTASSISTLEVEL_SHIFT);
 }
 
-void LevDisplayDataMsg::setCurrentRegenerative(uint8_t level) {
+void LevDisplayDataMsg::setCurrentRegenerativeLevel(uint8_t level) {
     set8BitValue(level,
             ANTPLUS_LEV_DATAPAGE_DISPLAYDATA_CURRENTREGENERATIVELEVEL_BYTE,
             ANTPLUS_LEV_DATAPAGE_DISPLAYDATA_CURRENTREGENERATIVELEVEL_MASK);

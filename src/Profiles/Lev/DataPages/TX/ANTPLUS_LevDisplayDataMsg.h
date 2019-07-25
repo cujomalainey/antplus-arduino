@@ -19,7 +19,7 @@ public:
      * requires changing reserved bits
      */
     void setCurrentAssistLevel(uint8_t level);
-    void setCurrentRegenerative(uint8_t level);
+    void setCurrentRegenerativeLevel(uint8_t level);
     void setCurrentRearGear(uint8_t gear);
     void setCurrentFrontGear(uint8_t gear);
     void setCurrentLightMode(uint8_t state);
