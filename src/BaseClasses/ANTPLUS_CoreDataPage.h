@@ -8,7 +8,9 @@ class CoreDataPage : public T {
 public:
     CoreDataPage();
     virtual uint8_t getDataPageNumber();
+#ifndef UNIT_TEST
 protected:
+#endif // UNIT_TEST
     /**
      * These values are assumed to contiguous in their bit fields, they will not work
      * for fields that are fragemented. Therefore inner bytes are assumed to have a mask
