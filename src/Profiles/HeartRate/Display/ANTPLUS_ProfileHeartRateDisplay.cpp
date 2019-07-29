@@ -1,5 +1,6 @@
 #include <Profiles/HeartRate/Display/ANTPLUS_ProfileHeartRateDisplay.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
 #include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
@@ -18,7 +19,7 @@ ProfileHeartRateDisplay::ProfileHeartRateDisplay(uint16_t deviceNumber, uint8_t 
 void ProfileHeartRateDisplay::onBroadcastData(BroadcastData& msg) {
     HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
     BaseSlaveProfile::onBroadcastData(msg);
-    if (handleDataPage(dp)) {
+    if (!handleDataPage(dp)) {
         callOnOtherDataPage(msg);
     }
 }
@@ -60,7 +61,7 @@ bool ProfileHeartRateDisplay::handleDataPage(HeartRateBaseMainDataPage& dp) {
 void ProfileHeartRateDisplay::onAcknowledgedData(AcknowledgedData& msg) {
     HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
     BaseSlaveProfile::onAcknowledgedData(msg);
-    if (handleDataPage(dp)) {
+    if (!handleDataPage(dp)) {
         callOnOtherDataPage(msg);
     }
 }

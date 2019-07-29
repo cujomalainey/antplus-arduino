@@ -17,8 +17,8 @@ AntPlusRouter::AntPlusRouter(BaseAntWithCallbacks* driver, const uint8_t* key) {
 
 uint8_t AntPlusRouter::setDriver(BaseAntWithCallbacks* driver) {
     // Synchronous locking nature needed to gurantee all configs were recieved
-    RequestMessage rm = RequestMessage();
-    Capabilities cap = Capabilities();
+    RequestMessage rm;
+    Capabilities cap;
     _ant = driver;
     // register callbacks
     _ant->onPacketError(onPacketErrorCallback, (uintptr_t)this);
@@ -45,6 +45,8 @@ uint8_t AntPlusRouter::setDriver(BaseAntWithCallbacks* driver) {
     if (_ant->waitFor(cap, ANTPLUS_DRIVER_REQUEST_TIMEOUT)) {
         return ANTPLUS_MAX_CHANNEL_CHECK_FAILED;
     }
+    _ant->getResponse().getCapabilitiesMsg(cap);
+    onCapabilities(cap);
     return 0;
 }
 
@@ -62,13 +64,26 @@ void AntPlusRouter::setAntPlusNetworkKey(const uint8_t* key) {
 
 void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
     // restrict user to maximum number of channels
-    // channel = min(channel, _maxChannels - 1); TODO, wait till we set this
-    // TODO close channel to make sure it hasn't been randomly replaced
+    if (channel >= ANTPLUS_MAX_CHANNELS_POSSIBLE)
+        return;
+    removeProfileByChannel(channel);
+    profile->setChannelNumber(channel);
     _profiles[channel] = profile;
     profile->setRouter(this);
 }
 
-void AntPlusRouter::removeProfile(uint8_t channel) {
+void AntPlusRouter::removeProfile(BaseProfile *profile) {
+    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
+        if (_profiles[i] == profile) {
+            removeProfileByChannel(i);
+        }
+    }
+}
+
+void AntPlusRouter::removeProfileByChannel(uint8_t channel) {
+    if (channel >= ANTPLUS_MAX_CHANNELS_POSSIBLE) {
+        return;
+    }
     if (_profiles[channel]) {
         _profiles[channel]->stop();
         _profiles[channel]->setChannelNumber(0);
@@ -82,7 +97,7 @@ void AntPlusRouter::removeProfile(uint8_t channel) {
 
 void AntPlusRouter::removeAllProfiles() {
     for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
-        removeProfile(i);
+        removeProfileByChannel(i);
     }
 }
 
@@ -110,11 +125,26 @@ void AntPlusRouter::loop() {
     _ant->loop();
 }
 
+void AntPlusRouter::stopAllProfiles() {
+    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
+        if (_profiles[i]) {
+            _profiles[i]->stop();
+        }
+    }
+}
+
+void AntPlusRouter::flushMessages() {
+    // purge buffer of any left over messages
+    do {
+        _ant->readPacket();
+    } while (_ant->getResponse().isAvailable());
+}
+
 void AntPlusRouter::reset() {
+    resetRadio(ANTPLUS_RESET_WAIT_FOR_STARTUP);
     _ant = NULL;
     _networkKey = NULL;
     _maxChannels = 0;
-    resetRadio(ANTPLUS_RESET_WAIT_FOR_STARTUP);
     for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
         if (_profiles[i]) {
             // profile stopped in resetRadio
@@ -127,15 +157,12 @@ void AntPlusRouter::reset() {
 
 uint8_t AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     ResetSystem rs;
-    for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
-        if (_profiles[i]) {
-            _profiles[i]->stop();
-        }
-    }
+    stopAllProfiles();
+    flushMessages();
     send(rs);
     _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
     if (waitForStartup == ANTPLUS_RESET_WAIT_FOR_STARTUP) {
-        StartUpMessage sm = StartUpMessage();
+        StartUpMessage sm;
         if (_ant->waitFor(sm, ANTPLUS_DRIVER_RESET_TIMEOUT)) {
             onStartUpMessage(sm);
         } else {
@@ -145,12 +172,73 @@ uint8_t AntPlusRouter::resetRadio(uint8_t waitForStartup) {
     return 0;
 }
 
+void AntPlusRouter::startRxSearch(void(*callback)(uint16_t, uint8_t, uint8_t, uint8_t)) {
+    UnAssignChannel uc;
+    AssignChannel ac;
+    ChannelId ci;
+    ChannelRfFrequency crf;
+    LibConfig lb;
+    OpenRxScanMode osm;
+    _searchCallback = callback;
+    stopAllProfiles();
+    uc.setChannel(0); // TODO magic number (pull from ant-arduino once define is released)
+    send(uc);
+    ac.setChannel(0);
+    ac.setChannelType(CHANNEL_TYPE_UNIDIRECTIONAL_RECEIVE);
+    ac.setChannelNetwork(ANTPLUS_NETWORKKEY_INDEX);
+    send(ac);
+    ci.setChannel(0);
+    ci.setDeviceNumber(0);
+    ci.setDeviceType(0);
+    ci.setPairingBit(false);
+    ci.setTransmissionType(0);
+    send(ci);
+    crf.setChannel(0);
+    crf.setRfFrequency(ANTPLUS_CHANNEL_FREQUENCY);
+    send(crf);
+    lb.setConfig(LIB_CONFIG_RSSI | LIB_CONFIG_CHANNEL_ID);
+    send(lb);
+    send(osm);
+}
+
+void AntPlusRouter::stopRxSearch() {
+    LibConfig lb;
+    CloseChannel cc;
+    UnAssignChannel uc;
+    cc.setChannel(0); // TODO magic number (pull from ant-arduino once define is released)
+    send(cc);
+    lb.setConfig(0);
+    send(lb);
+    flushMessages();
+    uc.setChannel(0);
+    send(uc);
+    // No need to reapply config as it will be sent on next begin call
+    _searchCallback = NULL;
+}
+
+void AntPlusRouter::doSearchCallback(AntRxDataResponse& msg) {
+    if ((msg.getFlagByte() & LIB_CONFIG_RSSI) &&
+        (msg.getFlagByte() & LIB_CONFIG_CHANNEL_ID)) {
+        _searchCallback(
+                msg.getDeviceNumber(),
+                msg.getDeviceType(),
+                msg.getTransmissionType(),
+                msg.getRSSIValue());
+    }
+}
+
 void AntPlusRouter::onPacketError(uint8_t error) {
     // TODO
 }
 
 void AntPlusRouter::onAcknowledgedData(AcknowledgedData& msg) {
     uint8_t channel = msg.getChannelNumber();
+
+    if (_searchCallback) {
+        doSearchCallback(msg);
+        return;
+    }
+
     if (_profiles[channel]) {
         _profiles[channel]->onAcknowledgedData(msg);
     }
@@ -158,6 +246,12 @@ void AntPlusRouter::onAcknowledgedData(AcknowledgedData& msg) {
 
 void AntPlusRouter::onAdvancedBurstData(AdvancedBurstData& msg) {
     uint8_t channel = msg.getChannelNumber();
+
+    if (_searchCallback) {
+        doSearchCallback(msg);
+        return;
+    }
+
     if (_profiles[channel]) {
         _profiles[channel]->onAdvancedBurstData(msg);
     }
@@ -165,6 +259,12 @@ void AntPlusRouter::onAdvancedBurstData(AdvancedBurstData& msg) {
 
 void AntPlusRouter::onBroadcastData(BroadcastData& msg) {
     uint8_t channel = msg.getChannelNumber();
+
+    if (_searchCallback) {
+        doSearchCallback(msg);
+        return;
+    }
+
     if (_profiles[channel]) {
         _profiles[channel]->onBroadcastData(msg);
     }
@@ -172,6 +272,12 @@ void AntPlusRouter::onBroadcastData(BroadcastData& msg) {
 
 void AntPlusRouter::onBurstTransferData(BurstTransferData& msg) {
     uint8_t channel = msg.getChannelNumber();
+
+    if (_searchCallback) {
+        doSearchCallback(msg);
+        return;
+    }
+
     if (_profiles[channel]) {
         _profiles[channel]->onBurstTransferData(msg);
     }

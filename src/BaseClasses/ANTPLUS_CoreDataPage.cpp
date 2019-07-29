@@ -14,6 +14,11 @@ uint8_t CoreDataPage<T>::getDataPageNumber() {
     return this->getData(ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 
+template<class T>
+inline int8_t CoreDataPage<T>::getByteStepDirection(uint8_t from, uint8_t to) {
+    return from < to ? 1 : -1;
+}
+
 template class CoreDataPage<BroadcastData>;
 template class CoreDataPage<AcknowledgedData>;
 template class CoreDataPage<BroadcastDataMsg>;
