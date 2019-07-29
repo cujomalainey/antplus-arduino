@@ -131,7 +131,7 @@ void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_
         Serial.println(errorCode);
         break;
     default:
-        Serial.print("Unknown");
+        Serial.println("Unknown");
         break;
     }
     printCommonSpeedSystemInformation(msg);
