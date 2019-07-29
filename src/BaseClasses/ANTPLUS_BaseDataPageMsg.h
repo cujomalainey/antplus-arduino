@@ -7,7 +7,9 @@ template<class T>
 class BaseDataPageMsg : public CoreDataPage<T> {
 public:
     BaseDataPageMsg();
+#ifndef UNIT_TEST
 protected:
+#endif // UNIT_TEST
     uint8_t get8BitValue(uint8_t byte, uint8_t mask = 0xFF, uint8_t shift = 0);
     uint16_t get16BitValue(uint8_t lsb_byte, uint8_t msb_byte, uint16_t mask = 0xFFFF, uint8_t shift = 0);
     uint32_t get24BitValue(uint8_t lsb_byte, uint8_t msb_byte, uint32_t mask = 0xFFFFFF, uint8_t shift = 0);
