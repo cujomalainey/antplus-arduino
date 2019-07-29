@@ -4,6 +4,8 @@ An Implementation of the Ant+ Network on top of [ant-arduino](https://github.com
 ## Status
 
 [![Build Status](https://travis-ci.org/cujomalainey/antplus-arduino.svg?branch=master)](https://travis-ci.org/cujomalainey/antplus-arduino)
+[![Test Status](https://img.shields.io/circleci/build/github/cujomalainey/antplus-arduino?label=test)](https://circleci.com/gh/cujomalainey/antplus-arduino)
+
 
 ## News
 
