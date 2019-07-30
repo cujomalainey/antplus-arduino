@@ -4,7 +4,7 @@
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseCumulativeOperatingTime.h>
 
-class HeartRateCumulativeOperatingTime : public HeartRateBaseMainDataPage, HeartRateBaseCumulativeOperatingTime<BroadcastData> {
+class HeartRateCumulativeOperatingTime : public HeartRateBaseMainDataPage, public HeartRateBaseCumulativeOperatingTime<BroadcastData> {
 public:
     HeartRateCumulativeOperatingTime(AntRxDataResponse& dp);
 };
