@@ -1,6 +1,5 @@
 #include <Profiles/HeartRate/DataPages/TX/ANTPLUS_HeartRateManufacturerInformationMsg.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
-#include <ANTPLUS_PrivateDefines.h>
 
 HeartRateManufacturerInformationMsg::HeartRateManufacturerInformationMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER), HeartRateBaseManufacturerInformation<BroadcastDataMsg>() {
 }
