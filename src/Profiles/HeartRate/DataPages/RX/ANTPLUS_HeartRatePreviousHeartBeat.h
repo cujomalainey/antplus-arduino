@@ -2,12 +2,11 @@
 #define ANTPLUS_HEARTRATEPREVIOUSHEARTBEAT_h
 
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBasePreviousHeartBeat.h>
 
-class HeartRatePreviousHeartBeat : public HeartRateBaseMainDataPage {
+class HeartRatePreviousHeartBeat : public HeartRateBaseMainDataPage, public HeartRateBasePreviousHeartBeat<BroadcastData> {
 public:
     HeartRatePreviousHeartBeat(AntRxDataResponse& dp);
-    uint8_t getManufacturerSpecific();
-    uint16_t getPreviousHeartBeatEventTime();
 };
 
 #endif // ANTPLUS_HEARTRATEPREVIOUSHEARTBEAT_h
