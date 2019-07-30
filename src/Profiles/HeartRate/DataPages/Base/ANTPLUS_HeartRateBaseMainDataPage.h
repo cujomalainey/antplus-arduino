@@ -2,17 +2,13 @@
 #define ANTPLUS_HEARTRATEBASEMAINDATAPAGE_h
 
 #include <BaseClasses/ANTPLUS_BaseDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateCoreMainDataPage.h>
 
 #include "ANT.h"
 
-class HeartRateBaseMainDataPage : public BaseDataPage<BroadcastData> {
+class HeartRateBaseMainDataPage : public BaseDataPage<BroadcastData>, public HeartRateCoreMainDataPage<BroadcastData> {
 public:
     HeartRateBaseMainDataPage(AntRxDataResponse& dp);
-    uint8_t getDataPageNumber();
-    uint8_t getPageChangeToggle();
-    uint16_t getHeartBeatEventTime();
-    uint8_t getHeartBeatCount();
-    uint8_t getComputedHeartRate();
 };
 
 #endif // ANTPLUS_HEARTRATEBASEMAINDATAPAGE_h

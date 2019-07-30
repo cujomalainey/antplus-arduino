@@ -6,7 +6,7 @@
 #include "ANT.h"
 
 template<class T>
-class BaseDataPage : public CoreDataPage<T> {
+class BaseDataPage : virtual public CoreDataPage<T> {
 public:
     BaseDataPage<T>(AntRxDataResponse& msg);
 #ifndef UNIT_TEST

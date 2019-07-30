@@ -2,16 +2,13 @@
 #define ANTPLUS_HEARTRATEBASEMAINDATAPAGEMSG_h
 
 #include <BaseClasses/ANTPLUS_BaseDataPageMsg.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateCoreMainDataPage.h>
 
 #include "ANT.h"
 
-class HeartRateBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg> {
+class HeartRateBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg>, public HeartRateCoreMainDataPage<BroadcastDataMsg> {
 public:
     HeartRateBaseMainDataPageMsg(uint8_t dataPageNumber);
-    uint8_t getPageChangeToggle();
-    uint16_t getHeartBeatEventTime();
-    uint8_t getHeartBeatCount();
-    uint8_t getComputedHeartRate();
     void setPageChangeToggle(uint8_t toggle);
     void setHeartBeatEventTime(uint16_t time);
     void setHeartBeatCount(uint8_t count);

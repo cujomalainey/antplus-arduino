@@ -4,7 +4,7 @@
 #include <BaseClasses/ANTPLUS_CoreDataPage.h>
 
 template<class T>
-class BaseDataPageMsg : public CoreDataPage<T> {
+class BaseDataPageMsg : virtual public CoreDataPage<T> {
 public:
     BaseDataPageMsg();
 #ifndef UNIT_TEST
