@@ -2,12 +2,11 @@
 #define ANTPLUS_HEARTRATEMANUFACTURERINFORMATION_h
 
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseManufacturerInformation.h>
 
-class HeartRateManufacturerInformation : public HeartRateBaseMainDataPage {
+class HeartRateManufacturerInformation : public HeartRateBaseMainDataPage, public HeartRateBaseManufacturerInformation<BroadcastData> {
 public:
     HeartRateManufacturerInformation(AntRxDataResponse& dp);
-    uint8_t getManufacturerIdLsb();
-    uint16_t getSerialNumber();
 };
 
 #endif // ANTPLUS_HEARTRATEMANUFACTURERINFORMATION_h
