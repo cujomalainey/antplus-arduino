@@ -1,10 +1,11 @@
 #include <CommonDataPages/TX/ANTPLUS_ProductInformationMsg.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <ANTPLUS_PrivateDefines.h>
 
 ProductInformationMsg::ProductInformationMsg() : BaseDataPageMsg(), BaseProductInformation<BroadcastDataMsg>() {
     // TODO set default values
     setDataBuffer(_buffer);
-    _buffer[0] = ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER;
+    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER;
     _buffer[1] = 0xFF;
 }
 

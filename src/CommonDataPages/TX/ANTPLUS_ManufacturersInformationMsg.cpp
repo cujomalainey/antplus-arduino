@@ -6,7 +6,7 @@
 // TODO Magic numbers
 ManufacturersInformationMsg::ManufacturersInformationMsg() : BaseDataPageMsg(), BaseManufacturersInformation<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
-    _buffer[0] = ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER;
+    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER;
     _buffer[1] = 0xFF;
     _buffer[2] = 0xFF;
 }
