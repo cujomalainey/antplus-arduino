@@ -68,15 +68,33 @@ public:
      */
     void loop();
     /**
+     * Calls stop on all profiles
+     */
+    void stopAllProfiles();
+    /**
      * Reset the whole system back to its defaults
-     * This does not remove callbacks or the driver
-     * but does reset the driver and the radio.
+     * This does not remove callbacks but does reset
+     * the driver and the radio and dissociate the
+     * two drivers.
      */
     void reset();
     /**
      * Stops all profiles and resets the radio
      */
     uint8_t resetRadio(uint8_t waitForStartup);
+    /**
+     * Start an open Rx search and return all data
+     * via a callback handler, this will stop all
+     * profiles that have been started and they will
+     * need to be restarted AFTER the search has
+     * been stopped.
+     */
+    void startRxSearch(void(*callback)(uint16_t, uint8_t, uint8_t, uint8_t));
+    /**
+     * Stops a search, after calling this you can
+     * restart any stopped profiles
+     */
+    void stopRxSearch();
     /******************************************
      *LIBRARY INTERNAL ONLY FUNCTIONS BELOW
      ******************************************/
@@ -96,7 +114,9 @@ public:
     void onSelectiveDataUpdateMaskSetting(SelectiveDataUpdateMaskSetting& msg);
     void onStartUpMessage(StartUpMessage& msg);
 private:
+    void flushMessages();
     void pushNetworkKey();
+    void doSearchCallback(AntRxDataResponse& msg);
     // Driver callbacks
 
     BaseAntWithCallbacks* _ant = NULL;
@@ -104,6 +124,7 @@ private:
     uint8_t _maxChannels = 0;
     const uint8_t* _networkKey = NULL;
     uint8_t _radioStarted = ANTPLUS_DRIVER_STATE_UNKNOWN;
+    void(*_searchCallback)(uint16_t,uint8_t,uint8_t,uint8_t) = NULL;
 };
 
 #endif // ANTPLUS_ANTPLUSROUTER_h
