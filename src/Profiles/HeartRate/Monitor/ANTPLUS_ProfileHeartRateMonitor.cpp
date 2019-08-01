@@ -27,7 +27,7 @@ void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
-    BaseProfile::onBroadcastData(msg);
+    BaseMasterProfile::onBroadcastData(msg);
 
     switch (dataPage) {
         // Display always should be using acknowledged messages
@@ -43,7 +43,7 @@ void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
-    BaseProfile::onAcknowledgedData(msg);
+    BaseMasterProfile::onAcknowledgedData(msg);
 
     switch (dataPage) {
 
@@ -202,7 +202,7 @@ void ProfileHeartRateMonitor::transmitHeartRateMsg(HeartRateBaseMainDataPageMsg&
     toggle /= 4;
     _toggleStep = _toggleStep % 8;
     msg.setPageChangeToggle(toggle);
-    if (isRequestedPageAcknowledged()) {
+    if (isRequestedPageAcknowledged() && isRequestedPagePending()) {
         AcknowledgedDataMsg ack;
         ack.setDataBuffer(msg.getDataBuffer());
         send(ack);
