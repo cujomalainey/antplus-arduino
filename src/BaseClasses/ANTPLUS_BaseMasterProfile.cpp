@@ -41,7 +41,9 @@ bool BaseMasterProfile::isRequestedPagePending() {
 }
 
 uint8_t BaseMasterProfile::getRequestedPage() {
-    _requestedCount--;
+    if (_requestedCount > 0) {
+        _requestedCount--;
+    }
     return _requestedPage;
 }
 
