@@ -37,6 +37,7 @@ protected:
      */
     bool isRequestedPageAcknowledged();
 private:
+    void handleRequestDataPage(AcknowledgedData& msg);
     uint8_t _requestedPage;
     uint8_t _requestedCount = 0;
     bool _isRequestAcknowledged;

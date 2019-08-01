@@ -1,4 +1,7 @@
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
+#include <BaseClasses/ANTPLUS_BaseDataPage.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/RX/ANTPLUS_RequestDataPage.h>
 
 BaseMasterProfile::BaseMasterProfile(uint16_t deviceNumber, uint8_t transmissionType) : BaseProfile(deviceNumber, transmissionType) {
 }
@@ -15,7 +18,22 @@ void BaseMasterProfile::onChannelEventResponse(ChannelEventResponse& msg) {
 
 void BaseMasterProfile::onAcknowledgedData(AcknowledgedData& msg) {
     BaseProfile::onAcknowledgedData(msg);
-    // TODO handle requested dataPage
+    BaseDataPage<AcknowledgedData> dp(msg);
+    if (dp.getDataPageNumber() == ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER) {
+        handleRequestDataPage(msg);
+    }
+}
+
+void BaseMasterProfile::handleRequestDataPage(AcknowledgedData& msg) {
+    RequestDataPage dp(msg);
+    if (!isDataPageValid(dp.getRequestedPageNumber())) {
+        // Datapage requested isn't supported, don't do anything
+        return;
+    }
+    _requestedCount = dp.getRequestedPageCount();
+    _requestedPage = dp.getRequestedPageNumber();
+    _isRequestAcknowledged = dp.getUseAcknowledgedMsgs();
+    _requestAcked = !dp.getUseAcknowledgedMsgs();
 }
 
 bool BaseMasterProfile::isRequestedPagePending() {
@@ -23,6 +41,7 @@ bool BaseMasterProfile::isRequestedPagePending() {
 }
 
 uint8_t BaseMasterProfile::getRequestedPage() {
+    _requestedCount--;
     return _requestedPage;
 }
 
