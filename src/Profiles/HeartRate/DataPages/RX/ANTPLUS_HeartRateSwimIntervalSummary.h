@@ -2,13 +2,11 @@
 #define ANTPLUS_HEARTRATESWIMINTERVALSUMMARY_h
 
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseSwimIntervalSummary.h>
 
-class HeartRateSwimIntervalSummary : public HeartRateBaseMainDataPage {
+class HeartRateSwimIntervalSummary : public HeartRateBaseMainDataPage, public HeartRateBaseSwimIntervalSummary<BroadcastData> {
 public:
     HeartRateSwimIntervalSummary(AntRxDataResponse& dp);
-    uint8_t getIntervalAverageHeartRate();
-    uint8_t getIntervalMaximumHeartRate();
-    uint8_t getSessionAverageHeartRate();
 };
 
 #endif // ANTPLUS_HEARTRATESWIMINTERVALSUMMARY_h

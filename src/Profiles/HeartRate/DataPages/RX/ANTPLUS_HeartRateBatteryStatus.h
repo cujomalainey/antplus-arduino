@@ -2,14 +2,11 @@
 #define ANTPLUS_HEARTRATEBATTERYSTATUS_h
 
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseBatteryStatus.h>
 
-class HeartRateBatteryStatus : public HeartRateBaseMainDataPage {
+class HeartRateBatteryStatus : public HeartRateBaseMainDataPage, public HeartRateBaseBatteryStatus<BroadcastData> {
 public:
     HeartRateBatteryStatus(AntRxDataResponse& dp);
-    uint8_t getBatteryLevel();
-    uint8_t getFractionalBatteryVoltage();
-    uint8_t getCoarseBatteryVoltage();
-    uint8_t getBatteryStatus();
 };
 
 #endif // ANTPLUS_HEARTRATEBATTERYSTATUS_h

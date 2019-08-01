@@ -2,11 +2,11 @@
 #define ANTPLUS_HEARTRATECUMULITIVEOPERATINGTIME_h
 
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseCumulativeOperatingTime.h>
 
-class HeartRateCumulativeOperatingTime : public HeartRateBaseMainDataPage {
+class HeartRateCumulativeOperatingTime : public HeartRateBaseMainDataPage, public HeartRateBaseCumulativeOperatingTime<BroadcastData> {
 public:
     HeartRateCumulativeOperatingTime(AntRxDataResponse& dp);
-    uint32_t getCumulativeOperatingTime(); // only 24 bits
 };
 
 #endif // ANTPLUS_HEARTRATECUMULITIVEOPERATINGTIME_h

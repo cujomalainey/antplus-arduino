@@ -2,17 +2,15 @@
 #define ANTPLUS_MANUFACTURERSINFORMATIONMSG_h
 
 #include <BaseClasses/ANTPLUS_BaseDataPageMsg.h>
+#include <CommonDataPages/Base/ANTPLUS_BaseManufacturersInformation.h>
 
 #include "ANT.h"
 
 // Common page 80
 
-class ManufacturersInformationMsg : public BaseDataPageMsg<BroadcastDataMsg> {
+class ManufacturersInformationMsg : public BaseDataPageMsg<BroadcastDataMsg>, BaseManufacturersInformation<BroadcastDataMsg> {
 public:
     ManufacturersInformationMsg();
-    uint8_t getHWRevision();
-    uint16_t getManufacturerId();
-    uint16_t getModelNumber();
     void setHWRevision(uint8_t revision);
     void setManufacturerId(uint16_t id);
     void setModelNumber(uint16_t modelNumber);
