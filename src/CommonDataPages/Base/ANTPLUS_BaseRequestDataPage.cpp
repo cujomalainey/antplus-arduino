@@ -25,18 +25,24 @@ uint8_t BaseRequestDataPage<T>::getDescriptorByte2() {
 }
 
 template<class T>
-uint8_t BaseRequestDataPage<T>::getRequestedTransmissionResponseCount() {
+uint8_t BaseRequestDataPage<T>::getRequestedPageCount() {
     return this->get8BitValue(
             ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_BYTE,
             ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_COUNT_MASK);
 }
 
 template<class T>
-uint8_t BaseRequestDataPage<T>::getRequestedTransmissionUseAcknowledged() {
+uint8_t BaseRequestDataPage<T>::getUseAcknowledgedMsgs() {
     return this->get8BitValue(
             ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_BYTE,
             ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_USEACKNOWLEDGED_MASK,
             ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_USEACKNOWLEDGED_SHIFT);
+}
+
+template<class T>
+uint8_t BaseRequestDataPage<T>::transmitTillAcknowledged() {
+    return this->get8BitValue(ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_BYTE)
+        == ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_REQUESTEDTRANSMISSIONRESPONSE_TRANSMITTILLACKNOWLEDGED_VALUE;
 }
 
 template<class T>

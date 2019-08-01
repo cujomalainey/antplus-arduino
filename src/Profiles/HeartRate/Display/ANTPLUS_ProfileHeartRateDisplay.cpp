@@ -68,7 +68,7 @@ void ProfileHeartRateDisplay::onAcknowledgedData(AcknowledgedData& msg) {
 
 
 void ProfileHeartRateDisplay::setChannelConfig() {
-    setChannelType(ANTPLUS_HEARTRATE_CHANNELTYPE);
+    setChannelType(ANTPLUS_HEARTRATE_DISPLAY_CHANNELTYPE);
     setDeviceType(ANTPLUS_HEARTRATE_DEVICETYPE);
     setChannelPeriod(ANTPLUS_HEARTRATE_CHANNELPERIOD);
     setSearchTimeout(ANTPLUS_HEARTRATE_SEARCHTIMEOUT);
