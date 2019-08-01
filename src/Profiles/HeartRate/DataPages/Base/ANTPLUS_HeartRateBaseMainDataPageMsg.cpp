@@ -8,7 +8,7 @@ HeartRateBaseMainDataPageMsg::HeartRateBaseMainDataPageMsg(uint8_t dataPageNumbe
 }
 
 void HeartRateBaseMainDataPageMsg::setPageChangeToggle(uint8_t toggle) {
-    set8BitValue(toggle ? ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_MASK : 0,
+    set8BitValue(toggle ? 1 : 0,
             ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_BYTE,
             ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_MASK,
             ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_SHIFT);
