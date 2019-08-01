@@ -1,5 +1,5 @@
-#ifndef ANTPLUS_PROFILEHEARTRATEMONITOR_h
-#define ANTPLUS_PROFILEHEARTRATEMONITOR_h
+#ifndef ANTPLUS_PROFILEHEARTRATEDISPLAY_h
+#define ANTPLUS_PROFILEHEARTRATEDISPLAY_h
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
 #include <Profiles/HeartRate/DataPages/ANTPLUS_ProfileHeartRateDataPages.h>
@@ -46,4 +46,4 @@ private:
     Callback<HeartRateSwimIntervalSummary&> _onHeartRateSwimIntervalSummary;
 };
 
-#endif // ANTPLUS_PROFILEHEARTRATEMONITOR_h
+#endif // ANTPLUS_PROFILEHEARTRATEDISPLAY_h
