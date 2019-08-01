@@ -33,7 +33,7 @@ void BaseMasterProfile::handleRequestDataPage(AcknowledgedData& msg) {
     _requestedCount = dp.getRequestedPageCount();
     _requestedPage = dp.getRequestedPageNumber();
     _isRequestAcknowledged = dp.getUseAcknowledgedMsgs();
-    _requestAcked = !dp.getUseAcknowledgedMsgs();
+    _requestAcked = !dp.transmitTillAcknowledged();
 }
 
 bool BaseMasterProfile::isRequestedPagePending() {
