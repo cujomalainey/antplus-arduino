@@ -99,6 +99,12 @@ void ProfileHeartRateMonitor::transmitBackgroundDataPage() {
     case ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER:
         transmitHeartRateProductInformationMsg();
         break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER:
+        transmitHeartRateBatteryStatusMsg();
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER:
+        transmitHeartRateCapabilitiesMsg();
+        break;
     }
 }
 
