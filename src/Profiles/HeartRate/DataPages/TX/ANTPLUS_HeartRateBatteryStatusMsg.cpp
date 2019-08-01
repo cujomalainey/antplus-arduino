@@ -1,7 +1,7 @@
 #include <Profiles/HeartRate/DataPages/TX/ANTPLUS_HeartRateBatteryStatusMsg.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
-HeartRateBatteryStatusMsg::HeartRateBatteryStatusMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER), HeartRateBaseBatteryStatus() {
+HeartRateBatteryStatusMsg::HeartRateBatteryStatusMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER), HeartRateBaseBatteryStatus<BroadcastDataMsg>() {
 }
 
 void HeartRateBatteryStatusMsg::setBatteryLevel(uint8_t level) {

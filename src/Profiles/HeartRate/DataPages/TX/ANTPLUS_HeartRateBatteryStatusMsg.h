@@ -4,7 +4,7 @@
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPageMsg.h>
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseBatteryStatus.h>
 
-class HeartRateBatteryStatusMsg : public HeartRateBaseMainDataPageMsg, public HeartRateBaseBatteryStatus<BroadcastData> {
+class HeartRateBatteryStatusMsg : public HeartRateBaseMainDataPageMsg, public HeartRateBaseBatteryStatus<BroadcastDataMsg> {
 public:
     HeartRateBatteryStatusMsg();
     void setBatteryLevel(uint8_t level);
