@@ -52,7 +52,7 @@ void setup() {
     router.setProfile(CHANNEL_0, &hr);
     // Delay after initial setup to wait for user to connect on serial
 
-    hr.createHeartRateBatteryStatusMsg(batteryStatusDataPageHandler);
+    // hr.createHeartRateBatteryStatusMsg(batteryStatusDataPageHandler);
     // hr.createHeartRateCapabilitiesMsg(capabilitiesDataPageHandler);
     // hr.createHeartRateCumulativeOperatingTimeMsg(cumulativeOperatingTimeDataPageHandler);
     hr.createHeartRateDefaultMsg(defaultDataPageHandler);
