@@ -2,11 +2,11 @@
 #define ANTPLUS_HEARTRATECUMULITIVEOPERATINGTIMEMSG_h
 
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPageMsg.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseCumulativeOperatingTime.h>
 
-class HeartRateCumulativeOperatingTimeMsg : public HeartRateBaseMainDataPageMsg {
+class HeartRateCumulativeOperatingTimeMsg : public HeartRateBaseMainDataPageMsg, public HeartRateBaseCumulativeOperatingTime<BroadcastDataMsg> {
 public:
     HeartRateCumulativeOperatingTimeMsg();
-    uint32_t getCumulativeOperatingTime();
     void setCumulativeOperatingTime(uint32_t time);
 };
 

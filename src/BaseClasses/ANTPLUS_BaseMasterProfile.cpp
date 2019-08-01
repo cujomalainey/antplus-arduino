@@ -17,21 +17,23 @@ void BaseMasterProfile::onChannelEventResponse(ChannelEventResponse& msg) {
 }
 
 void BaseMasterProfile::onAcknowledgedData(AcknowledgedData& msg) {
-    BaseDataPage<AcknowledgedData> bdp(msg);
-    if (bdp.getDataPageNumber() == ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER) {
-        RequestDataPage rdp(msg);
-        _requestedPage = rdp.getRequestedPageNumber();
-        if (rdp.transmitTillAcknowledged()) {
-            _requestAcked = false;
-        } else if (rdp.getRequestedPageCount()) {
-            _requestedCount = rdp.getRequestedPageCount();
-        }
-        _isRequestAcknowledged = rdp.getUseAcknowledgedMsgs();
-        // TODO handle command type
-    }
-    // passthrough so any profiles that reset their broadcast pattern on a request can do so
-    // also the profile can handle the descriptor bytes if needed
     BaseProfile::onAcknowledgedData(msg);
+    BaseDataPage<AcknowledgedData> dp(msg);
+    if (dp.getDataPageNumber() == ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER) {
+        handleRequestDataPage(msg);
+    }
+}
+
+void BaseMasterProfile::handleRequestDataPage(AcknowledgedData& msg) {
+    RequestDataPage dp(msg);
+    if (!isDataPageValid(dp.getRequestedPageNumber())) {
+        // Datapage requested isn't supported, don't do anything
+        return;
+    }
+    _requestedCount = dp.getRequestedPageCount();
+    _requestedPage = dp.getRequestedPageNumber();
+    _isRequestAcknowledged = dp.getUseAcknowledgedMsgs();
+    _requestAcked = !dp.transmitTillAcknowledged();
 }
 
 bool BaseMasterProfile::isRequestedPagePending() {
@@ -39,9 +41,18 @@ bool BaseMasterProfile::isRequestedPagePending() {
 }
 
 uint8_t BaseMasterProfile::getRequestedPage() {
+    if (_requestedCount > 0) {
+        _requestedCount--;
+    }
     return _requestedPage;
 }
 
 bool BaseMasterProfile::isRequestedPageAcknowledged() {
     return _isRequestAcknowledged;
+}
+
+void BaseMasterProfile::begin() {
+    BaseProfile::begin();
+    // send first datapage manually so we don't transmit 0s
+    transmitNextDataPage();
 }

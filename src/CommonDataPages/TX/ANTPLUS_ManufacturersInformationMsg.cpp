@@ -4,39 +4,26 @@
 #include <ANTPLUS_PrivateDefines.h>
 
 // TODO Magic numbers
-ManufacturersInformationMsg::ManufacturersInformationMsg() : BaseDataPageMsg() {
+ManufacturersInformationMsg::ManufacturersInformationMsg() : BaseDataPageMsg(), BaseManufacturersInformation<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
-    _buffer[0] = 80;
+    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER;
     _buffer[1] = 0xFF;
     _buffer[2] = 0xFF;
 }
 
-uint8_t ManufacturersInformationMsg::getHWRevision() {
-    return _buffer[3];
-}
-
-uint16_t ManufacturersInformationMsg::getManufacturerId() {
-    uint16_t temp = _buffer[4];
-    temp |= _buffer[5] << 8;
-    return temp;
-}
-
-uint16_t ManufacturersInformationMsg::getModelNumber() {
-    uint16_t temp = _buffer[6];
-    temp |= _buffer[7] << 8;
-    return temp;
-}
-
 void ManufacturersInformationMsg::setHWRevision(uint8_t revision) {
-    _buffer[3] = revision;
+    set8BitValue(revision,
+            ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_HWREVISION_BYTE);
 }
 
 void ManufacturersInformationMsg::setManufacturerId(uint16_t id) {
-    _buffer[4] = id & 0xFF;
-    _buffer[5] = (id >> 8) & 0xFF;
+    set16BitValue(id,
+            ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_MANUFACTURERID_LSB_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_MANUFACTURERID_MSB_BYTE);
 }
 
 void ManufacturersInformationMsg::setModelNumber(uint16_t modelNumber) {
-    _buffer[6] = modelNumber & 0xFF;
-    _buffer[7] = (modelNumber >> 8) & 0xFF;
+    set16BitValue(modelNumber,
+            ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_MODELNUMBER_LSB_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_MODELNUMBER_MSB_BYTE);
 }

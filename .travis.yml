@@ -38,7 +38,10 @@ env:
     - PLATFORMIO_CI_SRC=examples/EnvironmentDisplay/EnvironmentDisplay.ino
     - PLATFORMIO_CI_SRC=examples/HeartRateDisplay/HeartRateDisplay.ino
     - PLATFORMIO_CI_SRC=examples/HeartRateMonitor/HeartRateMonitor.ino
+    - PLATFORMIO_CI_SRC=examples/LEVDisplay/LEVDisplay.ino
     - PLATFORMIO_CI_SRC=examples/MuscleOxygenMonitor/MuscleOxygenMonitor.ino
+
+>>>>>>> develop
 install:
     - pip install -U platformio
 
