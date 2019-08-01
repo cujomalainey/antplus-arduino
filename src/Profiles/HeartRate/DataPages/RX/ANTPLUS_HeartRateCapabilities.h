@@ -2,12 +2,11 @@
 #define ANTPLUS_HEARTRATECAPABILITIES_h
 
 #include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseMainDataPage.h>
+#include <Profiles/HeartRate/DataPages/Base/ANTPLUS_HeartRateBaseCapabilities.h>
 
-class HeartRateCapabilities : public HeartRateBaseMainDataPage {
+class HeartRateCapabilities : public HeartRateBaseMainDataPage, public HeartRateBaseCapabilities<BroadcastData> {
 public:
     HeartRateCapabilities(AntRxDataResponse& dp);
-    uint8_t getFeaturesSupported();
-    uint8_t getFeaturesEnabled();
 };
 
 #endif // ANTPLUS_HEARTRATECAPABILITIES_h

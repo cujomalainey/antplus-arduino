@@ -48,3 +48,9 @@ uint8_t BaseMasterProfile::getRequestedPage() {
 bool BaseMasterProfile::isRequestedPageAcknowledged() {
     return _isRequestAcknowledged;
 }
+
+void BaseMasterProfile::begin() {
+    BaseProfile::begin();
+    // send first datapage manually so we don't transmit 0s
+    transmitNextDataPage();
+}

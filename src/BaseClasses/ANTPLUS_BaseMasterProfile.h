@@ -6,6 +6,10 @@
 class BaseMasterProfile : public BaseProfile {
 public:
     BaseMasterProfile(uint16_t deviceNumber, uint8_t transmissionType);
+    /**
+     * start profile transmission sequence
+     */
+    virtual void begin();
 protected:
     /**
      * Used to catch EVENT_TX and continue transmission pattern
