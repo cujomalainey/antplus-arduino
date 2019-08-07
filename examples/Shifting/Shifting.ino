@@ -20,7 +20,7 @@ AntWithCallbacks ant = AntWithCallbacks();
 AntPlusRouter router = AntPlusRouter();
 ProfileShiftingShifter shift = ProfileShiftingShifter( 7370 );
 
-void shiftCreateMsgHandler(ShiftingBaseMainDataPageMsg& msg, uintptr_t data);
+void shiftCreateMsgHandler(ShiftingShiftSystemStatusMsg& msg, uintptr_t data);
 void shiftCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data);
 void shiftCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data);
 
@@ -37,7 +37,7 @@ void setup() {
     Serial.println("Running");
 
     // setup shifting monitor
-    shift.createShiftingSystemStatusMsg(shiftCreateMsgHandler);
+    shift.createShiftingShiftSystemStatusMsg(shiftCreateMsgHandler);
     shift.createShiftingManufacturerInformationMsg(shiftCreateManufacturerInformationMsg);
     shift.createShiftingProductInformationMsg(shiftCreateProductInformationMsg);
     shift.begin();
@@ -48,7 +48,7 @@ void loop() {
     router.loop();
 }
 
-void shiftCreateMsgHandler(ShiftingBaseMainDataPageMsg& msg, uintptr_t data)
+void shiftCreateMsgHandler(ShiftingShiftSystemStatusMsg& msg, uintptr_t data)
 {
     static int _gear = 0;
     static int _eventCount = 0;

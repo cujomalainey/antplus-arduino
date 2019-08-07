@@ -13,7 +13,7 @@ public:
     /**
      * Register callback to populate default data messages (Datapage 0)
      */
-    void createShiftingSystemStatusMsg(void(*func)(ShiftingBaseMainDataPageMsg&, uintptr_t), uintptr_t data = 0) { _createShiftingSystemStatusMsg.set(func, data); }
+    void createShiftingSystemStatusMsg(void(*func)(ShiftingShiftSystemStatusMsg&, uintptr_t), uintptr_t data = 0) { _createShiftingShiftSystemStatusMsg.set(func, data); }
     /**
      * Register callback to populate manufacturer information data messages (Datapage 2)
      */
@@ -37,7 +37,7 @@ private:
     uint8_t _patternStep;
     uint8_t _toggle;
 
-    Callback<ShiftingBaseMainDataPageMsg&> _createShiftingSystemStatusMsg;
+    Callback<ShiftingShiftSystemStatusMsg&> _createShiftingShiftSystemStatusMsg;
     Callback<ManufacturersInformationMsg&> _createShiftingManufacturerInformationMsg;
     Callback<ProductInformationMsg&> _createShiftingProductInformationMsg;
 };

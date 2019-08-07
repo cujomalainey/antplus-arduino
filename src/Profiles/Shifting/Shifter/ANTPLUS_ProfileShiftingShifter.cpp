@@ -57,8 +57,8 @@ void ProfileShiftingShifter::transmitShiftingProductInformationMsg() {
 }
 
 void ProfileShiftingShifter::transmitShiftingMainPageMsg() {
-    ShiftingBaseMainDataPageMsg msg;
-    _createShiftingSystemStatusMsg.call(msg);
+    ShiftingShiftSystemStatusMsg msg;
+    _createShiftingShiftSystemStatusMsg.call(msg);
     send(msg);
 }
 
