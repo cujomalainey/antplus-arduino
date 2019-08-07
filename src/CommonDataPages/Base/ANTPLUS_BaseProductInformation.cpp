@@ -1,4 +1,4 @@
-#include <CommonDataPages/RX/ANTPLUS_ProductInformation.h>
+#include <CommonDataPages/Base/ANTPLUS_BaseProductInformation.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 template<class T>
