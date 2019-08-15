@@ -1,35 +1,43 @@
-#include <CommonDataPages/TX/ANTPLUS_MultiComponentSystemProductInformationMsg.h>
+#include <CommonDataPages/Base/ANTPLUS_BaseMultiComponentSystemProductInformation.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
-#include <ANTPLUS_PrivateDefines.h>
 
-MultiComponentSystemProductInformationMsg::MultiComponentSystemProductInformationMsg() : BaseDataPageMsg<BroadcastDataMsg>(), BaseMultiComponentSystemProductInformation<BroadcastDataMsg>() {
+template<class T>
+BaseMultiComponentSystemProductInformation<T>::BaseMultiComponentSystemProductInformation() : CoreDataPage<T>() {
 }
 
-void MultiComponentSystemProductInformationMsg::setNumberOfComponents(uint8_t count) {
-    set8BitValue(count,
+template<class T>
+uint8_t BaseMultiComponentSystemProductInformation<T>::getNumberOfComponents() {
+    return this->get8BitValue(
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_COMPONENTIDENTIFIER_BYTE,
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_COMPONENTIDENTIFIER_NUMBEROFCOMPONENTS_MASK);
 }
 
-void MultiComponentSystemProductInformationMsg::setComponentIdentifier(uint8_t identifier) {
-    set8BitValue(identifier,
+template<class T>
+uint8_t BaseMultiComponentSystemProductInformation<T>::getComponentIdentifier() {
+    return this->get8BitValue(
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_COMPONENTIDENTIFIER_BYTE,
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_COMPONENTIDENTIFIER_IDENTIFIER_MASK,
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_COMPONENTIDENTIFIER_IDENTIFIER_SHIFT);
 }
 
-void MultiComponentSystemProductInformationMsg::setSWRevisionSupplemental(uint8_t revision) {
-    set8BitValue(revision,
+template<class T>
+uint8_t BaseMultiComponentSystemProductInformation<T>::getSWRevisionSupplemental() {
+    return this->get8BitValue(
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_SWREVISIONSUPPLEMENTAL_BYTE);
 }
 
-void MultiComponentSystemProductInformationMsg::setSWRevisionMain(uint8_t revision) {
-    set8BitValue(revision,
+template<class T>
+uint8_t BaseMultiComponentSystemProductInformation<T>::getSWRevisionMain() {
+    return this->get8BitValue(
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_SWREVISIONMAIN_BYTE);
 }
 
-void MultiComponentSystemProductInformationMsg::setSerialNumber(uint32_t serialNumber) {
-    set32BitValue(serialNumber,
+template<class T>
+uint32_t BaseMultiComponentSystemProductInformation<T>::getSerialNumber() {
+    return this->get32BitValue(
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_SERIALNUMBER_LSB_BYTE,
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_SERIALNUMBER_MSB_BYTE);
 }
+
+template class BaseMultiComponentSystemProductInformation<BroadcastData>;
+template class BaseMultiComponentSystemProductInformation<BroadcastDataMsg>;
