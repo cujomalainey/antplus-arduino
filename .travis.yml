@@ -34,9 +34,11 @@ cache:
         - "~/.platformio"
 
 env:
+    - PLATFORMIO_CI_SRC=examples/BicycleSpeedDisplay/BicycleSpeedDisplay.ino
     - PLATFORMIO_CI_SRC=examples/EnvironmentDisplay/EnvironmentDisplay.ino
     - PLATFORMIO_CI_SRC=examples/HeartRateDisplay/HeartRateDisplay.ino
-    - PLATFORMIO_CI_SRC=examples/BicycleSpeedDisplay/BicycleSpeedDisplay.ino
+    - PLATFORMIO_CI_SRC=examples/HeartRateMonitor/HeartRateMonitor.ino
+    - PLATFORMIO_CI_SRC=examples/LEVDisplay/LEVDisplay.ino
 
 install:
     - pip install -U platformio

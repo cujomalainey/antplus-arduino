@@ -7,7 +7,7 @@
 
 // Common page 76
 
-class ModeSettingsMsg : public BaseDataPageMsg<BroadcastDataMsg> {
+class ModeSettingsMsg : public BaseDataPageMsg<BroadcastDataMsg>, public BaseModeSettings<BroadcastDataMsg> {
 // TODO
 };
 
