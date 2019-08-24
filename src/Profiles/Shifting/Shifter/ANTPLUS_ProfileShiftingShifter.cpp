@@ -28,6 +28,7 @@ bool ProfileShiftingShifter::isDataPageValid(uint8_t dataPage)
 }
 
 void ProfileShiftingShifter::transmitNextDataPage() {
+    // TODO the pattern needs to adjust in when a shift event occurs
     if (_patternStep++ < 64) {
         transmitShiftingMainPageMsg();
     }
