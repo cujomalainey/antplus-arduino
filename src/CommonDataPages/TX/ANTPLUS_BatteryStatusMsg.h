@@ -9,6 +9,7 @@
 // Common page 82
 
 class BatteryStatusMsg : public BaseDataPageMsg<BroadcastDataMsg>, public BaseBatteryStatus<BroadcastDataMsg> {
+public:
     BatteryStatusMsg();
     void setNumberOfBatteries(uint8_t num);
     void setBatteryIdentifier(uint8_t id);

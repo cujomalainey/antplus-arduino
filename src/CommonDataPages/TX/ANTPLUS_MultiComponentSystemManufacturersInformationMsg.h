@@ -9,6 +9,7 @@
 // Common page 78
 
 class MultiComponentSystemManufacturersInformationMsg : public BaseDataPageMsg<BroadcastDataMsg>, public BaseMultiComponentSystemManufacturersInformation<BroadcastDataMsg> {
+public:
     MultiComponentSystemManufacturersInformationMsg();
     void setNumberOfComponents(uint8_t count);
     void setComponentIdentifier(uint8_t identifier);
