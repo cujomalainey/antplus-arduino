@@ -2,6 +2,7 @@
 #define ANTPLUS_BASEMASTERPROFILE_h
 
 #include <BaseClasses/ANTPLUS_BaseProfile.h>
+#include <BaseClasses/ANTPLUS_BaseDataPageMsg.h>
 
 class BaseMasterProfile : public BaseProfile {
 public:
@@ -40,6 +41,11 @@ protected:
      * returns true if the request is meant to be sent as a acknowledged message
      */
     bool isRequestedPageAcknowledged();
+    /**
+     * Handles ack msg conversions for requests, all transmissions that are part of the broadcast pattern should be through this.
+     */
+    void transmitMsg(BaseDataPageMsg<BroadcastDataMsg> &msg);
+    void transmitMsg(BaseDataPageMsg<AcknowledgedDataMsg> &msg);
 private:
     void handleRequestDataPage(AcknowledgedData& msg);
     uint8_t _requestedPage;

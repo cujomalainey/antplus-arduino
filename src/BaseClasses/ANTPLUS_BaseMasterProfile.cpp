@@ -58,3 +58,17 @@ void BaseMasterProfile::begin() {
     // send first datapage manually so we don't transmit 0s
     transmitNextDataPage();
 }
+
+void BaseMasterProfile::transmitMsg(BaseDataPageMsg<BroadcastDataMsg> &msg) {
+    if (isRequestedPageAcknowledged() && isRequestedPagePending()) {
+        AcknowledgedDataMsg ack;
+        ack.setDataBuffer(msg.getDataBuffer());
+        send(ack);
+    } else {
+        send(msg);
+    }
+}
+
+void BaseMasterProfile::transmitMsg(BaseDataPageMsg<AcknowledgedDataMsg> &msg) {
+    send(msg);
+}
