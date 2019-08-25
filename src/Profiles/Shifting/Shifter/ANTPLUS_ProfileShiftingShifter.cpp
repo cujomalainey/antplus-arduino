@@ -1,11 +1,12 @@
 #include <Profiles/Shifting/Shifter/ANTPLUS_ProfileShiftingShifter.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
+#define INTERLEAVE_STEP 65
 
-ProfileShiftingShifter::ProfileShiftingShifter( uint16_t deviceNumber, uint8_t transmissionType) :
+ProfileShiftingShifter::ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType) :
     BaseMasterProfile(deviceNumber, transmissionType),
-    _patternStep( 0 ),
-    _toggle(0)
+    _patternStep(0),
+    _backgroundStep(0)
 {
     setChannelConfig();
 }
@@ -29,37 +30,52 @@ bool ProfileShiftingShifter::isDataPageValid(uint8_t dataPage)
 
 void ProfileShiftingShifter::transmitNextDataPage() {
     // TODO the pattern needs to adjust in when a shift event occurs
-    if (_patternStep++ < 64) {
+    if (_patternStep++ < INTERLEAVE_STEP) {
         transmitShiftingMainPageMsg();
-    }
-    else {
-
-        if (_toggle++ % 2 == 0) {
-            transmitShiftingManufacturerInformationMsg();
-        }
-        else {
-            transmitShiftingProductInformationMsg();
-        }
-        // TODO battery status and some more pages
+    } else {
+        transmitBackgroundDataPage();
         _patternStep = 0;
     }
 }
 
-void ProfileShiftingShifter::transmitShiftingManufacturerInformationMsg() {
-    ManufacturersInformationMsg msg;
-    _createShiftingManufacturerInformationMsg.call(msg);
-    send(msg);
+void ProfileShiftingShifter::transmitBackgroundDataPage() {
+    _backgroundStep += 1;
+    switch (_backgroundStep) {
+    case 0:
+        transmitMultiComponentSystemManufacturersInformationMsg();
+        break;
+    case 1:
+        transmitMultiComponentSystemProductInformationMsg();
+        break;
+    case 2:
+        transmitBatteryStatusMsg();
+        // prevent roll overs
+        _backgroundStep = 0;
+        break;
+    }
 }
 
-void ProfileShiftingShifter::transmitShiftingProductInformationMsg() {
-    ProductInformationMsg msg;
-    _createShiftingProductInformationMsg.call(msg);
-   send(msg);
+void ProfileShiftingShifter::transmitMultiComponentSystemManufacturersInformationMsg() {
+    MultiComponentSystemManufacturersInformationMsg msg;
+    _createMultiComponentSystemManufacturersInformationMsg.call(msg);
+    transmitMsg(msg);
+}
+
+void ProfileShiftingShifter::transmitMultiComponentSystemProductInformationMsg() {
+    MultiComponentSystemProductInformationMsg msg;
+    _createMultiComponentSystemProductInformationMsg.call(msg);
+    transmitMsg(msg);
+}
+
+void ProfileShiftingShifter::transmitBatteryStatusMsg() {
+    BatteryStatusMsg msg;
+    _createBatteryStatusMsg.call(msg);
+    transmitMsg(msg);
 }
 
 void ProfileShiftingShifter::transmitShiftingMainPageMsg() {
     ShiftingShiftSystemStatusMsg msg;
     _createShiftingShiftSystemStatusMsg.call(msg);
-    send(msg);
+    transmitMsg(msg);
 }
 
