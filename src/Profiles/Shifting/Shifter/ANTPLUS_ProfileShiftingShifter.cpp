@@ -6,7 +6,8 @@
 ProfileShiftingShifter::ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType) :
     BaseMasterProfile(deviceNumber, transmissionType),
     _patternStep(0),
-    _backgroundStep(0)
+    _backgroundStep(0),
+    _shiftCounter(0)
 {
     setChannelConfig();
 }
@@ -31,12 +32,11 @@ bool ProfileShiftingShifter::isDataPageValid(uint8_t dataPage)
 }
 
 void ProfileShiftingShifter::transmitNextDataPage() {
-    // TODO the pattern needs to adjust in when a shift event occurs
-    if (_patternStep++ < INTERLEAVE_STEP) {
+    if (_patternStep++ < INTERLEAVE_STEP || _shiftCounter--) {
         transmitShiftingMainPageMsg();
     } else {
         transmitBackgroundDataPage();
-        _patternStep = 0;
+        _patternStep -= INTERLEAVE_STEP;
     }
 }
 
@@ -78,6 +78,7 @@ void ProfileShiftingShifter::transmitBatteryStatusMsg() {
 void ProfileShiftingShifter::transmitShiftingMainPageMsg() {
     ShiftingShiftSystemStatusMsg msg;
     _createShiftingShiftSystemStatusMsg.call(msg);
+    // TODO track shifting internally and adjust transmission pattern accodingly (if shifter _shiftCounter = 4);
     transmitMsg(msg);
 }
 

@@ -42,6 +42,7 @@ private:
 
     uint8_t _patternStep;
     uint8_t _backgroundStep;
+    uint8_t _shiftCounter;
 
     Callback<ShiftingShiftSystemStatusMsg&> _createShiftingShiftSystemStatusMsg;
     Callback<MultiComponentSystemManufacturersInformationMsg&> _createMultiComponentSystemManufacturersInformationMsg;
