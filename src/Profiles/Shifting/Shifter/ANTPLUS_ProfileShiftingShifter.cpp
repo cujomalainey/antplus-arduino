@@ -57,6 +57,41 @@ void ProfileShiftingShifter::transmitBackgroundDataPage() {
     }
 }
 
+void ProfileShiftingShifter::onBroadcastData(BroadcastData& msg) {
+    BaseDataPage<BroadcastData> dp(msg);
+    uint8_t dataPage = dp.getDataPageNumber();
+    bool called = false;
+
+    BaseMasterProfile::onBroadcastData(msg);
+
+    switch (dataPage) {
+        // Display always should be using acknowledged messages
+    }
+
+    if (!called) {
+        callOnOtherDataPage(msg);
+    }
+}
+
+void ProfileShiftingShifter::onAcknowledgedData(AcknowledgedData& msg) {
+    BaseDataPage<AcknowledgedData> dp(msg);
+    uint8_t dataPage = dp.getDataPageNumber();
+    bool called = false;
+
+    BaseMasterProfile::onAcknowledgedData(msg);
+
+    switch (dataPage) {
+
+    case ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER:
+        called = handleRequestDataPage(dp);
+        break;
+    }
+
+    if (!called) {
+        callOnOtherDataPage(msg);
+    }
+}
+
 void ProfileShiftingShifter::transmitMultiComponentSystemManufacturersInformationMsg() {
     MultiComponentSystemManufacturersInformationMsg msg;
     _createMultiComponentSystemManufacturersInformationMsg.call(msg);
@@ -82,3 +117,8 @@ void ProfileShiftingShifter::transmitShiftingMainPageMsg() {
     transmitMsg(msg);
 }
 
+bool ProfileShiftingShifter::handleRequestDataPage(BaseDataPage<AcknowledgedData>& dataPage) {
+    RequestDataPage dp(dataPage);
+    // TODO disable use of ack messages as per spec
+    return _onRequestDataPage.call(dp);
+}
