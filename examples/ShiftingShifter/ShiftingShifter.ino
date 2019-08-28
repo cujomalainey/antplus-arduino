@@ -23,7 +23,7 @@ ProfileShiftingShifter shift = ProfileShiftingShifter( 7370 );
 void shiftSystemStatusMsgHandler(ShiftingShiftSystemStatusMsg& msg, uintptr_t data);
 void multiComponentSystemManufacturersInformationMsgHandler(MultiComponentSystemManufacturersInformationMsg& msg, uintptr_t data);
 void multiComponentSystemProductInformationMsgHandler(MultiComponentSystemProductInformationMsg& msg, uintptr_t data);
-void batteryStatusMsgHandler(batteryStatusMsgHandler& msg, uintptr_t data);
+void batteryStatusMsgHandler(BatteryStatusMsg& msg, uintptr_t data);
 
 void setup() {
     Serial2.begin(BAUD_RATE);

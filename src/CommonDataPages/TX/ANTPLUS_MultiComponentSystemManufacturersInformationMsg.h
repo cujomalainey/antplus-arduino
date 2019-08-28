@@ -14,7 +14,7 @@ public:
     void setNumberOfComponents(uint8_t count);
     void setComponentIdentifier(uint8_t identifier);
     void setHWRevision(uint8_t rev);
-    void setManufacturerID(uint16_t id);
+    void setManufacturerId(uint16_t id);
     void setModelNumber(uint16_t model);
 };
 

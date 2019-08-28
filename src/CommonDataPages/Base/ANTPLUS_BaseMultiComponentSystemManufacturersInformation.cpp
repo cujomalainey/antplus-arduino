@@ -27,7 +27,7 @@ uint8_t BaseMultiComponentSystemManufacturersInformation<T>::getHWRevision() {
 }
 
 template<class T>
-uint16_t BaseMultiComponentSystemManufacturersInformation<T>::getManufacturerID() {
+uint16_t BaseMultiComponentSystemManufacturersInformation<T>::getManufacturerId() {
     return this->get16BitValue(
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_MANUFACTURERID_LSB_BYTE,
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_MANUFACTURERID_MSB_BYTE);

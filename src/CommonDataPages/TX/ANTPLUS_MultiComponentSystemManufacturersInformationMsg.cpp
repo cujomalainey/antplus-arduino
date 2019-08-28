@@ -22,7 +22,7 @@ void MultiComponentSystemManufacturersInformationMsg::setHWRevision(uint8_t rev)
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_HWREVISION_BYTE);
 }
 
-void MultiComponentSystemManufacturersInformationMsg::setManufacturerID(uint16_t id) {
+void MultiComponentSystemManufacturersInformationMsg::setManufacturerId(uint16_t id) {
     set16BitValue(id,
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_MANUFACTURERID_LSB_BYTE,
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_MANUFACTURERID_MSB_BYTE);

@@ -14,7 +14,7 @@ public:
     uint8_t getNumberOfComponents();
     uint8_t getComponentIdentifier();
     uint8_t getHWRevision();
-    uint16_t getManufacturerID();
+    uint16_t getManufacturerId();
     uint16_t getModelNumber();
 };
 
