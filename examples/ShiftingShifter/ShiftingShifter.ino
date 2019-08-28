@@ -14,15 +14,16 @@
 #define BAUD_RATE 9600
 #define CHANNEL_0 0
 
-const uint8_t NETWORK_KEY[] = { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77 };
+const uint8_t NETWORK_KEY[] = { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77 }; // get this from thisisant.com
 
 AntWithCallbacks ant = AntWithCallbacks();
 AntPlusRouter router = AntPlusRouter();
 ProfileShiftingShifter shift = ProfileShiftingShifter( 7370 );
 
-void shiftCreateMsgHandler(ShiftingShiftSystemStatusMsg& msg, uintptr_t data);
-void shiftCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data);
-void shiftCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data);
+void shiftSystemStatusMsgHandler(ShiftingShiftSystemStatusMsg& msg, uintptr_t data);
+void multiComponentSystemManufacturersInformationMsgHandler(MultiComponentSystemManufacturersInformationMsg& msg, uintptr_t data);
+void multiComponentSystemProductInformationMsgHandler(MultiComponentSystemProductInformationMsg& msg, uintptr_t data);
+void batteryStatusMsgHandler(batteryStatusMsgHandler& msg, uintptr_t data);
 
 void setup() {
     Serial2.begin(BAUD_RATE);
@@ -37,9 +38,10 @@ void setup() {
     Serial.println("Running");
 
     // setup shifting monitor
-    shift.createShiftingShiftSystemStatusMsg(shiftCreateMsgHandler);
-    shift.createShiftingManufacturerInformationMsg(shiftCreateManufacturerInformationMsg);
-    shift.createShiftingProductInformationMsg(shiftCreateProductInformationMsg);
+    shift.createShiftingShiftSystemStatusMsg(shiftSystemStatusMsgHandler);
+    shift.createMultiComponentSystemManufacturerInformationMsg(multiComponentSystemManufacturersInformationMsgHandler);
+    shift.createMultiComponentSystemProductInformationMsg(multiComponentSystemProductInformationMsgHandler);
+    shift.createBatteryStatusMsg(batteryStatusMsgHandler);
     shift.begin();
     delay(100); // wait for module initialization
 }
@@ -60,14 +62,18 @@ void shiftCreateMsgHandler(ShiftingShiftSystemStatusMsg& msg, uintptr_t data)
     msg.setEventCount(_eventCount++);
 }
 
-void shiftCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data) {
+void multiComponentSystemManufacturersInformationMsgHandler(MultiComponentSystemManufacturersInformationMsg& msg, uintptr_t data) {
     msg.setHWRevision(0x01);
     msg.setManufacturerId(0x1234);
     msg.setModelNumber(0x0002);
 }
 
-void shiftCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data) {
+void multiComponentSystemProductInformationMsgHandler(MultiComponentSystemProductInformationMsg& msg, uintptr_t data) {
     msg.setSerialNumber(0x12345678);
     msg.setSWRevisionMain(0x01);
     msg.setSWRevisionSupplemental(0x00);
+}
+
+void batteryStatusMsgHandler(BatteryStatusMsg& msg, uintptr_t data) {
+    // TODO
 }
