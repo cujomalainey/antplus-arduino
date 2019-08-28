@@ -39,7 +39,7 @@ void setup() {
 
     // setup shifting monitor
     shift.createShiftingShiftSystemStatusMsg(shiftSystemStatusMsgHandler);
-    shift.createMultiComponentSystemManufacturerInformationMsg(multiComponentSystemManufacturersInformationMsgHandler);
+    shift.createMultiComponentSystemManufacturersInformationMsg(multiComponentSystemManufacturersInformationMsgHandler);
     shift.createMultiComponentSystemProductInformationMsg(multiComponentSystemProductInformationMsgHandler);
     shift.createBatteryStatusMsg(batteryStatusMsgHandler);
     shift.begin();
