@@ -50,7 +50,7 @@ void loop() {
     router.loop();
 }
 
-void shiftCreateMsgHandler(ShiftingShiftSystemStatusMsg& msg, uintptr_t data)
+void shiftSystemStatusMsgHandler(ShiftingShiftSystemStatusMsg& msg, uintptr_t data)
 {
     static int _gear = 0;
     static int _eventCount = 0;
