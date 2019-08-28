@@ -5,7 +5,7 @@ MultiComponentSystemManufacturersInformationMsg::MultiComponentSystemManufacture
 }
 
 void MultiComponentSystemManufacturersInformationMsg::setNumberOfComponents(uint8_t count) {
-    return set8BitValue(count,
+    set8BitValue(count,
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_COMPONENTIDENTIFIER_BYTE,
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_COMPONENTIDENTIFIER_NUMBERCOMPONENTS_MASK);
 }
