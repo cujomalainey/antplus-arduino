@@ -39,6 +39,7 @@ env:
     - PLATFORMIO_CI_SRC=examples/HeartRateDisplay/HeartRateDisplay.ino
     - PLATFORMIO_CI_SRC=examples/HeartRateMonitor/HeartRateMonitor.ino
     - PLATFORMIO_CI_SRC=examples/LEVDisplay/LEVDisplay.ino
+    - PLATFORMIO_CI_SRC=examples/ShiftingShifter/ShiftingShifter.ino
 
 install:
     - pip install -U platformio
