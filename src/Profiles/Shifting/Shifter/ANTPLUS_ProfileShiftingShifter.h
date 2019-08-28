@@ -13,7 +13,7 @@ public:
     /**
      * Register callback to populate default data messages (Datapage 1)
      */
-    void createShiftingSystemStatusMsg(void(*func)(ShiftingShiftSystemStatusMsg&, uintptr_t), uintptr_t data = 0) { _createShiftingShiftSystemStatusMsg.set(func, data); }
+    void createShiftingShiftSystemStatusMsg(void(*func)(ShiftingShiftSystemStatusMsg&, uintptr_t), uintptr_t data = 0) { _createShiftingShiftSystemStatusMsg.set(func, data); }
     /**
      * Register callback to populate multi component system manufacturer information data messages (Datapage 78)
      */
