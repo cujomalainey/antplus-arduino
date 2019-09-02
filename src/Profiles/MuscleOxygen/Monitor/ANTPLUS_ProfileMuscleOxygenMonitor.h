@@ -11,9 +11,9 @@ public:
     ProfileMuscleOxygenMonitor(uint16_t deviceNumber, uint8_t transmissionType = ANTPLUS_MUSCLEOXYGEN_MONITOR_TRANSMISSIONTYPE);
 
     /**
-     * Register callback to populate default data messages (Datapage 0)
+     * Register callback to populate Muscle Oxygen data messages (Datapage 0)
      */
-    void createMuscleOxygenDataMsg(void(*func)(MuscleOxygenBaseMainDataPageMsg&, uintptr_t), uintptr_t data = 0) { _createMuscleOxygenDataMsg.set(func, data); }
+    void createMuscleOxygenMuscleOxygenDataMsg(void(*func)(MuscleOxygenBaseMainDataPageMsg&, uintptr_t), uintptr_t data = 0) { _createMuscleOxygenMuscleOxygenDataMsg.set(func, data); }
     /**
      * Register callback to populate manufacturer information data messages (Datapage 2)
      */
@@ -33,11 +33,11 @@ protected:
 private:
     void setChannelConfig();
     void transmitMuscleOxygenMainPageMsg();
-    
+
     uint8_t _patternStep;
     uint8_t _toggle;
 
-    Callback<MuscleOxygenBaseMainDataPageMsg&> _createMuscleOxygenDataMsg;
+    Callback<MuscleOxygenBaseMainDataPageMsg&> _createMuscleOxygenMuscleOxygenDataMsg;
     Callback<ManufacturersInformationMsg&> _createMuscleOxygenManufacturerInformationMsg;
     Callback<ProductInformationMsg&> _createMuscleOxygenProductInformationMsg;
 };
