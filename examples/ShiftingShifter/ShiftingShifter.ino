@@ -43,7 +43,6 @@ void setup() {
     shift.createMultiComponentSystemProductInformationMsg(multiComponentSystemProductInformationMsgHandler);
     shift.createBatteryStatusMsg(batteryStatusMsgHandler);
     shift.begin();
-    delay(100); // wait for module initialization
 }
 
 void loop() {
