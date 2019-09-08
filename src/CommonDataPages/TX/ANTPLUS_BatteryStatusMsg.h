@@ -18,6 +18,8 @@ public:
     void setCoarseBatteryVoltage(uint8_t voltage);
     void setBatteryStatus(uint8_t status);
     void setCumulativeOperatingTimeResolution(uint8_t resolution);
+private:
+    uint8_t _buffer[MESSAGE_SIZE];
 };
 
 #endif // ANTPLUS_BATTERYSTATUSMSG_h

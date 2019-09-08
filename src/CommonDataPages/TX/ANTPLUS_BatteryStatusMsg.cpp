@@ -3,6 +3,7 @@
 #include <ANTPLUS_PrivateDefines.h>
 
 BatteryStatusMsg::BatteryStatusMsg() : BaseDataPageMsg<BroadcastDataMsg>(), BaseBatteryStatus<BroadcastDataMsg>() {
+    setDataBuffer(_buffer);
     set8BitValue(ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER,
             ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }

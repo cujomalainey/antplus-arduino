@@ -16,6 +16,8 @@ public:
     void setHWRevision(uint8_t rev);
     void setManufacturerId(uint16_t id);
     void setModelNumber(uint16_t model);
+private:
+    uint8_t _buffer[MESSAGE_SIZE];
 };
 
 #endif // ANTPLUS_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATIONMSG_h

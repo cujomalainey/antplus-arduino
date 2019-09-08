@@ -2,6 +2,7 @@
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 MultiComponentSystemManufacturersInformationMsg::MultiComponentSystemManufacturersInformationMsg() : BaseDataPageMsg<BroadcastDataMsg>(), BaseMultiComponentSystemManufacturersInformation<BroadcastDataMsg>() {
+    setDataBuffer(_buffer);
 }
 
 void MultiComponentSystemManufacturersInformationMsg::setNumberOfComponents(uint8_t count) {

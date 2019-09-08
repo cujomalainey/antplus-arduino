@@ -3,6 +3,7 @@
 #include <ANTPLUS_PrivateDefines.h>
 
 MultiComponentSystemProductInformationMsg::MultiComponentSystemProductInformationMsg() : BaseDataPageMsg<BroadcastDataMsg>(), BaseMultiComponentSystemProductInformation<BroadcastDataMsg>() {
+    setDataBuffer(_buffer);
 }
 
 void MultiComponentSystemProductInformationMsg::setNumberOfComponents(uint8_t count) {
