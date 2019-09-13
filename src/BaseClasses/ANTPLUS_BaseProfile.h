@@ -97,12 +97,12 @@ protected:
     void setSearchTimeout(uint8_t counts);
 private:
     void checkProfileStatus();
-    AntPlusRouter* _router;
+    AntPlusRouter* _router = NULL;
     Callback<AntRxDataResponse&> _onDataPage;
     Callback<AntRxDataResponse&> _onOtherDataPage;
     Callback<ChannelEventResponse&> _onChannelEvent;
     Callback<ChannelIdResponse&> _onChannelIdResponse;
-    uint8_t _channel;
+    uint8_t _channel = 0;
     uint8_t _channelType = 0;
     uint16_t _channelPeriod = 0;
     uint8_t _channelStatus = 0;
