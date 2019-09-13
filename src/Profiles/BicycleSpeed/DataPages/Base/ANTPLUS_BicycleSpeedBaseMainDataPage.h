@@ -8,7 +8,7 @@
 class BicycleSpeedBaseMainDataPage : public BaseDataPage<BroadcastData> {
 public:
     BicycleSpeedBaseMainDataPage(AntRxDataResponse& dp);
-    uint8_t getDataPageNumber();
+    uint8_t getDataPageNumber() override;
     uint8_t getPageChangeToggle();
     uint16_t getBikeSpeedEventTime();
     uint16_t getCumulativeSpeedRevolutionCount();
