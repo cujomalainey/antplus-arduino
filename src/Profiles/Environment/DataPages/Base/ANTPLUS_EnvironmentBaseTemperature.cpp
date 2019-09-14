@@ -21,7 +21,7 @@ int16_t EnvironmentBaseTemperature<T>::get24HourLow() {
     low |= this->get8BitValue(
             ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_24HOURLOW_LSB_BYTE);
     // extend bits if negative
-    low = 0x800 & low ? low | 0xF000 : low;
+    low = (0x800 & low) ? low | 0xF000 : low;
     return low;
 }
 
@@ -35,7 +35,7 @@ int16_t EnvironmentBaseTemperature<T>::get24HourHigh() {
             ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_24HOURHIGH_LSB_BYTE,
             ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_24HOURHIGH_LSB_MASK);
     // extend bits if negative
-    high = 0x800 & high ? high | 0xF000 : high;
+    high = (0x800 & high) ? high | 0xF000 : high;
     return high;
 }
 
