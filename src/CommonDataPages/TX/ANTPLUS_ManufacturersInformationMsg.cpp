@@ -1,6 +1,5 @@
 #include <CommonDataPages/TX/ANTPLUS_ManufacturersInformationMsg.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 // TODO Magic numbers
