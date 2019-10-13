@@ -4,8 +4,12 @@
 
 BatteryStatusMsg::BatteryStatusMsg() : BaseDataPageMsg<BroadcastDataMsg>(), BaseBatteryStatus<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
-    set8BitValue(ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER,
+    set8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER,
             ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+    set8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_RESERVED_VALUE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_RESERVED_BYTE);
 }
 
 void BatteryStatusMsg::setNumberOfBatteries(uint8_t num) {
