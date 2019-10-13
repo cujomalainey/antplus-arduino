@@ -1,8 +1,12 @@
 #include <CommonDataPages/TX/ANTPLUS_MultiComponentSystemManufacturersInformationMsg.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <ANTPLUS_PrivateDefines.h>
 
 MultiComponentSystemManufacturersInformationMsg::MultiComponentSystemManufacturersInformationMsg() : BaseDataPageMsg<BroadcastDataMsg>(), BaseMultiComponentSystemManufacturersInformation<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
+    set8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER,
+            ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 
 void MultiComponentSystemManufacturersInformationMsg::setNumberOfComponents(uint8_t count) {

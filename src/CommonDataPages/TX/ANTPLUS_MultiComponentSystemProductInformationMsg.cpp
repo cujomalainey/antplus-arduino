@@ -4,6 +4,9 @@
 
 MultiComponentSystemProductInformationMsg::MultiComponentSystemProductInformationMsg() : BaseDataPageMsg<BroadcastDataMsg>(), BaseMultiComponentSystemProductInformation<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
+    set8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER,
+            ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 
 void MultiComponentSystemProductInformationMsg::setNumberOfComponents(uint8_t count) {
