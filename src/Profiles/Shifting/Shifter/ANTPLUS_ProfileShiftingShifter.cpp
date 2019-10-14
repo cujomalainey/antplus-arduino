@@ -1,15 +1,25 @@
 #include <Profiles/Shifting/Shifter/ANTPLUS_ProfileShiftingShifter.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <Profiles/Shifting/ANTPLUS_ShiftingDefines.h>
 
-#define INTERLEAVE_STEP 65
-
-ProfileShiftingShifter::ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType) :
+ProfileShiftingShifter::ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType, uint16_t componentFlags) :
     BaseMasterProfile(deviceNumber, transmissionType),
-    _patternStep(0),
-    _backgroundStep(0),
-    _shiftCounter(0)
+    _componentFlags(componentFlags)
 {
     setChannelConfig();
+
+    if (isMultiComponentDevice()) {
+        // calculate interleave step
+        while (componentFlags) {
+            componentFlags &= (componentFlags - 1);
+            _componentCount++;
+        }
+    } else {
+        _componentCount = 1;
+        _componentState = 0xF;
+    }
+    _interleaveStep = ANTPLUS_SHIFTING_BACKGROUNDPAGE_INTERLEAVEINTERVAL /
+        (ANTPLUS_SHIFTING_NUMBERBACKGROUNDPAGES_PERCOMPONENT * _componentCount);
 }
 
 void ProfileShiftingShifter::setChannelConfig() {
@@ -32,11 +42,11 @@ bool ProfileShiftingShifter::isDataPageValid(uint8_t dataPage)
 }
 
 void ProfileShiftingShifter::transmitNextDataPage() {
-    if (_patternStep++ < INTERLEAVE_STEP || _shiftCounter--) {
+    if (_patternStep++ < _interleaveStep || _shiftCounter--) {
         transmitShiftingMainPageMsg();
     } else {
         transmitBackgroundDataPage();
-        _patternStep -= INTERLEAVE_STEP;
+        _patternStep -= _interleaveStep;
     }
 }
 
@@ -53,6 +63,16 @@ void ProfileShiftingShifter::transmitBackgroundDataPage() {
         transmitBatteryStatusMsg();
         // prevent roll overs
         _backgroundStep = 0;
+
+        if (isMultiComponentDevice()) {
+            // knock out component bit
+            _componentState &= (_componentState - 1);
+
+            if (!_componentState) {
+                // reset back to first component
+                _componentState = _componentFlags;
+            }
+        }
         break;
     }
 }
@@ -92,20 +112,46 @@ void ProfileShiftingShifter::onAcknowledgedData(AcknowledgedData& msg) {
     }
 }
 
+bool ProfileShiftingShifter::isMultiComponentDevice() {
+    return _componentFlags != ANTPLUS_SHIFTING_COMPONENTIDENTIFIER_NOTUSED;
+}
+
+
+bool ProfileShiftingShifter::isSupportedComponent(uint8_t id) {
+    return _componentFlags & (1 << id);
+}
+
+uint8_t ProfileShiftingShifter::getLowestBitPosition(uint16_t id) {
+    uint16_t lowestBitUnset = id & (id - 1);
+    uint8_t count = 0;
+    id ^= lowestBitUnset;
+    while (id) {
+        id >>= 1;
+        count++;
+    }
+    return count - 1;
+}
+
 void ProfileShiftingShifter::transmitMultiComponentSystemManufacturersInformationMsg() {
     MultiComponentSystemManufacturersInformationMsg msg;
+    msg.setComponentIdentifier(getLowestBitPosition(_componentState));
+    msg.setNumberOfComponents(_componentCount);
     _createMultiComponentSystemManufacturersInformationMsg.call(msg);
     transmitMsg(msg);
 }
 
 void ProfileShiftingShifter::transmitMultiComponentSystemProductInformationMsg() {
     MultiComponentSystemProductInformationMsg msg;
+    msg.setComponentIdentifier(getLowestBitPosition(_componentState));
+    msg.setNumberOfComponents(_componentCount);
     _createMultiComponentSystemProductInformationMsg.call(msg);
     transmitMsg(msg);
 }
 
 void ProfileShiftingShifter::transmitBatteryStatusMsg() {
     BatteryStatusMsg msg;
+    msg.setBatteryIdentifier(getLowestBitPosition(_componentState));
+    msg.setNumberOfBatteries(_componentCount);
     _createBatteryStatusMsg.call(msg);
     transmitMsg(msg);
 }
@@ -120,5 +166,6 @@ void ProfileShiftingShifter::transmitShiftingMainPageMsg() {
 bool ProfileShiftingShifter::handleRequestDataPage(BaseDataPage<AcknowledgedData>& dataPage) {
     RequestDataPage dp(dataPage);
     // TODO disable use of ack messages as per spec
+    // TODO handle descriptor byte if background datapage requested (need mechanism to cancel the request if component is not supported)
     return _onRequestDataPage.call(dp);
 }

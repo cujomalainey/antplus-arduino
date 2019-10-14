@@ -8,7 +8,7 @@
 
 class ProfileShiftingShifter : public BaseMasterProfile {
 public:
-    ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType = ANTPLUS_SHIFTING_SHIFTER_TRANSMISSIONTYPE);
+    ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType = ANTPLUS_SHIFTING_SHIFTER_TRANSMISSIONTYPE, uint16_t componentsSupported = 0x1);
 
     /**
      * Register callback to populate default data messages (Datapage 1)
@@ -44,13 +44,20 @@ private:
     void transmitMultiComponentSystemProductInformationMsg();
     void transmitBatteryStatusMsg();
     bool handleRequestDataPage(BaseDataPage<AcknowledgedData>& dataPage);
+    bool isSupportedComponent(uint8_t id);
+    bool isMultiComponentDevice();
+    uint8_t getLowestBitPosition(uint16_t id);
 
     void transmitBackgroundDataPage();
     void setChannelConfig();
 
-    uint8_t _patternStep;
-    uint8_t _backgroundStep;
-    uint8_t _shiftCounter;
+    uint8_t _patternStep = 0;
+    uint8_t _backgroundStep = 0;
+    uint8_t _shiftCounter = 0;
+    uint8_t _componentState = 0;
+    uint16_t _componentFlags;
+    uint8_t _interleaveStep;
+    uint8_t _componentCount = 0;
 
     Callback<ShiftingShiftSystemStatusMsg&> _createShiftingShiftSystemStatusMsg;
     Callback<MultiComponentSystemManufacturersInformationMsg&> _createMultiComponentSystemManufacturersInformationMsg;
