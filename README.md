@@ -9,16 +9,15 @@ An Implementation of the Ant+ Network on top of [ant-arduino](https://github.com
 
 ## News
 
+* 8/20/2019 v1.0.0 released, master profiles now are available
 * 10/1/2017 v0.1.0 Version released, library added to managers
 * 9/24/2017 Proof of concept complete (for system design)
 * 9/4/2017 Project Started
 
 ## Roadmap
 
-* v0.2.0 Build Framework for Channel Master with HR master
-* v0.3.0 Build support for non-ANT+ channel interfacing
-* v1.0.0 Finalize and verify system
-* v1.X.X Adding more profiles
+* Build support for non-ANT+ channel interfacing
+* Adding more profiles
 
 [Developer's Guide](https://github.com/cujomalainey/antplus-arduino/wiki/Developer's-Guide)
 
