@@ -23,8 +23,8 @@ public:
 
 private:
     void setChannelConfig();
-    void onBroadcastData(BroadcastData& msg);
-    void onAcknowledgedData(AcknowledgedData& msg);
+    void onBroadcastData(BroadcastData& msg) override;
+    void onAcknowledgedData(AcknowledgedData& msg) override;
 
     bool handleDataPage(HeartRateBaseMainDataPage& dp);
 

@@ -8,7 +8,6 @@
 class LevBaseMainDataPage : public BaseDataPage<BroadcastData> {
 public:
     LevBaseMainDataPage(AntRxDataResponse& dp);
-    uint8_t getDataPageNumber();
 };
 
 #endif // ANTPLUS_LEVBASEMAINDATAPAGE_h

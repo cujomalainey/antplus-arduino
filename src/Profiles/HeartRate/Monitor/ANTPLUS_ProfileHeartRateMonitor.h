@@ -59,10 +59,10 @@ public:
      */
     void setSportsMode(uint8_t mode) { _sportsMode = mode; }
 protected:
-    void transmitNextDataPage();
-    void onAcknowledgedData(AcknowledgedData& msg);
-    void onBroadcastData(BroadcastData& msg);
-    bool isDataPageValid(uint8_t dataPage);
+    void transmitNextDataPage() override;
+    void onAcknowledgedData(AcknowledgedData& msg) override;
+    void onBroadcastData(BroadcastData& msg) override;
+    bool isDataPageValid(uint8_t dataPage) override;
 private:
     void setChannelConfig();
     void transmitPrimaryDataPage();

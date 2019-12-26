@@ -10,13 +10,13 @@ public:
     /**
      * start profile transmission sequence
      */
-    virtual void begin();
+    virtual void begin() override;
 protected:
     /**
      * Used to catch EVENT_TX and continue transmission pattern
      * Also handles EVENT_TRANSFER_TX_COMPLETED for acknowledgement
      */
-    virtual void onChannelEventResponse(ChannelEventResponse& msg);
+    virtual void onChannelEventResponse(ChannelEventResponse& msg) override;
     /**
      * This function, when called, will transmit the next message in the broadcast pattern
      */
@@ -24,7 +24,7 @@ protected:
     /**
      * Checks for RequestDataPage messages and handles them accordingly
      */
-    virtual void onAcknowledgedData(AcknowledgedData& msg);
+    virtual void onAcknowledgedData(AcknowledgedData& msg) override;
     /**
      * Checks with subclass to see if request is valid
      */
@@ -48,9 +48,9 @@ protected:
     void transmitMsg(BaseDataPageMsg<AcknowledgedDataMsg> &msg);
 private:
     void handleRequestDataPage(AcknowledgedData& msg);
-    uint8_t _requestedPage;
+    uint8_t _requestedPage = 0;
     uint8_t _requestedCount = 0;
-    bool _isRequestAcknowledged;
+    bool _isRequestAcknowledged = false;
     bool _requestAcked = true;
 };
 

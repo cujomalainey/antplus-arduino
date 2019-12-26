@@ -23,7 +23,7 @@ ProfileHeartRateMonitor::ProfileHeartRateMonitor(
 }
 
 void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
-    HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
+    HeartRateBaseMainDataPage dp(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
@@ -39,7 +39,7 @@ void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
 }
 
 void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
-    HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
+    HeartRateBaseMainDataPage dp(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 

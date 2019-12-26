@@ -11,7 +11,7 @@ CoreDataPage<T>::CoreDataPage() : T() {
 template<class T>
 uint8_t CoreDataPage<T>::getDataPageNumber() {
     // TODO handle shared channels
-    return this->getData(ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+    return this->get8BitValue(ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 
 template<class T>
