@@ -65,7 +65,8 @@ void ProfileShiftingShifter::transmitBackgroundDataPage() {
         // prevent roll overs
         _backgroundStep = 0;
 
-        if (isMultiComponentDevice()) {
+        // Don't adjust state if we are handling a request
+        if (isMultiComponentDevice() && !isRequestedPagePending()) {
             // knock out component bit
             _componentState &= (_componentState - 1);
 
@@ -116,7 +117,6 @@ void ProfileShiftingShifter::onAcknowledgedData(AcknowledgedData& msg) {
 bool ProfileShiftingShifter::isMultiComponentDevice() {
     return _componentFlags != ANTPLUS_SHIFTING_COMPONENTIDENTIFIER_NOTUSED;
 }
-
 
 bool ProfileShiftingShifter::isSupportedComponent(uint8_t id) {
     return _componentFlags & (1 << id);
@@ -179,8 +179,13 @@ bool ProfileShiftingShifter::handleRequestDataPage(BaseDataPage<AcknowledgedData
     }
 
     // invalidate invalid component requests
-    if (isMultiComponentDevice() && !isSupportedComponent(dp.getDescriptorByte1())) {
-        invalidateDataPageRequest();
+    if (isMultiComponentDevice()) {
+        if (isSupportedComponent(dp.getDescriptorByte1())) {
+            // override transmission state, will automatically reset after
+            _componentState = 1 << dp.getDescriptorByte1();
+        } else {
+            invalidateDataPageRequest();
+        }
     }
 
     return _onRequestDataPage.call(dp);
