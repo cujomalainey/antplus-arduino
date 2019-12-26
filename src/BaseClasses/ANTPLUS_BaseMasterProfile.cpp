@@ -50,13 +50,22 @@ uint8_t BaseMasterProfile::getRequestedPage() {
 }
 
 bool BaseMasterProfile::isRequestedPageAcknowledged() {
-    return _isRequestAcknowledged;
+    return _isRequestAcknowledged && _ackMessagesAllowed;
 }
 
 void BaseMasterProfile::begin() {
     BaseProfile::begin();
     // send first datapage manually so we don't transmit 0s
     transmitNextDataPage();
+}
+
+void BaseMasterProfile::invalidateDataPageRequest() {
+    _requestedCount = 0;
+    _requestAcked = true;
+}
+
+void BaseMasterProfile::setAckMessageUsage(bool on) {
+    _ackMessagesAllowed = on;
 }
 
 void BaseMasterProfile::transmitMsg(BaseDataPageMsg<BroadcastDataMsg> &msg) {
