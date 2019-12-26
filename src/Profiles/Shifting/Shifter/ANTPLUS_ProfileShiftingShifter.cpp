@@ -7,6 +7,7 @@ ProfileShiftingShifter::ProfileShiftingShifter(uint16_t deviceNumber, uint8_t tr
     _componentFlags(componentFlags)
 {
     setChannelConfig();
+    setAckMessageUsage(false);
 
     if (isMultiComponentDevice()) {
         // calculate interleave step
@@ -165,7 +166,22 @@ void ProfileShiftingShifter::transmitShiftingMainPageMsg() {
 
 bool ProfileShiftingShifter::handleRequestDataPage(BaseDataPage<AcknowledgedData>& dataPage) {
     RequestDataPage dp(dataPage);
-    // TODO disable use of ack messages as per spec
-    // TODO handle descriptor byte if background datapage requested (need mechanism to cancel the request if component is not supported)
+    uint8_t dataPageRequestedNumber = dp.getRequestedPageNumber();
+
+    switch (dataPageRequestedNumber) {
+    case ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
+        break;
+    default:
+        // skip check if not multicomponent message
+        return _onRequestDataPage.call(dp);
+    }
+
+    // invalidate invalid component requests
+    if (isMultiComponentDevice() && !isSupportedComponent(dp.getDescriptorByte1())) {
+        invalidateDataPageRequest();
+    }
+
     return _onRequestDataPage.call(dp);
 }
