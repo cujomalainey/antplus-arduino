@@ -2,6 +2,8 @@
 .piolibdeps
 .ycm*
 *.swp
+.DS_Store
+*.DS_Store
 
 # used for testing
 src/main.cpp
@@ -9,3 +11,4 @@ src/main.cpp
 .tags*
 tags
 .pio
+*-e
