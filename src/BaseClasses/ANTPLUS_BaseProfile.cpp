@@ -128,7 +128,7 @@ void BaseProfile::checkProfileStatus() {
 }
 
 void BaseProfile::send(AcknowledgedDataMsg& msg) {
-    msg.setChannelNumber(_channel);
+    msg.setChannel(_channel);
     _router->send(msg);
 }
 

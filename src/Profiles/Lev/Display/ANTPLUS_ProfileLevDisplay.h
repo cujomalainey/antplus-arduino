@@ -37,14 +37,14 @@ private:
     bool handleManufacturersInformation(LevBaseMainDataPage& dataPage);
     bool handleProductInformation(LevBaseMainDataPage& dataPage);
 
-    Callback<LevSpeedSystemInformation1&> _onLevSpeedSystemInformation1;
-    Callback<LevSpeedDistanceInformation&> _onLevSpeedDistanceInformation;
-    Callback<LevAltSpeedDistanceInformation&> _onLevAltSpeedDistanceInformation;
-    Callback<LevSpeedSystemInformation2&> _onLevSpeedSystemInformation2;
-    Callback<LevBatteryInformation&> _onLevBatteryInformation;
-    Callback<LevCapabilities&> _onLevCapabilities;
-    Callback<ManufacturersInformation&> _onManufacturersInformation;
-    Callback<ProductInformation&> _onProductInformation;
+    AntCallback<LevSpeedSystemInformation1&> _onLevSpeedSystemInformation1;
+    AntCallback<LevSpeedDistanceInformation&> _onLevSpeedDistanceInformation;
+    AntCallback<LevAltSpeedDistanceInformation&> _onLevAltSpeedDistanceInformation;
+    AntCallback<LevSpeedSystemInformation2&> _onLevSpeedSystemInformation2;
+    AntCallback<LevBatteryInformation&> _onLevBatteryInformation;
+    AntCallback<LevCapabilities&> _onLevCapabilities;
+    AntCallback<ManufacturersInformation&> _onManufacturersInformation;
+    AntCallback<ProductInformation&> _onProductInformation;
 };
 
 #endif // ANTPLUS_PROFILELEVDISPLAY_h

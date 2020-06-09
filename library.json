@@ -13,7 +13,8 @@
   "dependencies":
   [
       {
-          "name":"ANT"
+          "name":"ANT",
+          "version": ">=2.0.0"
       }
   ]
  }
