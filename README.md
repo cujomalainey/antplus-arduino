@@ -9,6 +9,7 @@ An Implementation of the Ant+ Network on top of [ant-arduino](https://github.com
 
 ## News
 
+* 6/28/2020 v2.0.0 of ant-arduino released with support for mbed and softdevices
 * 8/20/2019 v1.0.0 released, master profiles now are available
 * 10/1/2017 v0.1.0 Version released, library added to managers
 * 9/24/2017 Proof of concept complete (for system design)
