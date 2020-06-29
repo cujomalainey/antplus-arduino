@@ -25,7 +25,7 @@
 const uint8_t NETWORK_KEY[] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77}; // get this from thisisant.com
 
 uint32_t flags = 0;
-AntWithCallbacks ant;
+ArduinoSerialAntWithCallbacks ant;
 AntPlusRouter router;
 ProfileHeartRateMonitor hr(123, 0, flags);
 

@@ -16,9 +16,9 @@
 
 const uint8_t NETWORK_KEY[] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77}; // get this from thisisant.com
 
-AntWithCallbacks ant = AntWithCallbacks();
-AntPlusRouter router = AntPlusRouter();
-ProfileEnvironmentDisplay env = ProfileEnvironmentDisplay();
+ArduinoSerialAntWithCallbacks ant;
+AntPlusRouter router;
+ProfileEnvironmentDisplay env;
 
 void generalInformationDataPageHandler(EnvironmentGeneralInformation& msg, uintptr_t data);
 void temperatureDataPageHandler(EnvironmentTemperature& msg, uintptr_t data);
