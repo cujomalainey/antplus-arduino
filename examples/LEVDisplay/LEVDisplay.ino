@@ -17,9 +17,9 @@
 
 const uint8_t NETWORK_KEY[] = { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77 };
 
-AntWithCallbacks ant = AntWithCallbacks();
-AntPlusRouter router = AntPlusRouter();
-ProfileLevDisplay lev = ProfileLevDisplay();
+ArduinoSerialAntWithCallbacks ant;
+AntPlusRouter router;
+ProfileLevDisplay lev;
 
 void levBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data);
 void levSpeedSystemInformation1Handler(LevSpeedSystemInformation1& msg, uintptr_t data);
