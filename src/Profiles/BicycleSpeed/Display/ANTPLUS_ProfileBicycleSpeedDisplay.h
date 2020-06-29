@@ -21,8 +21,8 @@ public:
 
 private:
     void setChannelConfig();
-    void onBroadcastData(BroadcastData& msg);
-    void onAcknowledgedData(AcknowledgedData& msg);
+    void onBroadcastData(BroadcastData& msg) override;
+    void onAcknowledgedData(AcknowledgedData& msg) override;
 
     bool handleDataPage(BicycleSpeedBaseMainDataPage& dataPage);
     bool handleBatteryStatus(BicycleSpeedBaseMainDataPage& dataPage);
@@ -31,12 +31,12 @@ private:
     bool handleManufacturerID(BicycleSpeedBaseMainDataPage& dataPage);
     bool handleMotionAndSpeed(BicycleSpeedBaseMainDataPage& dataPage);
     bool handleProductID(BicycleSpeedBaseMainDataPage& dataPage);
-    Callback<BicycleSpeedBatteryStatus&> _onBicycleSpeedBatteryStatus;
-    Callback<BicycleSpeedCumulativeOperatingTime&> _onBicycleSpeedCumulativeOperatingTime;
-    Callback<BicycleSpeedDefault&> _onBicycleSpeedDefault;
-    Callback<BicycleSpeedManufacturerID&> _onBicycleSpeedManufacturerID;
-    Callback<BicycleSpeedMotionAndSpeed&> _onBicycleSpeedMotionAndSpeed;
-    Callback<BicycleSpeedProductID&> _onBicycleSpeedProductID;
+    AntCallback<BicycleSpeedBatteryStatus&> _onBicycleSpeedBatteryStatus;
+    AntCallback<BicycleSpeedCumulativeOperatingTime&> _onBicycleSpeedCumulativeOperatingTime;
+    AntCallback<BicycleSpeedDefault&> _onBicycleSpeedDefault;
+    AntCallback<BicycleSpeedManufacturerID&> _onBicycleSpeedManufacturerID;
+    AntCallback<BicycleSpeedMotionAndSpeed&> _onBicycleSpeedMotionAndSpeed;
+    AntCallback<BicycleSpeedProductID&> _onBicycleSpeedProductID;
 };
 
 #endif // ANTPLUS_PROFILEBICYCLESPEEDDISPLAY_h

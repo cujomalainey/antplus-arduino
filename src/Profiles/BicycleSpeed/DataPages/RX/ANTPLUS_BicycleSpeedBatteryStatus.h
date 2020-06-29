@@ -2,13 +2,11 @@
 #define ANTPLUS_BICYCLESPEEDBATTERYSTATUS_h
 
 #include <Profiles/BicycleSpeed/DataPages/Base/ANTPLUS_BicycleSpeedBaseMainDataPage.h>
+#include <Profiles/BicycleSpeed/DataPages/Base/ANTPLUS_BicycleSpeedBaseBatteryStatus.h>
 
-class BicycleSpeedBatteryStatus : public BicycleSpeedBaseMainDataPage {
+class BicycleSpeedBatteryStatus : public BicycleSpeedBaseMainDataPage, public BicycleSpeedBaseBatteryStatus<BroadcastData> {
 public:
     BicycleSpeedBatteryStatus(AntRxDataResponse& dp);
-    uint8_t getFractionalBatteryVoltage();
-    uint8_t getCoarseBatteryVoltage();
-    uint8_t getBatteryStatus();
 };
 
 #endif // ANTPLUS_BICYCLESPEEDBATTERYSTATUS_h

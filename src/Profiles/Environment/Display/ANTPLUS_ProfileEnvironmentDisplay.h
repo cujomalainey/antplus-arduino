@@ -19,8 +19,8 @@ public:
 
 private:
     void setChannelConfig();
-    void onBroadcastData(BroadcastData& msg);
-    void onAcknowledgedData(AcknowledgedData& msg);
+    void onBroadcastData(BroadcastData& msg) override;
+    void onAcknowledgedData(AcknowledgedData& msg) override;
 
     bool handleDataPage(EnvironmentBaseDataPage& dp);
 
@@ -28,10 +28,10 @@ private:
     bool handleTemperature(EnvironmentBaseDataPage& dataPage);
     bool handleManufacturersInformation(EnvironmentBaseDataPage& dataPage);
     bool handleProductInformation(EnvironmentBaseDataPage& dataPage);
-    Callback<EnvironmentGeneralInformation&> _onEnvironmentGeneralInformation;
-    Callback<EnvironmentTemperature&> _onEnvironmentTemperature;
-    Callback<ManufacturersInformation&> _onManufacturersInformation;
-    Callback<ProductInformation&> _onProductInformation;
+    AntCallback<EnvironmentGeneralInformation&> _onEnvironmentGeneralInformation;
+    AntCallback<EnvironmentTemperature&> _onEnvironmentTemperature;
+    AntCallback<ManufacturersInformation&> _onManufacturersInformation;
+    AntCallback<ProductInformation&> _onProductInformation;
 };
 
 #endif // ANTPLUS_PROFILEENVIRONMENTDISPLAY_h

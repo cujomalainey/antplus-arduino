@@ -9,7 +9,7 @@ template<class T>
 class HeartRateCoreMainDataPage : virtual public CoreDataPage<T> {
 public:
     HeartRateCoreMainDataPage();
-    uint8_t getDataPageNumber();
+    uint8_t getDataPageNumber() override;
     uint8_t getPageChangeToggle();
     uint16_t getHeartBeatEventTime();
     uint8_t getHeartBeatCount();

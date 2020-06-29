@@ -23,8 +23,8 @@ public:
 
 private:
     void setChannelConfig();
-    void onBroadcastData(BroadcastData& msg);
-    void onAcknowledgedData(AcknowledgedData& msg);
+    void onBroadcastData(BroadcastData& msg) override;
+    void onAcknowledgedData(AcknowledgedData& msg) override;
 
     bool handleDataPage(HeartRateBaseMainDataPage& dp);
 
@@ -36,14 +36,14 @@ private:
     bool handlePreviousHeartBeat(HeartRateBaseMainDataPage& dataPage);
     bool handleProductInformation(HeartRateBaseMainDataPage& dataPage);
     bool handleSwimIntervalSummary(HeartRateBaseMainDataPage& dataPage);
-    Callback<HeartRateBatteryStatus&> _onHeartRateBatteryStatus;
-    Callback<HeartRateCapabilities&> _onHeartRateCapabilities;
-    Callback<HeartRateCumulativeOperatingTime&> _onHeartRateCumulativeOperatingTime;
-    Callback<HeartRateDefault&> _onHeartRateDefault;
-    Callback<HeartRateManufacturerInformation&> _onHeartRateManufacturerInformation;
-    Callback<HeartRatePreviousHeartBeat&> _onHeartRatePreviousHeartBeat;
-    Callback<HeartRateProductInformation&> _onHeartRateProductInformation;
-    Callback<HeartRateSwimIntervalSummary&> _onHeartRateSwimIntervalSummary;
+    AntCallback<HeartRateBatteryStatus&> _onHeartRateBatteryStatus;
+    AntCallback<HeartRateCapabilities&> _onHeartRateCapabilities;
+    AntCallback<HeartRateCumulativeOperatingTime&> _onHeartRateCumulativeOperatingTime;
+    AntCallback<HeartRateDefault&> _onHeartRateDefault;
+    AntCallback<HeartRateManufacturerInformation&> _onHeartRateManufacturerInformation;
+    AntCallback<HeartRatePreviousHeartBeat&> _onHeartRatePreviousHeartBeat;
+    AntCallback<HeartRateProductInformation&> _onHeartRateProductInformation;
+    AntCallback<HeartRateSwimIntervalSummary&> _onHeartRateSwimIntervalSummary;
 };
 
 #endif // ANTPLUS_PROFILEHEARTRATEDISPLAY_h

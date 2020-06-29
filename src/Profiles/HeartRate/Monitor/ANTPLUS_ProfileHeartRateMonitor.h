@@ -59,10 +59,10 @@ public:
      */
     void setSportsMode(uint8_t mode) { _sportsMode = mode; }
 protected:
-    void transmitNextDataPage();
-    void onAcknowledgedData(AcknowledgedData& msg);
-    void onBroadcastData(BroadcastData& msg);
-    bool isDataPageValid(uint8_t dataPage);
+    void transmitNextDataPage() override;
+    void onAcknowledgedData(AcknowledgedData& msg) override;
+    void onBroadcastData(BroadcastData& msg) override;
+    bool isDataPageValid(uint8_t dataPage) override;
 private:
     void setChannelConfig();
     void transmitPrimaryDataPage();
@@ -80,16 +80,16 @@ private:
     bool handleModeSettings(HeartRateBaseMainDataPage& dataPage);
     bool handleRequestDataPage(HeartRateBaseMainDataPage& dataPage);
     uint8_t getNextBackgroundPage(uint8_t currentPage);
-    Callback<RequestDataPage&> _onRequestDataPage;
-    Callback<ModeSettings&> _onModeSettings;
-    Callback<HeartRateDefaultMsg&> _createHeartRateDefaultMsg;
-    Callback<HeartRateCumulativeOperatingTimeMsg&> _createHeartRateCumulativeOperatingTimeMsg;
-    Callback<HeartRateManufacturerInformationMsg&> _createHeartRateManufacturerInformationMsg;
-    Callback<HeartRateProductInformationMsg&> _createHeartRateProductInformationMsg;
-    Callback<HeartRatePreviousHeartBeatMsg&> _createHeartRatePreviousHeartBeatMsg;
-    Callback<HeartRateSwimIntervalSummaryMsg&> _createHeartRateSwimIntervalSummaryMsg;
-    Callback<HeartRateCapabilitiesMsg&> _createHeartRateCapabilitiesMsg;
-    Callback<HeartRateBatteryStatusMsg&> _createHeartRateBatteryStatusMsg;
+    AntCallback<RequestDataPage&> _onRequestDataPage;
+    AntCallback<ModeSettings&> _onModeSettings;
+    AntCallback<HeartRateDefaultMsg&> _createHeartRateDefaultMsg;
+    AntCallback<HeartRateCumulativeOperatingTimeMsg&> _createHeartRateCumulativeOperatingTimeMsg;
+    AntCallback<HeartRateManufacturerInformationMsg&> _createHeartRateManufacturerInformationMsg;
+    AntCallback<HeartRateProductInformationMsg&> _createHeartRateProductInformationMsg;
+    AntCallback<HeartRatePreviousHeartBeatMsg&> _createHeartRatePreviousHeartBeatMsg;
+    AntCallback<HeartRateSwimIntervalSummaryMsg&> _createHeartRateSwimIntervalSummaryMsg;
+    AntCallback<HeartRateCapabilitiesMsg&> _createHeartRateCapabilitiesMsg;
+    AntCallback<HeartRateBatteryStatusMsg&> _createHeartRateBatteryStatusMsg;
     uint8_t _nextBackgroundPage;
     uint8_t _sportsMode = ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_SPORTSMODE_RUNNING;
     uint32_t _flags = 0;

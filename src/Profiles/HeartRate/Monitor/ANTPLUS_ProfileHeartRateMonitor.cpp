@@ -23,7 +23,7 @@ ProfileHeartRateMonitor::ProfileHeartRateMonitor(
 }
 
 void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
-    HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
+    HeartRateBaseMainDataPage dp(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
@@ -39,7 +39,7 @@ void ProfileHeartRateMonitor::onBroadcastData(BroadcastData& msg) {
 }
 
 void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
-    HeartRateBaseMainDataPage dp = HeartRateBaseMainDataPage(msg);
+    HeartRateBaseMainDataPage dp(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
@@ -208,13 +208,7 @@ void ProfileHeartRateMonitor::transmitHeartRateMsg(HeartRateBaseMainDataPageMsg&
     toggle /= 4;
     _toggleStep = _toggleStep % 8;
     msg.setPageChangeToggle(toggle);
-    if (isRequestedPageAcknowledged() && isRequestedPagePending()) {
-        AcknowledgedDataMsg ack;
-        ack.setDataBuffer(msg.getDataBuffer());
-        send(ack);
-    } else {
-        send(msg);
-    }
+    transmitMsg(msg);
 }
 
 bool ProfileHeartRateMonitor::isDataPageValid(uint8_t dataPage) {

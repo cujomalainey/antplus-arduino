@@ -8,7 +8,6 @@
 class EnvironmentBaseDataPage : public BaseDataPage<BroadcastData> {
 public:
     EnvironmentBaseDataPage(AntRxDataResponse& dp);
-    uint8_t getDataPageNumber();
 };
 
 #endif // ANTPLUS_ENVIRONMENTBASEMAINDATAPAGE_h
