@@ -11,6 +11,7 @@ uint8_t EnvironmentBaseTemperature<T>::getEventCount() {
             ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_EVENTCOUNT_BYTE);
 }
 
+// TODO check if these can be replaced with get16bitValues
 /* NOTE: this is a non-contigous data field, which resuls in the shenanigans below */
 template<class T>
 int16_t EnvironmentBaseTemperature<T>::get24HourLow() {
