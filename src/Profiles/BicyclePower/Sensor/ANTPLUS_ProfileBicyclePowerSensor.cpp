@@ -23,8 +23,7 @@ ProfileBicyclePowerSensor::ProfileBicyclePowerSensor(
 }
 
 void ProfileBicyclePowerSensor::onBroadcastData(BroadcastData& msg) {
-    Serial.println("!!!!!!!");
-    BicyclePowerStdPowerOnlyDataPage dp = BicyclePowerStdPowerOnlyDataPage(msg);
+    BicyclePowerStdPowerOnlyDataPage dp(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
@@ -40,7 +39,7 @@ void ProfileBicyclePowerSensor::onBroadcastData(BroadcastData& msg) {
 }
 
 void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
-    BicyclePowerStdPowerOnlyDataPage dp = BicyclePowerStdPowerOnlyDataPage(msg);
+    BicyclePowerStdPowerOnlyDataPage dp(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
