@@ -45,7 +45,6 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
     bool called = false;
 
     BaseMasterProfile::onAcknowledgedData(msg);
-#if 0
     switch (dataPage) {
 
     case ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER:
@@ -55,14 +54,12 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
         called = handleModeSettings(dp);
         break;
     }
-#endif
     if (!called) {
         callOnOtherDataPage(msg);
     }
 }
 
 void ProfileBicyclePowerSensor::transmitNextDataPage() {
-#if 0
     if (isRequestedPagePending()) {
         transmitRequestedDataPage();
     } else {
@@ -76,9 +73,7 @@ void ProfileBicyclePowerSensor::transmitNextDataPage() {
             }
         }
     }
-#else
     transmitPrimaryDataPage();
-#endif
 }
 
 void ProfileBicyclePowerSensor::transmitPrimaryDataPage() {
@@ -86,7 +81,6 @@ void ProfileBicyclePowerSensor::transmitPrimaryDataPage() {
 }
 
 void ProfileBicyclePowerSensor::transmitBackgroundDataPage() {
-#if 0
     switch (_nextBackgroundPage) {
     case ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER:
         transmitBicyclePowerCumulativeOperatingTimeMsg();
@@ -104,11 +98,9 @@ void ProfileBicyclePowerSensor::transmitBackgroundDataPage() {
         transmitBicyclePowerCapabilitiesMsg();
         break;
     }
-#endif
 }
 
 uint8_t ProfileBicyclePowerSensor::getNextBackgroundPage(uint8_t currentPage) {
-#if 0
     if ((currentPage < ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_CUMULATIVEOPERATINGTIME_SUPPORTED)) {
         return ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER;
     } else if (currentPage < ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER) {
@@ -123,9 +115,7 @@ uint8_t ProfileBicyclePowerSensor::getNextBackgroundPage(uint8_t currentPage) {
         // Reached end of the loop, start again
         return getNextBackgroundPage(0);
     }
-#else
     return 0;
-#endif
 }
 
 void ProfileBicyclePowerSensor::transmitRequestedDataPage() {

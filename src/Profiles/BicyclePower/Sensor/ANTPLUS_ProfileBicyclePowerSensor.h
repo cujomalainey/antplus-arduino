@@ -27,7 +27,7 @@ private:
     void transmitBicyclePowerDefaultMsg();
     void transmitBicycleStdPowerOnlyMsg(BicyclePowerStdPowerOnlyDataPageMsg& msg);
     uint8_t getNextBackgroundPage(uint8_t currentPage);
-    Callback<BicyclePowerStdPowerOnlyDataPageMsg&> _createBicyclePowerStdPowerOnlyDataPageMsg;
+    AntCallback<BicyclePowerStdPowerOnlyDataPageMsg&> _createBicyclePowerStdPowerOnlyDataPageMsg;
     uint8_t _nextBackgroundPage;
     uint8_t _patternStep = 0;
     uint32_t _flags = 0;
