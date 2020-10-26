@@ -26,7 +26,9 @@ private:
     void transmitRequestedDataPage();
     void transmitBicyclePowerDefaultMsg();
     void transmitBicycleStdPowerOnlyMsg(BicyclePowerStdPowerOnlyDataPageMsg& msg);
+    bool handleRequestDataPage(BicyclePowerStdPowerOnlyDataPage& dataPage);
     uint8_t getNextBackgroundPage(uint8_t currentPage);
+    AntCallback<RequestDataPage&> _onRequestDataPage;
     AntCallback<BicyclePowerStdPowerOnlyDataPageMsg&> _createBicyclePowerStdPowerOnlyDataPageMsg;
     uint8_t _nextBackgroundPage;
     uint8_t _patternStep = 0;

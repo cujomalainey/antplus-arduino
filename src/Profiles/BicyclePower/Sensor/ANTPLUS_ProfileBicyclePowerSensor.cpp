@@ -75,6 +75,11 @@ void ProfileBicyclePowerSensor::transmitNextDataPage() {
     transmitPrimaryDataPage();
 }
 
+bool ProfileBicyclePowerSensor::handleRequestDataPage(BicyclePowerStdPowerOnlyDataPage& dataPage) {
+    RequestDataPage dp(dataPage);
+    return _onRequestDataPage.call(dp);
+}
+
 void ProfileBicyclePowerSensor::transmitPrimaryDataPage() {
     transmitBicyclePowerDefaultMsg();
 }
