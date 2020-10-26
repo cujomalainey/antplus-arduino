@@ -49,9 +49,6 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
     case ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
-    case ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_NUMBER:
-        called = handleModeSettings(dp);
-        break;
     }
     if (!called) {
         callOnOtherDataPage(msg);
