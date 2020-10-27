@@ -49,6 +49,9 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
     case ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
+    case ANTPLUS_BICYCLEPOWER_DATAPAGE_GENERALCALIBRATION_NUMBER:
+        called = handleGeneralCalibrationRequest(dp);
+        break;
     }
     if (!called) {
         callOnOtherDataPage(msg);
@@ -83,20 +86,23 @@ void ProfileBicyclePowerSensor::transmitPrimaryDataPage() {
 
 void ProfileBicyclePowerSensor::transmitBackgroundDataPage() {
     switch (_nextBackgroundPage) {
-    case ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER:
-        transmitBicyclePowerCumulativeOperatingTimeMsg();
+    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDPOWERONLY_NUMBER:
+        transmitBicyclePowerStandardPowerOnlyMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER:
-        transmitBicyclePowerManufacturerInformationMsg();
+    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDWHEELTORQUE_NUMBER:
+        transmitBicyclePowerStandardWheelTorqueMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER:
-        transmitBicyclePowerProductInformationMsg();
+    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDCRANKTORQUE_NUMBER:
+        transmitBicyclePowerStandardCrankTorqueMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER:
-        transmitBicyclePowerBatteryStatusMsg();
+    case ANTPLUS_BICYCLEPOWER_DATAPAGE_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
+        transmitBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER:
-        transmitBicyclePowerCapabilitiesMsg();
+    case ANTPLUS_BICYCLEPOWER_DATAPAGE_CRANKTORQUEFREQUENCY_NUMBER:
+        transmitBicyclePowerCrankTorqueFrequencyMsg();
+        break;
+    case ANTPLUS_BICYCLEPOWER_DATAPAGE_GENERALCALIBRATION_NUMBER:
+        transmistBicyclePowerGeneralCalibrationResponse();
         break;
     }
 }
@@ -122,20 +128,16 @@ uint8_t ProfileBicyclePowerSensor::getNextBackgroundPage(uint8_t currentPage) {
 void ProfileBicyclePowerSensor::transmitRequestedDataPage() {
     uint8_t requestedPage = getRequestedPage();
     switch (requestedPage) {
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STD_POWERONLY_MAIN_DATAPAGE_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDPOWERONLY_NUMBER:
         transmitBicyclePowerDefaultMsg();
         break;
     }
 }
 
-void ProfileBicyclePowerSensor::transmitBicyclePowerDefaultMsg() {
-    BicyclePowerStdPowerOnlyDataPageMsg msg;
-    _createBicyclePowerStdPowerOnlyDataPageMsg.call(msg);
-    transmitBicycleStdPowerOnlyMsg(msg);
-}
-
-void ProfileBicyclePowerSensor::transmitBicycleStdPowerOnlyMsg(BicyclePowerStdPowerOnlyDataPageMsg& msg) {
-    send(msg);
+void ProfileBicyclePowerSensor::transmitBicyclePowerOnlyMsg() {
+    BicyclePowerStandardPowerOnlyMsg msg;
+    _createBicyclePowerStandardPowerOnlyMsg.call(msg);
+    transmitMsg(msg);
 }
 
 void ProfileBicyclePowerSensor::setChannelConfig() {
@@ -146,5 +148,6 @@ void ProfileBicyclePowerSensor::setChannelConfig() {
 }
 
 bool ProfileBicyclePowerSensor::isDataPageValid(uint8_t dataPage) {
+    // TODO
     return true;
 }
