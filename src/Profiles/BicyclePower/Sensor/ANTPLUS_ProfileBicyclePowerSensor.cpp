@@ -50,7 +50,7 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
         called = handleRequestDataPage(dp);
         break;
     case ANTPLUS_BICYCLEPOWER_DATAPAGE_GENERALCALIBRATION_NUMBER:
-        called = handleGeneralCalibrationRequest(dp);
+        called = handleGeneralCalibration(dp);
         break;
     }
     if (!called) {
@@ -80,6 +80,11 @@ bool ProfileBicyclePowerSensor::handleRequestDataPage(BicyclePowerStdPowerOnlyDa
     return _onRequestDataPage.call(dp);
 }
 
+bool ProfileBicyclePowerSensor::handleGeneralCalibration(BicyclePowerStdPowerOnlyDataPage& dataPage) {
+    // TODO
+    return false;
+}
+
 void ProfileBicyclePowerSensor::transmitPrimaryDataPage() {
     transmitBicyclePowerDefaultMsg();
 }
@@ -105,6 +110,30 @@ void ProfileBicyclePowerSensor::transmitBackgroundDataPage() {
         transmistBicyclePowerGeneralCalibrationResponse();
         break;
     }
+}
+
+void ProfileBicyclePowerSensor::transmitBicyclePowerStandardPowerOnlyMsg() {
+    // TODO
+}
+
+void ProfileBicyclePowerSensor::transmitBicyclePowerStandardWheelTorqueMsg() {
+    // TODO
+}
+
+void ProfileBicyclePowerSensor::transmitBicyclePowerStandardCrankTorqueMsg() {
+    // TODO
+}
+
+void ProfileBicyclePowerSensor::transmitBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg() {
+    // TODO
+}
+
+void ProfileBicyclePowerSensor::transmitBicyclePowerCrankTorqueFrequencyMsg() {
+    // TODO
+}
+
+void ProfileBicyclePowerSensor::transmistBicyclePowerGeneralCalibrationResponse() {
+    // TODO
 }
 
 uint8_t ProfileBicyclePowerSensor::getNextBackgroundPage(uint8_t currentPage) {

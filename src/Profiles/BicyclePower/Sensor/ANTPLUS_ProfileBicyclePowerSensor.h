@@ -26,7 +26,14 @@ private:
     void transmitRequestedDataPage();
     void transmitBicyclePowerDefaultMsg();
     void transmitBicycleStdPowerOnlyMsg(BicyclePowerStdPowerOnlyDataPageMsg& msg);
+    void transmitBicyclePowerStandardPowerOnlyMsg();
+    void transmitBicyclePowerStandardWheelTorqueMsg();
+    void transmitBicyclePowerStandardCrankTorqueMsg();
+    void transmitBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg();
+    void transmitBicyclePowerCrankTorqueFrequencyMsg();
+    void transmistBicyclePowerGeneralCalibrationResponse();
     bool handleRequestDataPage(BicyclePowerStdPowerOnlyDataPage& dataPage);
+    bool handleGeneralCalibration(BicyclePowerStdPowerOnlyDataPage& dataPage);
     uint8_t getNextBackgroundPage(uint8_t currentPage);
     AntCallback<RequestDataPage&> _onRequestDataPage;
     AntCallback<BicyclePowerStdPowerOnlyDataPageMsg&> _createBicyclePowerStdPowerOnlyDataPageMsg;
