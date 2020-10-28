@@ -22,7 +22,7 @@ private:
     bool handleDataPage(BaseDataPage<BroadcastData>& dp);
 
     bool handleTrainerData(BaseDataPage<BroadcastData>& dataPage);
-    Callback<FECTrainerData&> _onFECTrainerData;
+    AntCallback<FECTrainerData&> _onFECTrainerData;
 };
 
 #endif // ANTPLUS_PROFILEFECDISPLAY_h
