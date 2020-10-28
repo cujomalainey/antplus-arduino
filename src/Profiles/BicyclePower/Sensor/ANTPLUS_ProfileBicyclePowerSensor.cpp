@@ -86,7 +86,7 @@ bool ProfileBicyclePowerSensor::handleGeneralCalibration(BicyclePowerStandardPow
 }
 
 void ProfileBicyclePowerSensor::transmitPrimaryDataPage() {
-    transmitBicyclePowerDefaultMsg();
+    // TODO
 }
 
 void ProfileBicyclePowerSensor::transmitBackgroundDataPage() {
@@ -148,7 +148,7 @@ void ProfileBicyclePowerSensor::transmitRequestedDataPage() {
     uint8_t requestedPage = getRequestedPage();
     switch (requestedPage) {
     case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDPOWERONLY_NUMBER:
-        transmitBicyclePowerDefaultMsg();
+        // TODO
         break;
     }
 }
