@@ -12,7 +12,7 @@ public:
     /**
      * Register callback to populate default data messages (Datapage 0)
      */
-    void createBicyclePowerStdPowerOnlyDataPageMsg(void (*func)(BicyclePowerStdPowerOnlyDataPageMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerStdPowerOnlyDataPageMsg.set(func, data); }
+    void createBicyclePowerStandardPowerOnlyMsg(void (*func)(BicyclePowerStandardPowerOnlyMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerStandardPowerOnlyMsg.set(func, data); }
 
 protected:
     void transmitNextDataPage();
@@ -25,18 +25,18 @@ private:
     void transmitBackgroundDataPage();
     void transmitRequestedDataPage();
     void transmitBicyclePowerDefaultMsg();
-    void transmitBicycleStdPowerOnlyMsg(BicyclePowerStdPowerOnlyDataPageMsg& msg);
+    void transmitBicycleStandardPowerOnlyMsg(BicyclePowerStandardPowerOnlyMsg& msg);
     void transmitBicyclePowerStandardPowerOnlyMsg();
     void transmitBicyclePowerStandardWheelTorqueMsg();
     void transmitBicyclePowerStandardCrankTorqueMsg();
     void transmitBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg();
     void transmitBicyclePowerCrankTorqueFrequencyMsg();
     void transmistBicyclePowerGeneralCalibrationResponse();
-    bool handleRequestDataPage(BicyclePowerStdPowerOnlyDataPage& dataPage);
-    bool handleGeneralCalibration(BicyclePowerStdPowerOnlyDataPage& dataPage);
+    bool handleRequestDataPage(BicyclePowerStandardPowerOnly& dataPage);
+    bool handleGeneralCalibration(BicyclePowerStandardPowerOnly& dataPage);
     uint8_t getNextBackgroundPage(uint8_t currentPage);
     AntCallback<RequestDataPage&> _onRequestDataPage;
-    AntCallback<BicyclePowerStdPowerOnlyDataPageMsg&> _createBicyclePowerStdPowerOnlyDataPageMsg;
+    AntCallback<BicyclePowerStandardPowerOnlyMsg&> _createBicyclePowerStandardPowerOnlyMsg;
     uint8_t _nextBackgroundPage;
     uint8_t _patternStep = 0;
     uint32_t _flags = 0;

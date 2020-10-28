@@ -23,7 +23,7 @@ ProfileBicyclePowerSensor::ProfileBicyclePowerSensor(
 }
 
 void ProfileBicyclePowerSensor::onBroadcastData(BroadcastData& msg) {
-    BicyclePowerStdPowerOnlyDataPage dp(msg);
+    BicyclePowerStandardPowerOnly dp(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
@@ -39,7 +39,7 @@ void ProfileBicyclePowerSensor::onBroadcastData(BroadcastData& msg) {
 }
 
 void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
-    BicyclePowerStdPowerOnlyDataPage dp(msg);
+    BicyclePowerStandardPowerOnly dp(msg);
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
@@ -75,12 +75,12 @@ void ProfileBicyclePowerSensor::transmitNextDataPage() {
     transmitPrimaryDataPage();
 }
 
-bool ProfileBicyclePowerSensor::handleRequestDataPage(BicyclePowerStdPowerOnlyDataPage& dataPage) {
+bool ProfileBicyclePowerSensor::handleRequestDataPage(BicyclePowerStandardPowerOnly& dataPage) {
     RequestDataPage dp(dataPage);
     return _onRequestDataPage.call(dp);
 }
 
-bool ProfileBicyclePowerSensor::handleGeneralCalibration(BicyclePowerStdPowerOnlyDataPage& dataPage) {
+bool ProfileBicyclePowerSensor::handleGeneralCalibration(BicyclePowerStandardPowerOnly& dataPage) {
     // TODO
     return false;
 }
@@ -114,6 +114,9 @@ void ProfileBicyclePowerSensor::transmitBackgroundDataPage() {
 
 void ProfileBicyclePowerSensor::transmitBicyclePowerStandardPowerOnlyMsg() {
     // TODO
+    BicyclePowerStandardPowerOnlyMsg msg;
+    _createBicyclePowerStandardPowerOnlyMsg.call(msg);
+    transmitMsg(msg);
 }
 
 void ProfileBicyclePowerSensor::transmitBicyclePowerStandardWheelTorqueMsg() {
@@ -148,12 +151,6 @@ void ProfileBicyclePowerSensor::transmitRequestedDataPage() {
         transmitBicyclePowerDefaultMsg();
         break;
     }
-}
-
-void ProfileBicyclePowerSensor::transmitBicyclePowerOnlyMsg() {
-    BicyclePowerStandardPowerOnlyMsg msg;
-    _createBicyclePowerStandardPowerOnlyMsg.call(msg);
-    transmitMsg(msg);
 }
 
 void ProfileBicyclePowerSensor::setChannelConfig() {
