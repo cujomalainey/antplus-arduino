@@ -14,6 +14,7 @@
 #include <Arduino.h>
 #include "ANT.h"
 #include "ANTPLUS.h"
+#include <HardwareSerial.h>
 
 #define BAUD_RATE 9600
 #define CHANNEL_0 0
