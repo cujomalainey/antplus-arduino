@@ -6,9 +6,9 @@
 #include "ANT.h"
 
 template<class T>
-class BicyclePowerBaseCrankTorque : virtual public CoreDataPage<T> {
+class BicyclePowerBaseStandardCrankTorque : virtual public CoreDataPage<T> {
 public:
-    BicyclePowerBaseCrankTorque();
+    BicyclePowerBaseStandardCrankTorque();
     uint8_t getCrankTicks();
     uint8_t getInstantCadence(); // May not be available, 0xFF indicates invalid
     uint16_t getCrankPeriod();

@@ -9,5 +9,6 @@
 
 // Profile Classes
 #include <Profiles/BicyclePower/Display/ANTPLUS_ProfileBicyclePowerDisplay.h>
+#include <Profiles/BicyclePower/Sensor/ANTPLUS_ProfileBicyclePowerSensor.h>
 
 #endif // ANTPLUS_BICYCLEPOWERPROFILE_h

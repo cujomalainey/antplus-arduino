@@ -6,13 +6,13 @@
 #include "ANT.h"
 
 template<class T>
-class BicyclePowerBasePowerOnly : virtual public CoreDataPage<T> {
+class BicyclePowerBaseStandardPowerOnly : virtual public CoreDataPage<T> {
 public:
-    BicyclePowerBasePowerOnly();
-    uint8_t getPedalBalance();
-    uint8_t getInstantCadence();
+    BicyclePowerBaseStandardPowerOnly();
+    uint8_t getPedalPower();
+    uint8_t getInstantaneousCadence();
     uint16_t getAccumulatedPower();
-    uint16_t getInstantPower();
+    uint16_t getInstantaneousPower();
 };
 
 #endif // ANTPLUS_BICYCLEPOWERBASEPOWERONLY_h

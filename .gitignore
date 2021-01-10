@@ -2,10 +2,13 @@
 .piolibdeps
 .ycm*
 *.swp
+*.DS_Store
 
 # used for testing
 src/main.cpp
+
 .DS_Store
 .tags*
 tags
 .pio
+*-e

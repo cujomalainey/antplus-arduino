@@ -40,10 +40,10 @@ void batteryStatusDataPageHandler(BicyclePowerBatteryStatus& msg, uintptr_t data
 void cumulativeOperatingTimeDataPageHandler(BicyclePowerCumulativeOperatingTime& msg, uintptr_t data);
 void manufacturerIDDataPageHandler(BicyclePowerManufacturerID& msg, uintptr_t data);
 void productIDDataPageHandler(BicyclePowerProductID& msg, uintptr_t data);
-void powerOnlyDataPageHandler(BicyclePowerPowerOnly& msg, uintptr_t data);
-void crankTorqueDataPageHandler(BicyclePowerCrankTorque& msg, uintptr_t data);
-void wheelTorqueDataPageHandler(BicyclePowerWheelTorque& msg, uintptr_t data);
-void pedalSmoothnessDataPageHandler(BicyclePowerPedalSmoothness& msg, uintptr_t data);
+void powerOnlyDataPageHandler(BicyclePowerStandardPowerOnly& msg, uintptr_t data);
+void crankTorqueDataPageHandler(BicyclePowerStandardCrankTorque& msg, uintptr_t data);
+void wheelTorqueDataPageHandler(BicyclePowerStandardWheelTorque& msg, uintptr_t data);
+void pedalSmoothnessDataPageHandler(BicyclePowerTorqueEffectivenessAndPedalSmoothness& msg, uintptr_t data);
 
 void bicyclePowerBatteryStatus(uint8_t flags);
 void printStatus(uint8_t status);
@@ -81,10 +81,10 @@ void setup() {
     bikePower.onBicyclePowerCumulativeOperatingTime(cumulativeOperatingTimeDataPageHandler);
     bikePower.onBicyclePowerManufacturerID(manufacturerIDDataPageHandler);
     bikePower.onBicyclePowerProductID(productIDDataPageHandler);
-    bikePower.onBicyclePowerPowerOnly(powerOnlyDataPageHandler);
-    bikePower.onBicyclePowerCrankTorque(crankTorqueDataPageHandler);
-    bikePower.onBicyclePowerWheelTorque(wheelTorqueDataPageHandler);
-    bikePower.onBicyclePowerPedalSmoothness(pedalSmoothnessDataPageHandler);
+    bikePower.onBicyclePowerStandardPowerOnly(powerOnlyDataPageHandler);
+    bikePower.onBicyclePowerStandardCrankTorque(crankTorqueDataPageHandler);
+    bikePower.onBicyclePowerStandardWheelTorque(wheelTorqueDataPageHandler);
+    bikePower.onBicyclePowerTorqueEffectivenessAndPedalSmoothness(pedalSmoothnessDataPageHandler);
     bikePower.begin();
     // wait for pair to complete
     uint8_t status = bikePower.waitForPair();
@@ -140,18 +140,18 @@ void bicyclePowerBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
     Serial.println(dp.getUpdateEventCount());
 }
 
-void powerOnlyDataPageHandler(BicyclePowerPowerOnly& msg, uintptr_t data) {
+void powerOnlyDataPageHandler(BicyclePowerStandardPowerOnly& msg, uintptr_t data) {
     Serial.print("Pedal Balance: ");
-    Serial.println(msg.getPedalBalance());
+    Serial.println(msg.getPedalPower());
     Serial.print("Instant Cadence: ");
-    Serial.println(msg.getInstantCadence());
+    Serial.println(msg.getInstantaneousCadence());
     Serial.print("Accumulated Power: ");
     Serial.println(msg.getAccumulatedPower());
     Serial.print("Instant Power: ");
-    Serial.println(msg.getInstantPower());
+    Serial.println(msg.getInstantaneousPower());
 }
 
-void crankTorqueDataPageHandler(BicyclePowerCrankTorque& msg, uintptr_t data) {
+void crankTorqueDataPageHandler(BicyclePowerStandardCrankTorque& msg, uintptr_t data) {
     Serial.print("Crank Ticks: ");
     Serial.println(msg.getCrankTicks());
     Serial.print("Instant Cadence: ");
@@ -162,7 +162,7 @@ void crankTorqueDataPageHandler(BicyclePowerCrankTorque& msg, uintptr_t data) {
     Serial.println(msg.getAccumulatedTorque());
 }
 
-void wheelTorqueDataPageHandler(BicyclePowerWheelTorque& msg, uintptr_t data) {
+void wheelTorqueDataPageHandler(BicyclePowerStandardWheelTorque& msg, uintptr_t data) {
     Serial.print("Wheel Ticks: ");
     Serial.println(msg.getWheelTicks());
     Serial.print("Instant Cadence: ");
@@ -173,7 +173,7 @@ void wheelTorqueDataPageHandler(BicyclePowerWheelTorque& msg, uintptr_t data) {
     Serial.println(msg.getAccumulatedTorque());
 }
 
-void pedalSmoothnessDataPageHandler(BicyclePowerPedalSmoothness& msg, uintptr_t data) {
+void pedalSmoothnessDataPageHandler(BicyclePowerTorqueEffectivenessAndPedalSmoothness& msg, uintptr_t data) {
     Serial.print("Left Torque Effectiveness: ");
     Serial.println(msg.getLeftTorqueEffectiveness());
     Serial.print("Right Torque Effectiveness: ");

@@ -6,9 +6,9 @@
 #include "ANT.h"
 
 template<class T>
-class BicyclePowerBasePedalSmoothness : virtual public CoreDataPage<T> {
+class BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness : virtual public CoreDataPage<T> {
 public:
-    BicyclePowerBasePedalSmoothness();
+    BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness();
     uint8_t getLeftTorqueEffectiveness();
     uint8_t getRightTorqueEffectiveness();
     uint8_t getLeftPedalSmoothness();

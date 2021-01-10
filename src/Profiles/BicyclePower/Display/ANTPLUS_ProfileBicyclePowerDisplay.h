@@ -16,10 +16,10 @@ public:
     void onBicyclePowerCumulativeOperatingTime(void (*func)(BicyclePowerCumulativeOperatingTime&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerCumulativeOperatingTime.set(func, data); }
     void onBicyclePowerManufacturerID(void (*func)(BicyclePowerManufacturerID&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerManufacturerID.set(func, data); }
     void onBicyclePowerProductID(void (*func)(BicyclePowerProductID&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerProductID.set(func, data); }
-    void onBicyclePowerPowerOnly(void (*func)(BicyclePowerPowerOnly&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerPowerOnly.set(func, data); }
-    void onBicyclePowerCrankTorque(void (*func)(BicyclePowerCrankTorque&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerCrankTorque.set(func, data); }
-    void onBicyclePowerWheelTorque(void (*func)(BicyclePowerWheelTorque&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerWheelTorque.set(func, data); }
-    void onBicyclePowerPedalSmoothness(void (*func)(BicyclePowerPedalSmoothness&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerPedalSmoothness.set(func, data); }
+    void onBicyclePowerStandardPowerOnly(void (*func)(BicyclePowerStandardPowerOnly&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerStandardPowerOnly.set(func, data); }
+    void onBicyclePowerStandardCrankTorque(void (*func)(BicyclePowerStandardCrankTorque&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerStandardCrankTorque.set(func, data); }
+    void onBicyclePowerStandardWheelTorque(void (*func)(BicyclePowerStandardWheelTorque&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerStandardWheelTorque.set(func, data); }
+    void onBicyclePowerTorqueEffectivenessAndPedalSmoothness(void (*func)(BicyclePowerTorqueEffectivenessAndPedalSmoothness&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerTorqueEffectivenessAndPedalSmoothness.set(func, data); }
 
 private:
     void setChannelConfig();
@@ -32,18 +32,18 @@ private:
     bool handleCumulativeOperatingTime(BicyclePowerBaseMainDataPage& dataPage);
     bool handleManufacturerID(BicyclePowerBaseMainDataPage& dataPage);
     bool handleProductID(BicyclePowerBaseMainDataPage& dataPage);
-    bool handlePowerOnly(BicyclePowerBaseMainDataPage& dataPage);
-    bool handleCrankTorque(BicyclePowerBaseMainDataPage& dataPage);
-    bool handleWheelTorque(BicyclePowerBaseMainDataPage& dataPage);
-    bool handlePedalSmoothness(BicyclePowerBaseMainDataPage& dataPage);
+    bool handleStandardPowerOnly(BicyclePowerBaseMainDataPage& dataPage);
+    bool handleStandardCrankTorque(BicyclePowerBaseMainDataPage& dataPage);
+    bool handleStandardWheelTorque(BicyclePowerBaseMainDataPage& dataPage);
+    bool handleTorqueEffectivenessAndPedalSmoothness(BicyclePowerBaseMainDataPage& dataPage);
     AntCallback<BicyclePowerBatteryStatus&> _onBicyclePowerBatteryStatus;
     AntCallback<BicyclePowerCumulativeOperatingTime&> _onBicyclePowerCumulativeOperatingTime;
     AntCallback<BicyclePowerManufacturerID&> _onBicyclePowerManufacturerID;
     AntCallback<BicyclePowerProductID&> _onBicyclePowerProductID;
-    AntCallback<BicyclePowerPowerOnly&> _onBicyclePowerPowerOnly;
-    AntCallback<BicyclePowerCrankTorque&> _onBicyclePowerCrankTorque;
-    AntCallback<BicyclePowerWheelTorque&> _onBicyclePowerWheelTorque;
-    AntCallback<BicyclePowerPedalSmoothness&> _onBicyclePowerPedalSmoothness;
+    AntCallback<BicyclePowerStandardPowerOnly&> _onBicyclePowerStandardPowerOnly;
+    AntCallback<BicyclePowerStandardCrankTorque&> _onBicyclePowerStandardCrankTorque;
+    AntCallback<BicyclePowerStandardWheelTorque&> _onBicyclePowerStandardWheelTorque;
+    AntCallback<BicyclePowerTorqueEffectivenessAndPedalSmoothness&> _onBicyclePowerTorqueEffectivenessAndPedalSmoothness;
 };
 
 #endif // ANTPLUS_PROFILEBICYCLEPOWERDISPLAY_h
