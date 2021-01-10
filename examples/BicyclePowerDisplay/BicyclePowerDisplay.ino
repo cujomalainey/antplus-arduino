@@ -18,6 +18,7 @@
 
 #define BAUD_RATE 9600
 #define CHANNEL_0 0
+#define antSerial Serial2
 
 const uint8_t NETWORK_KEY[] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77}; // get this from thisisant.com
 
@@ -27,10 +28,6 @@ const int RTS_PIN = 23;
 const int SUSPEND_PIN = 22;
 const int SLEEP_PIN = 19;
 const int RESET_PIN = 2;
-const int TX_PIN = 17;
-const int RX_PIN = 16;
-
-HardwareSerial antSerial(2);
 
 // *************************************
 
