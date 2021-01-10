@@ -12,8 +12,7 @@ public:
     ProfileBicyclePowerDisplay();
     ProfileBicyclePowerDisplay(uint16_t deviceNumber);
     ProfileBicyclePowerDisplay(uint16_t deviceNumber, uint8_t transmissionType);
-    void onBicyclePowerBatteryStatus(void (*func)(BicyclePowerBatteryStatus&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerBatteryStatus.set(func, data); }
-    void onBicyclePowerCumulativeOperatingTime(void (*func)(BicyclePowerCumulativeOperatingTime&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerCumulativeOperatingTime.set(func, data); }
+    void onBatteryStatus(void (*func)(BatteryStatus&, uintptr_t), uintptr_t data = 0) { _onBatteryStatus.set(func, data); }
     void onBicyclePowerManufacturerID(void (*func)(BicyclePowerManufacturerID&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerManufacturerID.set(func, data); }
     void onBicyclePowerProductID(void (*func)(BicyclePowerProductID&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerProductID.set(func, data); }
     void onBicyclePowerStandardPowerOnly(void (*func)(BicyclePowerStandardPowerOnly&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerStandardPowerOnly.set(func, data); }
@@ -29,15 +28,13 @@ private:
     bool handleDataPage(BicyclePowerBaseMainDataPage& dp);
 
     bool handleBatteryStatus(BicyclePowerBaseMainDataPage& dataPage);
-    bool handleCumulativeOperatingTime(BicyclePowerBaseMainDataPage& dataPage);
     bool handleManufacturerID(BicyclePowerBaseMainDataPage& dataPage);
     bool handleProductID(BicyclePowerBaseMainDataPage& dataPage);
     bool handleStandardPowerOnly(BicyclePowerBaseMainDataPage& dataPage);
     bool handleStandardCrankTorque(BicyclePowerBaseMainDataPage& dataPage);
     bool handleStandardWheelTorque(BicyclePowerBaseMainDataPage& dataPage);
     bool handleTorqueEffectivenessAndPedalSmoothness(BicyclePowerBaseMainDataPage& dataPage);
-    AntCallback<BicyclePowerBatteryStatus&> _onBicyclePowerBatteryStatus;
-    AntCallback<BicyclePowerCumulativeOperatingTime&> _onBicyclePowerCumulativeOperatingTime;
+    AntCallback<BatteryStatus&> _onBatteryStatus;
     AntCallback<BicyclePowerManufacturerID&> _onBicyclePowerManufacturerID;
     AntCallback<BicyclePowerProductID&> _onBicyclePowerProductID;
     AntCallback<BicyclePowerStandardPowerOnly&> _onBicyclePowerStandardPowerOnly;

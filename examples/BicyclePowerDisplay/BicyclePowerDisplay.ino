@@ -36,8 +36,7 @@ AntPlusRouter router;
 ProfileBicyclePowerDisplay bikePower;
 
 void bicyclePowerBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data);
-void batteryStatusDataPageHandler(BicyclePowerBatteryStatus& msg, uintptr_t data);
-void cumulativeOperatingTimeDataPageHandler(BicyclePowerCumulativeOperatingTime& msg, uintptr_t data);
+void batteryStatusDataPageHandler(BatteryStatus& msg, uintptr_t data);
 void manufacturerIDDataPageHandler(BicyclePowerManufacturerID& msg, uintptr_t data);
 void productIDDataPageHandler(BicyclePowerProductID& msg, uintptr_t data);
 void powerOnlyDataPageHandler(BicyclePowerStandardPowerOnly& msg, uintptr_t data);
@@ -77,8 +76,7 @@ void setup() {
     Serial.begin(BAUD_RATE);
     Serial.println("Running");
     bikePower.onDataPage(bicyclePowerBaseDataPageHandler);
-    bikePower.onBicyclePowerBatteryStatus(batteryStatusDataPageHandler);
-    bikePower.onBicyclePowerCumulativeOperatingTime(cumulativeOperatingTimeDataPageHandler);
+    bikePower.onBatteryStatus(batteryStatusDataPageHandler);
     bikePower.onBicyclePowerManufacturerID(manufacturerIDDataPageHandler);
     bikePower.onBicyclePowerProductID(productIDDataPageHandler);
     bikePower.onBicyclePowerStandardPowerOnly(powerOnlyDataPageHandler);
@@ -101,16 +99,11 @@ void loop() {
     router.loop();
 }
 
-void batteryStatusDataPageHandler(BicyclePowerBatteryStatus& msg, uintptr_t data) {
+void batteryStatusDataPageHandler(BatteryStatus& msg, uintptr_t data) {
     Serial.print("Fractional Battery Voltage: ");
     Serial.println(msg.getFractionalBatteryVoltage());
     Serial.print("Battery Status: ");
     bicyclePowerBatteryStatus(msg.getBatteryStatus());
-}
-
-void cumulativeOperatingTimeDataPageHandler(BicyclePowerCumulativeOperatingTime& msg, uintptr_t data) {
-    Serial.print("Cumulative Operating Time: ");
-    Serial.println(msg.getCumulativeOperatingTime());
 }
 
 void manufacturerIDDataPageHandler(BicyclePowerManufacturerID& msg, uintptr_t data) {
@@ -204,22 +197,22 @@ void printStatus(uint8_t status) {
 
 void bicyclePowerBatteryStatus(uint8_t flags) {
     switch (flags) {
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_NEW:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_NEW:
         Serial.println("New");
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_GOOD:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_GOOD:
         Serial.println("Good");
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_OK:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_OK:
         Serial.println("Ok");
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_LOW:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_LOW:
         Serial.println("Low");
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_CRITICAL:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_CRITICAL:
         Serial.println("Critical");
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_INVALID:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_INVALID:
         Serial.println("Invalid");
         break;
     default:

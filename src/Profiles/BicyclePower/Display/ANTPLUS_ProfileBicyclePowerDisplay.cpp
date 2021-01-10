@@ -34,7 +34,7 @@ bool ProfileBicyclePowerDisplay::handleDataPage(BicyclePowerBaseMainDataPage& dp
     case ANTPLUS_BICYCLEPOWER_DATAPAGE_PRODUCTID_NUMBER:
         called = handleProductID(dp);
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_BATTERYSTATUS_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
         called = handleBatteryStatus(dp);
         break;
     case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDPOWERONLY_NUMBER:
@@ -71,13 +71,8 @@ void ProfileBicyclePowerDisplay::setChannelConfig() {
 }
 
 bool ProfileBicyclePowerDisplay::handleBatteryStatus(BicyclePowerBaseMainDataPage& dataPage) {
-    BicyclePowerBatteryStatus dp = BicyclePowerBatteryStatus(dataPage);
-    return _onBicyclePowerBatteryStatus.call(dp);
-}
-
-bool ProfileBicyclePowerDisplay::handleCumulativeOperatingTime(BicyclePowerBaseMainDataPage& dataPage) {
-    BicyclePowerCumulativeOperatingTime dp(dataPage);
-    return _onBicyclePowerCumulativeOperatingTime.call(dp);
+    BatteryStatus dp(dataPage);
+    return _onBatteryStatus.call(dp);
 }
 
 bool ProfileBicyclePowerDisplay::handleManufacturerID(BicyclePowerBaseMainDataPage& dataPage) {
