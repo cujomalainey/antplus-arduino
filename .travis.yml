@@ -34,6 +34,7 @@ cache:
         - "~/.platformio"
 
 env:
+    - PLATFORMIO_CI_SRC=examples/BicyclePowerDisplay/BicyclePowerDisplay.ino
     - PLATFORMIO_CI_SRC=examples/BicycleSpeedDisplay/BicycleSpeedDisplay.ino
     - PLATFORMIO_CI_SRC=examples/DeviceSearch/DeviceSearch.ino
     - PLATFORMIO_CI_SRC=examples/DynamicProfiles/DynamicProfiles.ino
