@@ -8,6 +8,9 @@
 class ProfileEnvironmentMonitor : BaseMasterProfile {
 public:
     // TODO
+    ProfileEnvironmentMonitor();
+    ProfileEnvironmentMonitor(uint16_t deviceNumber);
+    ProfileEnvironmentMonitor(uint16_t deviceNumber, uint8_t transmissionType);
 };
 
 #endif // ANTPLUS_PROFILEENVIRONMENTMONITOR_h
