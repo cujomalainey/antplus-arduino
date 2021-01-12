@@ -59,11 +59,11 @@ private:
     uint8_t _interleaveStep;
     uint8_t _componentCount = 0;
 
-    Callback<ShiftingShiftSystemStatusMsg&> _createShiftingShiftSystemStatusMsg;
-    Callback<MultiComponentSystemManufacturersInformationMsg&> _createMultiComponentSystemManufacturersInformationMsg;
-    Callback<MultiComponentSystemProductInformationMsg&> _createMultiComponentSystemProductInformationMsg;
-    Callback<BatteryStatusMsg&> _createBatteryStatusMsg;
-    Callback<RequestDataPage&> _onRequestDataPage;
+    AntCallback<ShiftingShiftSystemStatusMsg&> _createShiftingShiftSystemStatusMsg;
+    AntCallback<MultiComponentSystemManufacturersInformationMsg&> _createMultiComponentSystemManufacturersInformationMsg;
+    AntCallback<MultiComponentSystemProductInformationMsg&> _createMultiComponentSystemProductInformationMsg;
+    AntCallback<BatteryStatusMsg&> _createBatteryStatusMsg;
+    AntCallback<RequestDataPage&> _onRequestDataPage;
 };
 
 #endif // ANTPLUS_PROFILESHIFTINGSHIFTER_h
