@@ -42,6 +42,16 @@ protected:
      */
     bool isRequestedPageAcknowledged();
     /**
+     * Allows a profile to further validate datapage requests and invludate at a later
+     * time if deemed appropriate. An example is the descriptor byte fields.
+     */
+    void invalidateDataPageRequest();
+    /**
+     * Some profiles are forbidden from replying with ACK messages, this allows the profile
+     * to disable automatic request conversions;
+     */
+    void setAckMessageUsage(bool on);
+    /**
      * Handles ack msg conversions for requests, all transmissions that are part of the broadcast pattern should be through this.
      */
     void transmitMsg(BaseDataPageMsg<BroadcastDataMsg> &msg);
@@ -50,6 +60,7 @@ private:
     void handleRequestDataPage(AcknowledgedData& msg);
     uint8_t _requestedPage = 0;
     uint8_t _requestedCount = 0;
+    bool _ackMessagesAllowed = true;
     bool _isRequestAcknowledged = false;
     bool _requestAcked = true;
 };
