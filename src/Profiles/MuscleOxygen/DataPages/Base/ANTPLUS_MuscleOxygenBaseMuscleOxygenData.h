@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_MUSCLEOXYGENBASEMUSCLEOXYGENDATA_h
 #define ANTPLUS_MUSCLEOXYGENBASEMUSCLEOXYGENDATA_h
 
-#include <Profiles/MuscleOxygen/DataPages/Base/ANTPLUS_MuscleOxygenBaseMainDataPage.h>
+#include <BaseClasses/ANTPLUS_CoreDataPage.h>
 
 template<class T>
 class MuscleOxygenBaseMuscleOxygenData : public virtual CoreDataPage<T> {
