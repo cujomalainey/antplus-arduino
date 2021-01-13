@@ -2,6 +2,7 @@
 #include <Profiles/MuscleOxygen/ANTPLUS_MuscleOxygenPrivateDefines.h>
 
 
+// TODO magic numbers
 MuscleOxygenMuscleOxygenDataMsg::MuscleOxygenMuscleOxygenDataMsg() : MuscleOxygenBaseMainDataPageMsg(0) {
     setTotalHemoglobinConcentration(0xFFF);
     setPreviousSaturatedHemoglobinPercentage(0x3FF);

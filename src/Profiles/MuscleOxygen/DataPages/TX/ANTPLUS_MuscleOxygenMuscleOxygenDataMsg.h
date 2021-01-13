@@ -8,7 +8,6 @@
 class MuscleOxygenMuscleOxygenDataMsg : public MuscleOxygenBaseMainDataPageMsg {
 public:
     MuscleOxygenMuscleOxygenDataMsg();
-
     void setEventCount(uint8_t n);
     void setNotifications(uint8_t notficications);
     void setCapabilities(uint8_t capabilities);
