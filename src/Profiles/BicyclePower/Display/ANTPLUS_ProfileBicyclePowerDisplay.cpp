@@ -31,8 +31,8 @@ bool ProfileBicyclePowerDisplay::handleDataPage(BicyclePowerBaseMainDataPage& dp
     case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
         called = handleManufacturersInformation(dp);
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_PRODUCTID_NUMBER:
-        called = handleProductID(dp);
+    case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
+        called = handleProductInformation(dp);
         break;
     case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
         called = handleBatteryStatus(dp);
@@ -80,9 +80,9 @@ bool ProfileBicyclePowerDisplay::handleManufacturersInformation(BicyclePowerBase
     return _onManufacturersInformation.call(dp);
 }
 
-bool ProfileBicyclePowerDisplay::handleProductID(BicyclePowerBaseMainDataPage& dataPage) {
-    BicyclePowerProductID dp(dataPage);
-    return _onBicyclePowerProductID.call(dp);
+bool ProfileBicyclePowerDisplay::handleProductInformation(BicyclePowerBaseMainDataPage& dataPage) {
+    ProductInformation dp(dataPage);
+    return _onProductInformation.call(dp);
 }
 
 bool ProfileBicyclePowerDisplay::handleStandardPowerOnly(BicyclePowerBaseMainDataPage& dataPage) {

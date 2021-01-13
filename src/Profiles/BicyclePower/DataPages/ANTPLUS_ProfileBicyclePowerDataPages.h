@@ -2,7 +2,6 @@
 #define ANTPLUS_PROFILEBICYCLEPOWERDATAPAGES_h
 
 /* RX */
-#include <Profiles/BicyclePower/DataPages/RX/ANTPLUS_BicyclePowerProductID.h>
 #include <Profiles/BicyclePower/DataPages/RX/ANTPLUS_BicyclePowerStandardPowerOnly.h>
 #include <Profiles/BicyclePower/DataPages/RX/ANTPLUS_BicyclePowerStandardWheelTorque.h>
 #include <Profiles/BicyclePower/DataPages/RX/ANTPLUS_BicyclePowerStandardCrankTorque.h>
