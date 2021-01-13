@@ -37,7 +37,7 @@ ProfileBicyclePowerDisplay bikePower;
 
 void bicyclePowerBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data);
 void batteryStatusDataPageHandler(BatteryStatus& msg, uintptr_t data);
-void manufacturerIDDataPageHandler(BicyclePowerManufacturerID& msg, uintptr_t data);
+void manufacturerIDDataPageHandler(ManufacturersInformation& msg, uintptr_t data);
 void productIDDataPageHandler(BicyclePowerProductID& msg, uintptr_t data);
 void powerOnlyDataPageHandler(BicyclePowerStandardPowerOnly& msg, uintptr_t data);
 void crankTorqueDataPageHandler(BicyclePowerStandardCrankTorque& msg, uintptr_t data);
@@ -77,7 +77,7 @@ void setup() {
     Serial.println("Running");
     bikePower.onDataPage(bicyclePowerBaseDataPageHandler);
     bikePower.onBatteryStatus(batteryStatusDataPageHandler);
-    bikePower.onBicyclePowerManufacturerID(manufacturerIDDataPageHandler);
+    bikePower.onManufacturersInformation(manufacturerIDDataPageHandler);
     bikePower.onBicyclePowerProductID(productIDDataPageHandler);
     bikePower.onBicyclePowerStandardPowerOnly(powerOnlyDataPageHandler);
     bikePower.onBicyclePowerStandardCrankTorque(crankTorqueDataPageHandler);
@@ -106,11 +106,11 @@ void batteryStatusDataPageHandler(BatteryStatus& msg, uintptr_t data) {
     bicyclePowerBatteryStatus(msg.getBatteryStatus());
 }
 
-void manufacturerIDDataPageHandler(BicyclePowerManufacturerID& msg, uintptr_t data) {
+void manufacturerIDDataPageHandler(ManufacturersInformation& msg, uintptr_t data) {
     Serial.print("Hardware ID: ");
-    Serial.println(msg.getHardwareVersion());
+    Serial.println(msg.getHWRevision());
     Serial.print("Manufacturer ID: ");
-    Serial.println(msg.getManufacturerId());
+    Serial.println(msg.getManufacturerID());
     Serial.print("Model Number: ");
     Serial.println(msg.getModelNumber());
 }
