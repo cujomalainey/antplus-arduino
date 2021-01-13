@@ -20,7 +20,7 @@ ArduinoSerialAntWithCallbacks ant;
 AntPlusRouter router;
 ProfileMuscleOxygenMonitor moxy(123);
 
-void moxyCreateMsgHandler(MuscleOxygenBaseMainDataPageMsg& msg, uintptr_t data);
+void moxyCreateMsgHandler(MuscleOxygenMuscleOxygenDataMsg& msg, uintptr_t data);
 void moxyCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data);
 void moxyCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data);
 
@@ -38,9 +38,9 @@ void setup() {
     Serial.println("Running");
 
     // setup muscle oxygen monitor
-    moxy.createMuscleOxygenDataMsg(moxyCreateMsgHandler);
-    moxy.createMuscleOxygenManufacturerInformationMsg(moxyCreateManufacturerInformationMsg);
-    moxy.createMuscleOxygenProductInformationMsg(moxyCreateProductInformationMsg);
+    moxy.createMuscleOxygenMuscleOxygenDataMsg(moxyCreateMsgHandler);
+    moxy.createManufacturerInformationMsg(moxyCreateManufacturerInformationMsg);
+    moxy.createProductInformationMsg(moxyCreateProductInformationMsg);
     moxy.begin();
 }
 
@@ -48,13 +48,13 @@ void loop() {
     router.loop();
 }
 
-void moxyCreateMsgHandler(MuscleOxygenBaseMainDataPageMsg& msg, uintptr_t data)
+void moxyCreateMsgHandler(MuscleOxygenMuscleOxygenDataMsg& msg, uintptr_t data)
 {
     const int lo = 500, hi = 2500;
     static uint16_t _c = lo;
     static uint8_t _eventCount = 0;
 
-    // demo data 
+    // demo data
     msg.setTotalHemoglobinConcentration(_c);
     msg.setCurrentSaturatedHemoglobinPercentage(_c++/4);
     msg.setEventCount(_eventCount++);

@@ -13,15 +13,15 @@ public:
     /**
      * Register callback to populate Muscle Oxygen data messages (Datapage 0)
      */
-    void createMuscleOxygenMuscleOxygenDataMsg(void(*func)(MuscleOxygenBaseMainDataPageMsg&, uintptr_t), uintptr_t data = 0) { _createMuscleOxygenMuscleOxygenDataMsg.set(func, data); }
+    void createMuscleOxygenMuscleOxygenDataMsg(void(*func)(MuscleOxygenMuscleOxygenDataMsg&, uintptr_t), uintptr_t data = 0) { _createMuscleOxygenMuscleOxygenDataMsg.set(func, data); }
     /**
      * Register callback to populate manufacturer information data messages (Datapage 2)
      */
-    void createMuscleOxygenManufacturerInformationMsg(void(*func)(ManufacturersInformationMsg&, uintptr_t), uintptr_t data = 0) { _createManufacturersInformationMsg.set(func, data); }
+    void createManufacturerInformationMsg(void(*func)(ManufacturersInformationMsg&, uintptr_t), uintptr_t data = 0) { _createManufacturersInformationMsg.set(func, data); }
     /**
      * Register callback to populate product information data messages (Datapage 3)
      */
-    void createMuscleOxygenProductInformationMsg(void(*func)(ProductInformationMsg&, uintptr_t), uintptr_t data = 0) { _createProductInformationMsg.set(func, data); }
+    void createProductInformationMsg(void(*func)(ProductInformationMsg&, uintptr_t), uintptr_t data = 0) { _createProductInformationMsg.set(func, data); }
 
 protected:
     void transmitNextDataPage();
@@ -37,7 +37,7 @@ private:
     uint8_t _patternStep;
     uint8_t _backgroundStep;
 
-    AntCallback<MuscleOxygenBaseMainDataPageMsg&> _createMuscleOxygenMuscleOxygenDataMsg;
+    AntCallback<MuscleOxygenMuscleOxygenDataMsg&> _createMuscleOxygenMuscleOxygenDataMsg;
     AntCallback<ManufacturersInformationMsg&> _createManufacturersInformationMsg;
     AntCallback<ProductInformationMsg&> _createProductInformationMsg;
     AntCallback<BatteryStatusMsg&> _createBatteryStatusMsg;
