@@ -17,29 +17,30 @@ public:
     /**
      * Register callback to populate manufacturer information data messages (Datapage 2)
      */
-    void createMuscleOxygenManufacturerInformationMsg(void(*func)(ManufacturersInformationMsg&, uintptr_t), uintptr_t data = 0) { _createMuscleOxygenManufacturerInformationMsg.set(func, data); }
+    void createMuscleOxygenManufacturerInformationMsg(void(*func)(ManufacturersInformationMsg&, uintptr_t), uintptr_t data = 0) { _createManufacturersInformationMsg.set(func, data); }
     /**
      * Register callback to populate product information data messages (Datapage 3)
      */
-    void createMuscleOxygenProductInformationMsg(void(*func)(ProductInformationMsg&, uintptr_t), uintptr_t data = 0) { _createMuscleOxygenProductInformationMsg.set(func, data); }
+    void createMuscleOxygenProductInformationMsg(void(*func)(ProductInformationMsg&, uintptr_t), uintptr_t data = 0) { _createProductInformationMsg.set(func, data); }
 
 protected:
-    virtual void transmitNextDataPage();
-    virtual bool isDataPageValid(uint8_t dataPage);
-
-    void transmitMuscleOxygenManufacturerInformationMsg();
-    void transmitMuscleOxygenProductInformationMsg();
+    void transmitNextDataPage();
+    bool isDataPageValid(uint8_t dataPage);
 
 private:
     void setChannelConfig();
-    void transmitMuscleOxygenMainPageMsg();
+    void transmitMuscleOxygenMuscleOxygenDataMsg();
+    void transmitManufacturerInformationMsg();
+    void transmitProductInformationMsg();
+    void transmitBatteryStatusMsg();
 
     uint8_t _patternStep;
-    uint8_t _toggle;
+    uint8_t _backgroundStep;
 
     Callback<MuscleOxygenBaseMainDataPageMsg&> _createMuscleOxygenMuscleOxygenDataMsg;
-    Callback<ManufacturersInformationMsg&> _createMuscleOxygenManufacturerInformationMsg;
-    Callback<ProductInformationMsg&> _createMuscleOxygenProductInformationMsg;
+    Callback<ManufacturersInformationMsg&> _createManufacturersInformationMsg;
+    Callback<ProductInformationMsg&> _createProductInformationMsg;
+    Callback<BatteryStatusMsg&> _createBatteryStatusMsg;
 };
 
 #endif // ANTPLUS_PROFILEMUSCLEOXYGENMONITOR_h

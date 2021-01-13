@@ -5,7 +5,7 @@
 ProfileMuscleOxygenMonitor::ProfileMuscleOxygenMonitor(	uint16_t deviceNumber, uint8_t transmissionType) :
     BaseMasterProfile(deviceNumber, transmissionType),
     _patternStep(0),
-    _toggle(0)
+    _backgroundStep(0)
 {
     setChannelConfig();
 }
@@ -31,7 +31,7 @@ void ProfileMuscleOxygenMonitor::transmitNextDataPage() {
         transmitMuscleOxygenMainPageMsg();
     }
     else {
-        if (_toggle++ % 2 == 0) {
+        if (_backgroundStep++ % 2 == 0) {
             transmitMuscleOxygenManufacturerInformationMsg();
         }
         else {
@@ -41,20 +41,23 @@ void ProfileMuscleOxygenMonitor::transmitNextDataPage() {
     }
 }
 
-void ProfileMuscleOxygenMonitor::transmitMuscleOxygenManufacturerInformationMsg() {
+void ProfileMuscleOxygenMonitor::transmitManufacturerInformationMsg() {
     ManufacturersInformationMsg msg;
-    _createMuscleOxygenManufacturerInformationMsg.call(msg);
+    _createManufacturerInformationMsg.call(msg);
     send(msg);
 }
 
-void ProfileMuscleOxygenMonitor::transmitMuscleOxygenProductInformationMsg() {
+void ProfileMuscleOxygenMonitor::transmitProductInformationMsg() {
     ProductInformationMsg msg;
-    _createMuscleOxygenProductInformationMsg.call(msg);
+    _createProductInformationMsg.call(msg);
     send(msg);
 }
 
-void ProfileMuscleOxygenMonitor::transmitMuscleOxygenMainPageMsg() {
+void ProfileMuscleOxygenMonitor::transmitMuscleOxygenMuscleOxygenDataMsg() {
     MuscleOxygenMuscleOxygenDataMsg msg;
     _createMuscleOxygenMuscleOxygenDataMsg.call(msg);
     send(msg);
+}
+
+void ProfileMuscleOxygenMonitor::transmitBatteryStatusMsg() {
 }
