@@ -37,10 +37,10 @@ private:
     uint8_t _patternStep;
     uint8_t _backgroundStep;
 
-    Callback<MuscleOxygenBaseMainDataPageMsg&> _createMuscleOxygenMuscleOxygenDataMsg;
-    Callback<ManufacturersInformationMsg&> _createManufacturersInformationMsg;
-    Callback<ProductInformationMsg&> _createProductInformationMsg;
-    Callback<BatteryStatusMsg&> _createBatteryStatusMsg;
+    AntCallback<MuscleOxygenBaseMainDataPageMsg&> _createMuscleOxygenMuscleOxygenDataMsg;
+    AntCallback<ManufacturersInformationMsg&> _createManufacturersInformationMsg;
+    AntCallback<ProductInformationMsg&> _createProductInformationMsg;
+    AntCallback<BatteryStatusMsg&> _createBatteryStatusMsg;
 };
 
 #endif // ANTPLUS_PROFILEMUSCLEOXYGENMONITOR_h
