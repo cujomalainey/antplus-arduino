@@ -28,14 +28,14 @@ bool ProfileMuscleOxygenMonitor::isDataPageValid(uint8_t dataPage) {
 
 void ProfileMuscleOxygenMonitor::transmitNextDataPage() {
     if (_patternStep++ < 64) {
-        transmitMuscleOxygenMainPageMsg();
+        transmitMuscleOxygenMuscleOxygenDataMsg();
     }
     else {
         if (_backgroundStep++ % 2 == 0) {
-            transmitMuscleOxygenManufacturerInformationMsg();
+            transmitManufacturerInformationMsg();
         }
         else {
-            transmitMuscleOxygenProductInformationMsg();
+            transmitProductInformationMsg();
         }
         _patternStep = 0;
     }
@@ -43,7 +43,7 @@ void ProfileMuscleOxygenMonitor::transmitNextDataPage() {
 
 void ProfileMuscleOxygenMonitor::transmitManufacturerInformationMsg() {
     ManufacturersInformationMsg msg;
-    _createManufacturerInformationMsg.call(msg);
+    _createManufacturersInformationMsg.call(msg);
     send(msg);
 }
 
