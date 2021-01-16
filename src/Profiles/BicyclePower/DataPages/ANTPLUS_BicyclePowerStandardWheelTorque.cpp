@@ -1,34 +1,37 @@
 #include <Profiles/BicyclePower/DataPages/ANTPLUS_BicyclePowerStandardWheelTorque.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerPrivateDefines.h>
 
+#define WHEELTICKS_BYTE                   2
+#define INSTANTANEOUSCADENCE_BYTE         3
+#define WHEELPERIOD_LSB_BYTE              4
+#define WHEELPERIOD_MSB_BYTE              5
+#define ACCUMULATEDTORQUE_LSB_BYTE        6
+#define ACCUMULATEDTORQUE_MSB_BYTE        7
+
 template<class T>
 BicyclePowerBaseStandardWheelTorque<T>::BicyclePowerBaseStandardWheelTorque() :
     CoreDataPage<T>() {}
 
 template<class T>
 uint8_t BicyclePowerBaseStandardWheelTorque<T>::getWheelTicks() {
-    return this->get8BitValue(
-            ANTPLUS_BICYCLEPOWER_DATAPAGE_WHEELTICKS_WHEELTORQUE_BYTE);
+    return this->get8BitValue(WHEELTICKS_BYTE);
 }
 
 template<class T>
-uint8_t BicyclePowerBaseStandardWheelTorque<T>::getInstantCadence() {
-    return this->get8BitValue(
-            ANTPLUS_BICYCLEPOWER_DATAPAGE_CADENCE_WHEELTORQUE_BYTE);
+uint8_t BicyclePowerBaseStandardWheelTorque<T>::getInstantaneousCadence() {
+    return this->get8BitValue(INSTANTANEOUSCADENCE_BYTE);
 }
 
 template<class T>
 uint16_t BicyclePowerBaseStandardWheelTorque<T>::getWheelPeriod() {
     return this->get16BitValue(
-            ANTPLUS_BICYCLEPOWER_DATAPAGE_WHEELPERIODLSB_WHEELTORQUE_BYTE,
-            ANTPLUS_BICYCLEPOWER_DATAPAGE_WHEELPERIODMSB_WHEELTORQUE_BYTE);
+            WHEELPERIOD_LSB_BYTE, WHEELPERIOD_MSB_BYTE);
 }
 
 template<class T>
 uint16_t BicyclePowerBaseStandardWheelTorque<T>::getAccumulatedTorque() {
     return this->get16BitValue(
-            ANTPLUS_BICYCLEPOWER_DATAPAGE_ACCUMULATEDTORQUELSB_WHEELTORQUE_BYTE,
-            ANTPLUS_BICYCLEPOWER_DATAPAGE_ACCUMULATEDTORQUEMSB_WHEELTORQUE_BYTE);
+            ACCUMULATEDTORQUE_LSB_BYTE, ACCUMULATEDTORQUE_MSB_BYTE);
 }
 
 template class BicyclePowerBaseStandardWheelTorque<BroadcastData>;

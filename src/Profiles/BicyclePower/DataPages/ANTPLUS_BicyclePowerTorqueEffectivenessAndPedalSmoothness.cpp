@@ -1,32 +1,33 @@
 #include <Profiles/BicyclePower/DataPages/ANTPLUS_BicyclePowerTorqueEffectivenessAndPedalSmoothness.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerPrivateDefines.h>
 
+#define LEFTEFFECTIVENESS_BYTE    2
+#define RIGHTEFFECTIVENESS_BYTE   3
+#define LEFTSMOOTHNESS_BYTE       4
+#define RIGHTSMOOTHNESS_BYTE      5
+
 template<class T>
-BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<T>::BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness() : CoreDataPage<T>() {
-}
+BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<T>::BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness() :
+    CoreDataPage<T>() {}
 
 template<class T>
 uint8_t BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<T>::getLeftTorqueEffectiveness() {
-    return this->get8BitValue(
-            ANTPLUS_BICYCLEPOWER_DATAPAGE_LEFTEFFECTIVENESS_PEDALSMOOTHNESS_BYTE);
+    return this->get8BitValue(LEFTEFFECTIVENESS_BYTE);
 }
 
 template<class T>
 uint8_t BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<T>::getRightTorqueEffectiveness() {
-    return this->get8BitValue(
-            ANTPLUS_BICYCLEPOWER_DATAPAGE_RIGHTEFFECTIVENESS_PEDALSMOOTHNESS_BYTE);
+    return this->get8BitValue(RIGHTEFFECTIVENESS_BYTE);
 }
 
 template<class T>
 uint8_t BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<T>::getLeftPedalSmoothness() {
-    return this->get8BitValue(
-            ANTPLUS_BICYCLEPOWER_DATAPAGE_LEFTSMOOTHNESS_PEDALSMOOTHNESS_BYTE);
+    return this->get8BitValue(LEFTSMOOTHNESS_BYTE);
 }
 
 template<class T>
 uint8_t BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<T>::getRightPedalSmoothness() {
-    return this->get8BitValue(
-            ANTPLUS_BICYCLEPOWER_DATAPAGE_RIGHTSMOOTHNESS_PEDALSMOOTHNESS_BYTE);
+    return this->get8BitValue(RIGHTSMOOTHNESS_BYTE);
 }
 
 template class BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<BroadcastData>;

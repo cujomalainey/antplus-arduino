@@ -8,7 +8,7 @@ class BicyclePowerBaseStandardCrankTorque : virtual public CoreDataPage<T> {
 public:
     BicyclePowerBaseStandardCrankTorque();
     uint8_t getCrankTicks();
-    uint8_t getInstantCadence(); // May not be available, 0xFF indicates invalid
+    uint8_t getInstantaneousCadence(); //TODO is vaid check, May not be available, 0xFF indicates invalid
     uint16_t getCrankPeriod();
     uint16_t getAccumulatedTorque();
 };
