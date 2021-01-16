@@ -7,7 +7,7 @@
 
 class BicyclePowerBaseMainDataPage : public BaseDataPage<BroadcastData> {
 public:
-    BicyclePowerBaseMainDataPage(AntRxDataResponse& dp);
+    explicit BicyclePowerBaseMainDataPage(AntRxDataResponse& dp);
     uint8_t getDataPageNumber() override;
     uint8_t getUpdateEventCount();
 

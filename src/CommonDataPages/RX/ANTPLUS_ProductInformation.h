@@ -10,7 +10,7 @@
 
 class ProductInformation : public BaseDataPage<BroadcastData>, public BaseProductInformation<BroadcastData> {
 public:
-    ProductInformation(AntRxDataResponse& dp);
+    explicit ProductInformation(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_PRODUCTINFORMATION_h

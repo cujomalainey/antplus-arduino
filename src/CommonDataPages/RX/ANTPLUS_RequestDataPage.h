@@ -10,7 +10,7 @@
 
 class RequestDataPage : public BaseDataPage<AcknowledgedData>, public BaseRequestDataPage<AcknowledgedData> {
 public:
-    RequestDataPage(AntRxDataResponse& dp);
+    explicit RequestDataPage(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_REQUESTDATAPAGE_h

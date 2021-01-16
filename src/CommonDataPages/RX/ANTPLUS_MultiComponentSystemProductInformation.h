@@ -10,7 +10,7 @@
 
 class MultiComponentSystemProductInformation : public BaseDataPage<BroadcastData>, public BaseMultiComponentSystemProductInformation<BroadcastData> {
 public:
-    MultiComponentSystemProductInformation(AntRxDataResponse& dp);
+    explicit MultiComponentSystemProductInformation(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_h

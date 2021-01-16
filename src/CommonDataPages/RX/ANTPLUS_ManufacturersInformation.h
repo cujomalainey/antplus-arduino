@@ -10,7 +10,7 @@
 
 class ManufacturersInformation : public BaseDataPage<BroadcastData>, public BaseManufacturersInformation<BroadcastData> {
 public:
-    ManufacturersInformation(AntRxDataResponse& dp);
+    explicit ManufacturersInformation(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_MANUFACTURERSINFORMATION_h

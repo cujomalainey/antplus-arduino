@@ -10,7 +10,7 @@
 
 class ModeSettings : public BaseDataPage<BroadcastData>, public BaseModeSettings<BroadcastData> {
 public:
-    ModeSettings(AntRxDataResponse& dp);
+    explicit ModeSettings(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_MODESETTINGS_h
