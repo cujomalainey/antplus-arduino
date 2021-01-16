@@ -2,10 +2,8 @@
 #define ANTPLUS_PROFILEHEARTRATEDISPLAY_h
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
-#include <Profiles/HeartRate/DataPages/ANTPLUS_ProfileHeartRateDataPages.h>
+#include <Profiles/HeartRate/ANTPLUS_ProfileHeartRateDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
-
-#include "ANT.h"
 
 class ProfileHeartRateDisplay : public BaseSlaveProfile {
 public:

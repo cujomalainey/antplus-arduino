@@ -2,7 +2,7 @@
 #define ANTPLUS_PROFILEHEARTRATEMONITOR_h
 
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
-#include <Profiles/HeartRate/DataPages/ANTPLUS_ProfileHeartRateDataPages.h>
+#include <Profiles/HeartRate/ANTPLUS_ProfileHeartRateDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 
