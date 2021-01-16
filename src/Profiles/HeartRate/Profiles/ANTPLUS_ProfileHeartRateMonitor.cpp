@@ -1,4 +1,4 @@
-#include <Profiles/HeartRate/Monitor/ANTPLUS_ProfileHeartRateMonitor.h>
+#include <Profiles/HeartRate/Profiles/ANTPLUS_ProfileHeartRateMonitor.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
