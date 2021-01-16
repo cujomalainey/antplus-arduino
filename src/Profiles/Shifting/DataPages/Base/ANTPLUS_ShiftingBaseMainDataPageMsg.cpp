@@ -7,5 +7,6 @@ ShiftingBaseMainDataPageMsg::ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber)
     memset(_buffer, 0, MESSAGE_SIZE);
     setDataBuffer(_buffer);
     set8BitValue(dataPageNumber, ANTPLUS_SHIFTING_DATAPAGEBASE_DATAPAGE_BYTE);
+    // TODO magic numbers
     _buffer[2] = 0xFF;
 }
