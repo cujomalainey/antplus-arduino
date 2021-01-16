@@ -1,9 +1,9 @@
-#include <Profiles/BicyclePower/DataPages/Base/ANTPLUS_BicyclePowerBaseStandardCrankTorque.h>
+#include <Profiles/BicyclePower/DataPages/ANTPLUS_BicyclePowerStandardCrankTorque.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerPrivateDefines.h>
 
 template<class T>
-BicyclePowerBaseStandardCrankTorque<T>::BicyclePowerBaseStandardCrankTorque() : CoreDataPage<T>() {
-}
+BicyclePowerBaseStandardCrankTorque<T>::BicyclePowerBaseStandardCrankTorque() :
+    CoreDataPage<T>() {}
 
 template<class T>
 uint8_t BicyclePowerBaseStandardCrankTorque<T>::getCrankTicks() {
@@ -33,3 +33,7 @@ uint16_t BicyclePowerBaseStandardCrankTorque<T>::getAccumulatedTorque() {
 
 template class BicyclePowerBaseStandardCrankTorque<BroadcastData>;
 template class BicyclePowerBaseStandardCrankTorque<BroadcastDataMsg>;
+
+BicyclePowerStandardCrankTorque::BicyclePowerStandardCrankTorque(AntRxDataResponse& dp) :
+    BicyclePowerBaseMainDataPage(dp),
+    BicyclePowerBaseStandardCrankTorque() {}

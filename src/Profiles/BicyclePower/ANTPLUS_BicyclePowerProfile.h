@@ -5,7 +5,7 @@
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerDefines.h>
 
 // Datapages
-#include <Profiles/BicyclePower/DataPages/ANTPLUS_ProfileBicyclePowerDataPages.h>
+#include <Profiles/BicyclePower/ANTPLUS_ProfileBicyclePowerDataPages.h>
 
 // Profile Classes
 #include <Profiles/BicyclePower/Display/ANTPLUS_ProfileBicyclePowerDisplay.h>

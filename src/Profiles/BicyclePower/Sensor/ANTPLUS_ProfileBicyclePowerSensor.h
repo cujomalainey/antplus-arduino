@@ -2,7 +2,7 @@
 #define ANTPLUS_PROFILEBICYCLEPOWERSENSOR_h
 
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
-#include <Profiles/BicyclePower/DataPages/ANTPLUS_ProfileBicyclePowerDataPages.h>
+#include <Profiles/BicyclePower/ANTPLUS_ProfileBicyclePowerDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
 class ProfileBicyclePowerSensor : public BaseMasterProfile {

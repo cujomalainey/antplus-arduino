@@ -1,4 +1,4 @@
-#include <Profiles/BicyclePower/DataPages/Base/ANTPLUS_BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness.h>
+#include <Profiles/BicyclePower/DataPages/ANTPLUS_BicyclePowerTorqueEffectivenessAndPedalSmoothness.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerPrivateDefines.h>
 
 template<class T>
@@ -31,3 +31,7 @@ uint8_t BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<T>::getRightPedalS
 
 template class BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<BroadcastData>;
 template class BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<BroadcastDataMsg>;
+
+BicyclePowerTorqueEffectivenessAndPedalSmoothness::BicyclePowerTorqueEffectivenessAndPedalSmoothness(AntRxDataResponse& dp) :
+    BicyclePowerBaseMainDataPage(dp),
+    BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness() {}
