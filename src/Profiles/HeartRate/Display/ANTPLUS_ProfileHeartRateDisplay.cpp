@@ -4,6 +4,8 @@
 #include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
+#define DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
+
 ProfileHeartRateDisplay::ProfileHeartRateDisplay() : BaseSlaveProfile() {
     setChannelConfig();
 }
@@ -29,28 +31,28 @@ bool ProfileHeartRateDisplay::handleDataPage(HeartRateBaseMainDataPage& dp) {
     bool called = false;
 
     switch (dataPage) {
-    case ANTPLUS_HEARTRATE_DATAPAGE_DEFAULT_NUMBER:
+    case DEFAULT_NUMBER:
         called = handleDefault(dp);
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER:
+    case CUMULATIVEOPERATINGTIME_NUMBER:
         called = handleCumulativeOperatingTime(dp);
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER:
+    case MANUFACTURERINFORMATION_NUMBER:
         called = handleManufacturerInformation(dp);
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER:
+    case PRODUCTINFORMATION_NUMBER:
         called = handleProductInformation(dp);
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_NUMBER:
+    case PREVIOUSHEARTBEAT_NUMBER:
         called = handlePreviousHeartBeat(dp);
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_NUMBER:
+    case SWIMINTERVALSUMMARY_NUMBER:
         called = handleSwimIntervalSummary(dp);
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER:
+    case BATTERYSTATUS_NUMBER:
         called = handleBatteryStatus(dp);
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER:
+    case CAPABILITIES_NUMBER:
         called = handleCapabilities(dp);
         break;
     }
@@ -68,7 +70,7 @@ void ProfileHeartRateDisplay::onAcknowledgedData(AcknowledgedData& msg) {
 
 
 void ProfileHeartRateDisplay::setChannelConfig() {
-    setChannelType(ANTPLUS_HEARTRATE_DISPLAY_CHANNELTYPE);
+    setChannelType(DISPLAY_CHANNELTYPE);
     setDeviceType(ANTPLUS_HEARTRATE_DEVICETYPE);
     setChannelPeriod(ANTPLUS_HEARTRATE_CHANNELPERIOD);
     setSearchTimeout(ANTPLUS_HEARTRATE_SEARCHTIMEOUT);

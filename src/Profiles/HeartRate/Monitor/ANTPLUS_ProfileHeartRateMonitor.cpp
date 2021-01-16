@@ -3,11 +3,13 @@
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
+#define MONITOR_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
+
 ProfileHeartRateMonitor::ProfileHeartRateMonitor(
         uint16_t deviceNumber,
         uint8_t transmissionType) :
     BaseMasterProfile(deviceNumber, transmissionType),
-    _nextBackgroundPage(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER),
+    _nextBackgroundPage(MANUFACTURERINFORMATION_NUMBER),
     _flags(0) {
     setChannelConfig();
 }
@@ -17,7 +19,7 @@ ProfileHeartRateMonitor::ProfileHeartRateMonitor(
         uint8_t transmissionType,
         uint32_t flags) :
     BaseMasterProfile(deviceNumber, transmissionType),
-    _nextBackgroundPage(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER),
+    _nextBackgroundPage(MANUFACTURERINFORMATION_NUMBER),
     _flags(flags) {
     setChannelConfig();
 }
@@ -90,35 +92,35 @@ void ProfileHeartRateMonitor::transmitPrimaryDataPage() {
 
 void ProfileHeartRateMonitor::transmitBackgroundDataPage() {
     switch (_nextBackgroundPage) {
-    case ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER:
+    case CUMULATIVEOPERATINGTIME_NUMBER:
         transmitHeartRateCumulativeOperatingTimeMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER:
+    case MANUFACTURERINFORMATION_NUMBER:
         transmitHeartRateManufacturerInformationMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER:
+    case PRODUCTINFORMATION_NUMBER:
         transmitHeartRateProductInformationMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER:
+    case BATTERYSTATUS_NUMBER:
         transmitHeartRateBatteryStatusMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER:
+    case CAPABILITIES_NUMBER:
         transmitHeartRateCapabilitiesMsg();
         break;
     }
 }
 
 uint8_t ProfileHeartRateMonitor::getNextBackgroundPage(uint8_t currentPage) {
-    if ((currentPage < ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_CUMULATIVEOPERATINGTIME_SUPPORTED)) {
-        return ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER;
-    } else if (currentPage < ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER) {
-        return ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER;
-    } else if (currentPage < ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER) {
-        return ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER;
-    } else if ((currentPage < ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_EXTENTED_FEATURES)) {
-        return ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER;
-    } else if ((currentPage < ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_BATTERYSTATUS_SUPPORTED)) {
-        return ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER;
+    if ((currentPage < CUMULATIVEOPERATINGTIME_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_CUMULATIVEOPERATINGTIME_SUPPORTED)) {
+        return CUMULATIVEOPERATINGTIME_NUMBER;
+    } else if (currentPage < MANUFACTURERINFORMATION_NUMBER) {
+        return MANUFACTURERINFORMATION_NUMBER;
+    } else if (currentPage < PRODUCTINFORMATION_NUMBER) {
+        return PRODUCTINFORMATION_NUMBER;
+    } else if ((currentPage < CAPABILITIES_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_EXTENTED_FEATURES)) {
+        return CAPABILITIES_NUMBER;
+    } else if ((currentPage < BATTERYSTATUS_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_BATTERYSTATUS_SUPPORTED)) {
+        return BATTERYSTATUS_NUMBER;
     } else {
         // Reached end of the loop, start again
         return getNextBackgroundPage(0);
@@ -128,28 +130,28 @@ uint8_t ProfileHeartRateMonitor::getNextBackgroundPage(uint8_t currentPage) {
 void ProfileHeartRateMonitor::transmitRequestedDataPage() {
     uint8_t requestedPage = getRequestedPage();
     switch (requestedPage) {
-    case ANTPLUS_HEARTRATE_DATAPAGE_DEFAULT_NUMBER:
+    case DEFAULT_NUMBER:
         transmitHeartRateDefaultMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER:
+    case CUMULATIVEOPERATINGTIME_NUMBER:
         transmitHeartRateCumulativeOperatingTimeMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER:
+    case MANUFACTURERINFORMATION_NUMBER:
         transmitHeartRateManufacturerInformationMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER:
+    case PRODUCTINFORMATION_NUMBER:
         transmitHeartRateProductInformationMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_NUMBER:
+    case PREVIOUSHEARTBEAT_NUMBER:
         transmitHeartRatePreviousHeartBeatMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_NUMBER:
+    case SWIMINTERVALSUMMARY_NUMBER:
         transmitHeartRateSwimIntervalSummaryMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER:
+    case CAPABILITIES_NUMBER:
         transmitHeartRateCapabilitiesMsg();
         break;
-    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER:
+    case BATTERYSTATUS_NUMBER:
         transmitHeartRateBatteryStatusMsg();
         break;
     }
@@ -213,19 +215,20 @@ void ProfileHeartRateMonitor::transmitHeartRateMsg(HeartRateBaseMainDataPageMsg&
 
 bool ProfileHeartRateMonitor::isDataPageValid(uint8_t dataPage) {
     switch (dataPage) {
-    case ANTPLUS_HEARTRATE_DATAPAGE_DEFAULT_NUMBER:
+    case DEFAULT_NUMBER:
+        // TODO double check this is correct that dp 4 is only needed if imlemented
         return !(_flags & ANTPLUS_HEARTRATE_FLAGS_PREVIOUSHEARTBEAT_SUPPORTED);
-    case ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER:
+    case CUMULATIVEOPERATINGTIME_NUMBER:
         return _flags & ANTPLUS_HEARTRATE_FLAGS_CUMULATIVEOPERATINGTIME_SUPPORTED;
-    case ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER:
-    case ANTPLUS_HEARTRATE_DATAPAGE_PRODUCTINFORMATION_NUMBER:
+    case MANUFACTURERINFORMATION_NUMBER:
+    case PRODUCTINFORMATION_NUMBER:
         return true;
-    case ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_NUMBER:
+    case PREVIOUSHEARTBEAT_NUMBER:
         return _flags & ANTPLUS_HEARTRATE_FLAGS_PREVIOUSHEARTBEAT_SUPPORTED;
-    case ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_NUMBER:
-    case ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER:
+    case SWIMINTERVALSUMMARY_NUMBER:
+    case CAPABILITIES_NUMBER:
         return _flags & ANTPLUS_HEARTRATE_FLAGS_EXTENTED_FEATURES;
-    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER:
+    case BATTERYSTATUS_NUMBER:
         return _flags & ANTPLUS_HEARTRATE_FLAGS_BATTERYSTATUS_SUPPORTED;
     default:
         return false;
@@ -243,7 +246,7 @@ bool ProfileHeartRateMonitor::handleRequestDataPage(HeartRateBaseMainDataPage& d
 }
 
 void ProfileHeartRateMonitor::setChannelConfig() {
-    setChannelType(ANTPLUS_HEARTRATE_MONITOR_CHANNELTYPE);
+    setChannelType(MONITOR_CHANNELTYPE);
     setDeviceType(ANTPLUS_HEARTRATE_DEVICETYPE);
     setChannelPeriod(ANTPLUS_HEARTRATE_CHANNELPERIOD);
     setSearchTimeout(ANTPLUS_HEARTRATE_SEARCHTIMEOUT);

@@ -1,15 +1,15 @@
 #include <Profiles/HeartRate/DataPages/ANTPLUS_HeartRateCumulativeOperatingTime.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
+#define TIME_LSB_BYTE 1
+#define TIME_MSB_BYTE 3
+
 template<class T>
-HeartRateBaseCumulativeOperatingTime<T>::HeartRateBaseCumulativeOperatingTime() : CoreDataPage<T>() {
-}
+HeartRateBaseCumulativeOperatingTime<T>::HeartRateBaseCumulativeOperatingTime() : CoreDataPage<T>() {}
 
 template<class T>
 uint32_t HeartRateBaseCumulativeOperatingTime<T>::getCumulativeOperatingTime() {
-    return this->get24BitValue(
-            ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_TIME_LSB_BYTE,
-            ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_TIME_MSB_BYTE);
+    return this->get24BitValue(TIME_LSB_BYTE, TIME_MSB_BYTE);
 }
 
 template class HeartRateBaseCumulativeOperatingTime<BroadcastData>;
@@ -17,11 +17,8 @@ template class HeartRateBaseCumulativeOperatingTime<BroadcastDataMsg>;
 
 HeartRateCumulativeOperatingTime::HeartRateCumulativeOperatingTime(AntRxDataResponse& dp) : HeartRateBaseMainDataPage(dp), HeartRateBaseCumulativeOperatingTime<BroadcastData>() {}
 
-HeartRateCumulativeOperatingTimeMsg::HeartRateCumulativeOperatingTimeMsg() : HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER), HeartRateBaseCumulativeOperatingTime<BroadcastDataMsg>() {
-}
+HeartRateCumulativeOperatingTimeMsg::HeartRateCumulativeOperatingTimeMsg() : HeartRateBaseMainDataPageMsg(CUMULATIVEOPERATINGTIME_NUMBER), HeartRateBaseCumulativeOperatingTime<BroadcastDataMsg>() {}
 
 void HeartRateCumulativeOperatingTimeMsg::setCumulativeOperatingTime(uint32_t time) {
-    set24BitValue(time,
-            ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_TIME_LSB_BYTE,
-            ANTPLUS_HEARTRATE_DATAPAGE_CUMULATIVEOPERATINGTIME_TIME_MSB_BYTE);
+    set24BitValue(time, TIME_LSB_BYTE, TIME_MSB_BYTE);
 }

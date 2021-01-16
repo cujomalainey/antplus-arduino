@@ -2,74 +2,67 @@
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
+#define DATAPAGE_BYTE 0
+#define TOGGLE_BYTE   0
+#define HEARTBEATEVENTTIMELSB_BYTE 4
+#define HEARTBEATEVENTTIMEMSB_BYTE 5
+#define HEARTBEATCOUNT_BYTE 6
+#define COMPUTEDHEARTRATE_BYTE 7
+#define DATAPAGE_MASK 0x7F
+#define TOGGLE_MASK   0x80
+#define TOGGLE_SHIFT  7
+
 template<class T>
-HeartRateCoreMainDataPage<T>::HeartRateCoreMainDataPage() : CoreDataPage<T>() {
-}
+HeartRateCoreMainDataPage<T>::HeartRateCoreMainDataPage() : CoreDataPage<T>() {}
 
 template<class T>
 uint8_t HeartRateCoreMainDataPage<T>::getDataPageNumber() {
-    return this->get8BitValue(
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_DATAPAGE_BYTE,
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_DATAPAGE_MASK);
+    return this->get8BitValue(DATAPAGE_BYTE, DATAPAGE_MASK);
 }
 
 template<class T>
 uint8_t HeartRateCoreMainDataPage<T>::getPageChangeToggle() {
-    return this->get8BitValue(
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_BYTE,
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_MASK,
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_SHIFT);
+    return this->get8BitValue(TOGGLE_BYTE, TOGGLE_MASK, TOGGLE_SHIFT);
 }
 
 template<class T>
 uint16_t HeartRateCoreMainDataPage<T>::getHeartBeatEventTime() {
-    return this->get16BitValue(
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMELSB_BYTE,
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMEMSB_BYTE);
+    return this->get16BitValue(HEARTBEATEVENTTIMELSB_BYTE, HEARTBEATEVENTTIMEMSB_BYTE);
 }
 
 template<class T>
 uint8_t HeartRateCoreMainDataPage<T>::getHeartBeatCount() {
-    return this->get8BitValue(
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATCOUNT_BYTE);
+    return this->get8BitValue(HEARTBEATCOUNT_BYTE);
 }
 
 template<class T>
 uint8_t HeartRateCoreMainDataPage<T>::getComputedHeartRate() {
-    return this->get8BitValue(
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_COMPUTEDHEARTRATE_BYTE);
+    return this->get8BitValue(COMPUTEDHEARTRATE_BYTE);
 }
 
 template class HeartRateCoreMainDataPage<BroadcastData>;
 template class HeartRateCoreMainDataPage<BroadcastDataMsg>;
 
-HeartRateBaseMainDataPage::HeartRateBaseMainDataPage(AntRxDataResponse& dp) : BaseDataPage<BroadcastData>(dp), HeartRateCoreMainDataPage<BroadcastData>() {
-}
+HeartRateBaseMainDataPage::HeartRateBaseMainDataPage(AntRxDataResponse& dp) : BaseDataPage<BroadcastData>(dp), HeartRateCoreMainDataPage<BroadcastData>() {}
 
 HeartRateBaseMainDataPageMsg::HeartRateBaseMainDataPageMsg(uint8_t dataPageNumber) : BaseDataPageMsg<BroadcastDataMsg>(), HeartRateCoreMainDataPage<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
+    // TODO fixup to set data api
     _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = dataPageNumber;
 }
 
 void HeartRateBaseMainDataPageMsg::setPageChangeToggle(uint8_t toggle) {
-    set8BitValue(toggle ? 1 : 0,
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_BYTE,
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_MASK,
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_TOGGLE_SHIFT);
+    set8BitValue(toggle ? 1 : 0, TOGGLE_BYTE, TOGGLE_MASK, TOGGLE_SHIFT);
 }
 
 void HeartRateBaseMainDataPageMsg::setHeartBeatEventTime(uint16_t time) {
-    set16BitValue(time,
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMELSB_BYTE,
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATEVENTTIMEMSB_BYTE);
+    set16BitValue(time, HEARTBEATEVENTTIMELSB_BYTE, HEARTBEATEVENTTIMEMSB_BYTE);
 }
 
 void HeartRateBaseMainDataPageMsg::setHeartBeatCount(uint8_t count) {
-    set8BitValue(count,
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_HEARTBEATCOUNT_BYTE);
+    set8BitValue(count, HEARTBEATCOUNT_BYTE);
 }
 
 void HeartRateBaseMainDataPageMsg::setComputedHeartRate(uint8_t heartRate) {
-    set8BitValue(heartRate,
-            ANTPLUS_HEARTRATE_DATAPAGEBASE_COMPUTEDHEARTRATE_BYTE);
+    set8BitValue(heartRate, COMPUTEDHEARTRATE_BYTE);
 }
