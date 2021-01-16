@@ -8,7 +8,7 @@
 
 class ProfileShiftingShifter : public BaseMasterProfile {
 public:
-    ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType = ANTPLUS_SHIFTING_SHIFTER_TRANSMISSIONTYPE, uint16_t componentsSupported = 0x1);
+    explicit ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType = ANTPLUS_SHIFTING_SHIFTER_TRANSMISSIONTYPE, uint16_t componentsSupported = 0x1);
 
     /**
      * Register callback to populate default data messages (Datapage 1)

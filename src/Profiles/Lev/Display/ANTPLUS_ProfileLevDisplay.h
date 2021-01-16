@@ -10,8 +10,8 @@
 class ProfileLevDisplay : public BaseSlaveProfile {
 public:
     ProfileLevDisplay();
-    ProfileLevDisplay(uint16_t deviceNumber);
-    ProfileLevDisplay(uint16_t deviceNumber, uint8_t transmissionType);
+    explicit ProfileLevDisplay(uint16_t deviceNumber);
+    explicit ProfileLevDisplay(uint16_t deviceNumber, uint8_t transmissionType);
 
     void onLevSpeedSystemInformation1(void(*func)(LevSpeedSystemInformation1&, uintptr_t), uintptr_t data = 0) { _onLevSpeedSystemInformation1.set(func, data); }
     void onLevSpeedDistanceInformation(void(*func)(LevSpeedDistanceInformation&, uintptr_t), uintptr_t data = 0) { _onLevSpeedDistanceInformation.set(func, data); }

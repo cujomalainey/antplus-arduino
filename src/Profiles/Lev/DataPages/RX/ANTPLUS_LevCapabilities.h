@@ -5,7 +5,7 @@
 
 class LevCapabilities : public LevBaseMainDataPage {
 public:
-    LevCapabilities(AntRxDataResponse& dp);
+    explicit LevCapabilities(AntRxDataResponse& dp);
     uint8_t getNumberOfAssistModesSupported();
     uint8_t getNumberOfRegenerativeModesSupported();
     uint16_t getWheelCircumference();

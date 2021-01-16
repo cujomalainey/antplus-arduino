@@ -6,7 +6,7 @@
 
 class HeartRateSwimIntervalSummary : public HeartRateBaseMainDataPage, public HeartRateBaseSwimIntervalSummary<BroadcastData> {
 public:
-    HeartRateSwimIntervalSummary(AntRxDataResponse& dp);
+    explicit HeartRateSwimIntervalSummary(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_HEARTRATESWIMINTERVALSUMMARY_h

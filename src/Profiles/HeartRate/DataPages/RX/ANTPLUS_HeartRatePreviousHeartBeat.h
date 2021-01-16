@@ -6,7 +6,7 @@
 
 class HeartRatePreviousHeartBeat : public HeartRateBaseMainDataPage, public HeartRateBasePreviousHeartBeat<BroadcastData> {
 public:
-    HeartRatePreviousHeartBeat(AntRxDataResponse& dp);
+    explicit HeartRatePreviousHeartBeat(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_HEARTRATEPREVIOUSHEARTBEAT_h

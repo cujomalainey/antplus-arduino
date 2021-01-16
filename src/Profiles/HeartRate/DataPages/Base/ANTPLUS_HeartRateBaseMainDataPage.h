@@ -8,7 +8,7 @@
 
 class HeartRateBaseMainDataPage : public BaseDataPage<BroadcastData>, public HeartRateCoreMainDataPage<BroadcastData> {
 public:
-    HeartRateBaseMainDataPage(AntRxDataResponse& dp);
+    explicit HeartRateBaseMainDataPage(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_HEARTRATEBASEMAINDATAPAGE_h

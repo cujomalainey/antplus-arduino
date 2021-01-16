@@ -7,7 +7,7 @@
 
 class LevBaseMainDataPage : public BaseDataPage<BroadcastData> {
 public:
-    LevBaseMainDataPage(AntRxDataResponse& dp);
+    explicit LevBaseMainDataPage(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_LEVBASEMAINDATAPAGE_h

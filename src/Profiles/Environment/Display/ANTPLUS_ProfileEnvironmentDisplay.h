@@ -10,8 +10,8 @@
 class ProfileEnvironmentDisplay : public BaseSlaveProfile {
 public:
     ProfileEnvironmentDisplay();
-    ProfileEnvironmentDisplay(uint16_t deviceNumber);
-    ProfileEnvironmentDisplay(uint16_t deviceNumber, uint8_t transmissionType);
+    explicit ProfileEnvironmentDisplay(uint16_t deviceNumber);
+    explicit ProfileEnvironmentDisplay(uint16_t deviceNumber, uint8_t transmissionType);
     void onEnvironmentGeneralInformation(void (*func)(EnvironmentGeneralInformation&, uintptr_t), uintptr_t data = 0) { _onEnvironmentGeneralInformation.set(func, data); }
     void onEnvironmentTemperature(void (*func)(EnvironmentTemperature&, uintptr_t), uintptr_t data = 0) { _onEnvironmentTemperature.set(func, data); }
     void onManufacturersInformation(void (*func)(ManufacturersInformation&, uintptr_t), uintptr_t data = 0) { _onManufacturersInformation.set(func, data); }

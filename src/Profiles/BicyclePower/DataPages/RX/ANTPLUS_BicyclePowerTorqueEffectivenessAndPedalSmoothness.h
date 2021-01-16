@@ -6,7 +6,7 @@
 
 class BicyclePowerTorqueEffectivenessAndPedalSmoothness : public BicyclePowerBaseMainDataPage, public BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<BroadcastData> {
 public:
-    BicyclePowerTorqueEffectivenessAndPedalSmoothness(AntRxDataResponse& dp);
+    explicit BicyclePowerTorqueEffectivenessAndPedalSmoothness(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_BICYCLEPOWERPEDALSMOOTHNESS_h

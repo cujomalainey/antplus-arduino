@@ -6,7 +6,7 @@
 
 class HeartRateBatteryStatus : public HeartRateBaseMainDataPage, public HeartRateBaseBatteryStatus<BroadcastData> {
 public:
-    HeartRateBatteryStatus(AntRxDataResponse& dp);
+    explicit HeartRateBatteryStatus(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_HEARTRATEBATTERYSTATUS_h

@@ -6,7 +6,7 @@
 
 class BicycleSpeedCumulativeOperatingTime : public BicycleSpeedBaseMainDataPage, public BicycleSpeedBaseCumulativeOperatingTime<BroadcastData> {
 public:
-    BicycleSpeedCumulativeOperatingTime(AntRxDataResponse& dp);
+    explicit BicycleSpeedCumulativeOperatingTime(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_BICYCLESPEEDCUMULITIVEOPERATINGTIME_h

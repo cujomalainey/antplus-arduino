@@ -6,7 +6,7 @@
 
 class FECTrainerData : public BaseDataPage<BroadcastData>, public FECTrainerDataPage<BroadcastData> {
 public:
-    FECTrainerData(AntRxDataResponse& dp);
+    explicit FECTrainerData(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_FECTRAINERDATA_h

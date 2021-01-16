@@ -7,7 +7,7 @@
 
 class BicycleSpeedBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg> {
 public:
-    BicycleSpeedBaseMainDataPageMsg(uint8_t dataPageNumber);
+    explicit BicycleSpeedBaseMainDataPageMsg(uint8_t dataPageNumber);
     uint8_t getPageChangeToggle();
     uint16_t getBikeSpeedEventTime();
     uint16_t getCumulativeSpeedRevolutionCount();

@@ -6,7 +6,7 @@
 
 class HeartRateCumulativeOperatingTime : public HeartRateBaseMainDataPage, public HeartRateBaseCumulativeOperatingTime<BroadcastData> {
 public:
-    HeartRateCumulativeOperatingTime(AntRxDataResponse& dp);
+    explicit HeartRateCumulativeOperatingTime(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_HEARTRATECUMULITIVEOPERATINGTIME_h

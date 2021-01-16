@@ -6,7 +6,7 @@
 
 class HeartRateCapabilities : public HeartRateBaseMainDataPage, public HeartRateBaseCapabilities<BroadcastData> {
 public:
-    HeartRateCapabilities(AntRxDataResponse& dp);
+    explicit HeartRateCapabilities(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_HEARTRATECAPABILITIES_h

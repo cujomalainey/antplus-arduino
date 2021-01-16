@@ -7,7 +7,7 @@
 
 class LevBaseMainDataPageMsg : public BaseDataPageMsg<AcknowledgedDataMsg> {
 public:
-    LevBaseMainDataPageMsg(uint8_t dataPageNumber);
+    explicit LevBaseMainDataPageMsg(uint8_t dataPageNumber);
 protected:
     uint8_t _buffer[MESSAGE_SIZE];
 };

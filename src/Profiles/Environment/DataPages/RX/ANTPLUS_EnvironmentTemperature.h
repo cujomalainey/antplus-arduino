@@ -6,7 +6,7 @@
 
 class EnvironmentTemperature : public EnvironmentBaseDataPage, public EnvironmentBaseTemperature<BroadcastData> {
 public:
-    EnvironmentTemperature(AntRxDataResponse& dp);
+    explicit EnvironmentTemperature(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_ENVIRONMENTTEMPERATURE_h

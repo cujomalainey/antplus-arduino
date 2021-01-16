@@ -5,7 +5,7 @@
 
 class LevBatteryInformation : public LevBaseMainDataPage {
 public:
-    LevBatteryInformation(AntRxDataResponse& dp);
+    explicit LevBatteryInformation(AntRxDataResponse& dp);
     uint16_t getChargingCycleCount();
     uint16_t getFuelConsumption();
     uint8_t getBatteryVoltage();

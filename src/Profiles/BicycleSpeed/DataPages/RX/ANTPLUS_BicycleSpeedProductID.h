@@ -6,7 +6,7 @@
 
 class BicycleSpeedProductID : public BicycleSpeedBaseMainDataPage, public BicycleSpeedBaseProductID<BroadcastData> {
 public:
-    BicycleSpeedProductID(AntRxDataResponse& dp);
+    explicit BicycleSpeedProductID(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_BICYCLESPEEDPRODUCTIONID_h

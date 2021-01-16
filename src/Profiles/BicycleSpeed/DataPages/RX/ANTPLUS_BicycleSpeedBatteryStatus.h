@@ -6,7 +6,7 @@
 
 class BicycleSpeedBatteryStatus : public BicycleSpeedBaseMainDataPage, public BicycleSpeedBaseBatteryStatus<BroadcastData> {
 public:
-    BicycleSpeedBatteryStatus(AntRxDataResponse& dp);
+    explicit BicycleSpeedBatteryStatus(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_BICYCLESPEEDBATTERYSTATUS_h

@@ -5,7 +5,7 @@
 
 class LevBaseSpeedSystemInformation : public LevBaseMainDataPage {
 public:
-    LevBaseSpeedSystemInformation(AntRxDataResponse& dp);
+    explicit LevBaseSpeedSystemInformation(AntRxDataResponse& dp);
     uint8_t getCurrentRegenerativeLevel();
     uint8_t getCurrentAssistLevel();
     uint8_t getSystemState();

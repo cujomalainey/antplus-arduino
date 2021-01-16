@@ -5,7 +5,7 @@
 
 class LevAltSpeedDistanceInformation : public LevBaseSpeedDistanceInformation {
 public:
-    LevAltSpeedDistanceInformation(AntRxDataResponse& dp);
+    explicit LevAltSpeedDistanceInformation(AntRxDataResponse& dp);
     uint16_t getFuelConsumption(); // in Wh/km
 };
 

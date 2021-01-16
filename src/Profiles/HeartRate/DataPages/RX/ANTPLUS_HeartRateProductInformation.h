@@ -6,7 +6,7 @@
 
 class HeartRateProductInformation : public HeartRateBaseMainDataPage, public HeartRateBaseProductInformation<BroadcastData> {
 public:
-    HeartRateProductInformation(AntRxDataResponse& dp);
+    explicit HeartRateProductInformation(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_HEARTRATEPRODUCTIONINFORMATION_h

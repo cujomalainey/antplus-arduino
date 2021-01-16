@@ -7,7 +7,7 @@
 
 class MuscleOxygenBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg> {
 public:
-    MuscleOxygenBaseMainDataPageMsg(uint8_t dataPageNumber);
+    explicit MuscleOxygenBaseMainDataPageMsg(uint8_t dataPageNumber);
 protected:
     uint8_t _buffer[MESSAGE_SIZE];
 };

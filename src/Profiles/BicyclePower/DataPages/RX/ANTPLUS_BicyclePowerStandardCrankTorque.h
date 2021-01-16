@@ -6,7 +6,7 @@
 
 class BicyclePowerStandardCrankTorque : public BicyclePowerBaseMainDataPage, public BicyclePowerBaseStandardCrankTorque<BroadcastData> {
 public:
-    BicyclePowerStandardCrankTorque(AntRxDataResponse& dp);
+    explicit BicyclePowerStandardCrankTorque(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_BICYCLEPOWERSTANDARDCRANKTORQUE_h

@@ -6,7 +6,7 @@
 
 class BicycleSpeedMotionAndSpeed : public BicycleSpeedBaseMainDataPage, public BicycleSpeedBaseMotionAndSpeed<BroadcastData> {
 public:
-    BicycleSpeedMotionAndSpeed(AntRxDataResponse& dp);
+    explicit BicycleSpeedMotionAndSpeed(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_BICYCLESPEEDMOTIONANDSPEED_h

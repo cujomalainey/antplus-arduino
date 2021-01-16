@@ -6,7 +6,7 @@
 
 class BicyclePowerStandardPowerOnly : public BicyclePowerBaseMainDataPage, public BicyclePowerBaseStandardPowerOnly<BroadcastData> {
 public:
-    BicyclePowerStandardPowerOnly(AntRxDataResponse& dp);
+    explicit BicyclePowerStandardPowerOnly(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_BICYCLEPOWERSTANDARDPOWERONLY_h

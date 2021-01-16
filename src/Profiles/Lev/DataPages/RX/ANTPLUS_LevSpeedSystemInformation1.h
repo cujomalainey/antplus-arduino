@@ -5,7 +5,7 @@
 
 class LevSpeedSystemInformation1 : public LevBaseSpeedSystemInformation {
 public:
-    LevSpeedSystemInformation1(AntRxDataResponse& dp);
+    explicit LevSpeedSystemInformation1(AntRxDataResponse& dp);
     uint8_t getBatteryTemperatureState();
     uint8_t getBatteryTemperatureAlert();
     uint8_t getMotorTemperatureState();

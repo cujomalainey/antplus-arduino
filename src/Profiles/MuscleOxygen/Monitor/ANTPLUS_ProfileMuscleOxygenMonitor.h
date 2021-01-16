@@ -8,7 +8,7 @@
 
 class ProfileMuscleOxygenMonitor : public BaseMasterProfile {
 public:
-    ProfileMuscleOxygenMonitor(uint16_t deviceNumber, uint8_t transmissionType = ANTPLUS_MUSCLEOXYGEN_MONITOR_TRANSMISSIONTYPE);
+    explicit ProfileMuscleOxygenMonitor(uint16_t deviceNumber, uint8_t transmissionType = ANTPLUS_MUSCLEOXYGEN_MONITOR_TRANSMISSIONTYPE);
 
     /**
      * Register callback to populate Muscle Oxygen data messages (Datapage 0)

@@ -10,8 +10,8 @@
 class ProfileBicycleSpeedDisplay : public BaseSlaveProfile {
 public:
     ProfileBicycleSpeedDisplay();
-    ProfileBicycleSpeedDisplay(uint16_t deviceNumber);
-    ProfileBicycleSpeedDisplay(uint16_t deviceNumber, uint8_t transmissionType);
+    explicit ProfileBicycleSpeedDisplay(uint16_t deviceNumber);
+    explicit ProfileBicycleSpeedDisplay(uint16_t deviceNumber, uint8_t transmissionType);
     void onBicycleSpeedBatteryStatus(void (*func)(BicycleSpeedBatteryStatus&, uintptr_t), uintptr_t data = 0) { _onBicycleSpeedBatteryStatus.set(func, data); }
     void onBicycleSpeedCumulativeOperatingTime(void (*func)(BicycleSpeedCumulativeOperatingTime&, uintptr_t), uintptr_t data = 0) { _onBicycleSpeedCumulativeOperatingTime.set(func, data); }
     void onBicycleSpeedDefault(void (*func)(BicycleSpeedDefault&, uintptr_t), uintptr_t data = 0) { _onBicycleSpeedDefault.set(func, data); }

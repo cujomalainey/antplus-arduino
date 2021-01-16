@@ -6,7 +6,7 @@
 
 class HeartRateManufacturerInformation : public HeartRateBaseMainDataPage, public HeartRateBaseManufacturerInformation<BroadcastData> {
 public:
-    HeartRateManufacturerInformation(AntRxDataResponse& dp);
+    explicit HeartRateManufacturerInformation(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_HEARTRATEMANUFACTURERINFORMATION_h

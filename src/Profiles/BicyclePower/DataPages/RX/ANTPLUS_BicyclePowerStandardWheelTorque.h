@@ -6,7 +6,7 @@
 
 class BicyclePowerStandardWheelTorque : public BicyclePowerBaseMainDataPage, public BicyclePowerBaseStandardWheelTorque<BroadcastData> {
 public:
-    BicyclePowerStandardWheelTorque(AntRxDataResponse& dp);
+    explicit BicyclePowerStandardWheelTorque(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_BICYCLEPOWERSTANDARDWHEELTORQUE_h

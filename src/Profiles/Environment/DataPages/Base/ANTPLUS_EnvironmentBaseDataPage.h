@@ -7,7 +7,7 @@
 
 class EnvironmentBaseDataPage : public BaseDataPage<BroadcastData> {
 public:
-    EnvironmentBaseDataPage(AntRxDataResponse& dp);
+    explicit EnvironmentBaseDataPage(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_ENVIRONMENTBASEMAINDATAPAGE_h

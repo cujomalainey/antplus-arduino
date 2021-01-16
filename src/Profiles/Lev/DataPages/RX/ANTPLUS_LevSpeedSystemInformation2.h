@@ -5,7 +5,7 @@
 
 class LevSpeedSystemInformation2 : public LevBaseSpeedSystemInformation {
 public:
-    LevSpeedSystemInformation2(AntRxDataResponse& dp);
+    explicit LevSpeedSystemInformation2(AntRxDataResponse& dp);
     uint8_t getBatterySOC();
     uint8_t getBatteryEmptyWarning();
     uint8_t getPercentAssist();

@@ -6,7 +6,7 @@
 
 class EnvironmentGeneralInformation : public EnvironmentBaseDataPage, public EnvironmentBaseGeneralInformation<BroadcastData> {
 public:
-    EnvironmentGeneralInformation(AntRxDataResponse& dp);
+    explicit EnvironmentGeneralInformation(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_ENVIRONMENTGENERALINFORMATION_h

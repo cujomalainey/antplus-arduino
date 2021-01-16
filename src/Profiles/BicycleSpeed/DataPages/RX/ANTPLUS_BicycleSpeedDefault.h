@@ -5,7 +5,7 @@
 
 class BicycleSpeedDefault : public BicycleSpeedBaseMainDataPage {
 public:
-    BicycleSpeedDefault(AntRxDataResponse& dp);
+    explicit BicycleSpeedDefault(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_BICYCLESPEEDDEFAULT_h
