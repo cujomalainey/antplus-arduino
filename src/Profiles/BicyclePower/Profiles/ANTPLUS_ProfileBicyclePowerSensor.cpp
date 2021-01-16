@@ -1,4 +1,4 @@
-#include <Profiles/BicyclePower/Sensor/ANTPLUS_ProfileBicyclePowerSensor.h>
+#include <Profiles/BicyclePower/Profiles/ANTPLUS_ProfileBicyclePowerSensor.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerDefines.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerPrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>

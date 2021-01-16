@@ -8,7 +8,7 @@
 #include <Profiles/BicyclePower/ANTPLUS_ProfileBicyclePowerDataPages.h>
 
 // Profile Classes
-#include <Profiles/BicyclePower/Display/ANTPLUS_ProfileBicyclePowerDisplay.h>
-#include <Profiles/BicyclePower/Sensor/ANTPLUS_ProfileBicyclePowerSensor.h>
+#include <Profiles/BicyclePower/Profiles/ANTPLUS_ProfileBicyclePowerDisplay.h>
+#include <Profiles/BicyclePower/Profiles/ANTPLUS_ProfileBicyclePowerSensor.h>
 
 #endif // ANTPLUS_BICYCLEPOWERPROFILE_h
