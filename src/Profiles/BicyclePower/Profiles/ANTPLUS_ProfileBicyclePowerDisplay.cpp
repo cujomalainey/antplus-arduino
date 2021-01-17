@@ -1,6 +1,6 @@
 #include <Profiles/BicyclePower/Profiles/ANTPLUS_ProfileBicyclePowerDisplay.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerPrivateDefines.h>
-#include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 #define DISPLAY_CHANNELTYPE			CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE

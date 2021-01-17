@@ -1,6 +1,6 @@
 #include <Profiles/BicycleSpeed/Display/ANTPLUS_ProfileBicycleSpeedDisplay.h>
 #include <Profiles/BicycleSpeed/ANTPLUS_BicycleSpeedPrivateDefines.h>
-#include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 ProfileBicycleSpeedDisplay::ProfileBicycleSpeedDisplay() : BaseSlaveProfile() {

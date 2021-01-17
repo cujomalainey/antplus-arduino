@@ -1,4 +1,4 @@
-#include <CommonDataPages/Base/ANTPLUS_BaseModeSettings.h>
+#include <CommonDataPages/ANTPLUS_ModeSettings.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 template<class T>
@@ -13,3 +13,7 @@ uint8_t BaseModeSettings<T>::getSportMode() {
 
 template class BaseModeSettings<BroadcastData>;
 template class BaseModeSettings<BroadcastDataMsg>;
+
+ModeSettings::ModeSettings(AntRxDataResponse& dp) :
+    BaseDataPage<BroadcastData>(dp),
+    BaseModeSettings<BroadcastData>() {}

@@ -1,0 +1,121 @@
+#include <CommonDataPages/ANTPLUS_BatteryStatus.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <ANTPLUS_PrivateDefines.h>
+
+
+template<class T>
+BaseBatteryStatus<T>::BaseBatteryStatus() : CoreDataPage<T>() {}
+
+template<class T>
+uint8_t BaseBatteryStatus<T>::getNumberOfBatteries() {
+    return this->get8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYIDENTIFIER_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYIDENTIFIER_NUMBEROFBATTERIES_MASK);
+}
+
+template<class T>
+uint8_t BaseBatteryStatus<T>::getBatteryIdentifier() {
+    return this->get8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYIDENTIFIER_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYIDENTIFIER_IDENTIFIER_MASK,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYIDENTIFIER_IDENTIFIER_SHIFT);
+}
+
+template<class T>
+uint32_t BaseBatteryStatus<T>::getCumulativeOperatingTime() {
+    return this->get24BitValue(
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_CUMULATIVEOPERATINGTIME_LSB_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_CUMULATIVEOPERATINGTIME_MSB_BYTE);
+}
+
+template<class T>
+uint8_t BaseBatteryStatus<T>::getFractionalBatteryVoltage() {
+    return this->get8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_FRACTIONALBATTERYVOLTAGE_BYTE);
+}
+
+template<class T>
+uint8_t BaseBatteryStatus<T>::getCoarseBatteryVoltage() {
+    return this->get8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_COARSEBATTERYVOLTAGE_MASK);
+}
+
+template<class T>
+uint8_t BaseBatteryStatus<T>::getBatteryStatus() {
+    return this->get8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_BATTERYSTATUS_MASK,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_BATTERYSTATUS_SHIFT);
+}
+
+template<class T>
+uint8_t BaseBatteryStatus<T>::getCumulativeOperatingTimeResolution() {
+    return this->get8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_CUMULATIVEOPERATINGTIMERESOLUTION_MASK,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_CUMULATIVEOPERATINGTIMERESOLUTION_SHIFT);
+}
+
+template class BaseBatteryStatus<BroadcastData>;
+template class BaseBatteryStatus<BroadcastDataMsg>;
+
+BatteryStatus::BatteryStatus(AntRxDataResponse& dp) :
+    BaseDataPage<BroadcastData>(dp),
+    BaseBatteryStatus<BroadcastData>() {}
+
+BatteryStatusMsg::BatteryStatusMsg() :
+    BaseDataPageMsg<BroadcastDataMsg>(),
+    BaseBatteryStatus<BroadcastDataMsg>() {
+    setDataBuffer(_buffer);
+    set8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER,
+            ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+    set8BitValue(
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_RESERVED_VALUE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_RESERVED_BYTE);
+}
+
+void BatteryStatusMsg::setNumberOfBatteries(uint8_t num) {
+    set8BitValue(num,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYIDENTIFIER_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYIDENTIFIER_NUMBEROFBATTERIES_MASK);
+}
+
+void BatteryStatusMsg::setBatteryIdentifier(uint8_t id) {
+    set8BitValue(id,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYIDENTIFIER_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYIDENTIFIER_IDENTIFIER_MASK,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYIDENTIFIER_IDENTIFIER_SHIFT);
+}
+
+void BatteryStatusMsg::setCumulativeOperatingTime(uint32_t time) {
+    set24BitValue(time,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_CUMULATIVEOPERATINGTIME_LSB_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_CUMULATIVEOPERATINGTIME_MSB_BYTE);
+}
+
+void BatteryStatusMsg::setFractionalBatteryVoltage(uint8_t voltage) {
+    set8BitValue(voltage,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_FRACTIONALBATTERYVOLTAGE_BYTE);
+}
+
+void BatteryStatusMsg::setCoarseBatteryVoltage(uint8_t voltage) {
+    set8BitValue(voltage,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_COARSEBATTERYVOLTAGE_MASK);
+}
+
+void BatteryStatusMsg::setBatteryStatus(uint8_t status) {
+    set8BitValue(status,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_BATTERYSTATUS_MASK,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_BATTERYSTATUS_SHIFT);
+}
+
+void BatteryStatusMsg::setCumulativeOperatingTimeResolution(uint8_t resolution) {
+    set8BitValue(resolution,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_BYTE,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_CUMULATIVEOPERATINGTIMERESOLUTION_MASK,
+            ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_DESCRIPTIVEBITFIELD_CUMULATIVEOPERATINGTIMERESOLUTION_SHIFT);
+}

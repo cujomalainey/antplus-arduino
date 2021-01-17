@@ -1,8 +1,6 @@
 #include <Profiles/FEC/Display/ANTPLUS_ProfileFECDisplay.h>
 #include <Profiles/FEC/ANTPLUS_FECPrivateDefines.h>
 #include <Profiles/FEC/ANTPLUS_FECDefines.h>
-#include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 ProfileFECDisplay::ProfileFECDisplay() : BaseSlaveProfile() {
     setChannelConfig();

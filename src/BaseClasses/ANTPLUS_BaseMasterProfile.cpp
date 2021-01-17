@@ -1,7 +1,7 @@
 #include <BaseClasses/ANTPLUS_BaseDataPage.h>
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
-#include <CommonDataPages/RX/ANTPLUS_RequestDataPage.h>
+#include <CommonDataPages/ANTPLUS_RequestDataPage.h>
 
 BaseMasterProfile::BaseMasterProfile(uint16_t deviceNumber, uint8_t transmissionType) : BaseProfile(deviceNumber, transmissionType) {
 }
