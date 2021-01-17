@@ -1,7 +1,9 @@
-#include <Profiles/BicyclePower/Sensor/ANTPLUS_ProfileBicyclePowerSensor.h>
+#include <Profiles/BicyclePower/Profiles/ANTPLUS_ProfileBicyclePowerSensor.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerDefines.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerPrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+
+#define SENSOR_CHANNELTYPE   CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
 
 ProfileBicyclePowerSensor::ProfileBicyclePowerSensor(
         uint16_t deviceNumber,
@@ -49,7 +51,7 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
     case ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_GENERALCALIBRATION_NUMBER:
+    case GENERALCALIBRATION_NUMBER:
         called = handleGeneralCalibration(dp);
         break;
     }
@@ -91,22 +93,22 @@ void ProfileBicyclePowerSensor::transmitPrimaryDataPage() {
 
 void ProfileBicyclePowerSensor::transmitBackgroundDataPage() {
     switch (_nextBackgroundPage) {
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDPOWERONLY_NUMBER:
+    case STANDARDPOWERONLY_NUMBER:
         transmitBicyclePowerStandardPowerOnlyMsg();
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDWHEELTORQUE_NUMBER:
+    case STANDARDWHEELTORQUE_NUMBER:
         transmitBicyclePowerStandardWheelTorqueMsg();
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDCRANKTORQUE_NUMBER:
+    case STANDARDCRANKTORQUE_NUMBER:
         transmitBicyclePowerStandardCrankTorqueMsg();
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
+    case TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
         transmitBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg();
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_CRANKTORQUEFREQUENCY_NUMBER:
+    case CRANKTORQUEFREQUENCY_NUMBER:
         transmitBicyclePowerCrankTorqueFrequencyMsg();
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_GENERALCALIBRATION_NUMBER:
+    case GENERALCALIBRATION_NUMBER: // TODO (check is this part of the background transmission, seems sus)
         transmistBicyclePowerGeneralCalibrationResponse();
         break;
     }
@@ -147,17 +149,17 @@ uint8_t ProfileBicyclePowerSensor::getNextBackgroundPage(uint8_t currentPage) {
 void ProfileBicyclePowerSensor::transmitRequestedDataPage() {
     uint8_t requestedPage = getRequestedPage();
     switch (requestedPage) {
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDPOWERONLY_NUMBER:
+    case STANDARDPOWERONLY_NUMBER:
         // TODO
         break;
     }
 }
 
 void ProfileBicyclePowerSensor::setChannelConfig() {
-    setChannelType(ANTPLUS_BICYCLEPOWER_SENSOR_CHANNELTYPE);
+    setChannelType(SENSOR_CHANNELTYPE);
     setDeviceType(ANTPLUS_BICYCLEPOWER_DEVICETYPE);
-    setChannelPeriod(ANTPLUS_BICYCLEPOWER_CHANNELPERIOD);
-    setSearchTimeout(ANTPLUS_BICYCLEPOWER_SEARCHTIMEOUT);
+    setChannelPeriod(CHANNELPERIOD);
+    setSearchTimeout(SEARCHTIMEOUT);
 }
 
 bool ProfileBicyclePowerSensor::isDataPageValid(uint8_t dataPage) {

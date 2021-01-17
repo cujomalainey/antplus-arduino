@@ -5,8 +5,6 @@
 #include <BaseClasses/ANTPLUS_BaseDataPage.h>
 #include <BaseClasses/ANTPLUS_BaseDataPageMsg.h>
 
-#include "ANT.h"
-
 template<class T>
 class HeartRateCoreMainDataPage : virtual public CoreDataPage<T> {
 public:

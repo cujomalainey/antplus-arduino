@@ -1,4 +1,0 @@
-#include <Profiles/BicyclePower/DataPages/RX/ANTPLUS_BicyclePowerTorqueEffectivenessAndPedalSmoothness.h>
-
-BicyclePowerTorqueEffectivenessAndPedalSmoothness::BicyclePowerTorqueEffectivenessAndPedalSmoothness(AntRxDataResponse& dp) : BicyclePowerBaseMainDataPage(dp), BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness() {
-}

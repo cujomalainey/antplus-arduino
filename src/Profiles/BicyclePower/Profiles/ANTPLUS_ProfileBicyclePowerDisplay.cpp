@@ -1,7 +1,9 @@
-#include <Profiles/BicyclePower/Display/ANTPLUS_ProfileBicyclePowerDisplay.h>
+#include <Profiles/BicyclePower/Profiles/ANTPLUS_ProfileBicyclePowerDisplay.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerPrivateDefines.h>
 #include <CommonDataPages/RX/ANTPLUS_ModeSettings.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+
+#define DISPLAY_CHANNELTYPE			CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
 
 ProfileBicyclePowerDisplay::ProfileBicyclePowerDisplay() : BaseSlaveProfile() {
     setChannelConfig();
@@ -37,16 +39,16 @@ bool ProfileBicyclePowerDisplay::handleDataPage(BicyclePowerBaseMainDataPage& dp
     case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
         called = handleBatteryStatus(dp);
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDPOWERONLY_NUMBER:
+    case STANDARDPOWERONLY_NUMBER:
         called = handleStandardPowerOnly(dp);
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDCRANKTORQUE_NUMBER:
+    case STANDARDCRANKTORQUE_NUMBER:
         called = handleStandardCrankTorque(dp);
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_STANDARDWHEELTORQUE_NUMBER:
+    case STANDARDWHEELTORQUE_NUMBER:
         called = handleStandardWheelTorque(dp);
         break;
-    case ANTPLUS_BICYCLEPOWER_DATAPAGE_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
+    case TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
         called = handleTorqueEffectivenessAndPedalSmoothness(dp);
         break;
     }
@@ -64,10 +66,10 @@ void ProfileBicyclePowerDisplay::onAcknowledgedData(AcknowledgedData& msg) {
 
 
 void ProfileBicyclePowerDisplay::setChannelConfig() {
-    setChannelType(ANTPLUS_BICYCLEPOWER_DISPLAY_CHANNELTYPE);
+    setChannelType(DISPLAY_CHANNELTYPE);
     setDeviceType(ANTPLUS_BICYCLEPOWER_DEVICETYPE);
-    setChannelPeriod(ANTPLUS_BICYCLEPOWER_CHANNELPERIOD);
-    setSearchTimeout(ANTPLUS_BICYCLEPOWER_SEARCHTIMEOUT);
+    setChannelPeriod(CHANNELPERIOD);
+    setSearchTimeout(SEARCHTIMEOUT);
 }
 
 bool ProfileBicyclePowerDisplay::handleBatteryStatus(BicyclePowerBaseMainDataPage& dataPage) {
