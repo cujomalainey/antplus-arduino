@@ -136,19 +136,19 @@ void bicyclePowerBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
 void powerOnlyDataPageHandler(BicyclePowerStandardPowerOnly& msg, uintptr_t data) {
     Serial.print("Pedal Balance: ");
     Serial.println(msg.getPedalPower());
-    Serial.print("Instant Cadence: ");
+    Serial.print("Instantaneous Cadence: ");
     Serial.println(msg.getInstantaneousCadence());
     Serial.print("Accumulated Power: ");
     Serial.println(msg.getAccumulatedPower());
-    Serial.print("Instant Power: ");
+    Serial.print("Instantaneous Power: ");
     Serial.println(msg.getInstantaneousPower());
 }
 
 void crankTorqueDataPageHandler(BicyclePowerStandardCrankTorque& msg, uintptr_t data) {
     Serial.print("Crank Ticks: ");
     Serial.println(msg.getCrankTicks());
-    Serial.print("Instant Cadence: ");
-    Serial.println(msg.getInstantCadence());
+    Serial.print("Instantaneous Cadence: ");
+    Serial.println(msg.getInstantaneousCadence());
     Serial.print("Crank Period: ");
     Serial.println(msg.getCrankPeriod());
     Serial.print("Accumulated Torque: ");
@@ -158,8 +158,8 @@ void crankTorqueDataPageHandler(BicyclePowerStandardCrankTorque& msg, uintptr_t 
 void wheelTorqueDataPageHandler(BicyclePowerStandardWheelTorque& msg, uintptr_t data) {
     Serial.print("Wheel Ticks: ");
     Serial.println(msg.getWheelTicks());
-    Serial.print("Instant Cadence: ");
-    Serial.println(msg.getInstantCadence());
+    Serial.print("Instantaneous Cadence: ");
+    Serial.println(msg.getInstantaneousCadence());
     Serial.print("Wheel Period: ");
     Serial.println(msg.getWheelPeriod());
     Serial.print("Accumulated Torque: ");
