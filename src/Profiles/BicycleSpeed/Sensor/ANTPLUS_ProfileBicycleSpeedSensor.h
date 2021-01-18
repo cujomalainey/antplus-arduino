@@ -2,7 +2,7 @@
 #define ANTPLUS_PROFILEBICYCLESPEEDSENSOR_h
 
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
-#include <Profiles/BicycleSpeed/DataPages/ANTPLUS_ProfileBicycleSpeedDataPages.h>
+#include <Profiles/BicycleSpeed/ANTPLUS_ProfileBicycleSpeedDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
 class ProfileBicycleSpeedSensor : BaseMasterProfile {

@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_BICYCLESPEEDDEFAULT_h
 #define ANTPLUS_BICYCLESPEEDDEFAULT_h
 
-#include <Profiles/BicycleSpeed/DataPages/Base/ANTPLUS_BicycleSpeedBaseMainDataPage.h>
+#include <Profiles/BicycleSpeed/DataPages/ANTPLUS_BicycleSpeedBaseMainDataPage.h>
 
 class BicycleSpeedDefault : public BicycleSpeedBaseMainDataPage {
 public:

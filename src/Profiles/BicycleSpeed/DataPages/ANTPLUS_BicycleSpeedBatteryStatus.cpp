@@ -1,9 +1,9 @@
-#include <Profiles/BicycleSpeed/DataPages/Base/ANTPLUS_BicycleSpeedBaseBatteryStatus.h>
+#include <Profiles/BicycleSpeed/DataPages/ANTPLUS_BicycleSpeedBatteryStatus.h>
 #include <Profiles/BicycleSpeed/ANTPLUS_BicycleSpeedPrivateDefines.h>
 
 template<class T>
-BicycleSpeedBaseBatteryStatus<T>::BicycleSpeedBaseBatteryStatus() : CoreDataPage<T>() {
-}
+BicycleSpeedBaseBatteryStatus<T>::BicycleSpeedBaseBatteryStatus() :
+    CoreDataPage<T>() {}
 
 template<class T>
 uint8_t BicycleSpeedBaseBatteryStatus<T>::getFractionalBatteryVoltage() {
@@ -28,3 +28,7 @@ uint8_t BicycleSpeedBaseBatteryStatus<T>::getBatteryStatus() {
 
 template class BicycleSpeedBaseBatteryStatus<BroadcastData>;
 template class BicycleSpeedBaseBatteryStatus<BroadcastDataMsg>;
+
+BicycleSpeedBatteryStatus::BicycleSpeedBatteryStatus(AntRxDataResponse& dp) :
+    BicycleSpeedBaseMainDataPage(dp),
+    BicycleSpeedBaseBatteryStatus<BroadcastData>() {}

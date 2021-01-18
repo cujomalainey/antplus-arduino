@@ -1,9 +1,8 @@
-#include <Profiles/BicycleSpeed/DataPages/Base/ANTPLUS_BicycleSpeedBaseProductID.h>
+#include <Profiles/BicycleSpeed/DataPages/ANTPLUS_BicycleSpeedProductID.h>
 #include <Profiles/BicycleSpeed/ANTPLUS_BicycleSpeedPrivateDefines.h>
 
 template<class T>
-BicycleSpeedBaseProductID<T>::BicycleSpeedBaseProductID() : CoreDataPage<T>() {
-}
+BicycleSpeedBaseProductID<T>::BicycleSpeedBaseProductID() : CoreDataPage<T>() {}
 
 template<class T>
 uint8_t BicycleSpeedBaseProductID<T>::getHardwareVersion() {
@@ -25,3 +24,7 @@ uint8_t BicycleSpeedBaseProductID<T>::getModelNumber() {
 
 template class BicycleSpeedBaseProductID<BroadcastData>;
 template class BicycleSpeedBaseProductID<BroadcastDataMsg>;
+
+BicycleSpeedProductID::BicycleSpeedProductID(AntRxDataResponse& dp) :
+    BicycleSpeedBaseMainDataPage(dp),
+    BicycleSpeedBaseProductID<BroadcastData>() {}

@@ -1,9 +1,9 @@
-#include <Profiles/BicycleSpeed/DataPages/Base/ANTPLUS_BicycleSpeedBaseMotionAndSpeed.h>
+#include <Profiles/BicycleSpeed/DataPages/ANTPLUS_BicycleSpeedMotionAndSpeed.h>
 #include <Profiles/BicycleSpeed/ANTPLUS_BicycleSpeedPrivateDefines.h>
 
 template<class T>
-BicycleSpeedBaseMotionAndSpeed<T>::BicycleSpeedBaseMotionAndSpeed() : CoreDataPage<T>() {
-}
+BicycleSpeedBaseMotionAndSpeed<T>::BicycleSpeedBaseMotionAndSpeed() :
+    CoreDataPage<T>() {}
 
 template<class T>
 uint8_t BicycleSpeedBaseMotionAndSpeed<T>::getFlags() {
@@ -13,3 +13,7 @@ uint8_t BicycleSpeedBaseMotionAndSpeed<T>::getFlags() {
 
 template class BicycleSpeedBaseMotionAndSpeed<BroadcastData>;
 template class BicycleSpeedBaseMotionAndSpeed<BroadcastDataMsg>;
+
+BicycleSpeedMotionAndSpeed::BicycleSpeedMotionAndSpeed(AntRxDataResponse& dp) :
+    BicycleSpeedBaseMainDataPage(dp),
+    BicycleSpeedBaseMotionAndSpeed<BroadcastData>() {}

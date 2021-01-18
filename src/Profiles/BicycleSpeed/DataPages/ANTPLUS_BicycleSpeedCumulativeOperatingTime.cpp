@@ -1,9 +1,9 @@
-#include <Profiles/BicycleSpeed/DataPages/Base/ANTPLUS_BicycleSpeedBaseCumulativeOperatingTime.h>
+#include <Profiles/BicycleSpeed/DataPages/ANTPLUS_BicycleSpeedCumulativeOperatingTime.h>
 #include <Profiles/BicycleSpeed/ANTPLUS_BicycleSpeedPrivateDefines.h>
 
 template<class T>
-BicycleSpeedBaseCumulativeOperatingTime<T>::BicycleSpeedBaseCumulativeOperatingTime() : CoreDataPage<T>() {
-}
+BicycleSpeedBaseCumulativeOperatingTime<T>::BicycleSpeedBaseCumulativeOperatingTime() :
+    CoreDataPage<T>() {}
 
 template<class T>
 uint32_t BicycleSpeedBaseCumulativeOperatingTime<T>::getCumulativeOperatingTime() {
@@ -14,3 +14,6 @@ uint32_t BicycleSpeedBaseCumulativeOperatingTime<T>::getCumulativeOperatingTime(
 
 template class BicycleSpeedBaseCumulativeOperatingTime<BroadcastData>;
 template class BicycleSpeedBaseCumulativeOperatingTime<BroadcastDataMsg>;
+
+BicycleSpeedCumulativeOperatingTime::BicycleSpeedCumulativeOperatingTime(AntRxDataResponse& dp) :
+    BicycleSpeedBaseMainDataPage(dp), BicycleSpeedBaseCumulativeOperatingTime<BroadcastData>() {}
