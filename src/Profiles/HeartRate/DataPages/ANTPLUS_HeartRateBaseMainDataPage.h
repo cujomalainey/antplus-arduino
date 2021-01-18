@@ -1,7 +1,6 @@
 #ifndef ANTPLUS_HEARTRATEBASEMAINDATAPAGE_h
 #define ANTPLUS_HEARTRATEBASEMAINDATAPAGE_h
 
-#include <BaseClasses/ANTPLUS_CoreDataPage.h>
 #include <BaseClasses/ANTPLUS_BaseDataPage.h>
 #include <BaseClasses/ANTPLUS_BaseDataPageMsg.h>
 

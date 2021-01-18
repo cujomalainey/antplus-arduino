@@ -4,8 +4,8 @@
 
 #define DATAPAGE_BYTE 0
 #define TOGGLE_BYTE   0
-#define HEARTBEATEVENTTIMELSB_BYTE 4
-#define HEARTBEATEVENTTIMEMSB_BYTE 5
+#define HEARTBEATEVENTTIME_LSB_BYTE 4
+#define HEARTBEATEVENTTIME_MSB_BYTE 5
 #define HEARTBEATCOUNT_BYTE 6
 #define COMPUTEDHEARTRATE_BYTE 7
 #define DATAPAGE_MASK 0x7F
@@ -27,7 +27,7 @@ uint8_t HeartRateCoreMainDataPage<T>::getPageChangeToggle() {
 
 template<class T>
 uint16_t HeartRateCoreMainDataPage<T>::getHeartBeatEventTime() {
-    return this->get16BitValue(HEARTBEATEVENTTIMELSB_BYTE, HEARTBEATEVENTTIMEMSB_BYTE);
+    return this->get16BitValue(HEARTBEATEVENTTIME_LSB_BYTE, HEARTBEATEVENTTIME_MSB_BYTE);
 }
 
 template<class T>
@@ -43,9 +43,13 @@ uint8_t HeartRateCoreMainDataPage<T>::getComputedHeartRate() {
 template class HeartRateCoreMainDataPage<BroadcastData>;
 template class HeartRateCoreMainDataPage<BroadcastDataMsg>;
 
-HeartRateBaseMainDataPage::HeartRateBaseMainDataPage(AntRxDataResponse& dp) : BaseDataPage<BroadcastData>(dp), HeartRateCoreMainDataPage<BroadcastData>() {}
+HeartRateBaseMainDataPage::HeartRateBaseMainDataPage(AntRxDataResponse& dp) :
+    BaseDataPage<BroadcastData>(dp),
+    HeartRateCoreMainDataPage<BroadcastData>() {}
 
-HeartRateBaseMainDataPageMsg::HeartRateBaseMainDataPageMsg(uint8_t dataPageNumber) : BaseDataPageMsg<BroadcastDataMsg>(), HeartRateCoreMainDataPage<BroadcastDataMsg>() {
+HeartRateBaseMainDataPageMsg::HeartRateBaseMainDataPageMsg(uint8_t dataPageNumber) :
+    BaseDataPageMsg<BroadcastDataMsg>(),
+    HeartRateCoreMainDataPage<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
     // TODO fixup to set data api
     _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = dataPageNumber;
@@ -56,7 +60,8 @@ void HeartRateBaseMainDataPageMsg::setPageChangeToggle(uint8_t toggle) {
 }
 
 void HeartRateBaseMainDataPageMsg::setHeartBeatEventTime(uint16_t time) {
-    set16BitValue(time, HEARTBEATEVENTTIMELSB_BYTE, HEARTBEATEVENTTIMEMSB_BYTE);
+    set16BitValue(time, HEARTBEATEVENTTIME_LSB_BYTE,
+            HEARTBEATEVENTTIME_MSB_BYTE);
 }
 
 void HeartRateBaseMainDataPageMsg::setHeartBeatCount(uint8_t count) {
