@@ -77,7 +77,7 @@ BatteryStatusMsg::BatteryStatusMsg() :
     BaseDataPageMsg<BroadcastDataMsg>(),
     BaseBatteryStatus<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
-    set8BitValue(BATTERYSTATUS_NUMBER, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+    set8BitValue(COMMON_BATTERYSTATUS_NUMBER, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
     set8BitValue(RESERVED_VALUE, RESERVED_BYTE);
 }
 

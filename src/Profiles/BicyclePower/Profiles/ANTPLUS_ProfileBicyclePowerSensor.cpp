@@ -48,10 +48,10 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
     BaseMasterProfile::onAcknowledgedData(msg);
     switch (dataPage) {
 
-    case REQUESTDATAPAGE_NUMBER:
+    case COMMON_REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
-    case GENERALCALIBRATION_NUMBER:
+    case BICYCLEPOWER_GENERALCALIBRATION_NUMBER:
         called = handleGeneralCalibration(dp);
         break;
     }
@@ -93,22 +93,22 @@ void ProfileBicyclePowerSensor::transmitPrimaryDataPage() {
 
 void ProfileBicyclePowerSensor::transmitBackgroundDataPage() {
     switch (_nextBackgroundPage) {
-    case STANDARDPOWERONLY_NUMBER:
+    case BICYCLEPOWER_STANDARDPOWERONLY_NUMBER:
         transmitBicyclePowerStandardPowerOnlyMsg();
         break;
-    case STANDARDWHEELTORQUE_NUMBER:
+    case BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER:
         transmitBicyclePowerStandardWheelTorqueMsg();
         break;
-    case STANDARDCRANKTORQUE_NUMBER:
+    case BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER:
         transmitBicyclePowerStandardCrankTorqueMsg();
         break;
-    case TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
+    case BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
         transmitBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg();
         break;
-    case CRANKTORQUEFREQUENCY_NUMBER:
+    case BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER:
         transmitBicyclePowerCrankTorqueFrequencyMsg();
         break;
-    case GENERALCALIBRATION_NUMBER: // TODO (check is this part of the background transmission, seems sus)
+    case BICYCLEPOWER_GENERALCALIBRATION_NUMBER: // TODO (check is this part of the background transmission, seems sus)
         transmistBicyclePowerGeneralCalibrationResponse();
         break;
     }
@@ -149,7 +149,7 @@ uint8_t ProfileBicyclePowerSensor::getNextBackgroundPage(uint8_t currentPage) {
 void ProfileBicyclePowerSensor::transmitRequestedDataPage() {
     uint8_t requestedPage = getRequestedPage();
     switch (requestedPage) {
-    case STANDARDPOWERONLY_NUMBER:
+    case BICYCLEPOWER_STANDARDPOWERONLY_NUMBER:
         // TODO
         break;
     }

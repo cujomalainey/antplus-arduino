@@ -56,7 +56,7 @@ MultiComponentSystemManufacturersInformationMsg::MultiComponentSystemManufacture
     BaseMultiComponentSystemManufacturersInformation<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
     set8BitValue(
-            MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER,
+            COMMON_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER,
             ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 

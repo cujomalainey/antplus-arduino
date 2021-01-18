@@ -5,7 +5,8 @@
 #define TIME_MSB_BYTE 3
 
 template<class T>
-HeartRateBaseCumulativeOperatingTime<T>::HeartRateBaseCumulativeOperatingTime() : CoreDataPage<T>() {}
+HeartRateBaseCumulativeOperatingTime<T>::HeartRateBaseCumulativeOperatingTime() :
+    CoreDataPage<T>() {}
 
 template<class T>
 uint32_t HeartRateBaseCumulativeOperatingTime<T>::getCumulativeOperatingTime() {
@@ -15,9 +16,13 @@ uint32_t HeartRateBaseCumulativeOperatingTime<T>::getCumulativeOperatingTime() {
 template class HeartRateBaseCumulativeOperatingTime<BroadcastData>;
 template class HeartRateBaseCumulativeOperatingTime<BroadcastDataMsg>;
 
-HeartRateCumulativeOperatingTime::HeartRateCumulativeOperatingTime(AntRxDataResponse& dp) : HeartRateBaseMainDataPage(dp), HeartRateBaseCumulativeOperatingTime<BroadcastData>() {}
+HeartRateCumulativeOperatingTime::HeartRateCumulativeOperatingTime(AntRxDataResponse& dp) :
+    HeartRateBaseMainDataPage(dp),
+    HeartRateBaseCumulativeOperatingTime<BroadcastData>() {}
 
-HeartRateCumulativeOperatingTimeMsg::HeartRateCumulativeOperatingTimeMsg() : HeartRateBaseMainDataPageMsg(CUMULATIVEOPERATINGTIME_NUMBER), HeartRateBaseCumulativeOperatingTime<BroadcastDataMsg>() {}
+HeartRateCumulativeOperatingTimeMsg::HeartRateCumulativeOperatingTimeMsg() :
+    HeartRateBaseMainDataPageMsg(HEARTRATE_CUMULATIVEOPERATINGTIME_NUMBER),
+    HeartRateBaseCumulativeOperatingTime<BroadcastDataMsg>() {}
 
 void HeartRateCumulativeOperatingTimeMsg::setCumulativeOperatingTime(uint32_t time) {
     set24BitValue(time, TIME_LSB_BYTE, TIME_MSB_BYTE);

@@ -7,8 +7,8 @@
 #define SESSIONAVERAGEHEARTRATE_BYTE 3
 
 template<class T>
-HeartRateBaseSwimIntervalSummary<T>::HeartRateBaseSwimIntervalSummary() : CoreDataPage<T>() {
-}
+HeartRateBaseSwimIntervalSummary<T>::HeartRateBaseSwimIntervalSummary() :
+    CoreDataPage<T>() {}
 
 template<class T>
 uint8_t HeartRateBaseSwimIntervalSummary<T>::getIntervalAverageHeartRate() {
@@ -34,7 +34,7 @@ HeartRateSwimIntervalSummary::HeartRateSwimIntervalSummary(AntRxDataResponse& dp
 
 // TODO add isValid methods
 HeartRateSwimIntervalSummaryMsg::HeartRateSwimIntervalSummaryMsg() :
-    HeartRateBaseMainDataPageMsg(SWIMINTERVALSUMMARY_NUMBER),
+    HeartRateBaseMainDataPageMsg(HEARTRATE_SWIMINTERVALSUMMARY_NUMBER),
     HeartRateBaseSwimIntervalSummary<BroadcastDataMsg>() {
     setIntervalAverageHeartRate(ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_INTERVALAVERAGEHEARTRATE_INVALID);
     setIntervalMaximumHeartRate(ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_INTERVALMAXIMUMHEARTRATE_INVALID);

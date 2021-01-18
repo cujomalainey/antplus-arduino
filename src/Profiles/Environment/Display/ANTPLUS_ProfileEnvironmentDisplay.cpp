@@ -33,11 +33,11 @@ bool ProfileEnvironmentDisplay::handleDataPage(EnvironmentBaseDataPage& dp) {
         case ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_NUMBER:
             called = handleTemperature(dp);
             break;
-        case MANUFACTURERSINFORMATION_NUMBER:
+        case COMMON_MANUFACTURERSINFORMATION_NUMBER:
             // Called Manufacturers Identification in Environment Profile PDF
             called = handleManufacturersInformation(dp);
             break;
-        case PRODUCTINFORMATION_NUMBER:
+        case COMMON_PRODUCTINFORMATION_NUMBER:
             called = handleProductInformation(dp);
             break;
     }

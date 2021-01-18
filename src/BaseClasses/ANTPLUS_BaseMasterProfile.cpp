@@ -20,7 +20,7 @@ void BaseMasterProfile::onAcknowledgedData(AcknowledgedData& msg) {
     BaseProfile::onAcknowledgedData(msg);
     BaseDataPage<AcknowledgedData> dp(msg);
 
-    if (dp.getDataPageNumber() == REQUESTDATAPAGE_NUMBER) {
+    if (dp.getDataPageNumber() == COMMON_REQUESTDATAPAGE_NUMBER) {
         handleRequestDataPage(msg);
     }
 }

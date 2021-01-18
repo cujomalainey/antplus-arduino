@@ -31,7 +31,7 @@ HeartRatePreviousHeartBeat::HeartRatePreviousHeartBeat(AntRxDataResponse& dp) :
 
 // TODO add isValid method to manufactueres byte
 HeartRatePreviousHeartBeatMsg::HeartRatePreviousHeartBeatMsg() :
-    HeartRateBaseMainDataPageMsg(PREVIOUSHEARTBEAT_NUMBER),
+    HeartRateBaseMainDataPageMsg(HEARTRATE_PREVIOUSHEARTBEAT_NUMBER),
     HeartRateBasePreviousHeartBeat<BroadcastDataMsg>() {
     setManufacturerSpecific(
             ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_MANUFACTURERSPECIFIC_INVALID);

@@ -40,7 +40,7 @@ ManufacturersInformationMsg::ManufacturersInformationMsg() :
     BaseDataPageMsg<BroadcastDataMsg>(),
     BaseManufacturersInformation<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
-    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = MANUFACTURERSINFORMATION_NUMBER;
+    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = COMMON_MANUFACTURERSINFORMATION_NUMBER;
     _buffer[1] = 0xFF;
     _buffer[2] = 0xFF;
 }

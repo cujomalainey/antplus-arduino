@@ -27,7 +27,7 @@ HeartRateCapabilities::HeartRateCapabilities(AntRxDataResponse& dp) :
     HeartRateBaseCapabilities<BroadcastData>() {}
 
 HeartRateCapabilitiesMsg::HeartRateCapabilitiesMsg() :
-    HeartRateBaseMainDataPageMsg(CAPABILITIES_NUMBER),
+    HeartRateBaseMainDataPageMsg(HEARTRATE_CAPABILITIES_NUMBER),
     HeartRateBaseCapabilities<BroadcastDataMsg>() {}
 
 void HeartRateCapabilitiesMsg::setFeaturesSupported(uint8_t supported) {

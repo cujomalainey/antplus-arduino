@@ -54,7 +54,7 @@ MultiComponentSystemProductInformationMsg::MultiComponentSystemProductInformatio
     BaseDataPageMsg<BroadcastDataMsg>(),
     BaseMultiComponentSystemProductInformation<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
-    set8BitValue(MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER,
+    set8BitValue(COMMON_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER,
             ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 

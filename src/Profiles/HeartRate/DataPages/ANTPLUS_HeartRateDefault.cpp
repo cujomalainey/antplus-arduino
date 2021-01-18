@@ -5,7 +5,7 @@ HeartRateDefault::HeartRateDefault(AntRxDataResponse& dp) :
     HeartRateBaseMainDataPage(dp) {}
 
 HeartRateDefaultMsg::HeartRateDefaultMsg() :
-    HeartRateBaseMainDataPageMsg(DEFAULT_NUMBER) {
+    HeartRateBaseMainDataPageMsg(HEARTRATE_DEFAULT_NUMBER) {
     // TODO magic numbers
     _buffer[1] = 0xFF;
     _buffer[2] = 0xFF;

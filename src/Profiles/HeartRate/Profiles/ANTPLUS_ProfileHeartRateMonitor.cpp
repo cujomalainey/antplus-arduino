@@ -9,7 +9,7 @@ ProfileHeartRateMonitor::ProfileHeartRateMonitor(
         uint16_t deviceNumber,
         uint8_t transmissionType) :
     BaseMasterProfile(deviceNumber, transmissionType),
-    _nextBackgroundPage(MANUFACTURERINFORMATION_NUMBER),
+    _nextBackgroundPage(HEARTRATE_MANUFACTURERINFORMATION_NUMBER),
     _flags(0) {
     setChannelConfig();
 }
@@ -19,7 +19,7 @@ ProfileHeartRateMonitor::ProfileHeartRateMonitor(
         uint8_t transmissionType,
         uint32_t flags) :
     BaseMasterProfile(deviceNumber, transmissionType),
-    _nextBackgroundPage(MANUFACTURERINFORMATION_NUMBER),
+    _nextBackgroundPage(HEARTRATE_MANUFACTURERINFORMATION_NUMBER),
     _flags(flags) {
     setChannelConfig();
 }
@@ -49,10 +49,10 @@ void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
 
     switch (dataPage) {
 
-    case REQUESTDATAPAGE_NUMBER:
+    case COMMON_REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
-    case MODESETTINGS_NUMBER:
+    case COMMON_MODESETTINGS_NUMBER:
         called = handleModeSettings(dp);
         break;
     }
@@ -92,35 +92,38 @@ void ProfileHeartRateMonitor::transmitPrimaryDataPage() {
 
 void ProfileHeartRateMonitor::transmitBackgroundDataPage() {
     switch (_nextBackgroundPage) {
-    case CUMULATIVEOPERATINGTIME_NUMBER:
+    case HEARTRATE_CUMULATIVEOPERATINGTIME_NUMBER:
         transmitHeartRateCumulativeOperatingTimeMsg();
         break;
-    case MANUFACTURERINFORMATION_NUMBER:
+    case HEARTRATE_MANUFACTURERINFORMATION_NUMBER:
         transmitHeartRateManufacturerInformationMsg();
         break;
-    case PRODUCTINFORMATION_NUMBER:
+    case HEARTRATE_PRODUCTINFORMATION_NUMBER:
         transmitHeartRateProductInformationMsg();
         break;
-    case BATTERYSTATUS_NUMBER:
+    case HEARTRATE_BATTERYSTATUS_NUMBER:
         transmitHeartRateBatteryStatusMsg();
         break;
-    case CAPABILITIES_NUMBER:
+    case HEARTRATE_CAPABILITIES_NUMBER:
         transmitHeartRateCapabilitiesMsg();
         break;
     }
 }
 
 uint8_t ProfileHeartRateMonitor::getNextBackgroundPage(uint8_t currentPage) {
-    if ((currentPage < CUMULATIVEOPERATINGTIME_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_CUMULATIVEOPERATINGTIME_SUPPORTED)) {
-        return CUMULATIVEOPERATINGTIME_NUMBER;
-    } else if (currentPage < MANUFACTURERINFORMATION_NUMBER) {
-        return MANUFACTURERINFORMATION_NUMBER;
-    } else if (currentPage < PRODUCTINFORMATION_NUMBER) {
-        return PRODUCTINFORMATION_NUMBER;
-    } else if ((currentPage < CAPABILITIES_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_EXTENTED_FEATURES)) {
-        return CAPABILITIES_NUMBER;
-    } else if ((currentPage < BATTERYSTATUS_NUMBER) && (_flags & ANTPLUS_HEARTRATE_FLAGS_BATTERYSTATUS_SUPPORTED)) {
-        return BATTERYSTATUS_NUMBER;
+    if ((currentPage < HEARTRATE_CUMULATIVEOPERATINGTIME_NUMBER) &&
+            (_flags & ANTPLUS_HEARTRATE_FLAGS_CUMULATIVEOPERATINGTIME_SUPPORTED)) {
+        return HEARTRATE_CUMULATIVEOPERATINGTIME_NUMBER;
+    } else if (currentPage < HEARTRATE_MANUFACTURERINFORMATION_NUMBER) {
+        return HEARTRATE_MANUFACTURERINFORMATION_NUMBER;
+    } else if (currentPage < HEARTRATE_PRODUCTINFORMATION_NUMBER) {
+        return HEARTRATE_PRODUCTINFORMATION_NUMBER;
+    } else if ((currentPage < HEARTRATE_CAPABILITIES_NUMBER) &&
+            (_flags & ANTPLUS_HEARTRATE_FLAGS_EXTENTED_FEATURES)) {
+        return HEARTRATE_CAPABILITIES_NUMBER;
+    } else if ((currentPage < HEARTRATE_BATTERYSTATUS_NUMBER) &&
+            (_flags & ANTPLUS_HEARTRATE_FLAGS_BATTERYSTATUS_SUPPORTED)) {
+        return HEARTRATE_BATTERYSTATUS_NUMBER;
     } else {
         // Reached end of the loop, start again
         return getNextBackgroundPage(0);
@@ -130,28 +133,28 @@ uint8_t ProfileHeartRateMonitor::getNextBackgroundPage(uint8_t currentPage) {
 void ProfileHeartRateMonitor::transmitRequestedDataPage() {
     uint8_t requestedPage = getRequestedPage();
     switch (requestedPage) {
-    case DEFAULT_NUMBER:
+    case HEARTRATE_DEFAULT_NUMBER:
         transmitHeartRateDefaultMsg();
         break;
-    case CUMULATIVEOPERATINGTIME_NUMBER:
+    case HEARTRATE_CUMULATIVEOPERATINGTIME_NUMBER:
         transmitHeartRateCumulativeOperatingTimeMsg();
         break;
-    case MANUFACTURERINFORMATION_NUMBER:
+    case HEARTRATE_MANUFACTURERINFORMATION_NUMBER:
         transmitHeartRateManufacturerInformationMsg();
         break;
-    case PRODUCTINFORMATION_NUMBER:
+    case HEARTRATE_PRODUCTINFORMATION_NUMBER:
         transmitHeartRateProductInformationMsg();
         break;
-    case PREVIOUSHEARTBEAT_NUMBER:
+    case HEARTRATE_PREVIOUSHEARTBEAT_NUMBER:
         transmitHeartRatePreviousHeartBeatMsg();
         break;
-    case SWIMINTERVALSUMMARY_NUMBER:
+    case HEARTRATE_SWIMINTERVALSUMMARY_NUMBER:
         transmitHeartRateSwimIntervalSummaryMsg();
         break;
-    case CAPABILITIES_NUMBER:
+    case HEARTRATE_CAPABILITIES_NUMBER:
         transmitHeartRateCapabilitiesMsg();
         break;
-    case BATTERYSTATUS_NUMBER:
+    case HEARTRATE_BATTERYSTATUS_NUMBER:
         transmitHeartRateBatteryStatusMsg();
         break;
     }
@@ -215,20 +218,20 @@ void ProfileHeartRateMonitor::transmitHeartRateMsg(HeartRateBaseMainDataPageMsg&
 
 bool ProfileHeartRateMonitor::isDataPageValid(uint8_t dataPage) {
     switch (dataPage) {
-    case DEFAULT_NUMBER:
-        // TODO double check this is correct that dp 4 is only needed if imlemented
+    case HEARTRATE_DEFAULT_NUMBER:
+        // TODO double check this is correct that dp 4 is only needed if implemented
         return !(_flags & ANTPLUS_HEARTRATE_FLAGS_PREVIOUSHEARTBEAT_SUPPORTED);
-    case CUMULATIVEOPERATINGTIME_NUMBER:
+    case HEARTRATE_CUMULATIVEOPERATINGTIME_NUMBER:
         return _flags & ANTPLUS_HEARTRATE_FLAGS_CUMULATIVEOPERATINGTIME_SUPPORTED;
-    case MANUFACTURERINFORMATION_NUMBER:
-    case PRODUCTINFORMATION_NUMBER:
+    case HEARTRATE_MANUFACTURERINFORMATION_NUMBER:
+    case HEARTRATE_PRODUCTINFORMATION_NUMBER:
         return true;
-    case PREVIOUSHEARTBEAT_NUMBER:
+    case HEARTRATE_PREVIOUSHEARTBEAT_NUMBER:
         return _flags & ANTPLUS_HEARTRATE_FLAGS_PREVIOUSHEARTBEAT_SUPPORTED;
-    case SWIMINTERVALSUMMARY_NUMBER:
-    case CAPABILITIES_NUMBER:
+    case HEARTRATE_SWIMINTERVALSUMMARY_NUMBER:
+    case HEARTRATE_CAPABILITIES_NUMBER:
         return _flags & ANTPLUS_HEARTRATE_FLAGS_EXTENTED_FEATURES;
-    case BATTERYSTATUS_NUMBER:
+    case HEARTRATE_BATTERYSTATUS_NUMBER:
         return _flags & ANTPLUS_HEARTRATE_FLAGS_BATTERYSTATUS_SUPPORTED;
     default:
         return false;

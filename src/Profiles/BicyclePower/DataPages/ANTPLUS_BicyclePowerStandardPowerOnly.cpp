@@ -44,7 +44,7 @@ BicyclePowerStandardPowerOnly::BicyclePowerStandardPowerOnly(AntRxDataResponse& 
     BicyclePowerBaseStandardPowerOnly() {}
 
 BicyclePowerStandardPowerOnlyMsg::BicyclePowerStandardPowerOnlyMsg() :
-    BicyclePowerBaseMainDataPageMsg(STANDARDPOWERONLY_NUMBER),
+    BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_STANDARDPOWERONLY_NUMBER),
     BicyclePowerBaseStandardPowerOnly<BroadcastDataMsg>() {
     // TODO magic nums also using buffer directly
     _buffer[PEDALPOWER_BYTE] = 0xFF;

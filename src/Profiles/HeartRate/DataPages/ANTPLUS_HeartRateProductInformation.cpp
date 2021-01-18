@@ -32,7 +32,7 @@ HeartRateProductInformation::HeartRateProductInformation(AntRxDataResponse& dp) 
     HeartRateBaseProductInformation<BroadcastData>() {}
 
 HeartRateProductInformationMsg::HeartRateProductInformationMsg() :
-    HeartRateBaseMainDataPageMsg(PRODUCTINFORMATION_NUMBER),
+    HeartRateBaseMainDataPageMsg(HEARTRATE_PRODUCTINFORMATION_NUMBER),
     HeartRateBaseProductInformation<BroadcastDataMsg>() {}
 
 // TODO set to product information API

@@ -2,8 +2,8 @@
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 
 #define MANUFACTUREREIDLSB_BYTE 1
-#define SERIALNUMBERLSB_BYTE 2
-#define SERIALNUMBERMSB_BYTE 3
+#define SERIALNUMBER_LSB_BYTE 2
+#define SERIALNUMBER_MSB_BYTE 3
 
 template<class T>
 HeartRateBaseManufacturerInformation<T>::HeartRateBaseManufacturerInformation() :
@@ -16,7 +16,7 @@ uint8_t HeartRateBaseManufacturerInformation<T>::getManufacturerIdLsb() {
 
 template<class T>
 uint16_t HeartRateBaseManufacturerInformation<T>::getSerialNumber() {
-    return this->get16BitValue(SERIALNUMBERLSB_BYTE, SERIALNUMBERMSB_BYTE);
+    return this->get16BitValue(SERIALNUMBER_LSB_BYTE, SERIALNUMBER_MSB_BYTE);
 }
 
 template class HeartRateBaseManufacturerInformation<BroadcastData>;
@@ -27,7 +27,7 @@ HeartRateManufacturerInformation::HeartRateManufacturerInformation(AntRxDataResp
     HeartRateBaseManufacturerInformation<BroadcastData>() {}
 
 HeartRateManufacturerInformationMsg::HeartRateManufacturerInformationMsg() :
-    HeartRateBaseMainDataPageMsg(MANUFACTURERINFORMATION_NUMBER),
+    HeartRateBaseMainDataPageMsg(HEARTRATE_MANUFACTURERINFORMATION_NUMBER),
     HeartRateBaseManufacturerInformation<BroadcastDataMsg>() {}
 
 void HeartRateManufacturerInformationMsg::setManufacturerIdLsb(uint8_t id) {
@@ -35,5 +35,5 @@ void HeartRateManufacturerInformationMsg::setManufacturerIdLsb(uint8_t id) {
 }
 
 void HeartRateManufacturerInformationMsg::setSerialNumber(uint16_t serialNumber) {
-    set16BitValue(serialNumber, SERIALNUMBERLSB_BYTE, SERIALNUMBERMSB_BYTE);
+    set16BitValue(serialNumber, SERIALNUMBER_LSB_BYTE, SERIALNUMBER_MSB_BYTE);
 }

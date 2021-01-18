@@ -37,7 +37,7 @@ ProductInformationMsg::ProductInformationMsg() :
     BaseProductInformation<BroadcastDataMsg>() {
     // TODO set default values
     setDataBuffer(_buffer);
-    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = PRODUCTINFORMATION_NUMBER;
+    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = COMMON_PRODUCTINFORMATION_NUMBER;
     _buffer[1] = 0xFF;
 }
 

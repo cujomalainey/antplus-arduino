@@ -62,10 +62,10 @@ bool ProfileLevDisplay::handleDataPage(LevBaseMainDataPage& dp) {
     case ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_NUMBER:
         called = handleCapabilities(dp);
         break;
-    case MANUFACTURERSINFORMATION_NUMBER:
+    case COMMON_MANUFACTURERSINFORMATION_NUMBER:
         called = handleManufacturersInformation(dp);
         break;
-    case PRODUCTINFORMATION_NUMBER:
+    case COMMON_PRODUCTINFORMATION_NUMBER:
         called = handleProductInformation(dp);
         break;
     }

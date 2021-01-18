@@ -43,7 +43,7 @@ HeartRateBatteryStatus::HeartRateBatteryStatus(AntRxDataResponse& dp) :
     HeartRateBaseBatteryStatus() {}
 
 HeartRateBatteryStatusMsg::HeartRateBatteryStatusMsg() :
-    HeartRateBaseMainDataPageMsg(BATTERYSTATUS_NUMBER),
+    HeartRateBaseMainDataPageMsg(HEARTRATE_BATTERYSTATUS_NUMBER),
     HeartRateBaseBatteryStatus<BroadcastDataMsg>() {
 }
 

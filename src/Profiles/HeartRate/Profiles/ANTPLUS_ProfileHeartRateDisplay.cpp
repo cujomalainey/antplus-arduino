@@ -31,28 +31,28 @@ bool ProfileHeartRateDisplay::handleDataPage(HeartRateBaseMainDataPage& dp) {
     bool called = false;
 
     switch (dataPage) {
-    case DEFAULT_NUMBER:
+    case HEARTRATE_DEFAULT_NUMBER:
         called = handleDefault(dp);
         break;
-    case CUMULATIVEOPERATINGTIME_NUMBER:
+    case HEARTRATE_CUMULATIVEOPERATINGTIME_NUMBER:
         called = handleCumulativeOperatingTime(dp);
         break;
-    case MANUFACTURERINFORMATION_NUMBER:
+    case HEARTRATE_MANUFACTURERINFORMATION_NUMBER:
         called = handleManufacturerInformation(dp);
         break;
-    case PRODUCTINFORMATION_NUMBER:
+    case HEARTRATE_PRODUCTINFORMATION_NUMBER:
         called = handleProductInformation(dp);
         break;
-    case PREVIOUSHEARTBEAT_NUMBER:
+    case HEARTRATE_PREVIOUSHEARTBEAT_NUMBER:
         called = handlePreviousHeartBeat(dp);
         break;
-    case SWIMINTERVALSUMMARY_NUMBER:
+    case HEARTRATE_SWIMINTERVALSUMMARY_NUMBER:
         called = handleSwimIntervalSummary(dp);
         break;
-    case BATTERYSTATUS_NUMBER:
+    case HEARTRATE_BATTERYSTATUS_NUMBER:
         called = handleBatteryStatus(dp);
         break;
-    case CAPABILITIES_NUMBER:
+    case HEARTRATE_CAPABILITIES_NUMBER:
         called = handleCapabilities(dp);
         break;
     }
