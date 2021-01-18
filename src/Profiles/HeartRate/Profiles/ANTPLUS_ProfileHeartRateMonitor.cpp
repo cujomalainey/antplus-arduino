@@ -49,10 +49,10 @@ void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
 
     switch (dataPage) {
 
-    case ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER:
+    case REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
-    case ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_NUMBER:
+    case MODESETTINGS_NUMBER:
         called = handleModeSettings(dp);
         break;
     }

@@ -34,9 +34,9 @@ bool ProfileShiftingShifter::isDataPageValid(uint8_t dataPage)
 {
     switch (dataPage) {
     case ANTPLUS_SHIFTING_DATAPAGE_SHIFTSYSTEMSTATUS_NUMBER:
-    case ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER:
-    case ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER:
-    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
+    case MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER:
+    case MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER:
+    case BATTERYSTATUS_NUMBER:
         return true;
     }
     return false;
@@ -104,7 +104,7 @@ void ProfileShiftingShifter::onAcknowledgedData(AcknowledgedData& msg) {
 
     switch (dataPage) {
 
-    case ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER:
+    case REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
     }
@@ -169,9 +169,9 @@ bool ProfileShiftingShifter::handleRequestDataPage(BaseDataPage<AcknowledgedData
     uint8_t dataPageRequestedNumber = dp.getRequestedPageNumber();
 
     switch (dataPageRequestedNumber) {
-    case ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER:
-    case ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER:
-    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
+    case MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER:
+    case MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER:
+    case BATTERYSTATUS_NUMBER:
         break;
     default:
         // skip check if not multicomponent message

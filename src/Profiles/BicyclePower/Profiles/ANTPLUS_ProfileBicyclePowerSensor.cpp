@@ -48,7 +48,7 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
     BaseMasterProfile::onAcknowledgedData(msg);
     switch (dataPage) {
 
-    case ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER:
+    case REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
     case GENERALCALIBRATION_NUMBER:

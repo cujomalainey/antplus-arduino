@@ -30,13 +30,13 @@ bool ProfileBicyclePowerDisplay::handleDataPage(BicyclePowerBaseMainDataPage& dp
     bool called = false;
 
     switch (dataPage) {
-    case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
+    case MANUFACTURERSINFORMATION_NUMBER:
         called = handleManufacturersInformation(dp);
         break;
-    case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
+    case PRODUCTINFORMATION_NUMBER:
         called = handleProductInformation(dp);
         break;
-    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
+    case BATTERYSTATUS_NUMBER:
         called = handleBatteryStatus(dp);
         break;
     case STANDARDPOWERONLY_NUMBER:
