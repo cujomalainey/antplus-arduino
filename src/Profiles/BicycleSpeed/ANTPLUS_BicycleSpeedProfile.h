@@ -8,7 +8,7 @@
 #include <Profiles/BicycleSpeed/ANTPLUS_ProfileBicycleSpeedDataPages.h>
 
 // Profile Classes
-#include <Profiles/BicycleSpeed/Display/ANTPLUS_ProfileBicycleSpeedDisplay.h>
-#include <Profiles/BicycleSpeed/Sensor/ANTPLUS_ProfileBicycleSpeedSensor.h>
+#include <Profiles/BicycleSpeed/Profiles/ANTPLUS_ProfileBicycleSpeedDisplay.h>
+#include <Profiles/BicycleSpeed/Profiles/ANTPLUS_ProfileBicycleSpeedSensor.h>
 
 #endif // ANTPLUS_BICYCLESPEEDPROFILE_h

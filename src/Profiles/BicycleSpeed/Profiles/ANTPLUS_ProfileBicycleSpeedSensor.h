@@ -5,6 +5,7 @@
 #include <Profiles/BicycleSpeed/ANTPLUS_ProfileBicycleSpeedDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
+// TODO
 class ProfileBicycleSpeedSensor : BaseMasterProfile {
 public:
 //     void onHeartRateCapabilities(void (*func)(HeartRateCapabilities&, uintptr_t), uintptr_t data = 0) { _onHeartRateCapabilities.set(func, data); }
