@@ -3,8 +3,6 @@
 
 #include <BaseClasses/ANTPLUS_BaseDataPage.h>
 
-#include "ANT.h"
-
 class EnvironmentBaseDataPage : public BaseDataPage<BroadcastData> {
 public:
     explicit EnvironmentBaseDataPage(AntRxDataResponse& dp);

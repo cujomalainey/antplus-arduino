@@ -2,7 +2,7 @@
 #define ANTPLUS_PROFILEENVIRONMENTDISPLAY_h
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
-#include <Profiles/Environment/DataPages/ANTPLUS_ProfileEnvironmentDataPages.h>
+#include <Profiles/Environment/ANTPLUS_ProfileEnvironmentDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
 #include "ANT.h"

@@ -5,7 +5,7 @@
 #include <Profiles/Environment/ANTPLUS_EnvironmentDefines.h>
 
 // Datapages
-#include <Profiles/Environment/DataPages/ANTPLUS_ProfileEnvironmentDataPages.h>
+#include <Profiles/Environment/ANTPLUS_ProfileEnvironmentDataPages.h>
 
 // Profile Classes
 #include <Profiles/Environment/Display/ANTPLUS_ProfileEnvironmentDisplay.h>

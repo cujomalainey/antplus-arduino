@@ -1,9 +1,9 @@
-#include <Profiles/Environment/DataPages/RX/ANTPLUS_EnvironmentGeneralInformation.h>
+#include <Profiles/Environment/DataPages/ANTPLUS_EnvironmentGeneralInformation.h>
 #include <Profiles/Environment/ANTPLUS_EnvironmentPrivateDefines.h>
 
 template<class T>
-EnvironmentBaseGeneralInformation<T>::EnvironmentBaseGeneralInformation() : CoreDataPage<T>() {
-}
+EnvironmentBaseGeneralInformation<T>::EnvironmentBaseGeneralInformation() :
+    CoreDataPage<T>() {}
 
 template<class T>
 uint8_t EnvironmentBaseGeneralInformation<T>::getTransmissionInfoLocalTime() {
@@ -37,3 +37,7 @@ uint32_t EnvironmentBaseGeneralInformation<T>::getSupportedPages() {
 
 template class EnvironmentBaseGeneralInformation<BroadcastData>;
 template class EnvironmentBaseGeneralInformation<BroadcastDataMsg>;
+
+EnvironmentGeneralInformation::EnvironmentGeneralInformation(AntRxDataResponse& dp) :
+    EnvironmentBaseDataPage(dp),
+    EnvironmentBaseGeneralInformation<BroadcastData>() {}

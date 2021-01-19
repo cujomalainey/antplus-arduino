@@ -1,9 +1,9 @@
-#include <Profiles/Environment/DataPages/Base/ANTPLUS_EnvironmentBaseTemperature.h>
+#include <Profiles/Environment/DataPages/ANTPLUS_EnvironmentTemperature.h>
 #include <Profiles/Environment/ANTPLUS_EnvironmentPrivateDefines.h>
 
 template<class T>
-EnvironmentBaseTemperature<T>::EnvironmentBaseTemperature() : CoreDataPage<T>() {
-}
+EnvironmentBaseTemperature<T>::EnvironmentBaseTemperature() :
+    CoreDataPage<T>() {}
 
 template<class T>
 uint8_t EnvironmentBaseTemperature<T>::getEventCount() {
@@ -11,7 +11,6 @@ uint8_t EnvironmentBaseTemperature<T>::getEventCount() {
             ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_EVENTCOUNT_BYTE);
 }
 
-// TODO check if these can be replaced with get16bitValues
 /* NOTE: this is a non-contigous data field, which resuls in the shenanigans below */
 template<class T>
 int16_t EnvironmentBaseTemperature<T>::get24HourLow() {
@@ -49,3 +48,8 @@ int16_t EnvironmentBaseTemperature<T>::getCurrentTemp() {
 
 template class EnvironmentBaseTemperature<BroadcastData>;
 template class EnvironmentBaseTemperature<BroadcastDataMsg>;
+
+EnvironmentTemperature::EnvironmentTemperature(AntRxDataResponse& dp) :
+    EnvironmentBaseDataPage(dp),
+    EnvironmentBaseTemperature<BroadcastData>() {}
+
