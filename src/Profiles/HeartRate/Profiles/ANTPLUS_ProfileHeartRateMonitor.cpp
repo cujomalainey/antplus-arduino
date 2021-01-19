@@ -251,6 +251,6 @@ bool ProfileHeartRateMonitor::handleRequestDataPage(HeartRateBaseMainDataPage& d
 void ProfileHeartRateMonitor::setChannelConfig() {
     setChannelType(MONITOR_CHANNELTYPE);
     setDeviceType(ANTPLUS_HEARTRATE_DEVICETYPE);
-    setChannelPeriod(ANTPLUS_HEARTRATE_CHANNELPERIOD);
-    setSearchTimeout(ANTPLUS_HEARTRATE_SEARCHTIMEOUT);
+    setChannelPeriod(HEARTRATE_CHANNELPERIOD);
+    setSearchTimeout(HEARTRATE_SEARCHTIMEOUT);
 }

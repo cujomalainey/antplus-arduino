@@ -72,8 +72,8 @@ void ProfileHeartRateDisplay::onAcknowledgedData(AcknowledgedData& msg) {
 void ProfileHeartRateDisplay::setChannelConfig() {
     setChannelType(DISPLAY_CHANNELTYPE);
     setDeviceType(ANTPLUS_HEARTRATE_DEVICETYPE);
-    setChannelPeriod(ANTPLUS_HEARTRATE_CHANNELPERIOD);
-    setSearchTimeout(ANTPLUS_HEARTRATE_SEARCHTIMEOUT);
+    setChannelPeriod(HEARTRATE_CHANNELPERIOD);
+    setSearchTimeout(HEARTRATE_SEARCHTIMEOUT);
 }
 
 bool ProfileHeartRateDisplay::handleBatteryStatus(HeartRateBaseMainDataPage& dataPage) {
