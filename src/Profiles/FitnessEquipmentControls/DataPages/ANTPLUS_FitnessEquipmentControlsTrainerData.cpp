@@ -1,5 +1,5 @@
-#include <Profiles/FEC/DataPages/ANTPLUS_FECTrainerData.h>
-#include <Profiles/FEC/ANTPLUS_FECPrivateDefines.h>
+#include <Profiles/FitnessEquipmentControls/DataPages/ANTPLUS_FitnessEquipmentControlsTrainerData.h>
+#include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsPrivateDefines.h>
 
 template<class T>
 FECTrainerDataPage<T>::FECTrainerDataPage() :

@@ -1,6 +1,6 @@
 #ifndef ANTPLUS_PROFILEFECDATAPAGES_h
 #define ANTPLUS_PROFILEFECDATAPAGES_h
 
-#include <Profiles/FEC/DataPages/ANTPLUS_FECTrainerData.h>
+#include <Profiles/FitnessEquipmentControls/DataPages/ANTPLUS_FitnessEquipmentControlsTrainerData.h>
 
 #endif // ANTPLUS_PROFILEFECDATAPAGES_h

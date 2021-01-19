@@ -1,6 +1,5 @@
-#include <Profiles/FEC/Display/ANTPLUS_ProfileFECDisplay.h>
-#include <Profiles/FEC/ANTPLUS_FECPrivateDefines.h>
-#include <Profiles/FEC/ANTPLUS_FECDefines.h>
+#include <Profiles/FitnessEquipmentControls/Display/ANTPLUS_FitnessEquipmentControlsProfileDisplay.h>
+#include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsPrivateDefines.h>
 
 ProfileFECDisplay::ProfileFECDisplay() : BaseSlaveProfile() {
     setChannelConfig();

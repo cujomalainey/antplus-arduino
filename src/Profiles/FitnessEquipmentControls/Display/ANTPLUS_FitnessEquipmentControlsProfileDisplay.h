@@ -2,10 +2,8 @@
 #define ANTPLUS_PROFILEFECDISPLAY_h
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
-#include <Profiles/FEC/ANTPLUS_ProfileFECDataPages.h>
+#include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
-
-#include "ANT.h"
 
 class ProfileFECDisplay : public BaseSlaveProfile {
 public:

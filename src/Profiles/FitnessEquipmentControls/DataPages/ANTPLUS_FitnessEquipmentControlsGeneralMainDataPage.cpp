@@ -1,5 +1,5 @@
-#include <Profiles/FEC/DataPages/ANTPLUS_FECGeneralMainDataPage.h>
-#include <Profiles/FEC/ANTPLUS_FECPrivateDefines.h>
+#include <Profiles/FitnessEquipmentControls/DataPages/ANTPLUS_FitnessEquipmentControlsGeneralMainDataPage.h>
+#include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsPrivateDefines.h>
 
 template<class T>
 FECGeneralMainDataPage<T>::FECGeneralMainDataPage() : CoreDataPage<T>() {
