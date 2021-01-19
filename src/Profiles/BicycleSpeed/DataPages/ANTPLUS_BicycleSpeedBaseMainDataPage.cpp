@@ -37,6 +37,8 @@ uint16_t BicycleSpeedCoreMainDataPage<T>::getCumulativeSpeedRevolutionCount() {
     return this->get16BitValue(CUMULATIVESPEEDREVOLUTIONCOUNT_LSB_BYTE,
             CUMULATIVESPEEDREVOLUTIONCOUNT_MSB_BYTE);
 }
+template class BicycleSpeedCoreMainDataPage<BroadcastData>;
+template class BicycleSpeedCoreMainDataPage<BroadcastDataMsg>;
 
 BicycleSpeedBaseMainDataPage::BicycleSpeedBaseMainDataPage(AntRxDataResponse& dp) :
     BaseDataPage<BroadcastData>(dp),
