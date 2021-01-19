@@ -158,8 +158,8 @@ void ProfileBicyclePowerSensor::transmitRequestedDataPage() {
 void ProfileBicyclePowerSensor::setChannelConfig() {
     setChannelType(SENSOR_CHANNELTYPE);
     setDeviceType(ANTPLUS_BICYCLEPOWER_DEVICETYPE);
-    setChannelPeriod(CHANNELPERIOD);
-    setSearchTimeout(SEARCHTIMEOUT);
+    setChannelPeriod(BICYCLEPOWER_CHANNELPERIOD);
+    setSearchTimeout(BICYCLEPOWER_SEARCHTIMEOUT);
 }
 
 bool ProfileBicyclePowerSensor::isDataPageValid(uint8_t dataPage) {

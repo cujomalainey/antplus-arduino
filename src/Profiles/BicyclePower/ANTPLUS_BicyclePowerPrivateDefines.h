@@ -4,9 +4,9 @@
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerDefines.h>
 
 /* Channel Config */
-#define CHANNELPERIOD                          8182
+#define BICYCLEPOWER_CHANNELPERIOD                          8182
 // 30 / 2.5 = 12
-#define SEARCHTIMEOUT                          12
+#define BICYCLEPOWER_SEARCHTIMEOUT                          12
 
 #define BICYCLEPOWER_GENERALCALIBRATION_NUMBER     								0x01
 #define BICYCLEPOWER_STANDARDPOWERONLY_NUMBER 											0x10
