@@ -2,6 +2,8 @@
 #include <Profiles/Environment/ANTPLUS_EnvironmentPrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
+#define DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
+
 ProfileEnvironmentDisplay::ProfileEnvironmentDisplay() : BaseSlaveProfile() {
     setChannelConfig();
 }
@@ -27,10 +29,10 @@ bool ProfileEnvironmentDisplay::handleDataPage(EnvironmentBaseDataPage& dp) {
     bool called = false;
 
     switch (dataPage) {
-        case ANTPLUS_ENVIRONMENT_DATAPAGE_GENERALINFORMATION_NUMBER:
+        case ENVIRONMENT_GENERALINFORMATION_NUMBER:
             called = handleGeneralInformation(dp);
             break;
-        case ANTPLUS_ENVIRONMENT_DATAPAGE_TEMPERATURE_NUMBER:
+        case ENVIRONMENT_TEMPERATURE_NUMBER:
             called = handleTemperature(dp);
             break;
         case COMMON_MANUFACTURERSINFORMATION_NUMBER:
@@ -53,10 +55,10 @@ void ProfileEnvironmentDisplay::onAcknowledgedData(AcknowledgedData& msg) {
 }
 
 void ProfileEnvironmentDisplay::setChannelConfig() {
-    setChannelType(ANTPLUS_ENVIRONMENT_CHANNELTYPE);
+    setChannelType(DISPLAY_CHANNELTYPE);
     setDeviceType(ANTPLUS_ENVIRONMENT_DEVICETYPE);
-    setChannelPeriod(ANTPLUS_ENVIRONMENT_CHANNELPERIOD);
-    setSearchTimeout(ANTPLUS_ENVIRONMENT_SEARCHTIMEOUT);
+    setChannelPeriod(ENVIRONMENT_CHANNELPERIOD);
+    setSearchTimeout(ENVIRONMENT_SEARCHTIMEOUT);
 }
 
 bool ProfileEnvironmentDisplay::handleGeneralInformation(EnvironmentBaseDataPage& dataPage) {
