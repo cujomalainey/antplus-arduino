@@ -1,4 +1,4 @@
-#include <Profiles/Environment/Display/ANTPLUS_ProfileEnvironmentDisplay.h>
+#include <Profiles/Environment/Profiles/ANTPLUS_ProfileEnvironmentDisplay.h>
 #include <Profiles/Environment/ANTPLUS_EnvironmentPrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
