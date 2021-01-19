@@ -1,9 +1,6 @@
 #ifndef ANTPLUS_PROFILEFECDATAPAGES_h
 #define ANTPLUS_PROFILEFECDATAPAGES_h
 
-/* RX */
-#include <Profiles/FEC/DataPages/RX/ANTPLUS_FECTrainerData.h>
-
-/* TX */
+#include <Profiles/FEC/DataPages/ANTPLUS_FECTrainerData.h>
 
 #endif // ANTPLUS_PROFILEFECDATAPAGES_h

@@ -2,7 +2,7 @@
 #define ANTPLUS_PROFILEFECDISPLAY_h
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
-#include <Profiles/FEC/DataPages/ANTPLUS_ProfileFECDataPages.h>
+#include <Profiles/FEC/ANTPLUS_ProfileFECDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
 #include "ANT.h"

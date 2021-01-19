@@ -1,9 +1,9 @@
-#include <Profiles/FEC/DataPages/Base/ANTPLUS_FECTrainerDataPage.h>
+#include <Profiles/FEC/DataPages/ANTPLUS_FECTrainerData.h>
 #include <Profiles/FEC/ANTPLUS_FECPrivateDefines.h>
 
 template<class T>
-FECTrainerDataPage<T>::FECTrainerDataPage() : CoreDataPage<T>() {
-}
+FECTrainerDataPage<T>::FECTrainerDataPage() :
+    CoreDataPage<T>() {}
 
 template<class T>
 uint8_t FECTrainerDataPage<T>::getDataPageNumber() {
@@ -57,3 +57,7 @@ uint8_t FECTrainerDataPage<T>::getTrainerStatusBits() {
 
 template class FECTrainerDataPage<BroadcastData>;
 template class FECTrainerDataPage<BroadcastDataMsg>;
+
+FECTrainerData::FECTrainerData(AntRxDataResponse& dp) :
+    BaseDataPage<BroadcastData>(dp),
+    FECTrainerDataPage<BroadcastData>() {}

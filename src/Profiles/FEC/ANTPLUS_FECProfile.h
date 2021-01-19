@@ -5,7 +5,7 @@
 #include <Profiles/FEC/ANTPLUS_FECDefines.h>
 
 // Datapages
-#include <Profiles/FEC/DataPages/ANTPLUS_ProfileFECDataPages.h>
+#include <Profiles/FEC/ANTPLUS_ProfileFECDataPages.h>
 
 // Profile Classes
 #include <Profiles/FEC/Display/ANTPLUS_ProfileFECDisplay.h>
