@@ -3,6 +3,8 @@
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
+#define DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
+
 ProfileBicycleSpeedDisplay::ProfileBicycleSpeedDisplay() : BaseSlaveProfile() {
     setChannelConfig();
 }
@@ -28,22 +30,22 @@ bool ProfileBicycleSpeedDisplay::handleDataPage(BicycleSpeedBaseMainDataPage& dp
     bool called = false;
 
     switch (dataPage) {
-    case ANTPLUS_BICYCLESPEED_DATAPAGE_DEFAULT_NUMBER:
+    case BICYCLESPEED_DEFAULT_NUMBER:
         called = handleDefault(dp);
         break;
-    case ANTPLUS_BICYCLESPEED_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER:
+    case BICYCLESPEED_CUMULATIVEOPERATINGTIME_NUMBER:
         called = handleCumulativeOperatingTime(dp);
         break;
-    case ANTPLUS_BICYCLESPEED_DATAPAGE_MANUFACTURERID_NUMBER:
+    case BICYCLESPEED_MANUFACTURERID_NUMBER:
         called = handleManufacturerID(dp);
         break;
-    case ANTPLUS_BICYCLESPEED_DATAPAGE_PRODUCTID_NUMBER:
+    case BICYCLESPEED_PRODUCTID_NUMBER:
         called = handleProductID(dp);
         break;
-    case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERYSTATUS_NUMBER:
+    case BICYCLESPEED_BATTERYSTATUS_NUMBER:
         called = handleBatteryStatus(dp);
         break;
-    case ANTPLUS_BICYCLESPEED_DATAPAGE_MOTIONANDSPEED_NUMBER:
+    case BICYCLESPEED_MOTIONANDSPEED_NUMBER:
         called = handleMotionAndSpeed(dp);
         break;
     }
@@ -61,10 +63,10 @@ void ProfileBicycleSpeedDisplay::onAcknowledgedData(AcknowledgedData& msg) {
 
 
 void ProfileBicycleSpeedDisplay::setChannelConfig() {
-    setChannelType(ANTPLUS_BICYCLESPEED_CHANNELTYPE);
+    setChannelType(DISPLAY_CHANNELTYPE);
     setDeviceType(ANTPLUS_BICYCLESPEED_DEVICETYPE);
-    setChannelPeriod(ANTPLUS_BICYCLESPEED_CHANNELPERIOD);
-    setSearchTimeout(ANTPLUS_BICYCLESPEED_SEARCHTIMEOUT);
+    setChannelPeriod(BICYCLESPEED_CHANNELPERIOD);
+    setSearchTimeout(BICYCLESPEED_SEARCHTIMEOUT);
 }
 
 bool ProfileBicycleSpeedDisplay::handleBatteryStatus(BicycleSpeedBaseMainDataPage& dataPage) {
