@@ -134,7 +134,7 @@ void bicyclePowerBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
 }
 
 void powerOnlyDataPageHandler(BicyclePowerStandardPowerOnly& msg, uintptr_t data) {
-    Serial.print("Pedal Balance: ");
+    Serial.print("Pedal Power: ");
     Serial.println(msg.getPedalPower());
     Serial.print("Instantaneous Cadence: ");
     Serial.println(msg.getInstantaneousCadence());
