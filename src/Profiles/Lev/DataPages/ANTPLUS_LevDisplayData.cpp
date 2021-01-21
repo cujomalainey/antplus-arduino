@@ -1,4 +1,4 @@
-#include <Profiles/Lev/DataPages/TX/ANTPLUS_LevDisplayDataMsg.h>
+#include <Profiles/Lev/DataPages/ANTPLUS_LevDisplayData.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
 LevDisplayDataMsg::LevDisplayDataMsg() : LevBaseMainDataPageMsg(ANTPLUS_LEV_DATAPAGE_DISPLAYDATA_NUMBER) {

@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_LEVALTSPEEDDISTANCEINFORMATION_h
 #define ANTPLUS_LEVALTSPEEDDISTANCEINFORMATION_h
 
-#include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseSpeedDistanceInformation.h>
+#include <Profiles/Lev/DataPages/ANTPLUS_LevBaseSpeedDistanceInformation.h>
 
 class LevAltSpeedDistanceInformation : public LevBaseSpeedDistanceInformation {
 public:

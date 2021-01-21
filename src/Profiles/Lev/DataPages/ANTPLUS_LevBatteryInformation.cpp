@@ -1,8 +1,8 @@
-#include <Profiles/Lev/DataPages/RX/ANTPLUS_LevBatteryInformation.h>
+#include <Profiles/Lev/DataPages/ANTPLUS_LevBatteryInformation.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
-LevBatteryInformation::LevBatteryInformation(AntRxDataResponse& dp) : LevBaseMainDataPage(dp) {
-}
+LevBatteryInformation::LevBatteryInformation(AntRxDataResponse& dp) :
+    LevBaseMainDataPage(dp) {}
 
 uint16_t LevBatteryInformation::getChargingCycleCount() {
     return (uint16_t)getData(ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_CHARGINGCYCLECOUNT_LSB_BYTE) + (((uint16_t)getData(ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_CHARGINGCYCLECOUNT_MSB_BYTE) & ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_CHARGINGCYCLECOUNT_MSB_MASK) << ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_CHARGINGCYCLECOUNT_MSB_SHIFT);

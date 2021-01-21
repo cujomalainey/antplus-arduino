@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_LEVBASESPEEDSYSTEMINFORMATION_h
 #define ANTPLUS_LEVBASESPEEDSYSTEMINFORMATION_h
 
-#include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseMainDataPage.h>
+#include <Profiles/Lev/DataPages/ANTPLUS_LevBaseMainDataPage.h>
 
 class LevBaseSpeedSystemInformation : public LevBaseMainDataPage {
 public:

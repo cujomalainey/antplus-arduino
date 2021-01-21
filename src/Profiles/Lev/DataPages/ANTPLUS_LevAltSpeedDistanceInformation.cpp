@@ -1,9 +1,9 @@
-#include <Profiles/Lev/DataPages/RX/ANTPLUS_LevAltSpeedDistanceInformation.h>
+#include <Profiles/Lev/DataPages/ANTPLUS_LevAltSpeedDistanceInformation.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
 /* Alt Speed and Distance */
-LevAltSpeedDistanceInformation::LevAltSpeedDistanceInformation(AntRxDataResponse& dp) : LevBaseSpeedDistanceInformation(dp) {
-}
+LevAltSpeedDistanceInformation::LevAltSpeedDistanceInformation(AntRxDataResponse& dp) :
+    LevBaseSpeedDistanceInformation(dp) {}
 
 uint16_t LevAltSpeedDistanceInformation::getFuelConsumption() // in Wh/km
 {

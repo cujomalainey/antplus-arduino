@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_LEVDISPLAYDATAMSG_h
 #define ANTPLUS_LEVDISPLAYDATAMSG_h
 
-#include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseMainDataPageMsg.h>
+#include <Profiles/Lev/DataPages/ANTPLUS_LevBaseMainDataPage.h>
 
 class LevDisplayDataMsg : public LevBaseMainDataPageMsg {
 public:

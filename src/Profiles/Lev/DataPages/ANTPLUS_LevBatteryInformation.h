@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_LEVBATTERYINFORMATION_h
 #define ANTPLUS_LEVBATTERYINFORMATION_h
 
-#include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseMainDataPage.h>
+#include <Profiles/Lev/DataPages/ANTPLUS_LevBaseMainDataPage.h>
 
 class LevBatteryInformation : public LevBaseMainDataPage {
 public:

@@ -1,9 +1,9 @@
-#include <Profiles/Lev/DataPages/Base/ANTPLUS_LevBaseSpeedDistanceInformation.h>
+#include <Profiles/Lev/DataPages/ANTPLUS_LevBaseSpeedDistanceInformation.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
 /* Speed and Distance */
-LevBaseSpeedDistanceInformation::LevBaseSpeedDistanceInformation(AntRxDataResponse& dp) : LevBaseMainDataPage(dp) {
-}
+LevBaseSpeedDistanceInformation::LevBaseSpeedDistanceInformation(AntRxDataResponse& dp) :
+    LevBaseMainDataPage(dp) {}
 
 uint32_t LevBaseSpeedDistanceInformation::getOdometer() { // in km
     return (uint32_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_ODOMETER_LSB_BYTE) + ((uint32_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_ODOMETER_MID_BYTE) << ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_ODOMETER_MID_SHIFT) + ((uint32_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_ODOMETER_MSB_BYTE) << ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_ODOMETER_MSB_SHIFT);

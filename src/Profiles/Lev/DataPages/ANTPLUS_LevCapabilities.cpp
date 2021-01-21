@@ -1,8 +1,8 @@
-#include <Profiles/Lev/DataPages/RX/ANTPLUS_LevCapabilities.h>
+#include <Profiles/Lev/DataPages/ANTPLUS_LevCapabilities.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
-LevCapabilities::LevCapabilities(AntRxDataResponse& dp) : LevBaseMainDataPage(dp) {
-}
+LevCapabilities::LevCapabilities(AntRxDataResponse& dp) :
+    LevBaseMainDataPage(dp) {}
 
 uint8_t LevCapabilities::getNumberOfAssistModesSupported() {
     return (getData(ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_TRAVELMODESSUPPORTED_BYTE) & ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_TRAVELMODESSUPPORTED_NUMBERASSISTMODES_MASK) >> ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_TRAVELMODESSUPPORTED_NUMBERASSISTMODES_SHIFT;

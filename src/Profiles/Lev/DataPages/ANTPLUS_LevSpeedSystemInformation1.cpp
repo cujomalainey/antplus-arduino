@@ -1,8 +1,8 @@
-#include <Profiles/Lev/DataPages/RX/ANTPLUS_LevSpeedSystemInformation1.h>
+#include <Profiles/Lev/DataPages/ANTPLUS_LevSpeedSystemInformation1.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
-LevSpeedSystemInformation1::LevSpeedSystemInformation1(AntRxDataResponse& dp) : LevBaseSpeedSystemInformation(dp) {
-}
+LevSpeedSystemInformation1::LevSpeedSystemInformation1(AntRxDataResponse& dp) :
+    LevBaseSpeedSystemInformation(dp) {}
 
 uint8_t LevSpeedSystemInformation1::getBatteryTemperatureState() {
     return getData(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TEMPERATURESTATE_BYTE) & ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_TEMPERATURESTATE_BATTERYTEMPERATURE_MASK;
