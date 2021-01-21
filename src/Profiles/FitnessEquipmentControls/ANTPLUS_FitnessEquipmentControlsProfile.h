@@ -8,7 +8,7 @@
 #include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsDataPages.h>
 
 // Profile Classes
-#include <Profiles/FitnessEquipmentControls/Display/ANTPLUS_FitnessEquipmentControlsProfileDisplay.h>
+#include <Profiles/FitnessEquipmentControls/Profiles/ANTPLUS_FitnessEquipmentControlsProfileDisplay.h>
 // #include <Profiles/FEC/Monitor/ANTPLUS_ProfileFECMonitor.h>
 
 #endif // ANTPLUS_FECPROFILE_h

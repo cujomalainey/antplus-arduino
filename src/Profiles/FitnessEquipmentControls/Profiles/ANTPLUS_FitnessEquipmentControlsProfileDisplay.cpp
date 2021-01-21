@@ -1,4 +1,4 @@
-#include <Profiles/FitnessEquipmentControls/Display/ANTPLUS_FitnessEquipmentControlsProfileDisplay.h>
+#include <Profiles/FitnessEquipmentControls/Profiles/ANTPLUS_FitnessEquipmentControlsProfileDisplay.h>
 #include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsPrivateDefines.h>
 
 ProfileFECDisplay::ProfileFECDisplay() : BaseSlaveProfile() {
