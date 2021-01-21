@@ -4,9 +4,9 @@
 #include <BaseClasses/ANTPLUS_BaseDataPage.h>
 
 template<class T>
-class FECTrainerDataPage : virtual public CoreDataPage<T> {
+class FecBaseSpecificTrainerData : virtual public CoreDataPage<T> {
 public:
-    FECTrainerDataPage();
+    FecBaseSpecificTrainerData();
     uint8_t getDataPageNumber();
     uint8_t getUpdateEventCount();
     uint8_t getInstantaneousCadence();
@@ -17,9 +17,9 @@ public:
     uint8_t getFEStateBits();
 };
 
-class FECTrainerData : public BaseDataPage<BroadcastData>, public FECTrainerDataPage<BroadcastData> {
+class FecSpecificTrainerData : public BaseDataPage<BroadcastData>, public FecBaseSpecificTrainerData<BroadcastData> {
 public:
-    explicit FECTrainerData(AntRxDataResponse& dp);
+    explicit FecSpecificTrainerData(AntRxDataResponse& dp);
 };
 
 #endif // ANTPLUS_FECTRAINERDATA_h

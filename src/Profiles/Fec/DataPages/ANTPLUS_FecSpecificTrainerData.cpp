@@ -1,5 +1,5 @@
-#include <Profiles/FitnessEquipmentControls/DataPages/ANTPLUS_FitnessEquipmentControlsTrainerData.h>
-#include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsPrivateDefines.h>
+#include <Profiles/Fec/DataPages/ANTPLUS_FecSpecificTrainerData.h>
+#include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 // TODO correct names
@@ -13,54 +13,54 @@
 #define FLAGSFESTATEBIT_BYTE 7
 
 template<class T>
-FECTrainerDataPage<T>::FECTrainerDataPage() :
+FecBaseSpecificTrainerData<T>::FecBaseSpecificTrainerData() :
     CoreDataPage<T>() {}
 
 template<class T>
-uint8_t FECTrainerDataPage<T>::getDataPageNumber() {
+uint8_t FecBaseSpecificTrainerData<T>::getDataPageNumber() {
     return this->get8BitValue(ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 
 template<class T>
-uint8_t FECTrainerDataPage<T>::getUpdateEventCount() {
+uint8_t FecBaseSpecificTrainerData<T>::getUpdateEventCount() {
     return this->get8BitValue(UPDATEEVENTCOUNT_BYTE);
 }
 
 template<class T>
-uint8_t FECTrainerDataPage<T>::getInstantaneousCadence() {
+uint8_t FecBaseSpecificTrainerData<T>::getInstantaneousCadence() {
     return this->get8BitValue(INSTANTANEOUSCADENCE_BYTE);
 }
 
 template<class T>
-uint8_t FECTrainerDataPage<T>::getFlagsBits() {
+uint8_t FecBaseSpecificTrainerData<T>::getFlagsBits() {
     return this->get8BitValue(FLAGSFESTATEBIT_BYTE) & 0x0F;
 }
 
 template<class T>
-uint8_t FECTrainerDataPage<T>::getFEStateBits() {
+uint8_t FecBaseSpecificTrainerData<T>::getFEStateBits() {
     return (this->get8BitValue(FLAGSFESTATEBIT_BYTE) & 0xF0) >> 4;
 }
 
 template<class T>
-uint16_t FECTrainerDataPage<T>::getAccumulatedPower() {
+uint16_t FecBaseSpecificTrainerData<T>::getAccumulatedPower() {
     return this->get16BitValue(ACCUMULATEDPOWER_LSB_BYTE,
             ACCUMULATEDPOWER_MSB_BYTE);
 }
 
 template<class T>
-uint16_t FECTrainerDataPage<T>::getInstantaneousPower() {
+uint16_t FecBaseSpecificTrainerData<T>::getInstantaneousPower() {
     return this->get16BitValue(INSTANTANEOUSPOWER_LSB_BYTE,
             INSTANTANEOUSPOWER_MSB_BYTE) & 0x0FFF;
 }
 
 template<class T>
-uint8_t FECTrainerDataPage<T>::getTrainerStatusBits() {
+uint8_t FecBaseSpecificTrainerData<T>::getTrainerStatusBits() {
     return (this->get8BitValue(TRAINERSTATUS_BYTE) & 0xF0) >> 4;
 }
 
-template class FECTrainerDataPage<BroadcastData>;
-template class FECTrainerDataPage<BroadcastDataMsg>;
+template class FecBaseSpecificTrainerData<BroadcastData>;
+template class FecBaseSpecificTrainerData<BroadcastDataMsg>;
 
-FECTrainerData::FECTrainerData(AntRxDataResponse& dp) :
+FecSpecificTrainerData::FecSpecificTrainerData(AntRxDataResponse& dp) :
     BaseDataPage<BroadcastData>(dp),
-    FECTrainerDataPage<BroadcastData>() {}
+    FecBaseSpecificTrainerData<BroadcastData>() {}

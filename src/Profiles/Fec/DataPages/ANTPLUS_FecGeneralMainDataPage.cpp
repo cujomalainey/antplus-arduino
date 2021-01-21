@@ -1,5 +1,5 @@
-#include <Profiles/FitnessEquipmentControls/DataPages/ANTPLUS_FitnessEquipmentControlsGeneralMainDataPage.h>
-#include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsPrivateDefines.h>
+#include <Profiles/Fec/DataPages/ANTPLUS_FecGeneralMainDataPage.h>
+#include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 // TODO this is a mixture of datapages

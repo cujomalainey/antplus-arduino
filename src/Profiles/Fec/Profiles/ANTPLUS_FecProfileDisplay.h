@@ -2,15 +2,15 @@
 #define ANTPLUS_PROFILEFECDISPLAY_h
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
-#include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsDataPages.h>
+#include <Profiles/Fec/ANTPLUS_FecDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
-class ProfileFECDisplay : public BaseSlaveProfile {
+class ProfileFecDisplay : public BaseSlaveProfile {
 public:
-    ProfileFECDisplay();
-    ProfileFECDisplay(uint16_t deviceNumber);
-    ProfileFECDisplay(uint16_t deviceNumber, uint8_t transmissionType);
-    void onFECTrainerData(void (*func)(FECTrainerData&, uintptr_t), uintptr_t data = 0) { _onFECTrainerData.set(func, data); }
+    ProfileFecDisplay();
+    ProfileFecDisplay(uint16_t deviceNumber);
+    ProfileFecDisplay(uint16_t deviceNumber, uint8_t transmissionType);
+    void onFecTrainerData(void (*func)(FecSpecificTrainerData&, uintptr_t), uintptr_t data = 0) { _onFecSpecificTrainerData.set(func, data); }
 
 private:
     void setChannelConfig();
@@ -20,7 +20,7 @@ private:
     bool handleDataPage(BaseDataPage<BroadcastData>& dp);
 
     bool handleTrainerData(BaseDataPage<BroadcastData>& dataPage);
-    AntCallback<FECTrainerData&> _onFECTrainerData;
+    AntCallback<FecSpecificTrainerData&> _onFecSpecificTrainerData;
 };
 
 #endif // ANTPLUS_PROFILEFECDISPLAY_h

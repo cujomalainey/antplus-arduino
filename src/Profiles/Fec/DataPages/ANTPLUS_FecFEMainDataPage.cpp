@@ -1,5 +1,5 @@
-#include <Profiles/FitnessEquipmentControls/DataPages/ANTPLUS_FitnessEquipmentControlsFEMainDataPage.h>
-#include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsPrivateDefines.h>
+#include <Profiles/Fec/DataPages/ANTPLUS_FecFEMainDataPage.h>
+#include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
 
 #define CADENCE_BYTE 4
 #define NEGTIVE_VERTICAL_DISTANCE_BYTE 5

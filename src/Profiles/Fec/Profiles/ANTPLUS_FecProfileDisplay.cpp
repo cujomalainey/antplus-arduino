@@ -1,19 +1,19 @@
-#include <Profiles/FitnessEquipmentControls/Profiles/ANTPLUS_FitnessEquipmentControlsProfileDisplay.h>
-#include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsPrivateDefines.h>
+#include <Profiles/Fec/Profiles/ANTPLUS_FecProfileDisplay.h>
+#include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
 
-ProfileFECDisplay::ProfileFECDisplay() : BaseSlaveProfile() {
+ProfileFecDisplay::ProfileFecDisplay() : BaseSlaveProfile() {
     setChannelConfig();
 }
 
-ProfileFECDisplay::ProfileFECDisplay(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
+ProfileFecDisplay::ProfileFecDisplay(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
     setChannelConfig();
 }
 
-ProfileFECDisplay::ProfileFECDisplay(uint16_t deviceNumber, uint8_t transmissionType) : BaseSlaveProfile(deviceNumber, transmissionType) {
+ProfileFecDisplay::ProfileFecDisplay(uint16_t deviceNumber, uint8_t transmissionType) : BaseSlaveProfile(deviceNumber, transmissionType) {
     setChannelConfig();
 }
 
-void ProfileFECDisplay::onBroadcastData(BroadcastData& msg) {
+void ProfileFecDisplay::onBroadcastData(BroadcastData& msg) {
     BaseDataPage<BroadcastData> dp = BaseDataPage<BroadcastData>(msg);
     BaseSlaveProfile::onBroadcastData(msg);
     if (!handleDataPage(dp)) {
@@ -21,7 +21,7 @@ void ProfileFECDisplay::onBroadcastData(BroadcastData& msg) {
     }
 }
 
-bool ProfileFECDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
+bool ProfileFecDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
@@ -34,7 +34,7 @@ bool ProfileFECDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
     return called;
 }
 
-void ProfileFECDisplay::onAcknowledgedData(AcknowledgedData& msg) {
+void ProfileFecDisplay::onAcknowledgedData(AcknowledgedData& msg) {
     BaseDataPage<BroadcastData> dp = BaseDataPage<BroadcastData>(msg);
     BaseSlaveProfile::onAcknowledgedData(msg);
     if (!handleDataPage(dp)) {
@@ -43,14 +43,14 @@ void ProfileFECDisplay::onAcknowledgedData(AcknowledgedData& msg) {
 }
 
 
-void ProfileFECDisplay::setChannelConfig() {
+void ProfileFecDisplay::setChannelConfig() {
     setChannelType(ANTPLUS_FEC_DISPLAY_CHANNELTYPE);
     setDeviceType(ANTPLUS_FEC_DEVICETYPE);
     setChannelPeriod(ANTPLUS_FEC_CHANNELPERIOD);
     setSearchTimeout(ANTPLUS_FEC_SEARCHTIMEOUT);
 }
 
-bool ProfileFECDisplay::handleTrainerData(BaseDataPage<BroadcastData>& dataPage) {
-    FECTrainerData dp = FECTrainerData(dataPage);
-    return _onFECTrainerData.call(dp);
+bool ProfileFecDisplay::handleTrainerData(BaseDataPage<BroadcastData>& dataPage) {
+    FecSpecificTrainerData dp(dataPage);
+    return _onFecSpecificTrainerData.call(dp);
 }

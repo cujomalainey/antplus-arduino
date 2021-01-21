@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_FECPROFILEPRIVATEDEFINES_h
 #define ANTPLUS_FECPROFILEPRIVATEDEFINES_h
 
-#include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsDefines.h>
+#include <Profiles/Fec/ANTPLUS_FecDefines.h>
 
 /* Channel Config */
 #define ANTPLUS_FEC_DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE

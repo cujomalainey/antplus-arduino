@@ -4,7 +4,7 @@
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerProfile.h>
 #include <Profiles/BicycleSpeed/ANTPLUS_BicycleSpeedProfile.h>
 #include <Profiles/Environment/ANTPLUS_EnvironmentProfile.h>
-#include <Profiles/FitnessEquipmentControls/ANTPLUS_FitnessEquipmentControlsProfile.h>
+#include <Profiles/Fec/ANTPLUS_FecProfile.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRateProfile.h>
 #include <Profiles/Lev/ANTPLUS_LevProfile.h>
 #include <Profiles/MuscleOxygen/ANTPLUS_MuscleOxygenProfile.h>
