@@ -1,9 +1,8 @@
 #ifndef ANTPLUS_MUSCLEOXYGENBASEMAINDATAPAGEMSG_h
 #define ANTPLUS_MUSCLEOXYGENBASEMAINDATAPAGEMSG_h
 
+#include <BaseClasses/ANTPLUS_BaseDataPage.h>
 #include <BaseClasses/ANTPLUS_BaseDataPageMsg.h>
-
-#include "ANT.h"
 
 class MuscleOxygenBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg> {
 public:

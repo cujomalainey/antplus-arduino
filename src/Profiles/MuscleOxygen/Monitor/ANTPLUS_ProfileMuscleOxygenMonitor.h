@@ -2,7 +2,7 @@
 #define ANTPLUS_PROFILEMUSCLEOXYGENMONITOR_h
 
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
-#include <Profiles/MuscleOxygen/DataPages/ANTPLUS_ProfileMuscleOxygenDataPages.h>
+#include <Profiles/MuscleOxygen/ANTPLUS_ProfileMuscleOxygenDataPages.h>
 #include <Profiles/MuscleOxygen/ANTPLUS_MuscleOxygenPrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 

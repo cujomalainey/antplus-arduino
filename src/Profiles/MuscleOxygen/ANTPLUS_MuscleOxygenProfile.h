@@ -2,12 +2,12 @@
 #define ANTPLUS_MUSCLEOXYGENPROFILE_h
 
 // General Definitions
-#include <Profiles/MuscleOxygen/Monitor/ANTPLUS_ProfileMuscleOxygenMonitor.h>
+// TODO
 
 // Datapages
-#include <Profiles/MuscleOxygen/DataPages/ANTPLUS_ProfileMuscleOxygenDataPages.h>
+#include <Profiles/MuscleOxygen/ANTPLUS_ProfileMuscleOxygenDataPages.h>
 
 // Profile Classes
-// ...
+#include <Profiles/MuscleOxygen/Monitor/ANTPLUS_ProfileMuscleOxygenMonitor.h>
 
 #endif // ANTPLUS_MUSCLEOXYGENPROFILE_h

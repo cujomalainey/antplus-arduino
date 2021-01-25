@@ -1,6 +1,7 @@
-#include <Profiles/MuscleOxygen/DataPages/Base/ANTPLUS_MuscleOxygenBaseMainDataPageMsg.h>
+#include <Profiles/MuscleOxygen/DataPages/ANTPLUS_MuscleOxygenBaseMainDataPage.h>
 #include <ANTPLUS_PrivateDefines.h>
 
+// TODO setup core
 MuscleOxygenBaseMainDataPageMsg::MuscleOxygenBaseMainDataPageMsg(uint8_t dataPageNumber) : BaseDataPageMsg() {
     memset(_buffer, 0, MESSAGE_SIZE);
     setDataBuffer(_buffer);
