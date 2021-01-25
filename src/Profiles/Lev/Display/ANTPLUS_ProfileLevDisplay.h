@@ -2,7 +2,7 @@
 #define ANTPLUS_PROFILELEVDISPLAY_h
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
-#include <Profiles/Lev/ANTPLUS_ProfileLevDataPages.h>
+#include <Profiles/Lev/ANTPLUS_LevDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
 class ProfileLevDisplay : public BaseSlaveProfile {

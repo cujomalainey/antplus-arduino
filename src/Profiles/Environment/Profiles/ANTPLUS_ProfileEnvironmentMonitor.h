@@ -2,7 +2,7 @@
 #define ANTPLUS_PROFILEENVIRONMENTMONITOR_h
 
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
-#include <Profiles/Environment/ANTPLUS_ProfileEnvironmentDataPages.h>
+#include <Profiles/Environment/ANTPLUS_EnvironmentDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
 class ProfileEnvironmentMonitor : BaseMasterProfile {

@@ -5,7 +5,7 @@
 #include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
 
 // Datapages
-#include <Profiles/HeartRate/ANTPLUS_ProfileHeartRateDataPages.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRateDataPages.h>
 
 // Profile Classes
 #include <Profiles/HeartRate/Profiles/ANTPLUS_ProfileHeartRateDisplay.h>

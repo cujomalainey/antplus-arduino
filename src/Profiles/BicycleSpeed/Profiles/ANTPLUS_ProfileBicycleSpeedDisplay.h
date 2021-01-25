@@ -2,10 +2,8 @@
 #define ANTPLUS_PROFILEBICYCLESPEEDDISPLAY_h
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
-#include <Profiles/BicycleSpeed/ANTPLUS_ProfileBicycleSpeedDataPages.h>
+#include <Profiles/BicycleSpeed/ANTPLUS_BicycleSpeedDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
-
-#include "ANT.h"
 
 class ProfileBicycleSpeedDisplay : public BaseSlaveProfile {
 public:

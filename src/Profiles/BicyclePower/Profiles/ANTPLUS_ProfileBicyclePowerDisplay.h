@@ -2,10 +2,8 @@
 #define ANTPLUS_PROFILEBICYCLEPOWERDISPLAY_h
 
 #include <BaseClasses/ANTPLUS_BaseSlaveProfile.h>
-#include <Profiles/BicyclePower/ANTPLUS_ProfileBicyclePowerDataPages.h>
+#include <Profiles/BicyclePower/ANTPLUS_BicyclePowerDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
-
-#include "ANT.h"
 
 class ProfileBicyclePowerDisplay : public BaseSlaveProfile {
 public:

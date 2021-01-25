@@ -5,7 +5,7 @@
 #include <Profiles/BicycleSpeed/ANTPLUS_BicycleSpeedDefines.h>
 
 // Datapages
-#include <Profiles/BicycleSpeed/ANTPLUS_ProfileBicycleSpeedDataPages.h>
+#include <Profiles/BicycleSpeed/ANTPLUS_BicycleSpeedDataPages.h>
 
 // Profile Classes
 #include <Profiles/BicycleSpeed/Profiles/ANTPLUS_ProfileBicycleSpeedDisplay.h>

@@ -5,7 +5,7 @@
 #include <Profiles/Lev/ANTPLUS_LevDefines.h>
 
 // Datapages
-#include <Profiles/Lev/ANTPLUS_ProfileLevDataPages.h>
+#include <Profiles/Lev/ANTPLUS_LevDataPages.h>
 
 // Profile Classes
 #include <Profiles/Lev/Display/ANTPLUS_ProfileLevDisplay.h>
