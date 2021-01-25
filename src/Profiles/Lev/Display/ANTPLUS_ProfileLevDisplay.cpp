@@ -3,6 +3,8 @@
 #include <Profiles/Lev/ANTPLUS_LevDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
+#define DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
+
 ProfileLevDisplay::ProfileLevDisplay() : BaseSlaveProfile() {
     setChannelConfig();
 }
@@ -16,10 +18,10 @@ ProfileLevDisplay::ProfileLevDisplay(uint16_t deviceNumber, uint8_t transmission
 }
 
 void ProfileLevDisplay::setChannelConfig() {
-    setChannelType(ANTPLUS_LEV_DISPLAY_CHANNELTYPE);
+    setChannelType(DISPLAY_CHANNELTYPE);
     setDeviceType(ANTPLUS_LEV_DEVICETYPE);
-    setChannelPeriod(ANTPLUS_LEV_CHANNELPERIOD);
-    setSearchTimeout(ANTPLUS_LEV_SEARCHTIMEOUT);
+    setChannelPeriod(LEV_CHANNELPERIOD);
+    setSearchTimeout(LEV_SEARCHTIMEOUT);
 }
 
 void ProfileLevDisplay::onBroadcastData(BroadcastData& msg) {
@@ -44,22 +46,22 @@ bool ProfileLevDisplay::handleDataPage(LevBaseMainDataPage& dp) {
 
     switch (dataPage) {
 
-    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_NUMBER:
+    case SPEEDSYSTEMINFORMATION1_NUMBER:
         called = handleSpeedSystemInformation1(dp);
         break;
-    case ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_NUMBER:
+    case SPEEDDISTANCEINFORMATION_NUMBER:
         called = handleSpeedDistanceInformation(dp);
         break;
-    case ANTPLUS_LEV_DATAPAGE_ALTSPEEDDISTANCEINFORMATION_NUMBER:
+    case ALTSPEEDDISTANCEINFORMATION_NUMBER:
         called = handleAltSpeedDistanceInformation(dp);
         break;
-    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION2_NUMBER:
+    case SPEEDSYSTEMINFORMATION2_NUMBER:
         called = handleSpeedSystemInformation2(dp);
         break;
-    case ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_NUMBER:
+    case BATTERYINFORMATION_NUMBER:
         called = handleBatteryInformation(dp);
         break;
-    case ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_NUMBER:
+    case LEVCAPABILITIES_NUMBER:
         called = handleCapabilities(dp);
         break;
     case COMMON_MANUFACTURERSINFORMATION_NUMBER:

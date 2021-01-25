@@ -1,10 +1,15 @@
 #include <Profiles/Lev/DataPages/ANTPLUS_LevSpeedDistanceInformation.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
+#define REMAININGRANGE_LSB_BYTE  4
+#define REMAININGRANGE_MSB_BYTE  5
+#define REMAININGRANGE_MASK      0x0FFF
+
 /* Speed and Distance */
 LevSpeedDistanceInformation::LevSpeedDistanceInformation(AntRxDataResponse& dp) :
     LevBaseSpeedDistanceInformation(dp) {}
 
 uint16_t LevSpeedDistanceInformation::getRemainingRange() { // in km
-    return (uint16_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_REMAININGRANGE_LSB_BYTE) + (((uint16_t)getData(ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_REMAININGRANGE_MSB_BYTE) & ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_REMAININGRANGE_MSB_MASK) << ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_REMAININGRANGE_MSB_SHIFT);
+    return this->get16BitValue(REMAININGRANGE_LSB_BYTE, REMAININGRANGE_MSB_BYTE,
+            REMAININGRANGE_MASK);
 }
