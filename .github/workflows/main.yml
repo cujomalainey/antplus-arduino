@@ -45,6 +45,6 @@ jobs:
         run: pio lib -g install ANT
 
       - name: Run PlatformIO
-        run: pio ci --board=teensy31
+        run: pio ci --board=teensy31 --lib="."
         env:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}
