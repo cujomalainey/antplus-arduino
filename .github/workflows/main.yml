@@ -13,7 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        example: [examples/BicycleSpeedDisplay/BicycleSpeedDisplay.ino]
+        example: [
+        examples/BicycleSpeedDisplay/BicycleSpeedDisplay.ino,
+        examples/DeviceSearch/DeviceSearch.ino,
+        examples/DynamicProfiles/DynamicProfiles.ino,
+        examples/EnvironmentDisplay/EnvironmentDisplay.ino,
+        examples/HeartRateDisplay/HeartRateDisplay.ino,
+        examples/HeartRateMonitor/HeartRateMonitor.ino,
+        examples/LEVDisplay/LEVDisplay.ino]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
