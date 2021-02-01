@@ -51,7 +51,7 @@ jobs:
       - name: Install library dependencies
         run: pio lib -g install ANT
 
-      - name: Run PlatformIO
+      - name: Build example
         run: pio ci --board=teensy31 --lib="."
         env:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}
@@ -86,5 +86,5 @@ jobs:
       - name: Install library dependencies
         run: pio lib -g install ANT
 
-      - name: Run PlatformIO
+      - name: Run tests
         run: pio test -e native
