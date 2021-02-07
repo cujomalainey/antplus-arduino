@@ -2,23 +2,18 @@
 #include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <ANTPLUS_PrivateDefines.h>
 
 #define MONITOR_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
-
-ProfileHeartRateMonitor::ProfileHeartRateMonitor(
-        uint16_t deviceNumber,
-        uint8_t transmissionType) :
-    BaseMasterProfile(deviceNumber, transmissionType),
-    _nextBackgroundPage(HEARTRATE_MANUFACTURERINFORMATION_NUMBER),
-    _flags(0) {
-    setChannelConfig();
-}
+#define MONITOR_TRANSMISSIONTYPE TRANSMISSION_TYPE_INDEPENDENT
 
 ProfileHeartRateMonitor::ProfileHeartRateMonitor(
         uint16_t deviceNumber,
         uint8_t transmissionType,
         uint32_t flags) :
-    BaseMasterProfile(deviceNumber, transmissionType),
+    BaseMasterProfile(deviceNumber,
+            ANTPLUS_TRANSMISSION_SET_LSN(
+                transmissionType, MONITOR_TRANSMISSIONTYPE)),
     _nextBackgroundPage(HEARTRATE_MANUFACTURERINFORMATION_NUMBER),
     _flags(flags) {
     setChannelConfig();

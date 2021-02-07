@@ -8,8 +8,7 @@
 
 class ProfileHeartRateMonitor : public BaseMasterProfile {
 public:
-    ProfileHeartRateMonitor(uint16_t deviceNumber, uint8_t transmissionType);
-    ProfileHeartRateMonitor(uint16_t deviceNumber, uint8_t transmissionType, uint32_t flags);
+    ProfileHeartRateMonitor(uint16_t deviceNumber, uint8_t transmissionType = 0, uint32_t flags = 0);
     /**
      * Register callback to populate default data messages (Datapage 0)
      */

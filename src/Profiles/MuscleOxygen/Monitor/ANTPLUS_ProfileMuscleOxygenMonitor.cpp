@@ -1,10 +1,14 @@
 #include <Profiles/MuscleOxygen/Monitor/ANTPLUS_ProfileMuscleOxygenMonitor.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <ANTPLUS_PrivateDefines.h>
 
 #define MONITOR_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
+#define MONITOR_TRANSMISSIONTYPE (TRANSMISSION_TYPE_INDEPENDENT | TRANSMISSION_TYPE_GLOBALDATAPGESUSED)
 
 ProfileMuscleOxygenMonitor::ProfileMuscleOxygenMonitor(	uint16_t deviceNumber, uint8_t transmissionType) :
-    BaseMasterProfile(deviceNumber, transmissionType),
+    BaseMasterProfile(deviceNumber,
+            ANTPLUS_TRANSMISSION_SET_LSN(
+                transmissionType, MONITOR_TRANSMISSIONTYPE)),
     _patternStep(0),
     _backgroundStep(0)
 {
@@ -61,4 +65,5 @@ void ProfileMuscleOxygenMonitor::transmitMuscleOxygenMuscleOxygenDataMsg() {
 }
 
 void ProfileMuscleOxygenMonitor::transmitBatteryStatusMsg() {
+    // TODO
 }

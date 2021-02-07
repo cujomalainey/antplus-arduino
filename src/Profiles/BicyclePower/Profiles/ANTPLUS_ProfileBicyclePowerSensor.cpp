@@ -2,23 +2,19 @@
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerDefines.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerPrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <ANTPLUS_PrivateDefines.h>
 
 #define SENSOR_CHANNELTYPE   CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
-
-ProfileBicyclePowerSensor::ProfileBicyclePowerSensor(
-        uint16_t deviceNumber,
-        uint8_t transmissionType) :
-    BaseMasterProfile(deviceNumber, transmissionType),
-    //_nextBackgroundPage(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER),
-    _flags(0) {
-    setChannelConfig();
-}
+#define SENSOR_TRANSMISSIONTYPE (TRANSMISSION_TYPE_INDEPENDENT | TRANSMISSION_TYPE_GLOBALDATAPGESUSED)
 
 ProfileBicyclePowerSensor::ProfileBicyclePowerSensor(
         uint16_t deviceNumber,
         uint8_t transmissionType,
         uint32_t flags) :
-    BaseMasterProfile(deviceNumber, transmissionType),
+    BaseMasterProfile(deviceNumber,
+            ANTPLUS_TRANSMISSION_SET_LSN(
+                transmissionType, SENSOR_TRANSMISSIONTYPE)),
+    // TODO
     //_nextBackgroundPage(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER),
     _flags(flags) {
     setChannelConfig();

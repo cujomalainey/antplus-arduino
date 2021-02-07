@@ -1,9 +1,15 @@
 #include <Profiles/Shifting/Shifter/ANTPLUS_ProfileShiftingShifter.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 #include <Profiles/Shifting/ANTPLUS_ShiftingDefines.h>
+#include <ANTPLUS_PrivateDefines.h>
+
+#define SHIFTER_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
+#define SHIFTER_TRANSMISSIONTYPE (TRANSMISSION_TYPE_INDEPENDENT | TRANSMISSION_TYPE_GLOBALDATAPGESUSED)
 
 ProfileShiftingShifter::ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType, uint16_t componentFlags) :
-    BaseMasterProfile(deviceNumber, transmissionType),
+    BaseMasterProfile(deviceNumber,
+            ANTPLUS_TRANSMISSION_SET_LSN(
+                transmissionType, SHIFTER_TRANSMISSIONTYPE)),
     _componentFlags(componentFlags)
 {
     setChannelConfig();
@@ -24,10 +30,10 @@ ProfileShiftingShifter::ProfileShiftingShifter(uint16_t deviceNumber, uint8_t tr
 }
 
 void ProfileShiftingShifter::setChannelConfig() {
-    setChannelType(ANTPLUS_SHIFTING_SHIFTER_CHANNELTYPE);
+    setChannelType(SHIFTER_CHANNELTYPE);
     setDeviceType(ANTPLUS_SHIFTING_DEVICETYPE);
-    setChannelPeriod(ANTPLUS_SHIFTING_CHANNELPERIOD);
-    setSearchTimeout(ANTPLUS_SHIFTING_SEARCHTIMEOUT);
+    setChannelPeriod(SHIFTING_CHANNELPERIOD);
+    setSearchTimeout(SHIFTING_SEARCHTIMEOUT);
 }
 
 bool ProfileShiftingShifter::isDataPageValid(uint8_t dataPage)
