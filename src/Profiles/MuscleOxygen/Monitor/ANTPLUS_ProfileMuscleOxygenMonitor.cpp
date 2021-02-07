@@ -1,6 +1,7 @@
 #include <Profiles/MuscleOxygen/Monitor/ANTPLUS_ProfileMuscleOxygenMonitor.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
+#define MONITOR_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
 
 ProfileMuscleOxygenMonitor::ProfileMuscleOxygenMonitor(	uint16_t deviceNumber, uint8_t transmissionType) :
     BaseMasterProfile(deviceNumber, transmissionType),
@@ -11,15 +12,15 @@ ProfileMuscleOxygenMonitor::ProfileMuscleOxygenMonitor(	uint16_t deviceNumber, u
 }
 
 void ProfileMuscleOxygenMonitor::setChannelConfig() {
-    setChannelType(ANTPLUS_MUSCLEOXYGEN_MONITOR_CHANNELTYPE);
+    setChannelType(MONITOR_CHANNELTYPE);
     setDeviceType(ANTPLUS_MUSCLEOXYGEN_DEVICETYPE);
-    setChannelPeriod(ANTPLUS_MUSCLEOXYGEN_CHANNELPERIOD);
-    setSearchTimeout(ANTPLUS_MUSCLEOXYGEN_SEARCHTIMEOUT);
+    setChannelPeriod(MUSCLEOXYGEN_CHANNELPERIOD);
+    setSearchTimeout(MUSCLEOXYGEN_SEARCHTIMEOUT);
 }
 
 bool ProfileMuscleOxygenMonitor::isDataPageValid(uint8_t dataPage) {
     switch (dataPage) {
-    case ANTPLUS_MUSCLEOXYGEN_DATAPAGE_MUSCLEOXYGENDATA_NUMBER:
+    case MUSCLEOXYGEN_MUSCLEOXYGENDATA_NUMBER:
         return true;
     // TODO other datapages
     }
