@@ -32,14 +32,14 @@ private:
     bool handleCrankTorqueFrequency(BicyclePowerBaseMainDataPage& dataPage);
     bool handleStandardWheelTorque(BicyclePowerBaseMainDataPage& dataPage);
     bool handleTorqueEffectivenessAndPedalSmoothness(BicyclePowerBaseMainDataPage& dataPage);
-    AntCallback<BatteryStatus&> _onBatteryStatus;
-    AntCallback<ManufacturersInformation&> _onManufacturersInformation;
-    AntCallback<ProductInformation&> _onProductInformation;
-    AntCallback<BicyclePowerStandardPowerOnly&> _onBicyclePowerStandardPowerOnly;
-    AntCallback<BicyclePowerStandardCrankTorque&> _onBicyclePowerStandardCrankTorque;
-    AntCallback<BicyclePowerCrankTorqueFrequency&> _onBicyclePowerCrankTorqueFrequency;
-    AntCallback<BicyclePowerStandardWheelTorque&> _onBicyclePowerStandardWheelTorque;
-    AntCallback<BicyclePowerTorqueEffectivenessAndPedalSmoothness&> _onBicyclePowerTorqueEffectivenessAndPedalSmoothness;
+    AntCallback<BatteryStatus&> _onBatteryStatus = { .func = NULL };
+    AntCallback<ManufacturersInformation&> _onManufacturersInformation = { .func = NULL };
+    AntCallback<ProductInformation&> _onProductInformation = { .func = NULL };
+    AntCallback<BicyclePowerStandardPowerOnly&> _onBicyclePowerStandardPowerOnly = { .func = NULL };
+    AntCallback<BicyclePowerStandardCrankTorque&> _onBicyclePowerStandardCrankTorque = { .func = NULL };
+    AntCallback<BicyclePowerCrankTorqueFrequency&> _onBicyclePowerCrankTorqueFrequency = { .func = NULL };
+    AntCallback<BicyclePowerStandardWheelTorque&> _onBicyclePowerStandardWheelTorque = { .func = NULL };
+    AntCallback<BicyclePowerTorqueEffectivenessAndPedalSmoothness&> _onBicyclePowerTorqueEffectivenessAndPedalSmoothness = { .func = NULL };
 };
 
 #endif // ANTPLUS_PROFILEBICYCLEPOWERDISPLAY_h
