@@ -5,7 +5,8 @@
 #define RESERVED_BYTE 2
 #define RESERVED_VALUE 0xFF
 
-ShiftingBaseMainDataPageMsg::ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber) : BaseDataPageMsg<BroadcastDataMsg>()
+ShiftingBaseMainDataPageMsg::ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber) :
+    BaseDataPageMsg<BroadcastDataMsg>()
 {
     memset(_buffer, 0, MESSAGE_SIZE);
     setDataBuffer(_buffer);
