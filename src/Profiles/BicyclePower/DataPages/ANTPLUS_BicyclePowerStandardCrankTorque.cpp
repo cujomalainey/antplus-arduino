@@ -39,3 +39,22 @@ template class BicyclePowerBaseStandardCrankTorque<BroadcastDataMsg>;
 BicyclePowerStandardCrankTorque::BicyclePowerStandardCrankTorque(AntRxDataResponse& dp) :
     BicyclePowerBaseMainDataPage(dp),
     BicyclePowerBaseStandardCrankTorque() {}
+
+BicyclePowerStandardCrankTorqueMsg::BicyclePowerStandardCrankTorqueMsg() :
+    BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER),
+    BicyclePowerBaseStandardCrankTorque() {}
+
+void BicyclePowerStandardCrankTorqueMsg::setCrankTicks(uint8_t ticks) {
+    set8BitValue(ticks, CRANKTICKS_BYTE);
+}
+void BicyclePowerStandardCrankTorqueMsg::setInstantaneousCadence(uint8_t cadence) {
+    set8BitValue(cadence, INSTANTANEOUSCADENCE_BYTE);
+}
+
+void BicyclePowerStandardCrankTorqueMsg::setCrankPeriod(uint16_t period) {
+    set16BitValue(period, PERIOD_LSB_BYTE, PERIOD_MSB_BYTE);
+}
+
+void BicyclePowerStandardCrankTorqueMsg::setAccumulatedTorque(uint16_t torque) {
+    set16BitValue(torque, ACCUMULATEDTORQUE_LSB_BYTE, ACCUMULATEDTORQUE_MSB_BYTE);
+}

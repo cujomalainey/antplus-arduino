@@ -24,8 +24,7 @@ uint8_t BicyclePowerBaseStandardWheelTorque<T>::getInstantaneousCadence() {
 
 template<class T>
 uint16_t BicyclePowerBaseStandardWheelTorque<T>::getWheelPeriod() {
-    return this->get16BitValue(
-            WHEELPERIOD_LSB_BYTE, WHEELPERIOD_MSB_BYTE);
+    return this->get16BitValue(WHEELPERIOD_LSB_BYTE, WHEELPERIOD_MSB_BYTE);
 }
 
 template<class T>
@@ -40,3 +39,24 @@ template class BicyclePowerBaseStandardWheelTorque<BroadcastDataMsg>;
 BicyclePowerStandardWheelTorque::BicyclePowerStandardWheelTorque(AntRxDataResponse& dp) :
     BicyclePowerBaseMainDataPage(dp),
     BicyclePowerBaseStandardWheelTorque() {}
+
+BicyclePowerStandardWheelTorqueMsg::BicyclePowerStandardWheelTorqueMsg() :
+    BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER),
+    BicyclePowerBaseStandardWheelTorque() {}
+
+void BicyclePowerStandardWheelTorqueMsg::setWheelTicks(uint8_t ticks) {
+    set8BitValue(ticks, WHEELTICKS_BYTE);
+}
+
+void BicyclePowerStandardWheelTorqueMsg::setInstantaneousCadence(uint8_t cadence) {
+    set8BitValue(cadence, INSTANTANEOUSCADENCE_BYTE);
+}
+
+void BicyclePowerStandardWheelTorqueMsg::setWheelPeriod(uint16_t period) {
+    set16BitValue(period, WHEELPERIOD_LSB_BYTE, WHEELPERIOD_MSB_BYTE);
+}
+
+void BicyclePowerStandardWheelTorqueMsg::setAccumulatedTorque(uint16_t torque) {
+    set16BitValue(torque, ACCUMULATEDTORQUE_LSB_BYTE,
+            ACCUMULATEDTORQUE_MSB_BYTE);
+}

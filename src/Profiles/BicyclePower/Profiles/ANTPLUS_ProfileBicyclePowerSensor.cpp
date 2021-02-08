@@ -111,26 +111,33 @@ void ProfileBicyclePowerSensor::transmitBackgroundDataPage() {
 }
 
 void ProfileBicyclePowerSensor::transmitBicyclePowerStandardPowerOnlyMsg() {
-    // TODO
     BicyclePowerStandardPowerOnlyMsg msg;
     _createBicyclePowerStandardPowerOnlyMsg.call(msg);
     transmitMsg(msg);
 }
 
 void ProfileBicyclePowerSensor::transmitBicyclePowerStandardWheelTorqueMsg() {
-    // TODO
+    BicyclePowerStandardWheelTorqueMsg msg;
+    _createBicyclePowerStandardWheelTorqueMsg.call(msg);
+    transmitMsg(msg);
 }
 
 void ProfileBicyclePowerSensor::transmitBicyclePowerStandardCrankTorqueMsg() {
-    // TODO
+    BicyclePowerStandardCrankTorqueMsg msg;
+    _createBicyclePowerStandardCrankTorqueMsg.call(msg);
+    transmitMsg(msg);
 }
 
 void ProfileBicyclePowerSensor::transmitBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg() {
-    // TODO
+    BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg msg;
+    _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.call(msg);
+    transmitMsg(msg);
 }
 
 void ProfileBicyclePowerSensor::transmitBicyclePowerCrankTorqueFrequencyMsg() {
-    // TODO
+    BicyclePowerCrankTorqueFrequencyMsg msg;
+    _createBicyclePowerCrankTorqueFrequencyMsg.call(msg);
+    transmitMsg(msg);
 }
 
 void ProfileBicyclePowerSensor::transmistBicyclePowerGeneralCalibrationResponse() {
@@ -145,8 +152,21 @@ uint8_t ProfileBicyclePowerSensor::getNextBackgroundPage(uint8_t currentPage) {
 void ProfileBicyclePowerSensor::transmitRequestedDataPage() {
     uint8_t requestedPage = getRequestedPage();
     switch (requestedPage) {
+    // TODO rest of datapages
     case BICYCLEPOWER_STANDARDPOWERONLY_NUMBER:
-        // TODO
+        transmitBicyclePowerStandardPowerOnlyMsg();
+        break;
+    case BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER:
+        transmitBicyclePowerStandardWheelTorqueMsg();
+        break;
+    case BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER:
+        transmitBicyclePowerStandardCrankTorqueMsg();
+        break;
+    case BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
+        transmitBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg();
+        break;
+    case BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER:
+        transmitBicyclePowerCrankTorqueFrequencyMsg();
         break;
     }
 }

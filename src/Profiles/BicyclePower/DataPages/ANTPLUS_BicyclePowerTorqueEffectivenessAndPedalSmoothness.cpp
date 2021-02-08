@@ -36,3 +36,23 @@ template class BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness<BroadcastDa
 BicyclePowerTorqueEffectivenessAndPedalSmoothness::BicyclePowerTorqueEffectivenessAndPedalSmoothness(AntRxDataResponse& dp) :
     BicyclePowerBaseMainDataPage(dp),
     BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness() {}
+
+BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg::BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg() :
+    BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER),
+    BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness() {}
+
+void BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg::setLeftTorqueEffectiveness(uint8_t effectiveness) {
+    set8BitValue(effectiveness, LEFTEFFECTIVENESS_BYTE);
+}
+
+void BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg::setRightTorqueEffectiveness(uint8_t effectiveness) {
+    set8BitValue(effectiveness, RIGHTEFFECTIVENESS_BYTE);
+}
+
+void BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg::setLeftPedalSmoothness(uint8_t smoothness) {
+    set8BitValue(smoothness, LEFTSMOOTHNESS_BYTE);
+}
+
+void BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg::setRightPedalSmoothness(uint8_t smoothness) {
+    set8BitValue(smoothness, RIGHTSMOOTHNESS_BYTE);
+}

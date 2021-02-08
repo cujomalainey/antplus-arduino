@@ -34,3 +34,20 @@ template class BicyclePowerBaseCrankTorqueFrequency<BroadcastDataMsg>;
 BicyclePowerCrankTorqueFrequency::BicyclePowerCrankTorqueFrequency(AntRxDataResponse& dp) :
     BicyclePowerBaseMainDataPage(dp),
     BicyclePowerBaseCrankTorqueFrequency() {}
+
+BicyclePowerCrankTorqueFrequencyMsg::BicyclePowerCrankTorqueFrequencyMsg() :
+    BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER),
+    BicyclePowerBaseCrankTorqueFrequency() {}
+
+void BicyclePowerCrankTorqueFrequencyMsg::setSlope(uint16_t slope) {
+    set16BitValue(slope, SLOPE_LSB_BYTE, SLOPE_MSB_BYTE);
+}
+
+void BicyclePowerCrankTorqueFrequencyMsg::setTimeStamp(uint16_t timestamp) {
+    set16BitValue(timestamp, TIMESTAMP_LSB_BYTE, TIMESTAMP_MSB_BYTE);
+}
+
+void BicyclePowerCrankTorqueFrequencyMsg::setTorqueTicksStamp(uint16_t tickstamp) {
+    set16BitValue(tickstamp, TORQUETICKSTAMP_LSB_BYTE,
+            TORQUETICKSTAMP_MSB_BYTE);
+}

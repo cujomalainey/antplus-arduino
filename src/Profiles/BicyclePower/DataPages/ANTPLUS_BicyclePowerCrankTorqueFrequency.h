@@ -19,4 +19,14 @@ public:
     explicit BicyclePowerCrankTorqueFrequency(AntRxDataResponse& dp);
 };
 
+class BicyclePowerCrankTorqueFrequencyMsg :
+    public BicyclePowerBaseMainDataPageMsg,
+    public BicyclePowerBaseCrankTorqueFrequency<BroadcastDataMsg> {
+public:
+    BicyclePowerCrankTorqueFrequencyMsg();
+    void setSlope(uint16_t slope);
+    void setTimeStamp(uint16_t timestamp);
+    void setTorqueTicksStamp(uint16_t tickstamp);
+};
+
 #endif // ANTPLUS_BICYCLEPOWERCRANKTORQUEFREQUENCY_h

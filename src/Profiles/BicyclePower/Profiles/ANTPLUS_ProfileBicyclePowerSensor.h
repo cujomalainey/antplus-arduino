@@ -12,6 +12,10 @@ public:
      * Register callback to populate default data messages (Datapage 0)
      */
     void createBicyclePowerStandardPowerOnlyMsg(void (*func)(BicyclePowerStandardPowerOnlyMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerStandardPowerOnlyMsg.set(func, data); }
+    void createBicyclePowerStandardWheelTorqueMsg(void (*func)(BicyclePowerStandardWheelTorqueMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerStandardWheelTorqueMsg.set(func, data); }
+    void createBicyclePowerStandardCrankTorqueMsg(void (*func)(BicyclePowerStandardCrankTorqueMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerStandardCrankTorqueMsg.set(func, data); }
+    void createBicyclePowerCrankTorqueFrequencyMsg(void (*func)(BicyclePowerCrankTorqueFrequencyMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerCrankTorqueFrequencyMsg.set(func, data); }
+    void createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg(void (*func)(BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.set(func, data); }
 
 protected:
     void transmitNextDataPage();
@@ -36,6 +40,10 @@ private:
     uint8_t getNextBackgroundPage(uint8_t currentPage);
     AntCallback<RequestDataPage&> _onRequestDataPage;
     AntCallback<BicyclePowerStandardPowerOnlyMsg&> _createBicyclePowerStandardPowerOnlyMsg;
+    AntCallback<BicyclePowerStandardWheelTorqueMsg&> _createBicyclePowerStandardWheelTorqueMsg;
+    AntCallback<BicyclePowerStandardCrankTorqueMsg&> _createBicyclePowerStandardCrankTorqueMsg;
+    AntCallback<BicyclePowerCrankTorqueFrequencyMsg&> _createBicyclePowerCrankTorqueFrequencyMsg;
+    AntCallback<BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg&> _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg;
     uint8_t _nextBackgroundPage;
     uint8_t _patternStep = 0;
     uint32_t _flags = 0;

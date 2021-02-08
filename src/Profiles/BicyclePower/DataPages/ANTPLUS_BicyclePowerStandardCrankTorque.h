@@ -13,9 +13,22 @@ public:
     uint16_t getAccumulatedTorque();
 };
 
-class BicyclePowerStandardCrankTorque : public BicyclePowerBaseMainDataPage, public BicyclePowerBaseStandardCrankTorque<BroadcastData> {
+class BicyclePowerStandardCrankTorque :
+    public BicyclePowerBaseMainDataPage,
+    public BicyclePowerBaseStandardCrankTorque<BroadcastData> {
 public:
     explicit BicyclePowerStandardCrankTorque(AntRxDataResponse& dp);
+};
+
+class BicyclePowerStandardCrankTorqueMsg :
+    public BicyclePowerBaseMainDataPageMsg,
+    public BicyclePowerBaseStandardCrankTorque<BroadcastDataMsg> {
+public:
+    BicyclePowerStandardCrankTorqueMsg();
+    void setCrankTicks(uint8_t ticks);
+    void setInstantaneousCadence(uint8_t cadence); //TODO is vaid check, May not be available, 0xFF indicates invalid
+    void setCrankPeriod(uint16_t period);
+    void setAccumulatedTorque(uint16_t torque);
 };
 
 #endif // ANTPLUS_BICYCLEPOWERSTANDARDCRANKTORQUE_h
