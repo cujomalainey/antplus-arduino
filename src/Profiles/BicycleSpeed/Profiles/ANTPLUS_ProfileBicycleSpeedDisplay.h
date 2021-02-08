@@ -29,12 +29,12 @@ private:
     bool handleManufacturerID(BicycleSpeedBaseMainDataPage& dataPage);
     bool handleMotionAndSpeed(BicycleSpeedBaseMainDataPage& dataPage);
     bool handleProductID(BicycleSpeedBaseMainDataPage& dataPage);
-    AntCallback<BicycleSpeedBatteryStatus&> _onBicycleSpeedBatteryStatus;
-    AntCallback<BicycleSpeedCumulativeOperatingTime&> _onBicycleSpeedCumulativeOperatingTime;
-    AntCallback<BicycleSpeedDefault&> _onBicycleSpeedDefault;
-    AntCallback<BicycleSpeedManufacturerID&> _onBicycleSpeedManufacturerID;
-    AntCallback<BicycleSpeedMotionAndSpeed&> _onBicycleSpeedMotionAndSpeed;
-    AntCallback<BicycleSpeedProductID&> _onBicycleSpeedProductID;
+    AntCallback<BicycleSpeedBatteryStatus&> _onBicycleSpeedBatteryStatus = { .func = NULL };
+    AntCallback<BicycleSpeedCumulativeOperatingTime&> _onBicycleSpeedCumulativeOperatingTime = { .func = NULL };
+    AntCallback<BicycleSpeedDefault&> _onBicycleSpeedDefault = { .func = NULL };
+    AntCallback<BicycleSpeedManufacturerID&> _onBicycleSpeedManufacturerID = { .func = NULL };
+    AntCallback<BicycleSpeedMotionAndSpeed&> _onBicycleSpeedMotionAndSpeed = { .func = NULL };
+    AntCallback<BicycleSpeedProductID&> _onBicycleSpeedProductID = { .func = NULL };
 };
 
 #endif // ANTPLUS_PROFILEBICYCLESPEEDDISPLAY_h
