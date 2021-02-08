@@ -51,8 +51,7 @@ HeartRateBaseMainDataPageMsg::HeartRateBaseMainDataPageMsg(uint8_t dataPageNumbe
     BaseDataPageMsg<BroadcastDataMsg>(),
     HeartRateCoreMainDataPage<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
-    // TODO fixup to set data api
-    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = dataPageNumber;
+    set8BitValue(dataPageNumber, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 
 void HeartRateBaseMainDataPageMsg::setPageChangeToggle(uint8_t toggle) {
