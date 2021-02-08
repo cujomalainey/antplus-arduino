@@ -3,13 +3,14 @@
 
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
 #include <Profiles/Shifting/DataPages/ANTPLUS_ProfileShiftingDataPages.h>
-#include <Profiles/Shifting/ANTPLUS_ShiftingPrivateDefines.h>
+#include <Profiles/Shifting/ANTPLUS_ShiftingDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
 class ProfileShiftingShifter : public BaseMasterProfile {
 public:
-    explicit ProfileShiftingShifter(uint16_t deviceNumber, uint8_t transmissionType = 0, uint16_t componentsSupported = 0x1);
-
+    explicit ProfileShiftingShifter(uint16_t deviceNumber,
+            uint8_t transmissionType = 0,
+            uint16_t componentsSupported = ANTPLUS_SHIFTING_COMPONENTIDENTIFIER_SYSTEM_FLAG);
     /**
      * Register callback to populate default data messages (Datapage 1)
      */

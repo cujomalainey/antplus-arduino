@@ -1,6 +1,6 @@
-#include <Profiles/Shifting/Shifter/ANTPLUS_ProfileShiftingShifter.h>
+#include <Profiles/Shifting/Profiles/ANTPLUS_ProfileShiftingShifter.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
-#include <Profiles/Shifting/ANTPLUS_ShiftingDefines.h>
+#include <Profiles/Shifting/ANTPLUS_ShiftingPrivateDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 #define SHIFTER_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
