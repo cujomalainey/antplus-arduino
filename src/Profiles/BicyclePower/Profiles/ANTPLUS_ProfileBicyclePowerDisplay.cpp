@@ -5,14 +5,6 @@
 
 #define DISPLAY_CHANNELTYPE			CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
 
-ProfileBicyclePowerDisplay::ProfileBicyclePowerDisplay() : BaseSlaveProfile() {
-    setChannelConfig();
-}
-
-ProfileBicyclePowerDisplay::ProfileBicyclePowerDisplay(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
-    setChannelConfig();
-}
-
 ProfileBicyclePowerDisplay::ProfileBicyclePowerDisplay(uint16_t deviceNumber, uint8_t transmissionType) : BaseSlaveProfile(deviceNumber, transmissionType) {
     setChannelConfig();
 }
@@ -50,6 +42,9 @@ bool ProfileBicyclePowerDisplay::handleDataPage(BicyclePowerBaseMainDataPage& dp
         break;
     case BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
         called = handleTorqueEffectivenessAndPedalSmoothness(dp);
+        break;
+    case BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER:
+        called = handleCrankTorqueFrequency(dp);
         break;
     }
 
@@ -95,6 +90,11 @@ bool ProfileBicyclePowerDisplay::handleStandardPowerOnly(BicyclePowerBaseMainDat
 bool ProfileBicyclePowerDisplay::handleStandardCrankTorque(BicyclePowerBaseMainDataPage& dataPage) {
     BicyclePowerStandardCrankTorque dp(dataPage);
     return _onBicyclePowerStandardCrankTorque.call(dp);
+}
+
+bool ProfileBicyclePowerDisplay::handleCrankTorqueFrequency(BicyclePowerBaseMainDataPage& dataPage) {
+    BicyclePowerCrankTorqueFrequency dp(dataPage);
+    return _onBicyclePowerCrankTorqueFrequency.call(dp);
 }
 
 bool ProfileBicyclePowerDisplay::handleStandardWheelTorque(BicyclePowerBaseMainDataPage& dataPage) {

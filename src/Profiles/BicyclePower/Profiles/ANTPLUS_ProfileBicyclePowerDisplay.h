@@ -7,15 +7,14 @@
 
 class ProfileBicyclePowerDisplay : public BaseSlaveProfile {
 public:
-    ProfileBicyclePowerDisplay();
-    ProfileBicyclePowerDisplay(uint16_t deviceNumber);
-    ProfileBicyclePowerDisplay(uint16_t deviceNumber, uint8_t transmissionType);
+    ProfileBicyclePowerDisplay(uint16_t deviceNumber = 0, uint8_t transmissionType = 0);
     void onBatteryStatus(void (*func)(BatteryStatus&, uintptr_t), uintptr_t data = 0) { _onBatteryStatus.set(func, data); }
     void onManufacturersInformation(void (*func)(ManufacturersInformation&, uintptr_t), uintptr_t data = 0) { _onManufacturersInformation.set(func, data); }
     void onProductInformation(void (*func)(ProductInformation&, uintptr_t), uintptr_t data = 0) { _onProductInformation.set(func, data); }
     void onBicyclePowerStandardPowerOnly(void (*func)(BicyclePowerStandardPowerOnly&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerStandardPowerOnly.set(func, data); }
     void onBicyclePowerStandardCrankTorque(void (*func)(BicyclePowerStandardCrankTorque&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerStandardCrankTorque.set(func, data); }
     void onBicyclePowerStandardWheelTorque(void (*func)(BicyclePowerStandardWheelTorque&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerStandardWheelTorque.set(func, data); }
+    void onBicyclePowerCrankTorqueFrequency(void (*func)(BicyclePowerCrankTorqueFrequency&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerCrankTorqueFrequency.set(func, data); }
     void onBicyclePowerTorqueEffectivenessAndPedalSmoothness(void (*func)(BicyclePowerTorqueEffectivenessAndPedalSmoothness&, uintptr_t), uintptr_t data = 0) { _onBicyclePowerTorqueEffectivenessAndPedalSmoothness.set(func, data); }
 
 private:
@@ -30,6 +29,7 @@ private:
     bool handleProductInformation(BicyclePowerBaseMainDataPage& dataPage);
     bool handleStandardPowerOnly(BicyclePowerBaseMainDataPage& dataPage);
     bool handleStandardCrankTorque(BicyclePowerBaseMainDataPage& dataPage);
+    bool handleCrankTorqueFrequency(BicyclePowerBaseMainDataPage& dataPage);
     bool handleStandardWheelTorque(BicyclePowerBaseMainDataPage& dataPage);
     bool handleTorqueEffectivenessAndPedalSmoothness(BicyclePowerBaseMainDataPage& dataPage);
     AntCallback<BatteryStatus&> _onBatteryStatus;
@@ -37,6 +37,7 @@ private:
     AntCallback<ProductInformation&> _onProductInformation;
     AntCallback<BicyclePowerStandardPowerOnly&> _onBicyclePowerStandardPowerOnly;
     AntCallback<BicyclePowerStandardCrankTorque&> _onBicyclePowerStandardCrankTorque;
+    AntCallback<BicyclePowerCrankTorqueFrequency&> _onBicyclePowerCrankTorqueFrequency;
     AntCallback<BicyclePowerStandardWheelTorque&> _onBicyclePowerStandardWheelTorque;
     AntCallback<BicyclePowerTorqueEffectivenessAndPedalSmoothness&> _onBicyclePowerTorqueEffectivenessAndPedalSmoothness;
 };

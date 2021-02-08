@@ -24,8 +24,6 @@ public:
     void setUpdateEventCount(uint8_t eventCount);
     void setCumulativePowerCount(uint16_t accPower);
     void setInstataneousPowerCount(uint16_t power);
-protected:
-    uint8_t _buffer[MESSAGE_SIZE];
 };
 
 #endif // ANTPLUS_BICYCLEPOWERSTANDARDPOWERONLY_h
