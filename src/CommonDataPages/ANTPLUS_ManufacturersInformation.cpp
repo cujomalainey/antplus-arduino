@@ -7,6 +7,9 @@
 #define MANUFACTURERID_MSB_BYTE 5
 #define MODELNUMBER_LSB_BYTE 6
 #define MODELNUMBER_MSB_BYTE 7
+#define RESERVED_LSB_BYTE 1
+#define RESERVED_MSB_BYTE 2
+#define RESERVED_VALUE 0xFFFF
 
 template<class T>
 BaseManufacturersInformation<T>::BaseManufacturersInformation() :
@@ -25,7 +28,7 @@ uint16_t BaseManufacturersInformation<T>::getManufacturerID() {
 
 template<class T>
 uint16_t BaseManufacturersInformation<T>::getModelNumber() {
-    return this->get16BitValue( MODELNUMBER_LSB_BYTE, MODELNUMBER_MSB_BYTE);
+    return this->get16BitValue(MODELNUMBER_LSB_BYTE, MODELNUMBER_MSB_BYTE);
 }
 
 template class BaseManufacturersInformation<BroadcastData>;
@@ -35,14 +38,13 @@ ManufacturersInformation::ManufacturersInformation(AntRxDataResponse& dp) :
     BaseDataPage<BroadcastData>(dp),
     BaseManufacturersInformation<BroadcastData>() {}
 
-// TODO Magic numbers
 ManufacturersInformationMsg::ManufacturersInformationMsg() :
     BaseDataPageMsg<BroadcastDataMsg>(),
     BaseManufacturersInformation<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
-    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = COMMON_MANUFACTURERSINFORMATION_NUMBER;
-    _buffer[1] = 0xFF;
-    _buffer[2] = 0xFF;
+    set8BitValue(COMMON_MANUFACTURERSINFORMATION_NUMBER,
+            ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+    set16BitValue(RESERVED_VALUE, RESERVED_LSB_BYTE, RESERVED_MSB_BYTE);
 }
 
 void ManufacturersInformationMsg::setHWRevision(uint8_t revision) {
