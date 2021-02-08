@@ -21,7 +21,7 @@ public:
 
 class BatteryStatus : public BaseDataPage<BroadcastData>, public BaseBatteryStatus<BroadcastData> {
 public:
-    BatteryStatus(AntRxDataResponse& dp);
+    explicit BatteryStatus(AntRxDataResponse& dp);
 };
 
 class BatteryStatusMsg : public BaseDataPageMsg<BroadcastDataMsg>, public BaseBatteryStatus<BroadcastDataMsg> {
