@@ -26,10 +26,10 @@ private:
     bool handleTemperature(EnvironmentBaseDataPage& dataPage);
     bool handleManufacturersInformation(EnvironmentBaseDataPage& dataPage);
     bool handleProductInformation(EnvironmentBaseDataPage& dataPage);
-    AntCallback<EnvironmentGeneralInformation&> _onEnvironmentGeneralInformation;
-    AntCallback<EnvironmentTemperature&> _onEnvironmentTemperature;
-    AntCallback<ManufacturersInformation&> _onManufacturersInformation;
-    AntCallback<ProductInformation&> _onProductInformation;
+    AntCallback<EnvironmentGeneralInformation&> _onEnvironmentGeneralInformation = { .func = NULL };
+    AntCallback<EnvironmentTemperature&> _onEnvironmentTemperature = { .func = NULL };
+    AntCallback<ManufacturersInformation&> _onManufacturersInformation = { .func = NULL };
+    AntCallback<ProductInformation&> _onProductInformation = { .func = NULL };
 };
 
 #endif // ANTPLUS_PROFILEENVIRONMENTDISPLAY_h
