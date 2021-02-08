@@ -38,12 +38,12 @@ private:
     bool handleRequestDataPage(BicyclePowerStandardPowerOnly& dataPage);
     bool handleGeneralCalibration(BicyclePowerStandardPowerOnly& dataPage);
     uint8_t getNextBackgroundPage(uint8_t currentPage);
-    AntCallback<RequestDataPage&> _onRequestDataPage;
-    AntCallback<BicyclePowerStandardPowerOnlyMsg&> _createBicyclePowerStandardPowerOnlyMsg;
-    AntCallback<BicyclePowerStandardWheelTorqueMsg&> _createBicyclePowerStandardWheelTorqueMsg;
-    AntCallback<BicyclePowerStandardCrankTorqueMsg&> _createBicyclePowerStandardCrankTorqueMsg;
-    AntCallback<BicyclePowerCrankTorqueFrequencyMsg&> _createBicyclePowerCrankTorqueFrequencyMsg;
-    AntCallback<BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg&> _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg;
+    AntCallback<RequestDataPage&> _onRequestDataPage = { .func = NULL };
+    AntCallback<BicyclePowerStandardPowerOnlyMsg&> _createBicyclePowerStandardPowerOnlyMsg = { .func = NULL };
+    AntCallback<BicyclePowerStandardWheelTorqueMsg&> _createBicyclePowerStandardWheelTorqueMsg = { .func = NULL };
+    AntCallback<BicyclePowerStandardCrankTorqueMsg&> _createBicyclePowerStandardCrankTorqueMsg = { .func = NULL };
+    AntCallback<BicyclePowerCrankTorqueFrequencyMsg&> _createBicyclePowerCrankTorqueFrequencyMsg = { .func = NULL };
+    AntCallback<BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg&> _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg = { .func = NULL };
     uint8_t _nextBackgroundPage;
     uint8_t _patternStep = 0;
     uint32_t _flags = 0;
