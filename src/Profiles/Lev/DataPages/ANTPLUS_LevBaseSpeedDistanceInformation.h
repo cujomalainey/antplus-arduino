@@ -5,7 +5,7 @@
 
 class LevBaseSpeedDistanceInformation : public LevBaseMainDataPage {
 public:
-    LevBaseSpeedDistanceInformation(AntRxDataResponse& dp);
+    explicit LevBaseSpeedDistanceInformation(AntRxDataResponse& dp);
     uint32_t getOdometer(); // in km
     uint16_t getLevSpeed(); // in 1/10 km/h
 };

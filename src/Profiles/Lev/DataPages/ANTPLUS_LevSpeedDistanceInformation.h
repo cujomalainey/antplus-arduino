@@ -5,7 +5,7 @@
 
 class LevSpeedDistanceInformation : public LevBaseSpeedDistanceInformation {
 public:
-    LevSpeedDistanceInformation(AntRxDataResponse& dp);
+    explicit LevSpeedDistanceInformation(AntRxDataResponse& dp);
     uint16_t getRemainingRange(); // in km
 };
 
