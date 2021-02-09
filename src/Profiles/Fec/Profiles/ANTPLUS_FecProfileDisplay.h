@@ -7,9 +7,7 @@
 
 class ProfileFecDisplay : public BaseSlaveProfile {
 public:
-    ProfileFecDisplay();
-    ProfileFecDisplay(uint16_t deviceNumber);
-    ProfileFecDisplay(uint16_t deviceNumber, uint8_t transmissionType);
+    ProfileFecDisplay(uint16_t deviceNumber = 0, uint8_t transmissionType = 0);
     void onFecTrainerData(void (*func)(FecSpecificTrainerData&, uintptr_t), uintptr_t data = 0) { _onFecSpecificTrainerData.set(func, data); }
 
 private:

@@ -1,14 +1,6 @@
 #include <Profiles/Fec/Profiles/ANTPLUS_FecProfileDisplay.h>
 #include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
 
-ProfileFecDisplay::ProfileFecDisplay() : BaseSlaveProfile() {
-    setChannelConfig();
-}
-
-ProfileFecDisplay::ProfileFecDisplay(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
-    setChannelConfig();
-}
-
 ProfileFecDisplay::ProfileFecDisplay(uint16_t deviceNumber, uint8_t transmissionType) : BaseSlaveProfile(deviceNumber, transmissionType) {
     setChannelConfig();
 }
