@@ -18,7 +18,7 @@ private:
     bool handleDataPage(BaseDataPage<BroadcastData>& dp);
 
     bool handleTrainerData(BaseDataPage<BroadcastData>& dataPage);
-    AntCallback<FecSpecificTrainerData&> _onFecSpecificTrainerData;
+    AntCallback<FecSpecificTrainerData&> _onFecSpecificTrainerData = { .func = NULL };
 };
 
 #endif // ANTPLUS_PROFILEFECDISPLAY_h
