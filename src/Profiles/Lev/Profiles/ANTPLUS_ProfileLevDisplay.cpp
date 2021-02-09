@@ -5,14 +5,6 @@
 
 #define DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
 
-ProfileLevDisplay::ProfileLevDisplay() : BaseSlaveProfile() {
-    setChannelConfig();
-}
-
-ProfileLevDisplay::ProfileLevDisplay(uint16_t deviceNumber) : BaseSlaveProfile(deviceNumber) {
-    setChannelConfig();
-}
-
 ProfileLevDisplay::ProfileLevDisplay(uint16_t deviceNumber, uint8_t transmissionType) : BaseSlaveProfile(deviceNumber, transmissionType) {
     setChannelConfig();
 }
