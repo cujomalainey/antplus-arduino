@@ -34,10 +34,10 @@ public:
     void onRequestDataPage(void (*func)(RequestDataPage&, uintptr_t), uintptr_t data = 0) { _onRequestDataPage.set(func, data); }
 
 protected:
-    virtual void transmitNextDataPage();
-    virtual bool isDataPageValid(uint8_t dataPage);
-    void onAcknowledgedData(AcknowledgedData& msg);
-    void onBroadcastData(BroadcastData& msg);
+    virtual void transmitNextDataPage() override;
+    virtual bool isDataPageValid(uint8_t dataPage) override;
+    void onAcknowledgedData(AcknowledgedData& msg) override;
+    void onBroadcastData(BroadcastData& msg) override;
 
 private:
     void transmitShiftingMainPageMsg();
