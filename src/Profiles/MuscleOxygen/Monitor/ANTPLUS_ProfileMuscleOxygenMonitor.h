@@ -37,10 +37,10 @@ private:
     uint8_t _patternStep;
     uint8_t _backgroundStep;
 
-    AntCallback<MuscleOxygenMuscleOxygenDataMsg&> _createMuscleOxygenMuscleOxygenDataMsg;
-    AntCallback<ManufacturersInformationMsg&> _createManufacturersInformationMsg;
-    AntCallback<ProductInformationMsg&> _createProductInformationMsg;
-    AntCallback<BatteryStatusMsg&> _createBatteryStatusMsg;
+    AntCallback<MuscleOxygenMuscleOxygenDataMsg&> _createMuscleOxygenMuscleOxygenDataMsg = { .func = NULL };
+    AntCallback<ManufacturersInformationMsg&> _createManufacturersInformationMsg = { .func = NULL };
+    AntCallback<ProductInformationMsg&> _createProductInformationMsg = { .func = NULL };
+    AntCallback<BatteryStatusMsg&> _createBatteryStatusMsg = { .func = NULL };
 };
 
 #endif // ANTPLUS_PROFILEMUSCLEOXYGENMONITOR_h
