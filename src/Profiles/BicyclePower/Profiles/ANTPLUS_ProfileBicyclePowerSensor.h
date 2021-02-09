@@ -7,7 +7,7 @@
 
 class ProfileBicyclePowerSensor : public BaseMasterProfile {
 public:
-    ProfileBicyclePowerSensor(uint16_t deviceNumber, uint8_t transmissionType = 0, uint32_t flags = 0);
+    explicit ProfileBicyclePowerSensor(uint16_t deviceNumber, uint8_t transmissionType = 0, uint32_t flags = 0);
     /**
      * Register callback to populate default data messages (Datapage 0)
      */
