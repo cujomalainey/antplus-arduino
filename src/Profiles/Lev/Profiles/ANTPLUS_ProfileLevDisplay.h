@@ -33,14 +33,14 @@ private:
     bool handleManufacturersInformation(LevBaseMainDataPage& dataPage);
     bool handleProductInformation(LevBaseMainDataPage& dataPage);
 
-    AntCallback<LevSpeedSystemInformation1&> _onLevSpeedSystemInformation1;
-    AntCallback<LevSpeedDistanceInformation&> _onLevSpeedDistanceInformation;
-    AntCallback<LevAltSpeedDistanceInformation&> _onLevAltSpeedDistanceInformation;
-    AntCallback<LevSpeedSystemInformation2&> _onLevSpeedSystemInformation2;
-    AntCallback<LevBatteryInformation&> _onLevBatteryInformation;
-    AntCallback<LevCapabilities&> _onLevCapabilities;
-    AntCallback<ManufacturersInformation&> _onManufacturersInformation;
-    AntCallback<ProductInformation&> _onProductInformation;
+    AntCallback<LevSpeedSystemInformation1&> _onLevSpeedSystemInformation1 = { .func = NULL };
+    AntCallback<LevSpeedDistanceInformation&> _onLevSpeedDistanceInformation = { .func = NULL };
+    AntCallback<LevAltSpeedDistanceInformation&> _onLevAltSpeedDistanceInformation = { .func = NULL };
+    AntCallback<LevSpeedSystemInformation2&> _onLevSpeedSystemInformation2 = { .func = NULL };
+    AntCallback<LevBatteryInformation&> _onLevBatteryInformation = { .func = NULL };
+    AntCallback<LevCapabilities&> _onLevCapabilities = { .func = NULL };
+    AntCallback<ManufacturersInformation&> _onManufacturersInformation = { .func = NULL };
+    AntCallback<ProductInformation&> _onProductInformation = { .func = NULL };
 };
 
 #endif // ANTPLUS_PROFILELEVDISPLAY_h
