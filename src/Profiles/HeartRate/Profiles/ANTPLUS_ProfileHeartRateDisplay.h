@@ -34,14 +34,14 @@ private:
     bool handlePreviousHeartBeat(HeartRateBaseMainDataPage& dataPage);
     bool handleProductInformation(HeartRateBaseMainDataPage& dataPage);
     bool handleSwimIntervalSummary(HeartRateBaseMainDataPage& dataPage);
-    AntCallback<HeartRateBatteryStatus&> _onHeartRateBatteryStatus;
-    AntCallback<HeartRateCapabilities&> _onHeartRateCapabilities;
-    AntCallback<HeartRateCumulativeOperatingTime&> _onHeartRateCumulativeOperatingTime;
-    AntCallback<HeartRateDefault&> _onHeartRateDefault;
-    AntCallback<HeartRateManufacturerInformation&> _onHeartRateManufacturerInformation;
-    AntCallback<HeartRatePreviousHeartBeat&> _onHeartRatePreviousHeartBeat;
-    AntCallback<HeartRateProductInformation&> _onHeartRateProductInformation;
-    AntCallback<HeartRateSwimIntervalSummary&> _onHeartRateSwimIntervalSummary;
+    AntCallback<HeartRateBatteryStatus&> _onHeartRateBatteryStatus = { .func = NULL };
+    AntCallback<HeartRateCapabilities&> _onHeartRateCapabilities = { .func = NULL };
+    AntCallback<HeartRateCumulativeOperatingTime&> _onHeartRateCumulativeOperatingTime = { .func = NULL };
+    AntCallback<HeartRateDefault&> _onHeartRateDefault = { .func = NULL };
+    AntCallback<HeartRateManufacturerInformation&> _onHeartRateManufacturerInformation = { .func = NULL };
+    AntCallback<HeartRatePreviousHeartBeat&> _onHeartRatePreviousHeartBeat = { .func = NULL };
+    AntCallback<HeartRateProductInformation&> _onHeartRateProductInformation = { .func = NULL };
+    AntCallback<HeartRateSwimIntervalSummary&> _onHeartRateSwimIntervalSummary = { .func = NULL };
 };
 
 #endif // ANTPLUS_PROFILEHEARTRATEDISPLAY_h
