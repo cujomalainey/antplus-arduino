@@ -60,11 +60,11 @@ private:
     uint8_t _interleaveStep;
     uint8_t _componentCount = 0;
 
-    AntCallback<ShiftingShiftSystemStatusMsg&> _createShiftingShiftSystemStatusMsg;
-    AntCallback<MultiComponentSystemManufacturersInformationMsg&> _createMultiComponentSystemManufacturersInformationMsg;
-    AntCallback<MultiComponentSystemProductInformationMsg&> _createMultiComponentSystemProductInformationMsg;
-    AntCallback<BatteryStatusMsg&> _createBatteryStatusMsg;
-    AntCallback<RequestDataPage&> _onRequestDataPage;
+    AntCallback<ShiftingShiftSystemStatusMsg&> _createShiftingShiftSystemStatusMsg = { .func = NULL };
+    AntCallback<MultiComponentSystemManufacturersInformationMsg&> _createMultiComponentSystemManufacturersInformationMsg = { .func = NULL };
+    AntCallback<MultiComponentSystemProductInformationMsg&> _createMultiComponentSystemProductInformationMsg = { .func = NULL };
+    AntCallback<BatteryStatusMsg&> _createBatteryStatusMsg = { .func = NULL };
+    AntCallback<RequestDataPage&> _onRequestDataPage = { .func = NULL };
 };
 
 #endif // ANTPLUS_PROFILESHIFTINGSHIFTER_h
