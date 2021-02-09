@@ -17,11 +17,6 @@ FecBaseSpecificTrainerData<T>::FecBaseSpecificTrainerData() :
     CoreDataPage<T>() {}
 
 template<class T>
-uint8_t FecBaseSpecificTrainerData<T>::getDataPageNumber() {
-    return this->get8BitValue(ANTPLUS_DEFAULT_DATAPAGE_BYTE);
-}
-
-template<class T>
 uint8_t FecBaseSpecificTrainerData<T>::getUpdateEventCount() {
     return this->get8BitValue(UPDATEEVENTCOUNT_BYTE);
 }

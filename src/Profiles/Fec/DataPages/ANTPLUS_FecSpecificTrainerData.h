@@ -7,7 +7,6 @@ template<class T>
 class FecBaseSpecificTrainerData : virtual public CoreDataPage<T> {
 public:
     FecBaseSpecificTrainerData();
-    uint8_t getDataPageNumber();
     uint8_t getUpdateEventCount();
     uint8_t getInstantaneousCadence();
     uint16_t getAccumulatedPower();
