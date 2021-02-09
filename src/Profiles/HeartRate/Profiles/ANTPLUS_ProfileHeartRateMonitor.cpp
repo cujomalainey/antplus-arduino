@@ -7,6 +7,7 @@
 #define MONITOR_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
 #define MONITOR_TRANSMISSIONTYPE TRANSMISSION_TYPE_INDEPENDENT
 
+// TODO switch from flags to checking if callbacks are set
 ProfileHeartRateMonitor::ProfileHeartRateMonitor(
         uint16_t deviceNumber,
         uint8_t transmissionType,
@@ -60,15 +61,16 @@ void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
 void ProfileHeartRateMonitor::transmitNextDataPage() {
     if (isRequestedPagePending()) {
         transmitRequestedDataPage();
+        return;
+    }
+
+    if (_patternStep++ < 64) {
+        transmitPrimaryDataPage();
     } else {
-        if (_patternStep++ < 64) {
-            transmitPrimaryDataPage();
-        } else {
-            transmitBackgroundDataPage();
-            if (_patternStep > 67) {
-                _nextBackgroundPage = getNextBackgroundPage(_nextBackgroundPage);
-                _patternStep = 0;
-            }
+        transmitBackgroundDataPage();
+        if (_patternStep > 67) {
+            _nextBackgroundPage = getNextBackgroundPage(_nextBackgroundPage);
+            _patternStep = 0;
         }
     }
 }
@@ -76,12 +78,13 @@ void ProfileHeartRateMonitor::transmitNextDataPage() {
 void ProfileHeartRateMonitor::transmitPrimaryDataPage() {
     if (_sportsMode == ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_SPORTSMODE_SWIMMING) {
         transmitHeartRateSwimIntervalSummaryMsg();
+        return;
+    }
+
+    if (_flags & ANTPLUS_HEARTRATE_FLAGS_PREVIOUSHEARTBEAT_SUPPORTED) {
+        transmitHeartRatePreviousHeartBeatMsg();
     } else {
-        if (_flags & ANTPLUS_HEARTRATE_FLAGS_PREVIOUSHEARTBEAT_SUPPORTED) {
-            transmitHeartRatePreviousHeartBeatMsg();
-        } else {
-            transmitHeartRateDefaultMsg();
-        }
+        transmitHeartRateDefaultMsg();
     }
 }
 

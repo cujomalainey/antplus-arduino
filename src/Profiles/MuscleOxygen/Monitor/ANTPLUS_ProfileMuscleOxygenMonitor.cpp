@@ -31,6 +31,7 @@ bool ProfileMuscleOxygenMonitor::isDataPageValid(uint8_t dataPage) {
     return false;
 }
 
+// TODO add check for batterystatus callback
 void ProfileMuscleOxygenMonitor::transmitNextDataPage() {
     if (_patternStep++ < 64) {
         transmitMuscleOxygenMuscleOxygenDataMsg();
