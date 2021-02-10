@@ -7,5 +7,5 @@ LevBaseMainDataPage::LevBaseMainDataPage(AntRxDataResponse& dp) :
 LevBaseMainDataPageMsg::LevBaseMainDataPageMsg(uint8_t dataPageNumber) :
     BaseDataPageMsg<AcknowledgedDataMsg>() {
     setDataBuffer(_buffer);
-    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = dataPageNumber;
+    set8BitValue(dataPageNumber, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
