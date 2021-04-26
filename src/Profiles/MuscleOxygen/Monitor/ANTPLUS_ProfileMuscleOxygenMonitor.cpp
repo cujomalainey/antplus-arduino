@@ -5,14 +5,14 @@
 #define MONITOR_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
 #define MONITOR_TRANSMISSIONTYPE (TRANSMISSION_TYPE_INDEPENDENT | TRANSMISSION_TYPE_GLOBALDATAPGESUSED)
 
-ProfileMuscleOxygenMonitor::ProfileMuscleOxygenMonitor(	uint16_t deviceNumber, uint8_t transmissionType) :
+ProfileMuscleOxygenMonitor::ProfileMuscleOxygenMonitor(	uint16_t deviceNumber, uint8_t transmissionType, uint32_t flags) :
     BaseMasterProfile(deviceNumber,
             ANTPLUS_TRANSMISSION_SET_LSN(
-                transmissionType, MONITOR_TRANSMISSIONTYPE)),
-    _patternStep(0),
-    _backgroundStep(0)
+                transmissionType, MONITOR_TRANSMISSIONTYPE))
 {
     setChannelConfig();
+    // change the background cycle loop size
+    _backgroundStepSize = 2 + (flags & ANTPLUS_MUSCLEOXYGEN_FLAGS_BATTERYSTATUS_SUPPORTED ? 1 : 0);
 }
 
 void ProfileMuscleOxygenMonitor::setChannelConfig() {
@@ -26,22 +26,24 @@ bool ProfileMuscleOxygenMonitor::isDataPageValid(uint8_t dataPage) {
     switch (dataPage) {
     case MUSCLEOXYGEN_MUSCLEOXYGENDATA_NUMBER:
         return true;
-    // TODO other datapages
+    case COMMON_BATTERYSTATUS_NUMBER:
+        return _flags & ANTPLUS_MUSCLEOXYGEN_FLAGS_BATTERYSTATUS_SUPPORTED;
     }
     return false;
 }
 
-// TODO add check for batterystatus callback
 void ProfileMuscleOxygenMonitor::transmitNextDataPage() {
     if (_patternStep++ < 64) {
         transmitMuscleOxygenMuscleOxygenDataMsg();
     }
     else {
-        if (_backgroundStep++ % 2 == 0) {
+        if ((_backgroundStep++ % _backgroundStepSize) == 0) {
             transmitManufacturerInformationMsg();
-        }
-        else {
+            _backgroundStep = 0;
+        } else if ((_backgroundStep % _backgroundStepSize) == 1) {
             transmitProductInformationMsg();
+        } else if (_flags & ANTPLUS_MUSCLEOXYGEN_FLAGS_BATTERYSTATUS_SUPPORTED) {
+            transmitBatteryStatusMsg();
         }
         _patternStep = 0;
     }
@@ -66,5 +68,7 @@ void ProfileMuscleOxygenMonitor::transmitMuscleOxygenMuscleOxygenDataMsg() {
 }
 
 void ProfileMuscleOxygenMonitor::transmitBatteryStatusMsg() {
-    // TODO
+    BatteryStatusMsg msg;
+    _createBatteryStatusMsg.call(msg);
+    send(msg);
 }

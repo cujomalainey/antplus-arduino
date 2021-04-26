@@ -8,7 +8,7 @@
 
 class ProfileMuscleOxygenMonitor : public BaseMasterProfile {
 public:
-    explicit ProfileMuscleOxygenMonitor(uint16_t deviceNumber, uint8_t transmissionType = 0);
+    explicit ProfileMuscleOxygenMonitor(uint16_t deviceNumber, uint8_t transmissionType = 0, uint32_t flags = 0);
 
     /**
      * Register callback to populate Muscle Oxygen data messages (Datapage 0)
@@ -34,8 +34,10 @@ private:
     void transmitProductInformationMsg();
     void transmitBatteryStatusMsg();
 
-    uint8_t _patternStep;
-    uint8_t _backgroundStep;
+    uint8_t _patternStep = 0;
+    uint8_t _backgroundStep = 0;
+    uint8_t _backgroundStepSize = 0;
+    uint32_t _flags;
 
     AntCallback<MuscleOxygenMuscleOxygenDataMsg&> _createMuscleOxygenMuscleOxygenDataMsg = { .func = NULL };
     AntCallback<ManufacturersInformationMsg&> _createManufacturersInformationMsg = { .func = NULL };
