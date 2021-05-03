@@ -12,7 +12,7 @@ ProfileMuscleOxygenMonitor::ProfileMuscleOxygenMonitor(	uint16_t deviceNumber, u
 {
     setChannelConfig();
     // change the background cycle loop size
-    _backgroundStepSize = 2 + (flags & ANTPLUS_MUSCLEOXYGEN_FLAGS_BATTERYSTATUS_SUPPORTED ? 1 : 0);
+    _backgroundStepSize = 2 + ((flags & ANTPLUS_MUSCLEOXYGEN_FLAGS_BATTERYSTATUS_SUPPORTED) ? 1 : 0);
 }
 
 void ProfileMuscleOxygenMonitor::setChannelConfig() {
