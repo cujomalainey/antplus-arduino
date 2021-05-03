@@ -24,9 +24,11 @@ protected:
     bool isDataPageValid(uint8_t dataPage) override;
 private:
     void setChannelConfig();
-    void transmitPrimaryDataPage();
-    void transmitBackgroundDataPage();
     void transmitRequestedDataPage();
+    void transmitPowerOnlySensorPage();
+    void transmitTorqueWheelSensorPage();
+    void transmitTorqueCrankSensorPage();
+    void transmitCTFSensorPage();
     void transmitBicyclePowerDefaultMsg();
     void transmitBicycleStandardPowerOnlyMsg(BicyclePowerStandardPowerOnlyMsg& msg);
     void transmitBicyclePowerStandardPowerOnlyMsg();
@@ -47,6 +49,7 @@ private:
     uint8_t _nextBackgroundPage;
     uint8_t _patternStep = 0;
     uint32_t _flags = 0;
+    uint8_t _sensorType;
 };
 
 #endif // ANTPLUS_PROFILEBICYCLEPOWERSENSOR_h

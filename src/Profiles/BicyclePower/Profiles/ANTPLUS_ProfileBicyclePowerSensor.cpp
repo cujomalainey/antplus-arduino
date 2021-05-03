@@ -14,9 +14,9 @@ ProfileBicyclePowerSensor::ProfileBicyclePowerSensor(
     BaseMasterProfile(deviceNumber,
             ANTPLUS_TRANSMISSION_SET_LSN(
                 transmissionType, SENSOR_TRANSMISSIONTYPE)),
-    // TODO
-    //_nextBackgroundPage(ANTPLUS_HEARTRATE_DATAPAGE_MANUFACTURERINFORMATION_NUMBER),
-    _flags(flags) {
+    _flags(flags),
+    _sensorType(BICYCLEPOWER_SENSORTYPE_POWERONLY) {
+    // TODO add and parse flags to figure out sensor type
     setChannelConfig();
 }
 
@@ -59,18 +59,39 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
 void ProfileBicyclePowerSensor::transmitNextDataPage() {
     if (isRequestedPagePending()) {
         transmitRequestedDataPage();
-    } else {
-        if (_patternStep++ < 64) {
-            transmitPrimaryDataPage();
-        } else {
-            transmitBackgroundDataPage();
-            if (_patternStep > 67) {
-                _nextBackgroundPage = getNextBackgroundPage(_nextBackgroundPage);
-                _patternStep = 0;
-            }
-        }
+        return;
     }
-    transmitPrimaryDataPage();
+
+    switch (_sensorType) {
+    case BICYCLEPOWER_SENSORTYPE_POWERONLY:
+        transmitPowerOnlySensorPage();
+        break;
+    case BICYCLEPOWER_SENSORTYPE_TORQUEWHEEL:
+        transmitTorqueWheelSensorPage();
+        break;
+    case BICYCLEPOWER_SENSORTYPE_TORQUECRANK:
+        transmitTorqueCrankSensorPage();
+        break;
+    case BICYCLEPOWER_SENSORTYPE_CTF:
+        transmitCTFSensorPage();
+        break;
+    }
+}
+
+void ProfileBicyclePowerSensor::transmitPowerOnlySensorPage() {
+    // TODO
+}
+
+void ProfileBicyclePowerSensor::transmitTorqueWheelSensorPage() {
+    // TODO
+}
+
+void ProfileBicyclePowerSensor::transmitTorqueCrankSensorPage() {
+    // TODO
+}
+
+void ProfileBicyclePowerSensor::transmitCTFSensorPage() {
+    // TODO
 }
 
 bool ProfileBicyclePowerSensor::handleRequestDataPage(BicyclePowerStandardPowerOnly& dataPage) {
@@ -81,33 +102,6 @@ bool ProfileBicyclePowerSensor::handleRequestDataPage(BicyclePowerStandardPowerO
 bool ProfileBicyclePowerSensor::handleGeneralCalibration(BicyclePowerStandardPowerOnly& dataPage) {
     // TODO
     return false;
-}
-
-void ProfileBicyclePowerSensor::transmitPrimaryDataPage() {
-    // TODO
-}
-
-void ProfileBicyclePowerSensor::transmitBackgroundDataPage() {
-    switch (_nextBackgroundPage) {
-    case BICYCLEPOWER_STANDARDPOWERONLY_NUMBER:
-        transmitBicyclePowerStandardPowerOnlyMsg();
-        break;
-    case BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER:
-        transmitBicyclePowerStandardWheelTorqueMsg();
-        break;
-    case BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER:
-        transmitBicyclePowerStandardCrankTorqueMsg();
-        break;
-    case BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
-        transmitBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg();
-        break;
-    case BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER:
-        transmitBicyclePowerCrankTorqueFrequencyMsg();
-        break;
-    case BICYCLEPOWER_GENERALCALIBRATION_NUMBER: // TODO (check is this part of the background transmission, seems sus)
-        transmistBicyclePowerGeneralCalibrationResponse();
-        break;
-    }
 }
 
 void ProfileBicyclePowerSensor::transmitBicyclePowerStandardPowerOnlyMsg() {
