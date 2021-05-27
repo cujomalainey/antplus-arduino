@@ -16,6 +16,7 @@ public:
     void createBicyclePowerStandardCrankTorqueMsg(void (*func)(BicyclePowerStandardCrankTorqueMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerStandardCrankTorqueMsg.set(func, data); }
     void createBicyclePowerCrankTorqueFrequencyMsg(void (*func)(BicyclePowerCrankTorqueFrequencyMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerCrankTorqueFrequencyMsg.set(func, data); }
     void createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg(void (*func)(BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.set(func, data); }
+    void createBatteryStatusMsg(void (*func)(BatteryStatusMsg&, uintptr_t), uintptr_t data = 0) { _createBatteryStatusMsg.set(func, data); }
 
 protected:
     void transmitNextDataPage() override;
@@ -24,11 +25,11 @@ protected:
     bool isDataPageValid(uint8_t dataPage) override;
 private:
     void setChannelConfig();
-    void transmitRequestedDataPage();
-    void transmitPowerOnlySensorPage();
-    void transmitTorqueWheelSensorPage();
-    void transmitTorqueCrankSensorPage();
-    void transmitCTFSensorPage();
+    void transmitDataPage(uint8_t page);
+    uint8_t getNextPowerOnlySensorPage();
+    uint8_t getNextTorqueSensorPage();
+    uint8_t getNextCTFSensorPage();
+    uint8_t getBackgroundPage();
     void transmitBicyclePowerDefaultMsg();
     void transmitBicycleStandardPowerOnlyMsg(BicyclePowerStandardPowerOnlyMsg& msg);
     void transmitBicyclePowerStandardPowerOnlyMsg();
@@ -36,17 +37,17 @@ private:
     void transmitBicyclePowerStandardCrankTorqueMsg();
     void transmitBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg();
     void transmitBicyclePowerCrankTorqueFrequencyMsg();
-    void transmistBicyclePowerGeneralCalibrationResponse();
+    void transmitBicyclePowerGeneralCalibrationResponse();
+    void transmitBatteryStatusMsg();
     bool handleRequestDataPage(BicyclePowerStandardPowerOnly& dataPage);
     bool handleGeneralCalibration(BicyclePowerStandardPowerOnly& dataPage);
-    uint8_t getNextBackgroundPage(uint8_t currentPage);
     AntCallback<RequestDataPage&> _onRequestDataPage = { .func = NULL };
     AntCallback<BicyclePowerStandardPowerOnlyMsg&> _createBicyclePowerStandardPowerOnlyMsg = { .func = NULL };
     AntCallback<BicyclePowerStandardWheelTorqueMsg&> _createBicyclePowerStandardWheelTorqueMsg = { .func = NULL };
     AntCallback<BicyclePowerStandardCrankTorqueMsg&> _createBicyclePowerStandardCrankTorqueMsg = { .func = NULL };
     AntCallback<BicyclePowerCrankTorqueFrequencyMsg&> _createBicyclePowerCrankTorqueFrequencyMsg = { .func = NULL };
     AntCallback<BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg&> _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg = { .func = NULL };
-    uint8_t _nextBackgroundPage;
+    AntCallback<BatteryStatusMsg&> _createBatteryStatusMsg = { .func = NULL };
     uint8_t _patternStep = 0;
     uint32_t _flags = 0;
     uint8_t _sensorType;

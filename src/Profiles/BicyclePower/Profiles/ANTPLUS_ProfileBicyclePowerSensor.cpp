@@ -57,42 +57,64 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
 }
 
 void ProfileBicyclePowerSensor::transmitNextDataPage() {
+    uint8_t page = 0;
     if (isRequestedPagePending()) {
-        transmitRequestedDataPage();
+        transmitDataPage(getRequestedPage());
         return;
+    }
+
+    _patternStep++;
+    if (_patternStep == 120) {
+        _patternStep = 0;
     }
 
     switch (_sensorType) {
     case BICYCLEPOWER_SENSORTYPE_POWERONLY:
-        transmitPowerOnlySensorPage();
+        page = getNextPowerOnlySensorPage();
         break;
     case BICYCLEPOWER_SENSORTYPE_TORQUEWHEEL:
-        transmitTorqueWheelSensorPage();
-        break;
     case BICYCLEPOWER_SENSORTYPE_TORQUECRANK:
-        transmitTorqueCrankSensorPage();
+        page = getNextTorqueSensorPage();
         break;
     case BICYCLEPOWER_SENSORTYPE_CTF:
-        transmitCTFSensorPage();
+        page = BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER;
         break;
     }
+
+    transmitDataPage(page);
 }
 
-void ProfileBicyclePowerSensor::transmitPowerOnlySensorPage() {
-    // TODO
+uint8_t ProfileBicyclePowerSensor::getNextPowerOnlySensorPage() {
+    uint8_t backgroundPage;
+
+    backgroundPage = getBackgroundPage();
+    if (backgroundPage) {
+        return backgroundPage;
+    }
+    return BICYCLEPOWER_STANDARDPOWERONLY_NUMBER;
 }
 
-void ProfileBicyclePowerSensor::transmitTorqueWheelSensorPage() {
-    // TODO
+uint8_t ProfileBicyclePowerSensor::getNextTorqueSensorPage() {
+    uint8_t backgroundPage;
+    uint8_t mod_five = _patternStep % 5;
+
+    if (mod_five == 0) {
+        /* Interleave every 5th message */
+        return BICYCLEPOWER_STANDARDPOWERONLY_NUMBER;
+    } else if ((mod_five == 1) && _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.func) {
+        /* Interleave every 5th message if implemented */
+        return BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER;
+    }
+
+    backgroundPage = getBackgroundPage();
+    if (backgroundPage) {
+        return backgroundPage;
+    }
+
+    return _sensorType == BICYCLEPOWER_SENSORTYPE_TORQUECRANK ?
+        BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER : BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER;
 }
 
-void ProfileBicyclePowerSensor::transmitTorqueCrankSensorPage() {
-    // TODO
-}
-
-void ProfileBicyclePowerSensor::transmitCTFSensorPage() {
-    // TODO
-}
 
 bool ProfileBicyclePowerSensor::handleRequestDataPage(BicyclePowerStandardPowerOnly& dataPage) {
     RequestDataPage dp(dataPage);
@@ -134,18 +156,53 @@ void ProfileBicyclePowerSensor::transmitBicyclePowerCrankTorqueFrequencyMsg() {
     transmitMsg(msg);
 }
 
-void ProfileBicyclePowerSensor::transmistBicyclePowerGeneralCalibrationResponse() {
+void ProfileBicyclePowerSensor::transmitBatteryStatusMsg() {
+    BatteryStatusMsg msg;
+    _createBatteryStatusMsg.call(msg);
+    transmitMsg(msg);
+}
+
+void ProfileBicyclePowerSensor::transmitBicyclePowerGeneralCalibrationResponse() {
     // TODO
 }
 
-uint8_t ProfileBicyclePowerSensor::getNextBackgroundPage(uint8_t currentPage) {
-    // TODO
+uint8_t ProfileBicyclePowerSensor::getBackgroundPage() {
+    /* Note: on logic behind numbers here
+     *
+     * Messages are on 5 page period, so first 2 slots (i.e N % 5 = 0 and N % 5 = 1) are
+     * Main page 1
+     * Main page 2
+     * These slots may not actually be used but given this is configurable this makes it safe
+     *
+     * last 3 slots are synced in background pages in sub minimum requirement
+     * The magic numbers are N % 5 > 1 and are within the period assuming the counter
+     * resets on a 120 message period
+     *
+     * Verification
+     * 118 % 5 = 3
+     * 119 % 5 = 4
+     * 33 % 5 = 3
+     * 93 % 5 = 3
+     * */
+
+    if (_patternStep == 118) {
+        return COMMON_MANUFACTURERSINFORMATION_NUMBER;
+    }
+
+    if (_patternStep == 119) {
+        return COMMON_PRODUCTINFORMATION_NUMBER;
+    }
+
+    if ((_patternStep == 33 || _patternStep == 93) && _createBatteryStatusMsg.func) {
+        return COMMON_BATTERYSTATUS_NUMBER;
+    }
+
+    /* we don't have anything to transmit */
     return 0;
 }
 
-void ProfileBicyclePowerSensor::transmitRequestedDataPage() {
-    uint8_t requestedPage = getRequestedPage();
-    switch (requestedPage) {
+void ProfileBicyclePowerSensor::transmitDataPage(uint8_t page) {
+    switch (page) {
     // TODO rest of datapages
     case BICYCLEPOWER_STANDARDPOWERONLY_NUMBER:
         transmitBicyclePowerStandardPowerOnlyMsg();
@@ -161,6 +218,9 @@ void ProfileBicyclePowerSensor::transmitRequestedDataPage() {
         break;
     case BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER:
         transmitBicyclePowerCrankTorqueFrequencyMsg();
+        break;
+    case COMMON_BATTERYSTATUS_NUMBER:
+        transmitBatteryStatusMsg();
         break;
     }
 }
