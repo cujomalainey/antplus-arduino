@@ -86,6 +86,12 @@ void ProfileBicyclePowerSensor::transmitNextDataPage() {
 
 uint8_t ProfileBicyclePowerSensor::getNextPowerOnlySensorPage() {
     uint8_t backgroundPage;
+    uint8_t mod_five = _patternStep % 5;
+
+    if ((mod_five == 0) && _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.func) {
+        /* Interleave every 5th message if implemented */
+        return BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER;
+    }
 
     backgroundPage = getBackgroundPage();
     if (backgroundPage) {
