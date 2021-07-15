@@ -239,6 +239,25 @@ void ProfileBicyclePowerSensor::setChannelConfig() {
 }
 
 bool ProfileBicyclePowerSensor::isDataPageValid(uint8_t dataPage) {
-    // TODO
-    return true;
+    // TODO calibration data pages
+    switch (dataPage) {
+    case BICYCLEPOWER_STANDARDPOWERONLY_NUMBER:
+        return _sensorType != BICYCLEPOWER_SENSORTYPE_CTF;
+    case BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER:
+        return _sensorType == BICYCLEPOWER_SENSORTYPE_TORQUEWHEEL;
+    case BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER:
+        return _sensorType == BICYCLEPOWER_SENSORTYPE_TORQUECRANK;
+    case BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
+        return _sensorType != BICYCLEPOWER_SENSORTYPE_CTF &&
+            (bool)_createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.func;
+    case BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER:
+        return _sensorType == BICYCLEPOWER_SENSORTYPE_CTF;
+    case COMMON_BATTERYSTATUS_NUMBER:
+        return (bool)_createBatteryStatusMsg.func;
+    case COMMON_PRODUCTINFORMATION_NUMBER:
+    case COMMON_MANUFACTURERSINFORMATION_NUMBER:
+        return true;
+    default:
+        return false;
+    }
 }
