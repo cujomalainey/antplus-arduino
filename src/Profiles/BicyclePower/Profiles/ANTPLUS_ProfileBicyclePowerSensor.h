@@ -17,6 +17,8 @@ public:
     void createBicyclePowerCrankTorqueFrequencyMsg(void (*func)(BicyclePowerCrankTorqueFrequencyMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerCrankTorqueFrequencyMsg.set(func, data); }
     void createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg(void (*func)(BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg&, uintptr_t), uintptr_t data = 0) { _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.set(func, data); }
     void createBatteryStatusMsg(void (*func)(BatteryStatusMsg&, uintptr_t), uintptr_t data = 0) { _createBatteryStatusMsg.set(func, data); }
+    void createProductInformationMsg(void (*func)(ProductInformationMsg&, uintptr_t), uintptr_t data = 0) { _createProductInformationMsg.set(func, data); }
+    void createManufacturersInformationMsg(void (*func)(ManufacturersInformationMsg&, uintptr_t), uintptr_t data = 0) { _createManufacturersInformationMsg.set(func, data); }
 
 protected:
     void transmitNextDataPage() override;
@@ -39,6 +41,8 @@ private:
     void transmitBicyclePowerCrankTorqueFrequencyMsg();
     void transmitBicyclePowerGeneralCalibrationResponse();
     void transmitBatteryStatusMsg();
+    void transmitProductInfomrationMsg();
+    void transmitManufacturesInformationMsg();
     bool handleRequestDataPage(BicyclePowerStandardPowerOnly& dataPage);
     bool handleGeneralCalibration(BicyclePowerStandardPowerOnly& dataPage);
     AntCallback<RequestDataPage&> _onRequestDataPage = { .func = NULL };
@@ -48,6 +52,8 @@ private:
     AntCallback<BicyclePowerCrankTorqueFrequencyMsg&> _createBicyclePowerCrankTorqueFrequencyMsg = { .func = NULL };
     AntCallback<BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg&> _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg = { .func = NULL };
     AntCallback<BatteryStatusMsg&> _createBatteryStatusMsg = { .func = NULL };
+    AntCallback<ProductInformationMsg&> _createProductInformationMsg = { .func = NULL };
+    AntCallback<ManufacturersInformationMsg&> _createManufacturersInformationMsg = { .func = NULL };
     uint8_t _patternStep = 0;
     uint32_t _flags = 0;
     uint8_t _sensorType;

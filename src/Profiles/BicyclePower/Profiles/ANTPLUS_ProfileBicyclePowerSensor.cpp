@@ -168,6 +168,18 @@ void ProfileBicyclePowerSensor::transmitBatteryStatusMsg() {
     transmitMsg(msg);
 }
 
+void ProfileBicyclePowerSensor::transmitProductInfomrationMsg() {
+    ProductInformationMsg msg;
+    _createProductInformationMsg.call(msg);
+    transmitMsg(msg);
+}
+
+void ProfileBicyclePowerSensor::transmitManufacturesInformationMsg() {
+    ManufacturersInformationMsg msg;
+    _createManufacturersInformationMsg.call(msg);
+    transmitMsg(msg);
+}
+
 void ProfileBicyclePowerSensor::transmitBicyclePowerGeneralCalibrationResponse() {
     // TODO
 }
@@ -209,7 +221,7 @@ uint8_t ProfileBicyclePowerSensor::getBackgroundPage() {
 
 void ProfileBicyclePowerSensor::transmitDataPage(uint8_t page) {
     switch (page) {
-    // TODO rest of datapages
+    // TODO calibration datapages
     case BICYCLEPOWER_STANDARDPOWERONLY_NUMBER:
         transmitBicyclePowerStandardPowerOnlyMsg();
         break;
@@ -224,6 +236,12 @@ void ProfileBicyclePowerSensor::transmitDataPage(uint8_t page) {
         break;
     case BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER:
         transmitBicyclePowerCrankTorqueFrequencyMsg();
+        break;
+    case COMMON_PRODUCTINFORMATION_NUMBER:
+        transmitProductInfomrationMsg();
+        break;
+    case COMMON_MANUFACTURERSINFORMATION_NUMBER:
+        transmitManufacturesInformationMsg();
         break;
     case COMMON_BATTERYSTATUS_NUMBER:
         transmitBatteryStatusMsg();
