@@ -7,6 +7,8 @@
 #define SENSOR_CHANNELTYPE   CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
 #define SENSOR_TRANSMISSIONTYPE (TRANSMISSION_TYPE_INDEPENDENT | TRANSMISSION_TYPE_GLOBALDATAPGESUSED)
 
+#define FLAGS_SENSORTYPE(x) (x & 0x3)
+
 ProfileBicyclePowerSensor::ProfileBicyclePowerSensor(
         uint16_t deviceNumber,
         uint8_t transmissionType,
@@ -14,9 +16,7 @@ ProfileBicyclePowerSensor::ProfileBicyclePowerSensor(
     BaseMasterProfile(deviceNumber,
             ANTPLUS_TRANSMISSION_SET_LSN(
                 transmissionType, SENSOR_TRANSMISSIONTYPE)),
-    _flags(flags),
-    _sensorType(BICYCLEPOWER_SENSORTYPE_POWERONLY) {
-    // TODO add and parse flags to figure out sensor type
+    _flags(flags) {
     setChannelConfig();
 }
 
@@ -58,6 +58,8 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
 
 void ProfileBicyclePowerSensor::transmitNextDataPage() {
     uint8_t page = 0;
+    uint8_t sensorType = FLAGS_SENSORTYPE(_flags);
+
     if (isRequestedPagePending()) {
         transmitDataPage(getRequestedPage());
         return;
@@ -68,15 +70,15 @@ void ProfileBicyclePowerSensor::transmitNextDataPage() {
         _patternStep = 0;
     }
 
-    switch (_sensorType) {
-    case BICYCLEPOWER_SENSORTYPE_POWERONLY:
+    switch (sensorType) {
+    case BICYCLEPOWER_FLAGS_SENSORTYPE_POWERONLY:
         page = getNextPowerOnlySensorPage();
         break;
-    case BICYCLEPOWER_SENSORTYPE_TORQUEWHEEL:
-    case BICYCLEPOWER_SENSORTYPE_TORQUECRANK:
+    case BICYCLEPOWER_FLAGS_SENSORTYPE_TORQUEWHEEL:
+    case BICYCLEPOWER_FLAGS_SENSORTYPE_TORQUECRANK:
         page = getNextTorqueSensorPage();
         break;
-    case BICYCLEPOWER_SENSORTYPE_CTF:
+    case BICYCLEPOWER_FLAGS_SENSORTYPE_CTF:
         page = BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER;
         break;
     }
@@ -117,7 +119,7 @@ uint8_t ProfileBicyclePowerSensor::getNextTorqueSensorPage() {
         return backgroundPage;
     }
 
-    return _sensorType == BICYCLEPOWER_SENSORTYPE_TORQUECRANK ?
+    return FLAGS_SENSORTYPE(_flags) == BICYCLEPOWER_FLAGS_SENSORTYPE_TORQUECRANK ?
         BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER : BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER;
 }
 
@@ -260,16 +262,16 @@ bool ProfileBicyclePowerSensor::isDataPageValid(uint8_t dataPage) {
     // TODO calibration data pages
     switch (dataPage) {
     case BICYCLEPOWER_STANDARDPOWERONLY_NUMBER:
-        return _sensorType != BICYCLEPOWER_SENSORTYPE_CTF;
+        return FLAGS_SENSORTYPE(_flags) != BICYCLEPOWER_FLAGS_SENSORTYPE_CTF;
     case BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER:
-        return _sensorType == BICYCLEPOWER_SENSORTYPE_TORQUEWHEEL;
+        return FLAGS_SENSORTYPE(_flags) == BICYCLEPOWER_FLAGS_SENSORTYPE_TORQUEWHEEL;
     case BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER:
-        return _sensorType == BICYCLEPOWER_SENSORTYPE_TORQUECRANK;
+        return FLAGS_SENSORTYPE(_flags) == BICYCLEPOWER_FLAGS_SENSORTYPE_TORQUECRANK;
     case BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
-        return _sensorType != BICYCLEPOWER_SENSORTYPE_CTF &&
+        return FLAGS_SENSORTYPE(_flags) != BICYCLEPOWER_FLAGS_SENSORTYPE_CTF &&
             (bool)_createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.func;
     case BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER:
-        return _sensorType == BICYCLEPOWER_SENSORTYPE_CTF;
+        return FLAGS_SENSORTYPE(_flags) == BICYCLEPOWER_FLAGS_SENSORTYPE_CTF;
     case COMMON_BATTERYSTATUS_NUMBER:
         return (bool)_createBatteryStatusMsg.func;
     case COMMON_PRODUCTINFORMATION_NUMBER:

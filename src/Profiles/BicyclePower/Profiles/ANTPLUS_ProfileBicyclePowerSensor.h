@@ -56,7 +56,6 @@ private:
     AntCallback<ManufacturersInformationMsg&> _createManufacturersInformationMsg = { .func = NULL };
     uint8_t _patternStep = 0;
     uint32_t _flags = 0;
-    uint8_t _sensorType;
 };
 
 #endif // ANTPLUS_PROFILEBICYCLEPOWERSENSOR_h
