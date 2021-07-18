@@ -81,7 +81,7 @@ void ProfileHeartRateMonitor::transmitPrimaryDataPage() {
         return;
     }
 
-    if (_flags & ANTPLUS_HEARTRATE_FLAGS_PREVIOUSHEARTBEAT_SUPPORTED) {
+    if (_createHeartRatePreviousHeartBeatMsg.func) {
         transmitHeartRatePreviousHeartBeatMsg();
     } else {
         transmitHeartRateDefaultMsg();
@@ -110,7 +110,7 @@ void ProfileHeartRateMonitor::transmitBackgroundDataPage() {
 
 uint8_t ProfileHeartRateMonitor::getNextBackgroundPage(uint8_t currentPage) {
     if ((currentPage < HEARTRATE_CUMULATIVEOPERATINGTIME_NUMBER) &&
-            (_flags & ANTPLUS_HEARTRATE_FLAGS_CUMULATIVEOPERATINGTIME_SUPPORTED)) {
+            (_createHeartRateCumulativeOperatingTimeMsg.func)) {
         return HEARTRATE_CUMULATIVEOPERATINGTIME_NUMBER;
     } else if (currentPage < HEARTRATE_MANUFACTURERINFORMATION_NUMBER) {
         return HEARTRATE_MANUFACTURERINFORMATION_NUMBER;
@@ -120,7 +120,7 @@ uint8_t ProfileHeartRateMonitor::getNextBackgroundPage(uint8_t currentPage) {
             (_flags & ANTPLUS_HEARTRATE_FLAGS_EXTENTED_FEATURES)) {
         return HEARTRATE_CAPABILITIES_NUMBER;
     } else if ((currentPage < HEARTRATE_BATTERYSTATUS_NUMBER) &&
-            (_flags & ANTPLUS_HEARTRATE_FLAGS_BATTERYSTATUS_SUPPORTED)) {
+            (_createHeartRateBatteryStatusMsg.func)) {
         return HEARTRATE_BATTERYSTATUS_NUMBER;
     } else {
         // Reached end of the loop, start again
@@ -217,20 +217,21 @@ void ProfileHeartRateMonitor::transmitHeartRateMsg(HeartRateBaseMainDataPageMsg&
 bool ProfileHeartRateMonitor::isDataPageValid(uint8_t dataPage) {
     switch (dataPage) {
     case HEARTRATE_DEFAULT_NUMBER:
-        // TODO double check this is correct that dp 4 is only needed if implemented
-        return !(_flags & ANTPLUS_HEARTRATE_FLAGS_PREVIOUSHEARTBEAT_SUPPORTED);
+        return (bool)(_createHeartRateDefaultMsg.func);
     case HEARTRATE_CUMULATIVEOPERATINGTIME_NUMBER:
-        return _flags & ANTPLUS_HEARTRATE_FLAGS_CUMULATIVEOPERATINGTIME_SUPPORTED;
+        return (bool)(_createHeartRateCumulativeOperatingTimeMsg.func);
     case HEARTRATE_MANUFACTURERINFORMATION_NUMBER:
     case HEARTRATE_PRODUCTINFORMATION_NUMBER:
         return true;
     case HEARTRATE_PREVIOUSHEARTBEAT_NUMBER:
-        return _flags & ANTPLUS_HEARTRATE_FLAGS_PREVIOUSHEARTBEAT_SUPPORTED;
-    case HEARTRATE_SWIMINTERVALSUMMARY_NUMBER:
+        return (bool)(_createHeartRatePreviousHeartBeatMsg.func);
     case HEARTRATE_CAPABILITIES_NUMBER:
         return _flags & ANTPLUS_HEARTRATE_FLAGS_EXTENTED_FEATURES;
+    case HEARTRATE_SWIMINTERVALSUMMARY_NUMBER:
+        return _flags & ANTPLUS_HEARTRATE_FLAGS_EXTENTED_FEATURES &&
+            (bool)(_createHeartRateSwimIntervalSummaryMsg.func);
     case HEARTRATE_BATTERYSTATUS_NUMBER:
-        return _flags & ANTPLUS_HEARTRATE_FLAGS_BATTERYSTATUS_SUPPORTED;
+        return (bool)(_createHeartRateBatteryStatusMsg.func);
     default:
         return false;
     }
