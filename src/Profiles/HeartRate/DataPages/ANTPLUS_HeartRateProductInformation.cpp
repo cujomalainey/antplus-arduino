@@ -35,15 +35,14 @@ HeartRateProductInformationMsg::HeartRateProductInformationMsg() :
     HeartRateBaseMainDataPageMsg(HEARTRATE_PRODUCTINFORMATION_NUMBER),
     HeartRateBaseProductInformation<BroadcastDataMsg>() {}
 
-// TODO set to product information API
 void HeartRateProductInformationMsg::setHardwareVersion(uint8_t hwVersion) {
-    _buffer[HARDWAREVERSION_BYTE] = hwVersion;
+    this->set8BitValue(hwVersion, HARDWAREVERSION_BYTE);
 }
 
 void HeartRateProductInformationMsg::setSoftwareVersion(uint8_t swVersion) {
-    _buffer[SOFTWAREVERSION_BYTE] = swVersion;
+    this->set8BitValue(swVersion, SOFTWAREVERSION_BYTE);
 }
 
 void HeartRateProductInformationMsg::setModelNumber(uint8_t modelNumber) {
-    _buffer[MODELNUMBER_BYTE] = modelNumber;
+    this->set8BitValue(modelNumber, MODELNUMBER_BYTE);
 }
