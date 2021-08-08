@@ -60,7 +60,7 @@ void BicyclePowerStandardPowerOnlyMsg::setCumulativePowerCount(uint16_t accPower
     _buffer[ACCUMULATEDPOWER_LSB_BYTE] = accPower & ANTPLUS_DEFAULT_BYTE_MASK;
 }
 
-void BicyclePowerStandardPowerOnlyMsg::setInstataneousPowerCount(uint16_t power) {
+void BicyclePowerStandardPowerOnlyMsg::setInstantaneousPowerCount(uint16_t power) {
     _buffer[INSTANTANEOUSPOWER_MSB_BYTE] = power >> 8;
     _buffer[INSTANTANEOUSPOWER_LSB_BYTE] = power & ANTPLUS_DEFAULT_BYTE_MASK;
 }

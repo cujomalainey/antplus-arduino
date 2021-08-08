@@ -23,7 +23,7 @@ public:
     BicyclePowerStandardPowerOnlyMsg(void);
     void setUpdateEventCount(uint8_t eventCount);
     void setCumulativePowerCount(uint16_t accPower);
-    void setInstataneousPowerCount(uint16_t power);
+    void setInstantaneousPowerCount(uint16_t power);
 };
 
 #endif // ANTPLUS_BICYCLEPOWERSTANDARDPOWERONLY_h
