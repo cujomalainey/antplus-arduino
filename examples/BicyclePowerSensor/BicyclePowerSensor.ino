@@ -30,7 +30,7 @@ const int RESET_PIN = 2;
 
 ArduinoSerialAntWithCallbacks ant;
 AntPlusRouter router;
-ProfileBicyclePowerSensor bikePower(123, 0, BICYCLEPOWER_FLAGS_SENSORTYPE_TORQUECRANK);
+ProfileBicyclePowerSensor bikePower(123, 0, ANTPLUS_BICYCLEPOWER_FLAGS_SENSORTYPE_TORQUECRANK);
 
 void batteryStatusDataPageHandler(BatteryStatusMsg& msg, uintptr_t data);
 void manufacturerIDDataPageHandler(ManufacturersInformationMsg& msg, uintptr_t data);

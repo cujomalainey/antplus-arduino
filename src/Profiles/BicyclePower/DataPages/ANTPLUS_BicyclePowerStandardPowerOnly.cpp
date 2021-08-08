@@ -1,5 +1,6 @@
 #include <Profiles/BicyclePower/DataPages/ANTPLUS_BicyclePowerStandardPowerOnly.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerPrivateDefines.h>
+#include <Profiles/BicyclePower/ANTPLUS_BicyclePowerDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 #define UPDATEEVENTCOUNT_BYTE   1
@@ -46,9 +47,8 @@ BicyclePowerStandardPowerOnly::BicyclePowerStandardPowerOnly(AntRxDataResponse& 
 BicyclePowerStandardPowerOnlyMsg::BicyclePowerStandardPowerOnlyMsg() :
     BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_STANDARDPOWERONLY_NUMBER),
     BicyclePowerBaseStandardPowerOnly<BroadcastDataMsg>() {
-    // TODO magic nums
-    this->set8BitValue(0xFF, PEDALPOWER_BYTE);
-    this->set8BitValue(0xFF, INSTANTANEOUSCADENCE_BYTE);
+    this->set8BitValue(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_PEDALPOWER_NOTUSED, PEDALPOWER_BYTE);
+    this->set8BitValue(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_INSTANTANEOUSCADENCE_INVALID, INSTANTANEOUSCADENCE_BYTE);
 }
 
 void BicyclePowerStandardPowerOnlyMsg::setUpdateEventCount(uint8_t eventCount) {

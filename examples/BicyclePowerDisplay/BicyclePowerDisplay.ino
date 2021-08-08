@@ -135,9 +135,17 @@ void bicyclePowerBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
 
 void powerOnlyDataPageHandler(BicyclePowerStandardPowerOnly& msg, uintptr_t data) {
     Serial.print("Pedal Power: ");
-    Serial.println(msg.getPedalPower());
+    if (msg.getPedalPower() == ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_PEDALPOWER_NOTUSED) {
+        Serial.println("Not Used");
+    } else {
+        Serial.println(msg.getPedalPower());
+    }
     Serial.print("Instantaneous Cadence: ");
-    Serial.println(msg.getInstantaneousCadence());
+    if (msg.getInstantaneousCadence() == ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_INSTANTANEOUSCADENCE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(msg.getInstantaneousCadence());
+    }
     Serial.print("Accumulated Power: ");
     Serial.println(msg.getAccumulatedPower());
     Serial.print("Instantaneous Power: ");
