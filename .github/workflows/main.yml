@@ -15,6 +15,7 @@ jobs:
       matrix:
         example: [
         examples/BicyclePowerDisplay/BicyclePowerDisplay.ino,
+        examples/BicyclePowerSensor/BicyclePowerSensor.ino,
         examples/BicycleSpeedDisplay/BicycleSpeedDisplay.ino,
         examples/DeviceSearch/DeviceSearch.ino,
         examples/DynamicProfiles/DynamicProfiles.ino,
