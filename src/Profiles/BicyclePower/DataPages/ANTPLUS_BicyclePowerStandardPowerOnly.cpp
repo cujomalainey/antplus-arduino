@@ -46,21 +46,19 @@ BicyclePowerStandardPowerOnly::BicyclePowerStandardPowerOnly(AntRxDataResponse& 
 BicyclePowerStandardPowerOnlyMsg::BicyclePowerStandardPowerOnlyMsg() :
     BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_STANDARDPOWERONLY_NUMBER),
     BicyclePowerBaseStandardPowerOnly<BroadcastDataMsg>() {
-    // TODO magic nums also using buffer directly
-    _buffer[PEDALPOWER_BYTE] = 0xFF;
-    _buffer[INSTANTANEOUSCADENCE_BYTE] = 0xFF;
+    // TODO magic nums
+    this->set8BitValue(0xFF, PEDALPOWER_BYTE);
+    this->set8BitValue(0xFF, INSTANTANEOUSCADENCE_BYTE);
 }
 
 void BicyclePowerStandardPowerOnlyMsg::setUpdateEventCount(uint8_t eventCount) {
-    _buffer[UPDATEEVENTCOUNT_BYTE] = eventCount;
+    this->set8BitValue(eventCount, UPDATEEVENTCOUNT_BYTE);
 }
 
 void BicyclePowerStandardPowerOnlyMsg::setCumulativePowerCount(uint16_t accPower) {
-    _buffer[ACCUMULATEDPOWER_MSB_BYTE] = accPower >> 8;
-    _buffer[ACCUMULATEDPOWER_LSB_BYTE] = accPower & ANTPLUS_DEFAULT_BYTE_MASK;
+    this->set16BitValue(accPower, ACCUMULATEDPOWER_LSB_BYTE, ACCUMULATEDPOWER_MSB_BYTE);
 }
 
 void BicyclePowerStandardPowerOnlyMsg::setInstantaneousPowerCount(uint16_t power) {
-    _buffer[INSTANTANEOUSPOWER_MSB_BYTE] = power >> 8;
-    _buffer[INSTANTANEOUSPOWER_LSB_BYTE] = power & ANTPLUS_DEFAULT_BYTE_MASK;
+    this->set16BitValue(power, INSTANTANEOUSPOWER_LSB_BYTE, INSTANTANEOUSPOWER_MSB_BYTE);
 }
