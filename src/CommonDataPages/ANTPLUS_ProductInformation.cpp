@@ -35,10 +35,11 @@ ProductInformation::ProductInformation(AntRxDataResponse& dp) :
 ProductInformationMsg::ProductInformationMsg() :
     BaseDataPageMsg<BroadcastDataMsg>(),
     BaseProductInformation<BroadcastDataMsg>() {
-    // TODO set default values
+    // TODO magic numbers
     setDataBuffer(_buffer);
-    _buffer[ANTPLUS_DEFAULT_DATAPAGE_BYTE] = COMMON_PRODUCTINFORMATION_NUMBER;
-    _buffer[1] = 0xFF;
+    set8BitValue(COMMON_PRODUCTINFORMATION_NUMBER, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+    set8BitValue(0xFF, 1);
+    set8BitValue(0xFF, SWREVISIONSUPPLEMENTAL_BYTE);
 }
 
 void ProductInformationMsg::setSWRevisionSupplemental(uint8_t revision) {
