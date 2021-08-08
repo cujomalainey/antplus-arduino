@@ -26,7 +26,7 @@ public:
     void setBikeSpeedEventTime(uint16_t time);
     void setCumulativeSpeedRevolutionCount(uint16_t count);
 protected:
-    uint8_t _buffer[MESSAGE_SIZE];
+    uint8_t _buffer[MESSAGE_SIZE] = {0};
 };
 
 #endif // ANTPLUS_BICYCLESPEEDBASEMAINDATAPAGE_h

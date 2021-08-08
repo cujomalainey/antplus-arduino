@@ -9,7 +9,7 @@ class ShiftingBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg> {
 public:
     explicit ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber);
 protected:
-    uint8_t _buffer[MESSAGE_SIZE];
+    uint8_t _buffer[MESSAGE_SIZE] = {0};
 };
 
 #endif // ANTPLUS_SHIFTINGBASEMAINDATAPAGEMSG_h

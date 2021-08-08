@@ -27,7 +27,7 @@ public:
     void setManufacturerId(uint16_t id);
     void setModelNumber(uint16_t modelNumber);
 private:
-    uint8_t _buffer[MESSAGE_SIZE];
+    uint8_t _buffer[MESSAGE_SIZE] = {0};
 };
 
 #endif // ANTPLUS_MANUFACTURERSINFORMATION_h

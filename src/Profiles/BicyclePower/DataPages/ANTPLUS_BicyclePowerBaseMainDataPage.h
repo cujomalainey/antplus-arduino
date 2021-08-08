@@ -15,7 +15,7 @@ class BicyclePowerBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg>
 public:
     explicit BicyclePowerBaseMainDataPageMsg(uint8_t dataPageNumber);
 protected:
-    uint8_t _buffer[MESSAGE_SIZE];
+    uint8_t _buffer[MESSAGE_SIZE] = {0};
 };
 
 #endif // ANTPLUS_BICYCLEPOWERPOWERONLYDATAPAGE_h

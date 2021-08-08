@@ -28,7 +28,7 @@ public:
     void setHeartBeatCount(uint8_t count);
     void setComputedHeartRate(uint8_t heartRate);
 protected:
-    uint8_t _buffer[MESSAGE_SIZE];
+    uint8_t _buffer[MESSAGE_SIZE] = {0};
 };
 
 #endif // ANTPLUS_HEARTRATEBASEMAINDATAPAGE_h

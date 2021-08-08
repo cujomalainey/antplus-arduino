@@ -13,7 +13,7 @@ class MuscleOxygenBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg>
 public:
     explicit MuscleOxygenBaseMainDataPageMsg(uint8_t dataPageNumber);
 protected:
-    uint8_t _buffer[MESSAGE_SIZE];
+    uint8_t _buffer[MESSAGE_SIZE] = {0};
 };
 
 #endif // ANTPLUS_MUSCLEOXYGENBASEMAINDATAPAGEMSG_h

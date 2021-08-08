@@ -36,7 +36,7 @@ public:
     void setRequestedPageNumber(uint8_t pageNumber);
     void setCommandType(uint8_t commandType);
 private:
-    uint8_t _buffer[MESSAGE_SIZE];
+    uint8_t _buffer[MESSAGE_SIZE] = {0};
 };
 
 #endif // ANTPLUS_REQUESTDATAPAGE_h

@@ -35,7 +35,7 @@ public:
     void setBatteryStatus(uint8_t status);
     void setCumulativeOperatingTimeResolution(uint8_t resolution);
 private:
-    uint8_t _buffer[MESSAGE_SIZE];
+    uint8_t _buffer[MESSAGE_SIZE] = {0};
 };
 
 #endif // ANTPLUS_BATTERYSTATUS_h

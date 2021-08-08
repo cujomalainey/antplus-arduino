@@ -31,7 +31,7 @@ public:
     void setSWRevisionMain(uint8_t revision);
     void setSerialNumber(uint32_t serialNumber);
 private:
-    uint8_t _buffer[MESSAGE_SIZE];
+    uint8_t _buffer[MESSAGE_SIZE] = {0};
 };
 
 #endif // ANTPLUS_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_h

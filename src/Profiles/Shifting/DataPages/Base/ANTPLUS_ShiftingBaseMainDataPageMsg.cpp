@@ -8,7 +8,6 @@
 ShiftingBaseMainDataPageMsg::ShiftingBaseMainDataPageMsg(uint8_t dataPageNumber) :
     BaseDataPageMsg<BroadcastDataMsg>()
 {
-    memset(_buffer, 0, MESSAGE_SIZE);
     setDataBuffer(_buffer);
     set8BitValue(dataPageNumber, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
     set8BitValue(RESERVED_VALUE, RESERVED_BYTE);

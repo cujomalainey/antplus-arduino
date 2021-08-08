@@ -5,7 +5,6 @@ MuscleOxygenBaseMainDataPage::MuscleOxygenBaseMainDataPage(AntRxDataResponse& dp
     BaseDataPage<BroadcastData>(dp) {}
 
 MuscleOxygenBaseMainDataPageMsg::MuscleOxygenBaseMainDataPageMsg(uint8_t dataPageNumber) : BaseDataPageMsg() {
-    memset(_buffer, 0, MESSAGE_SIZE);
     setDataBuffer(_buffer);
     set8BitValue(dataPageNumber, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
