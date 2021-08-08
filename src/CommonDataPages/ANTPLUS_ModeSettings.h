@@ -19,7 +19,10 @@ public:
 };
 
 class ModeSettingsMsg : public BaseDataPageMsg<BroadcastDataMsg>, public BaseModeSettings<BroadcastDataMsg> {
-// TODO
+    ModeSettingsMsg();
+    void setSportMode(uint8_t sportsMode);
+private:
+    uint8_t _buffer[MESSAGE_SIZE] = {0};
 };
 
 #endif // ANTPLUS_MODESETTINGS_h
