@@ -1,22 +1,31 @@
-#ifndef ANTPLUS_FECCOREMAINDATAPAGE_h
-#define ANTPLUS_FECCOREMAINDATAPAGE_h
+#ifndef ANTPLUS_FECGENERALMAINDATAPAGE_h
+#define ANTPLUS_FECGENERALMAINDATAPAGE_h
 
-#include <BaseClasses/ANTPLUS_CoreDataPage.h>
-
-#include "ANT.h"
+#include <Profiles/Fec/DataPages/ANTPLUS_FecBaseMainDataPage.h>
 
 template<class T>
-class FECGeneralMainDataPage : virtual public CoreDataPage<T> {
+class FecBaseGeneralMainDataPage : virtual public CoreDataPage<T> {
 public:
-    FECGeneralMainDataPage();
-    uint8_t getDataPageNumber();
+    FecBaseGeneralMainDataPage();
     uint8_t getEquipmentTypeBits();
     uint8_t getElapsedTime();
     uint8_t getDistanceTraveled();
-    uint16_t getSpeed();
+    uint16_t getSpeed(bool km);
     uint8_t getHeartRate();
     uint8_t getCapabilitiesBits();
     uint8_t getFEStateBits();
 };
 
-#endif // ANTPLUS_FECCOREMAINDATAPAGE_h
+class FecGeneralMainDataPage : public FecBaseMainDataPage, public FecBaseGeneralMainDataPage<BroadcastData> {
+public:
+    explicit FecGeneralMainDataPage(AntRxDataResponse& dp);
+};
+
+class FecGeneralMainDataMsg : public FecBaseMainDataPageMsg, public FecBaseGeneralMainDataPage<BroadcastDataMsg> {
+public:
+    FecGeneralMainDataMsg();
+  //  void setSoftwareRevision(uint16_t SoftwareRevision);
+};
+
+
+#endif // ANTPLUS_FECGENERALMAINDATAPAGE_h
