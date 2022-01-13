@@ -5,10 +5,10 @@
 #include <Profiles/Environment/ANTPLUS_EnvironmentDefines.h>
 
 // Datapages
-#include <Profiles/Environment/DataPages/ANTPLUS_ProfileEnvironmentDataPages.h>
+#include <Profiles/Environment/ANTPLUS_EnvironmentDataPages.h>
 
 // Profile Classes
-#include <Profiles/Environment/Display/ANTPLUS_ProfileEnvironmentDisplay.h>
-#include <Profiles/Environment/Monitor/ANTPLUS_ProfileEnvironmentMonitor.h>
+#include <Profiles/Environment/Profiles/ANTPLUS_ProfileEnvironmentDisplay.h>
+#include <Profiles/Environment/Profiles/ANTPLUS_ProfileEnvironmentMonitor.h>
 
 #endif // ANTPLUS_ENVIRONMENTPROFILE_h

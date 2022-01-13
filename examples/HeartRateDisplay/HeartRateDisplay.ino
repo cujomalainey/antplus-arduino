@@ -106,7 +106,11 @@ void manufacturerInformationDataPageHandler(HeartRateManufacturerInformation& ms
 
 void previousHeartBeatDataPageHandler(HeartRatePreviousHeartBeat& dp, uintptr_t data) {
     Serial.print("Manufacturer Specific Byte: ");
-    Serial.println(dp.getManufacturerSpecific());
+    if (dp.getManufacturerSpecific() == ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_MANUFACTURERSPECIFIC_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(dp.getManufacturerSpecific());
+    }
     Serial.print("Previous Heart Beat Event Time: ");
     Serial.println(dp.getPreviousHeartBeatEventTime());
 }
@@ -122,11 +126,25 @@ void productInformationDataPageHandler(HeartRateProductInformation& msg, uintptr
 
 void swimIntervalSummary(HeartRateSwimIntervalSummary& msg, uintptr_t data) {
     Serial.print("Interval Average Heart Rate: ");
-    Serial.println(msg.getIntervalAverageHeartRate());
+    if (msg.getIntervalAverageHeartRate() == ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_INTERVALAVERAGEHEARTRATE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(msg.getIntervalAverageHeartRate());
+    }
+
     Serial.print("Interval Maximum Heart Rate: ");
-    Serial.println(msg.getIntervalMaximumHeartRate());
+    if (msg.getIntervalMaximumHeartRate() == ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_INTERVALMAXIMUMHEARTRATE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(msg.getIntervalMaximumHeartRate());
+    }
+
     Serial.print("Session Average Heart Rate: ");
-    Serial.println(msg.getSessionAverageHeartRate());
+    if (msg.getSessionAverageHeartRate() == ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_SESSIONAVERAGEHEARTRATE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(msg.getSessionAverageHeartRate());
+    }
 }
 
 void heartRateBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {

@@ -12,8 +12,8 @@ class BaseProfile;
 class AntPlusRouter {
 public:
     AntPlusRouter();
-    AntPlusRouter(BaseAntWithCallbacks* driver);
-    AntPlusRouter(BaseAntWithCallbacks* driver, const uint8_t* key);
+    explicit AntPlusRouter(BaseAntWithCallbacks* driver);
+    explicit AntPlusRouter(BaseAntWithCallbacks* driver, const uint8_t* key);
     /**
      * Give the router a driver to use (Ant, NativeAnt, SpiAnt)
      */
