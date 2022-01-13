@@ -16,50 +16,61 @@
 #define FESTATEBITFIELD_SHIFT 4
 
 template<class T>
-FECGeneralMainDataPage<T>::FECGeneralMainDataPage() :
+FecBaseGeneralMainDataPage<T>::FecBaseGeneralMainDataPage() :
     CoreDataPage<T>() {}
 
 template<class T>
-uint8_t FECGeneralMainDataPage<T>::getDataPageNumber() {
-    return this->get8BitValue(ANTPLUS_DEFAULT_DATAPAGE_BYTE);
-}
-
-template<class T>
-uint8_t FECGeneralMainDataPage<T>::getEquipmentTypeBits() {
+uint8_t FecBaseGeneralMainDataPage<T>::getEquipmentTypeBits() {
     return this->get8BitValue(EQUIPMENTTYPEBITS_BYTE);
 }
 
 template<class T>
-uint8_t FECGeneralMainDataPage<T>::getElapsedTime() {
+uint8_t FecBaseGeneralMainDataPage<T>::getElapsedTime() {
     return this->get8BitValue(ELAPSEDTIME_BYTE);
 }
 
 template<class T>
-uint8_t FECGeneralMainDataPage<T>::getDistanceTraveled() {
+uint8_t FecBaseGeneralMainDataPage<T>::getDistanceTraveled() {
     return this->get8BitValue(DISTANCETRAVELED_BYTE);
 }
 
 template<class T>
-uint8_t FECGeneralMainDataPage<T>::getHeartRate() {
+uint8_t FecBaseGeneralMainDataPage<T>::getHeartRate() {
     return this->get8BitValue(HEARTRATE_BYTE);
 }
 
 template<class T>
-uint8_t FECGeneralMainDataPage<T>::getCapabilitiesBits() {
+uint8_t FecBaseGeneralMainDataPage<T>::getCapabilitiesBits() {
     return this->get8BitValue(CAPABILITIESBITFIELD_BYTE,
             CAPABILITIESBITFIELD_MASK);
 }
 
 template<class T>
-uint8_t FECGeneralMainDataPage<T>::getFEStateBits() {
+uint8_t FecBaseGeneralMainDataPage<T>::getFEStateBits() {
     return this->get8BitValue(FESTATEBITFIELD_BYTE, FESTATEBITFIELD_MASK,
             FESTATEBITFIELD_SHIFT);
 }
 
 template<class T>
-uint16_t FECGeneralMainDataPage<T>::getSpeed() {
+/*
+
+in meter / s 
+
+*/
+uint16_t FecBaseGeneralMainDataPage<T>::getSpeed(bool km) {
+    if ( km == true ){
+        return 3.6 * (this->get16BitValue(SPEED_LSB_BYTE, SPEED_MSB_BYTE)) /1000;
+    }
     return this->get16BitValue(SPEED_LSB_BYTE, SPEED_MSB_BYTE);
 }
 
-template class FECGeneralMainDataPage<BroadcastData>;
-template class FECGeneralMainDataPage<BroadcastDataMsg>;
+template class FecBaseGeneralMainDataPage<BroadcastData>;
+template class FecBaseGeneralMainDataPage<BroadcastDataMsg>;
+
+FecGeneralMainDataPage::FecGeneralMainDataPage(AntRxDataResponse& dp) :
+    FecBaseMainDataPage(dp),
+    FecBaseGeneralMainDataPage<BroadcastData>() {}
+
+FecGeneralMainDataMsg::FecGeneralMainDataMsg() :
+    FecBaseMainDataPageMsg(ANTPLUS_FEC_GENERAL_INFORMATION_NUMBER),
+    FecBaseGeneralMainDataPage<BroadcastDataMsg>() {}
