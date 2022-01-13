@@ -1,11 +1,10 @@
 /***********************************
- * AntPlus HRDisplay example
+ * AntPlus Native Drive Fe-c Display
  *
- * Finds a nearby HR Monitor, pairs
- * to it and then reads the information
- * out via the serial port.
+ * Finds a nearby Indoor bike trainer
+ * And display content sent by it
  *
- * Author Curtis Malainey
+ * Author Charles-Antoine FOURNEL
  ************************************/
 #include <Arduino.h>
 #include "ANT.h"
@@ -16,7 +15,7 @@
 #define TOTAL_CHANNELS 1
 #define ENCRYPTED_CHANNELS 0
 
-const uint8_t NETWORK_KEY[] = {0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45}; // get this from thisisant.com
+const uint8_t NETWORK_KEY[] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}; // get this from thisisant.com
 
 ArduinoNativeAntWithCallbacks ant;
 AntPlusRouter router = AntPlusRouter();
@@ -81,7 +80,7 @@ void setup() {
     ht.transmitFecUserInformationMsg(9000, 3000);
     // get fec capabilities
     ht.transmitFecCapabitiliesRequestMsg();
-    Serial.print("Envoi de la demande capacitaire");
+    Serial.print("Ask for capacity"); // this datapage not always sent by indoor bike trainer
 
 }
 
@@ -95,6 +94,12 @@ void loop() {
     }
     unsigned long currentMillis = millis();
 
+    /** 
+     * 
+     * Just a quick test to switch target power 
+     * every **interval**
+     * 
+     */
     if(currentMillis - previousMillis > interval) 
     {
       // save the last time you blinked the LED 
@@ -106,8 +111,7 @@ void loop() {
       }else{
         TargetPower = 100;
       }
-      //ht.transmitFecTrackResistanceMsg(13000);
-      ht.transmitFecBasicResistanceMsg(TargetPower);
+      ht.transmitFecTargetPowerMsg(TargetPower);
       Serial.println(TargetPower);
     }
 }
