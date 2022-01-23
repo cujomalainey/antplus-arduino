@@ -17,7 +17,7 @@
 
 const uint8_t NETWORK_KEY[] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}; // get this from thisisant.com
 
-ArduinoNativeAntWithCallbacks ant;
+ArduinoSerialAntWithCallbacks ant;
 AntPlusRouter router = AntPlusRouter();
 ProfileFecDisplay ht = ProfileFecDisplay();
 
@@ -36,8 +36,8 @@ void CapabitiliesDataPageHandler(FecCapabilitiesInformationDatapage& msg, uintpt
 void TargetPowerDataPagehandler(FecTargetPowerDataPage& msg, uintptr_t data);
 void TrackREsistanceDataPageHandler(FecTrackResistanceDataPage& msg, uintptr_t data);
 
-long previousMillis = 0; 
-long interval = 4000;  
+long previousMillis = 0;
+long interval = 4000;
 int  TargetPower = 50;
 void fecRateFeatures(uint8_t bitfield);
 void printStatus(uint8_t status);
@@ -94,16 +94,16 @@ void loop() {
     }
     unsigned long currentMillis = millis();
 
-    /** 
-     * 
-     * Just a quick test to switch target power 
+    /**
+     *
+     * Just a quick test to switch target power
      * every **interval**
-     * 
+     *
      */
-    if(currentMillis - previousMillis > interval) 
+    if(currentMillis - previousMillis > interval)
     {
-      // save the last time you blinked the LED 
-      previousMillis = currentMillis;   
+      // save the last time you blinked the LED
+      previousMillis = currentMillis;
       //Serial.println("Envoi de la puissance vise");
       if ( TargetPower == 100 )
       {
@@ -186,7 +186,7 @@ void CapabitiliesDataPageHandler(FecCapabilitiesInformationDatapage& msg, uintpt
     Serial.print("Max resistance: ");
     Serial.println(msg.getMaximumResistance());
     Serial.print("Fec Capabilities: ");
-    Serial.println(msg.getCapabilities());  
+    Serial.println(msg.getCapabilities());
 }
 
 
