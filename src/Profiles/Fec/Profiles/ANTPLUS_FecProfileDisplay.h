@@ -40,7 +40,7 @@ private:
     bool handleBasicResistanceDataPage(BaseDataPage<BroadcastData>& dataPage);
     bool handleUserInformationDataPage(BaseDataPage<BroadcastData>& dataPage);
     bool handleCapabilitiesInformationDataPage(BaseDataPage<BroadcastData>& dataPage);
-    
+
     AntCallback<FecSpecificTrainerData&> _onFecSpecificTrainerData = { .func = NULL };
     AntCallback<FecManufacturerInformation&> _onFecManufacturerInformation = { .func = NULL };
     AntCallback<FecProductInformation&> _onFecProductInformation = { .func = NULL };
