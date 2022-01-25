@@ -78,7 +78,8 @@ void setup() {
 }
 
 void loop() {
-    if (!router.loop() && ant.getResponse().isError())
+    router.loop();
+    if (ant.getResponse().isError())
     {
         Serial.print("ANT MSG ERROR: ");
         Serial.println(ant.getResponse().getErrorCode());
