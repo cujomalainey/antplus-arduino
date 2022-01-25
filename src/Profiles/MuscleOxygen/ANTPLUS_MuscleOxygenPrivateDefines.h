@@ -3,8 +3,6 @@
 
 #include <Profiles/MuscleOxygen/ANTPLUS_MuscleOxygenDefines.h>
 
-/* Channel Config */
-#define ANTPLUS_MUSCLEOXYGEN_DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
 // Master channel
 #define MUSCLEOXYGEN_CHANNELPERIOD 8192
 
