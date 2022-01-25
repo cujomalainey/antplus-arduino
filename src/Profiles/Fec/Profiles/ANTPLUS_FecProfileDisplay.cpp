@@ -48,11 +48,6 @@ bool ProfileFecDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
     case FE_CAPABILITIES_NUMBER:
         called = handleCapabilitiesInformationDataPage(dp);
         break;
-
-    case BASIC_RESISTANCE_NUMBER:
-        called = handleBasicResistanceDataPage(dp);
-        break;
-
     }
 
     return called;
@@ -97,11 +92,6 @@ bool ProfileFecDisplay::handleTargetPowerDataPage(BaseDataPage<BroadcastData>& d
     return _onFecTargetPowerDataPage.call(dp);
 }
 
-bool ProfileFecDisplay::handleBasicResistanceDataPage(BaseDataPage<BroadcastData>& dataPage) {
-    FecBasicResistanceDataPage dp(dataPage);
-    return _onFecBasicResistanceDataPage.call(dp);
-}
-
 bool ProfileFecDisplay::handleCapabilitiesInformationDataPage(BaseDataPage<BroadcastData>& dataPage) {
     FecCapabilitiesInformationDatapage dp(dataPage);
     return _onFecCapabilitiesInformationDataPage.call(dp);
@@ -121,9 +111,9 @@ bool ProfileFecDisplay::transmitFecTrackResistanceMsg(uint16_t TargetGrade) {
     return false;
 }
 
-bool ProfileFecDisplay::transmitFecBasicResistanceMsg(uint8_t Power) {
-    FecBasicResistanceDataMsg msg;
-    msg.setPower(Power);
+bool ProfileFecDisplay::transmitFecBasicResistanceMsg(uint8_t total_resistance) {
+    FecBasicResistanceMsg msg;
+    msg.setTotalResistance(total_resistance);
     send(msg);
     return false;
 }
