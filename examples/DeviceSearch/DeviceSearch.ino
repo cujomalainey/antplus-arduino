@@ -71,8 +71,8 @@ void searchCallback(uint16_t deviceNumber, uint8_t deviceType, uint8_t transmiss
     case ANTPLUS_ENVIRONMENT_DEVICETYPE:
         Serial.println("Environment");
         break;
-    case ANTPLUS_FEC_DEVICETYPE:
-        Serial.println("Fitness Equiment");
+    case ANTPLUS_FEC_REALTIMECHANNEL_DEVICETYPE:
+        Serial.println("Realtime Fitness Equiment");
         break;
     case ANTPLUS_HEARTRATE_DEVICETYPE:
         Serial.println("Heart Rate");

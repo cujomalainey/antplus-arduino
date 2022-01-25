@@ -46,7 +46,7 @@ bool ProfileFecDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
         break;
 
     case FE_CAPABILITIES_NUMBER:
-        called = handleCapabilitiesInformationDataPage(dp);
+        called = handleFeCapabilities(dp);
         break;
     }
 
@@ -63,7 +63,7 @@ void ProfileFecDisplay::onAcknowledgedData(AcknowledgedData& msg) {
 
 void ProfileFecDisplay::setChannelConfig() {
     setChannelType(DISPLAY_CHANNELTYPE);
-    setDeviceType(ANTPLUS_FEC_DEVICETYPE);
+    setDeviceType(ANTPLUS_FEC_REALTIMECHANNEL_DEVICETYPE);
     setChannelPeriod(ANTPLUS_FEC_CHANNELPERIOD);
     setSearchTimeout(ANTPLUS_FEC_SEARCHTIMEOUT);
 }
@@ -92,9 +92,9 @@ bool ProfileFecDisplay::handleTargetPowerDataPage(BaseDataPage<BroadcastData>& d
     return _onFecTargetPowerDataPage.call(dp);
 }
 
-bool ProfileFecDisplay::handleCapabilitiesInformationDataPage(BaseDataPage<BroadcastData>& dataPage) {
-    FecCapabilitiesInformationDatapage dp(dataPage);
-    return _onFecCapabilitiesInformationDataPage.call(dp);
+bool ProfileFecDisplay::handleFeCapabilities(BaseDataPage<BroadcastData>& dataPage) {
+    FecFeCapabilities dp(dataPage);
+    return _onFecFeCapabilities.call(dp);
 }
 
 bool ProfileFecDisplay::transmitFecTargetPowerMsg(uint16_t TargetPower) {
@@ -122,15 +122,6 @@ bool ProfileFecDisplay::transmitFecUserConfigurationMsg(uint16_t UserWeight, uin
     FecUserConfigurationMsg msg;
     msg.setUserWeight(UserWeight);
     msg.setBikeWeight(BikeWeight);
-    send(msg);
-    return true;
-}
-
-bool ProfileFecDisplay::transmitFecCapabitiliesRequestMsg()
-{
-    FecCapabilitiesInformationMsg msg;
-    msg.setCapabitilies(0);
-    msg.setMaximumResistance(800);
     send(msg);
     return true;
 }

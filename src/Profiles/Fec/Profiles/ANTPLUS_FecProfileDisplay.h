@@ -15,12 +15,13 @@ public:
     void onFecGeneralSettingsDataPage(void (*func)(FecGeneralSettingsDataPage&, uintptr_t), uintptr_t data = 0) { _onFecGeneralSettingsDataPage.set(func, data); }
     void onFecTargetPowerDataPage(void (*func)(FecTargetPowerDataPage&, uintptr_t), uintptr_t data = 0) { _onFecTargetPowerDataPage.set(func, data); }
     void onFecTrackResistanceDataPage(void (*func)(FecTrackResistanceDataPage&, uintptr_t), uintptr_t data = 0) { _onFecTrackResistanceDataPage.set(func, data); }
-    void onFecCapabilitiesInformationDataPage(void (*func)(FecCapabilitiesInformationDatapage&, uintptr_t), uintptr_t data = 0) { _onFecCapabilitiesInformationDataPage.set(func, data); }
+    void onFecFeCapabilities(void (*func)(FecFeCapabilities&, uintptr_t), uintptr_t data = 0) { _onFecFeCapabilities.set(func, data); }
     bool transmitFecTargetPowerMsg(uint16_t TargetPower);
     bool transmitFecTrackResistanceMsg(uint16_t TrackResistance);
     bool transmitFecBasicResistanceMsg(uint8_t total_resistance);
     bool transmitFecUserConfigurationMsg(uint16_t UserWeight, uint16_t BikeWeight);
-    bool transmitFecCapabitiliesRequestMsg();
+    // TODO delete these
+    // TODO also move data page numbers to public, otherwise requests don't work
 
 private:
     void setChannelConfig();
@@ -35,7 +36,8 @@ private:
     bool handleTrainerData(BaseDataPage<BroadcastData>& dataPage);
     bool handleTargetPowerDataPage(BaseDataPage<BroadcastData>& dataPage);
     bool handleTrackResistanceDataPage(BaseDataPage<BroadcastData>& dataPage);
-    bool handleCapabilitiesInformationDataPage(BaseDataPage<BroadcastData>& dataPage);
+    bool handleFeCapabilities(BaseDataPage<BroadcastData>& dataPage);
+    // TODO update to base main dp
 
     AntCallback<FecSpecificTrainerData&> _onFecSpecificTrainerData = { .func = NULL };
     AntCallback<ManufacturersInformation&> _onManufacturersInformation = { .func = NULL };
@@ -44,7 +46,7 @@ private:
     AntCallback<FecGeneralSettingsDataPage&> _onFecGeneralSettingsDataPage = { .func = NULL };
     AntCallback<FecTargetPowerDataPage&> _onFecTargetPowerDataPage = { .func = NULL };
     AntCallback<FecTrackResistanceDataPage&> _onFecTrackResistanceDataPage = { .func = NULL };
-    AntCallback<FecCapabilitiesInformationDatapage&> _onFecCapabilitiesInformationDataPage = { .func = NULL };
+    AntCallback<FecFeCapabilities&> _onFecFeCapabilities = { .func = NULL };
 };
 
 #endif // ANTPLUS_PROFILEFECDISPLAY_h

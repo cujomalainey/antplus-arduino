@@ -7,7 +7,7 @@
 #include <Profiles/Fec/DataPages/ANTPLUS_FecBasicResistance.h>
 #include <Profiles/Fec/DataPages/ANTPLUS_FecTargetPowerDataPage.h>
 #include <Profiles/Fec/DataPages/ANTPLUS_FecTrackResistanceDataPage.h>
-#include <Profiles/Fec/DataPages/ANTPLUS_FecCapabilitiesInformationDataPage.h>
+#include <Profiles/Fec/DataPages/ANTPLUS_FecFeCapabilities.h>
 #include <Profiles/Fec/DataPages/ANTPLUS_FecUserConfiguration.h>
 
 #endif // ANTPLUS_PROFILEFECDATAPAGES_h

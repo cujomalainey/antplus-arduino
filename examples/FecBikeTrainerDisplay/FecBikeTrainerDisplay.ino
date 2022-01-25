@@ -25,7 +25,7 @@ void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data);
 void GeneralDataPageHandler(FecGeneralMainDataPage& msg, uintptr_t data);
 void GeneralSettingsDataPageHandler(FecGeneralSettingsDataPage& msg, uintptr_t data);
 void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data);
-void CapabitiliesDataPageHandler(FecCapabilitiesInformationDatapage& msg, uintptr_t data);
+void FeCapabitiliesDataPageHandler(FecFeCapabilities& msg, uintptr_t data);
 
 void TargetPowerDataPagehandler(FecTargetPowerDataPage& msg, uintptr_t data);
 void TrackREsistanceDataPageHandler(FecTrackResistanceDataPage& msg, uintptr_t data);
@@ -57,7 +57,7 @@ void setup() {
     fec.onFecTargetPowerDataPage(TargetPowerDataPagehandler);
     fec.onFecTrackResistanceDataPage(TrackResistanceDataPageHandler);
     fec.onFecTrainerData(SpecificTrainerDataPageHandler);
-    fec.onFecCapabilitiesInformationDataPage(CapabitiliesDataPageHandler);
+    fec.onFecFeCapabilities(FeCapabitiliesDataPageHandler);
 
     fec.begin();
     // wait for pair to complete
@@ -72,7 +72,7 @@ void setup() {
     Serial.print("settings user information");
     fec.transmitFecUserConfigurationMsg(9000, 3000);
     // get fec capabilities
-    fec.transmitFecCapabitiliesRequestMsg();
+    // TODO transmit request datapage asking for capabilities
     Serial.print("Ask for capacity"); // this datapage not always sent by indoor bike trainer
 
 }
@@ -132,8 +132,8 @@ void GeneralDataPageHandler(FecGeneralMainDataPage& msg, uintptr_t data) {
     Serial.println(msg.getSpeed());
     Serial.print("FE State:");
     Serial.println(msg.getFEStateBits());
-    Serial.print("FEC CAPABILITIES:");
-    Serial.println(msg.getCapabilitiesBits());
+    Serial.println("Fec Capabilities:");
+    // TODO
 }
 
 void GeneralSettingsDataPageHandler(FecGeneralSettingsDataPage& msg, uintptr_t data) {
@@ -175,14 +175,18 @@ void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data)
     Serial.println(msg.getFlagsBits());
 }
 
-void CapabitiliesDataPageHandler(FecCapabilitiesInformationDatapage& msg, uintptr_t data)
-{
+void FeCapabitiliesDataPageHandler(FecFeCapabilities& msg, uintptr_t data) {
+    uint8_t bits = msg.getCapabilitiesBitField();
     Serial.print("Max resistance: ");
     Serial.println(msg.getMaximumResistance());
     Serial.print("Fec Capabilities: ");
-    Serial.println(msg.getCapabilities());
+    Serial.print("  Supports Basic Resistance Mode: ");
+    Serial.println(bits & ANTPLUS_FEC_DATAPAGE_FECAPABILITIES_CAPABILITIESBITFIELD_SUPPORTSBASICRESISTANCEMODE ? "Y" : "N");
+    Serial.print("  Supports Target Power Mode: ");
+    Serial.println(bits & ANTPLUS_FEC_DATAPAGE_FECAPABILITIES_CAPABILITIESBITFIELD_SUPPORTSTARGETPOWERMODE ? "Y" : "N");
+    Serial.print("  Supports Sumulation Mode: ");
+    Serial.println(bits & ANTPLUS_FEC_DATAPAGE_FECAPABILITIES_CAPABILITIESBITFIELD_SUPPORTSSIMULATIONMODE ? "Y" : "N");
 }
-
 
 void printStatus(uint8_t status) {
     Serial.print("Channel Status: ");
