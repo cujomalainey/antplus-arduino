@@ -5,6 +5,7 @@
  * And display content sent by it
  *
  * Author Charles-Antoine FOURNEL
+ * Updated by Curtis Malainey
  ************************************/
 #include <Arduino.h>
 #include "ANT.h"
@@ -19,12 +20,8 @@ AntPlusRouter router;
 ProfileFecDisplay fec;
 
 void fecBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data);
-void batteryStatusDataPageHandler(HeartRateBatteryStatus& msg, uintptr_t data);
-void capabilitiesDataPageHandler(HeartRateCapabilities& msg, uintptr_t data);
-void cumulativeOperatingTimeDataPageHandler(HeartRateCumulativeOperatingTime& msg, uintptr_t data);
-void defaultDataPageHandler(HeartRateDefault& msg, uintptr_t data);
-void manufacturerInformationDataPageHandler(FecManufacturerInformation& msg, uintptr_t data);
-void productInformationDataPageHandler(FecProductInformation& msg, uintptr_t data);
+void manufacturerInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data);
+void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data);
 void GeneralDataPageHandler(FecGeneralMainDataPage& msg, uintptr_t data);
 void GeneralSettingsDataPageHandler(FecGeneralSettingsDataPage& msg, uintptr_t data);
 void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data);
@@ -53,8 +50,8 @@ void setup() {
     Serial.begin(BAUD_RATE);
     Serial.println("Running");
     fec.onDataPage(fecBaseDataPageHandler);
-    //fec.onFecManufacturerInformation(manufacturerInformationDataPageHandler);
-    //fec.onFecProductInformation(ProductInformationDataPageHandler);
+    fec.onManufacturersInformation(manufacturerInformationDataPageHandler);
+    fec.onProductInformation(productInformationDataPageHandler);
     fec.onFecGeneralDataPage(GeneralDataPageHandler);
     //fec.onFecGeneralSettingsDataPage(GeneralSettingsDataPageHandler);
     fec.onFecTargetPowerDataPage(TargetPowerDataPagehandler);
@@ -111,18 +108,22 @@ void loop() {
 }
 
 
-void manufacturerInformationDataPageHandler(FecManufacturerInformation& msg, uintptr_t data) {
+void manufacturerInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data) {
     Serial.print("Manufacturer ID: ");
-    Serial.println(msg.getManufacturerId());
+    Serial.println(msg.getManufacturerID());
     Serial.print("Model Number: ");
     Serial.println(msg.getModelNumber());
     Serial.print("hardware Revision: ");
-    Serial.println(msg.getHardwareRevision());
+    Serial.println(msg.getHWRevision());
 }
 
-void ProductInformationDataPageHandler(FecProductInformation& msg, uintptr_t data) {
-    Serial.print("Software Revision: ");
-    Serial.println(msg.getSoftwareRevision());
+void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data) {
+    Serial.print("Software Revision Main: ");
+    Serial.println(msg.getSWRevisionMain());
+    Serial.print("Software Revision Supplemental: ");
+    Serial.println(msg.getSWRevisionSupplemental());
+    Serial.print("Serial Number: ");
+    Serial.println(msg.getSerialNumber());
 }
 
 void GeneralDataPageHandler(FecGeneralMainDataPage& msg, uintptr_t data) {

@@ -9,8 +9,8 @@ class ProfileFecDisplay : public BaseSlaveProfile {
 public:
     ProfileFecDisplay(uint16_t deviceNumber = 0, uint8_t transmissionType = 0);
     void onFecTrainerData(void (*func)(FecSpecificTrainerData&, uintptr_t), uintptr_t data = 0) { _onFecSpecificTrainerData.set(func, data); }
-    void onFecManufacturerInformation(void (*func)(FecManufacturerInformation&, uintptr_t), uintptr_t data = 0) { _onFecManufacturerInformation.set(func, data); }
-    void onFecProductInformation(void (*func)(FecProductInformation&, uintptr_t), uintptr_t data = 0) { _onFecProductInformation.set(func, data); }
+    void onManufacturersInformation(void (*func)(ManufacturersInformation&, uintptr_t), uintptr_t data = 0) { _onManufacturersInformation.set(func, data); }
+    void onProductInformation(void (*func)(ProductInformation&, uintptr_t), uintptr_t data = 0) { _onProductInformation.set(func, data); }
     void onFecGeneralDataPage(void (*func)(FecGeneralMainDataPage&, uintptr_t), uintptr_t data = 0) { _onFecGeneralDataPage.set(func, data); }
     void onFecGeneralSettingsDataPage(void (*func)(FecGeneralSettingsDataPage&, uintptr_t), uintptr_t data = 0) { _onFecGeneralSettingsDataPage.set(func, data); }
     void onFecTargetPowerDataPage(void (*func)(FecTargetPowerDataPage&, uintptr_t), uintptr_t data = 0) { _onFecTargetPowerDataPage.set(func, data); }
@@ -42,8 +42,8 @@ private:
     bool handleCapabilitiesInformationDataPage(BaseDataPage<BroadcastData>& dataPage);
 
     AntCallback<FecSpecificTrainerData&> _onFecSpecificTrainerData = { .func = NULL };
-    AntCallback<FecManufacturerInformation&> _onFecManufacturerInformation = { .func = NULL };
-    AntCallback<FecProductInformation&> _onFecProductInformation = { .func = NULL };
+    AntCallback<ManufacturersInformation&> _onManufacturersInformation = { .func = NULL };
+    AntCallback<ProductInformation&> _onProductInformation = { .func = NULL };
     AntCallback<FecGeneralMainDataPage&> _onFecGeneralDataPage = { .func = NULL };
     AntCallback<FecGeneralSettingsDataPage&> _onFecGeneralSettingsDataPage = { .func = NULL };
     AntCallback<FecTargetPowerDataPage&> _onFecTargetPowerDataPage = { .func = NULL };

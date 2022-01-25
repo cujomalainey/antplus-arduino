@@ -1,5 +1,6 @@
 #include <Profiles/Fec/Profiles/ANTPLUS_FecProfileDisplay.h>
 #include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 ProfileFecDisplay::ProfileFecDisplay(uint16_t deviceNumber, uint8_t transmissionType) : BaseSlaveProfile(deviceNumber, transmissionType) {
     setChannelConfig();
@@ -22,11 +23,11 @@ bool ProfileFecDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
         called = handleTrainerData(dp);
         break;
 
-    case ANTPLUS_FEC_MANUFACTURERINFORMATION_NUMBER:
+    case COMMON_MANUFACTURERSINFORMATION_NUMBER:
         called = handleManufacturerInformation(dp);
         break;
 
-    case ANTPLUS_FEC_PRODUCT_INFORMATION_NUMBER:
+    case COMMON_PRODUCTINFORMATION_NUMBER:
         called = handleProductInformation(dp);
         break;
 
@@ -72,13 +73,13 @@ void ProfileFecDisplay::setChannelConfig() {
 }
 
 bool ProfileFecDisplay::handleManufacturerInformation(BaseDataPage<BroadcastData>& dataPage) {
-    FecManufacturerInformation dp(dataPage);
-    return _onFecManufacturerInformation.call(dp);
+    ManufacturersInformation dp(dataPage);
+    return _onManufacturersInformation.call(dp);
 }
 
 bool ProfileFecDisplay::handleProductInformation(BaseDataPage<BroadcastData>& dataPage) {
-    FecProductInformation dp(dataPage);
-    return _onFecProductInformation.call(dp);
+    ProductInformation dp(dataPage);
+    return _onProductInformation.call(dp);
 }
 
 bool ProfileFecDisplay::handleGeneralDataPage(BaseDataPage<BroadcastData>& dataPage) {
