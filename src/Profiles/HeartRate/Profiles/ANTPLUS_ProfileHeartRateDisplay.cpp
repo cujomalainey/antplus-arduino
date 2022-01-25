@@ -1,7 +1,6 @@
 #include <Profiles/HeartRate/Profiles/ANTPLUS_ProfileHeartRateDisplay.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 #define DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE

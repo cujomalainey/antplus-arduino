@@ -54,7 +54,7 @@ uint8_t FecBaseGeneralMainDataPage<T>::getFEStateBits() {
 template<class T>
 /*
 
-in meter / s 
+in meter / s
 
 */
 uint16_t FecBaseGeneralMainDataPage<T>::getSpeed(bool km) {
@@ -72,5 +72,5 @@ FecGeneralMainDataPage::FecGeneralMainDataPage(AntRxDataResponse& dp) :
     FecBaseGeneralMainDataPage<BroadcastData>() {}
 
 FecGeneralMainDataMsg::FecGeneralMainDataMsg() :
-    FecBaseMainDataPageMsg(ANTPLUS_FEC_GENERAL_INFORMATION_NUMBER),
+    FecBaseMainDataPageMsg(GENERAL_FE_DATA_NUMBER),
     FecBaseGeneralMainDataPage<BroadcastDataMsg>() {}

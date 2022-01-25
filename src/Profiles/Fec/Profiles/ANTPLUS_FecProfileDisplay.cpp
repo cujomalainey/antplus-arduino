@@ -2,6 +2,8 @@
 #include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
+#define DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
+
 ProfileFecDisplay::ProfileFecDisplay(uint16_t deviceNumber, uint8_t transmissionType) : BaseSlaveProfile(deviceNumber, transmissionType) {
     setChannelConfig();
 }
@@ -19,7 +21,7 @@ bool ProfileFecDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
     bool called = false;
 
     switch (dataPage) {
-    case ANTPLUS_FEC_DATAPAGE_TRAINER_DATA_NUMBER:
+    case SPECIFIC_TRAINER_DATA_NUMBER:
         called = handleTrainerData(dp);
         break;
 
@@ -31,23 +33,23 @@ bool ProfileFecDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
         called = handleProductInformation(dp);
         break;
 
-    case ANTPLUS_FEC_GENERAL_INFORMATION_NUMBER:
+    case GENERAL_FE_DATA_NUMBER:
         called = handleGeneralDataPage(dp);
         break;
 
-    case ANTPLUS_FEC_GENERAL_SETTINGS_NUMBER:
+    case GENERAL_SETTINGS_PAGE_NUMBER:
         called = handleGeneralSettingsDataPage(dp);
         break;
 
-    case ANTPLUS_FEC_TARGET_POWER_NUMBER:
+    case TARGET_POWER_NUMBER:
         called = handleTargetPowerDataPage(dp);
         break;
 
-    case ANTPLUS_FEC_CAPABILITIES_INFORMATION_NUMBER:
+    case FE_CAPABILITIES_NUMBER:
         called = handleCapabilitiesInformationDataPage(dp);
         break;
 
-    case ANTPLUS_FEC_BASIC_RESISTANCE_NUMBER:
+    case BASIC_RESISTANCE_NUMBER:
         called = handleBasicResistanceDataPage(dp);
         break;
 
@@ -64,9 +66,8 @@ void ProfileFecDisplay::onAcknowledgedData(AcknowledgedData& msg) {
     }
 }
 
-
 void ProfileFecDisplay::setChannelConfig() {
-    setChannelType(ANTPLUS_FEC_DISPLAY_CHANNELTYPE);
+    setChannelType(DISPLAY_CHANNELTYPE);
     setDeviceType(ANTPLUS_FEC_DEVICETYPE);
     setChannelPeriod(ANTPLUS_FEC_CHANNELPERIOD);
     setSearchTimeout(ANTPLUS_FEC_SEARCHTIMEOUT);
@@ -127,8 +128,8 @@ bool ProfileFecDisplay::transmitFecBasicResistanceMsg(uint8_t Power) {
     return false;
 }
 
-bool ProfileFecDisplay::transmitFecUserInformationMsg(uint16_t UserWeight, uint16_t BikeWeight) {
-    FecUserInformationMsg msg;
+bool ProfileFecDisplay::transmitFecUserConfigurationMsg(uint16_t UserWeight, uint16_t BikeWeight) {
+    FecUserConfigurationMsg msg;
     msg.setUserWeight(UserWeight);
     msg.setBikeWeight(BikeWeight);
     send(msg);
@@ -147,9 +148,4 @@ bool ProfileFecDisplay::transmitFecCapabitiliesRequestMsg()
 bool ProfileFecDisplay::handleTrainerData(BaseDataPage<BroadcastData>& dataPage) {
     FecSpecificTrainerData dp(dataPage);
     return _onFecSpecificTrainerData.call(dp);
-}
-
-bool ProfileFecDisplay::handleUserInformationDataPage(BaseDataPage<BroadcastData>& dataPage) {
-    FecUserInformationDatapage dp(dataPage);
-    return _onFecUserInformationDataPage.call(dp);
 }

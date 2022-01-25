@@ -27,7 +27,7 @@ FecCapabilitiesInformationDatapage::FecCapabilitiesInformationDatapage(AntRxData
     FecBaseCapabilitiesInformationDatapage<BroadcastData>() {}
 
 FecCapabilitiesInformationMsg::FecCapabilitiesInformationMsg() :
-    FecBaseMainDataPageMsg(ANTPLUS_FEC_USER_INFORMATION_NUMBER),
+    FecBaseMainDataPageMsg(FE_CAPABILITIES_NUMBER),
     FecBaseCapabilitiesInformationDatapage<BroadcastDataMsg>() {}
 
 void FecCapabilitiesInformationMsg::setMaximumResistance(uint16_t MaximumResistance) {

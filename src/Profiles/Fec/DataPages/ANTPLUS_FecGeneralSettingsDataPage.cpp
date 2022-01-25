@@ -52,7 +52,7 @@ FecGeneralSettingsDataPage::FecGeneralSettingsDataPage(AntRxDataResponse& dp) :
     FecBaseGeneralSettingsDataPage<BroadcastData>() {}
 
 FecGeneralSettingsDataMsg::FecGeneralSettingsDataMsg() :
-    FecBaseMainDataPageMsg(ANTPLUS_FEC_GENERAL_SETTINGS_NUMBER),
+    FecBaseMainDataPageMsg(GENERAL_SETTINGS_PAGE_NUMBER),
     FecBaseGeneralSettingsDataPage<BroadcastDataMsg>() {}
 
 void FecGeneralSettingsDataMsg::setResistanceLevel(uint8_t ResistanceLevel) {

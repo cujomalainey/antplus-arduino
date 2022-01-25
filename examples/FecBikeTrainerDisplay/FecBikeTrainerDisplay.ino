@@ -70,7 +70,7 @@ void setup() {
     Serial.print("Transmisison Type: ");
     Serial.println(fec.getTransmissionType());
     Serial.print("settings user information");
-    fec.transmitFecUserInformationMsg(9000, 3000);
+    fec.transmitFecUserConfigurationMsg(9000, 3000);
     // get fec capabilities
     fec.transmitFecCapabitiliesRequestMsg();
     Serial.print("Ask for capacity"); // this datapage not always sent by indoor bike trainer
@@ -169,7 +169,7 @@ void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data)
     Serial.println(msg.getTrainerStatusBits());
     if ( msg.getTrainerStatusBits() == 4 )
     {
-      fec.transmitFecUserInformationMsg(9000, 3000);
+      fec.transmitFecUserConfigurationMsg(9000, 3000);
       Serial.println("Envoi des informations utilisateurs :");
     }
     Serial.print("Trainer flag bit: ");

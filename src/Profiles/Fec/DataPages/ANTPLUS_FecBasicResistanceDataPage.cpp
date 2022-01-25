@@ -20,7 +20,7 @@ FecBasicResistanceDataPage::FecBasicResistanceDataPage(AntRxDataResponse& dp) :
     FecBaseBasicResistanceDataPage<BroadcastData>() {}
 
 FecBasicResistanceDataMsg::FecBasicResistanceDataMsg() :
-    FecBaseMainDataPageMsg(ANTPLUS_FEC_BASIC_RESISTANCE_NUMBER),
+    FecBaseMainDataPageMsg(BASIC_RESISTANCE_NUMBER),
     FecBaseBasicResistanceDataPage<BroadcastDataMsg>() {}
 
 void FecBasicResistanceDataMsg::setPower(uint8_t Power) {

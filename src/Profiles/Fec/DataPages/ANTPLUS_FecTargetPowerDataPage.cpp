@@ -21,7 +21,7 @@ FecTargetPowerDataPage::FecTargetPowerDataPage(AntRxDataResponse& dp) :
     FecBaseTargetPowerDataPage<BroadcastData>() {}
 
 FecTargetPowerDataMsg::FecTargetPowerDataMsg() :
-    FecBaseMainDataPageMsg(ANTPLUS_FEC_TARGET_POWER_NUMBER),
+    FecBaseMainDataPageMsg(TARGET_POWER_NUMBER),
     FecBaseTargetPowerDataPage<BroadcastDataMsg>() {}
 
 void FecTargetPowerDataMsg::setTargetPower(uint16_t TargetPower) {

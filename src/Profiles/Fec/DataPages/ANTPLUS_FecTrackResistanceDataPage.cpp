@@ -23,7 +23,7 @@ FecTrackResistanceDataPage::FecTrackResistanceDataPage(AntRxDataResponse& dp) :
     FecBaseTrackResistanceDataPage<BroadcastData>() {}
 
 FecTrackResistanceDataMsg::FecTrackResistanceDataMsg() :
-    FecBaseMainDataPageMsg(ANTPLUS_FEC_TRACK_RESISTANCE_NUMBER),
+    FecBaseMainDataPageMsg(TRACK_RESISTANCE_NUMBER),
     FecBaseTrackResistanceDataPage<BroadcastDataMsg>() {}
 
 void FecTrackResistanceDataMsg::setTargetGrade(uint16_t TargetGrade) {
