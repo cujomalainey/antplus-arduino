@@ -15,8 +15,8 @@
 const uint8_t NETWORK_KEY[] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}; // get this from thisisant.com
 
 ArduinoSerialAntWithCallbacks ant;
-AntPlusRouter router = AntPlusRouter();
-ProfileFecDisplay fec = ProfileFecDisplay();
+AntPlusRouter router;
+ProfileFecDisplay fec;
 
 void fecBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data);
 void batteryStatusDataPageHandler(HeartRateBatteryStatus& msg, uintptr_t data);
@@ -42,12 +42,12 @@ void printStatus(uint8_t status);
 void setup() {
     delay(2000);
     Serial1.begin(BAUD_RATE);
-    ant.begin(9600);
+    ant.begin(Serial1);
     delay(5000);
 
     router.setDriver(&ant); // never touch ant again
     router.setAntPlusNetworkKey(NETWORK_KEY);
-    router.setProfile(CHANNEL_0, &ht);
+    router.setProfile(CHANNEL_0, &fec);
     // Delay after initial setup to wait for user to connect on serial
 
     Serial.begin(BAUD_RATE);
@@ -168,7 +168,7 @@ void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data)
     Serial.println(msg.getTrainerStatusBits());
     if ( msg.getTrainerStatusBits() == 4 )
     {
-      ht.transmitFecUserInformationMsg(9000, 3000);
+      fec.transmitFecUserInformationMsg(9000, 3000);
       Serial.println("Envoi des informations utilisateurs :");
     }
     Serial.print("Trainer flag bit: ");
