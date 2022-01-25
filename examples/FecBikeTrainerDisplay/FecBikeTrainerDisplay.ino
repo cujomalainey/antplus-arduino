@@ -19,7 +19,7 @@ const uint8_t NETWORK_KEY[] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}; 
 
 ArduinoSerialAntWithCallbacks ant;
 AntPlusRouter router = AntPlusRouter();
-ProfileFecDisplay ht = ProfileFecDisplay();
+ProfileFecDisplay fec = ProfileFecDisplay();
 
 void fecBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data);
 void batteryStatusDataPageHandler(HeartRateBatteryStatus& msg, uintptr_t data);
@@ -44,9 +44,8 @@ void printStatus(uint8_t status);
 
 void setup() {
     delay(2000);
-    Bluefruit.begin() ;
     Serial1.begin(BAUD_RATE);
-    ant.begin(TOTAL_CHANNELS, ENCRYPTED_CHANNELS);
+    ant.begin(9600);
     delay(5000);
 
     router.setDriver(&ant); // never touch ant again
@@ -56,30 +55,30 @@ void setup() {
 
     Serial.begin(BAUD_RATE);
     Serial.println("Running");
-    ht.onDataPage(fecBaseDataPageHandler);
-    //ht.onFecManufacturerInformation(manufacturerInformationDataPageHandler);
-    //ht.onFecProductInformation(ProductInformationDataPageHandler);
-    ht.onFecGeneralDataPage(GeneralDataPageHandler);
-    //ht.onFecGeneralSettingsDataPage(GeneralSettingsDataPageHandler);
-    ht.onFecTargetPowerDataPage(TargetPowerDataPagehandler);
-    ht.onFecTrackResistanceDataPage(TrackResistanceDataPageHandler);
-    ht.onFecTrainerData(SpecificTrainerDataPageHandler);
-    ht.onFecCapabilitiesInformationDataPage(CapabitiliesDataPageHandler);
+    fec.onDataPage(fecBaseDataPageHandler);
+    //fec.onFecManufacturerInformation(manufacturerInformationDataPageHandler);
+    //fec.onFecProductInformation(ProductInformationDataPageHandler);
+    fec.onFecGeneralDataPage(GeneralDataPageHandler);
+    //fec.onFecGeneralSettingsDataPage(GeneralSettingsDataPageHandler);
+    fec.onFecTargetPowerDataPage(TargetPowerDataPagehandler);
+    fec.onFecTrackResistanceDataPage(TrackResistanceDataPageHandler);
+    fec.onFecTrainerData(SpecificTrainerDataPageHandler);
+    fec.onFecCapabilitiesInformationDataPage(CapabitiliesDataPageHandler);
 
-    ht.begin();
+    fec.begin();
     // wait for pair to complete
-    uint8_t status = ht.waitForPair();
+    uint8_t status = fec.waitForPair();
     // print channel status
     Serial.println("===========================");
     printStatus(status);
     Serial.print("Device Number: ");
-    Serial.println(ht.getDeviceNumber());
+    Serial.println(fec.getDeviceNumber());
     Serial.print("Transmisison Type: ");
-    Serial.println(ht.getTransmissionType());
+    Serial.println(fec.getTransmissionType());
     Serial.print("settings user information");
-    ht.transmitFecUserInformationMsg(9000, 3000);
+    fec.transmitFecUserInformationMsg(9000, 3000);
     // get fec capabilities
-    ht.transmitFecCapabitiliesRequestMsg();
+    fec.transmitFecCapabitiliesRequestMsg();
     Serial.print("Ask for capacity"); // this datapage not always sent by indoor bike trainer
 
 }
@@ -102,16 +101,14 @@ void loop() {
      */
     if(currentMillis - previousMillis > interval)
     {
-      // save the last time you blinked the LED
       previousMillis = currentMillis;
-      //Serial.println("Envoi de la puissance vise");
-      if ( TargetPower == 100 )
+      if (TargetPower == 100)
       {
         TargetPower = 50;
       }else{
         TargetPower = 100;
       }
-      ht.transmitFecTargetPowerMsg(TargetPower);
+      fec.transmitFecTargetPowerMsg(TargetPower);
       Serial.println(TargetPower);
     }
 }
