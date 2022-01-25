@@ -128,7 +128,7 @@ void GeneralDataPageHandler(FecGeneralMainDataPage& msg, uintptr_t data) {
     Serial.print("Equipment type: ");
     Serial.println(msg.getEquipmentTypeBits());
     Serial.print("Current speed:" );
-    Serial.println(msg.getSpeed(true));
+    Serial.println(msg.getSpeed());
     Serial.print("FE State:");
     Serial.println(msg.getFEStateBits());
     Serial.print("FEC CAPABILITIES:");

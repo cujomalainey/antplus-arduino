@@ -52,15 +52,7 @@ uint8_t FecBaseGeneralMainDataPage<T>::getFEStateBits() {
 }
 
 template<class T>
-/*
-
-in meter / s
-
-*/
-uint16_t FecBaseGeneralMainDataPage<T>::getSpeed(bool km) {
-    if ( km == true ){
-        return 3.6 * (this->get16BitValue(SPEED_LSB_BYTE, SPEED_MSB_BYTE)) /1000;
-    }
+uint16_t FecBaseGeneralMainDataPage<T>::getSpeed() {
     return this->get16BitValue(SPEED_LSB_BYTE, SPEED_MSB_BYTE);
 }
 
@@ -74,3 +66,4 @@ FecGeneralMainDataPage::FecGeneralMainDataPage(AntRxDataResponse& dp) :
 FecGeneralMainDataMsg::FecGeneralMainDataMsg() :
     FecBaseMainDataPageMsg(GENERAL_FE_DATA_NUMBER),
     FecBaseGeneralMainDataPage<BroadcastDataMsg>() {}
+// TODO

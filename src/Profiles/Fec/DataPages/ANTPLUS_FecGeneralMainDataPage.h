@@ -10,7 +10,7 @@ public:
     uint8_t getEquipmentTypeBits();
     uint8_t getElapsedTime();
     uint8_t getDistanceTraveled();
-    uint16_t getSpeed(bool km);
+    uint16_t getSpeed();
     uint8_t getHeartRate();
     uint8_t getCapabilitiesBits();
     uint8_t getFEStateBits();
