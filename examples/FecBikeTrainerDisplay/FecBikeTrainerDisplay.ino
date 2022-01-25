@@ -33,8 +33,8 @@ void CapabitiliesDataPageHandler(FecCapabilitiesInformationDatapage& msg, uintpt
 void TargetPowerDataPagehandler(FecTargetPowerDataPage& msg, uintptr_t data);
 void TrackREsistanceDataPageHandler(FecTrackResistanceDataPage& msg, uintptr_t data);
 
-long previousMillis = 0;
-long interval = 4000;
+unsigned long previousMillis = 0;
+const unsigned long interval = 4000;
 int  TargetPower = 50;
 void fecRateFeatures(uint8_t bitfield);
 void printStatus(uint8_t status);
