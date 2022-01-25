@@ -24,6 +24,6 @@ FecBasicResistanceMsg::FecBasicResistanceMsg() :
     FecBaseBasicResistance<BroadcastDataMsg>() {}
     // TODO reserved fields
 
-void FecBasicResistanceMsg::setTotalResistance(uint8_t total_resistance) {
-    set8BitValue(total_resistance, TOTAL_RESISTANCE_BYTE);
+void FecBasicResistanceMsg::setTotalResistance(uint8_t totalResistance) {
+    set8BitValue(totalResistance, TOTAL_RESISTANCE_BYTE);
 }

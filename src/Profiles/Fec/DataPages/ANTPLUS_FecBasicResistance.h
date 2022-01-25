@@ -18,7 +18,7 @@ public:
 class FecBasicResistanceMsg : public FecBaseMainDataPageMsg, public FecBaseBasicResistance<BroadcastDataMsg> {
 public:
     FecBasicResistanceMsg();
-    void setTotalResistance(uint8_t total_resistance);
+    void setTotalResistance(uint8_t totalResistance);
 };
 
 
