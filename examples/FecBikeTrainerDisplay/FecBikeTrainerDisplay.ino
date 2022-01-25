@@ -9,11 +9,8 @@
 #include <Arduino.h>
 #include "ANT.h"
 #include "ANTPLUS.h"
-#include "bluefruit.h"
-#define BAUD_RATE 115200
+#define BAUD_RATE 9600
 #define CHANNEL_0 0
-#define TOTAL_CHANNELS 1
-#define ENCRYPTED_CHANNELS 0
 
 const uint8_t NETWORK_KEY[] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}; // get this from thisisant.com
 
