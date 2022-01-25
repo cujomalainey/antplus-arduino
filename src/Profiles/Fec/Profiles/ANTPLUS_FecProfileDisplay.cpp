@@ -37,7 +37,7 @@ bool ProfileFecDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
     case ANTPLUS_FEC_GENERAL_SETTINGS_NUMBER:
         called = handleGeneralSettingsDataPage(dp);
         break;
-    
+
     case ANTPLUS_FEC_TARGET_POWER_NUMBER:
         called = handleTargetPowerDataPage(dp);
         break;
