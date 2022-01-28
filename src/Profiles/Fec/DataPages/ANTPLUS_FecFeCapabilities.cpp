@@ -4,6 +4,10 @@
 #define MAXIMUM_RESISTANCE_LSB_BYTE 5
 #define MAXIMUM_RESISTANCE_MSB_BYTE 6
 #define CAPABILITIES_BIT_FIELD_BYTE 7
+#define MAXIMUM_RESISTANCE_INVALID 0xFFFF
+#define RESERVED_LSB 1
+#define RESERVED_MSB 4
+#define RESERVED_VALUE 0xFFFFFFFF
 
 template<class T>
 FecBaseFeCapabilities<T>::FecBaseFeCapabilities() :
@@ -28,8 +32,10 @@ FecFeCapabilities::FecFeCapabilities(AntRxDataResponse& dp) :
 
 FecFeCapabilitiesMsg::FecFeCapabilitiesMsg() :
     FecBaseMainDataPageMsg(FE_CAPABILITIES_NUMBER),
-    FecBaseFeCapabilities<BroadcastDataMsg>() {}
-    // TODO reserved fields
+    FecBaseFeCapabilities<BroadcastDataMsg>() {
+    this->set32BitValue(RESERVED_VALUE, RESERVED_LSB, RESERVED_MSB);
+    setMaximumResistance(MAXIMUM_RESISTANCE_INVALID);
+}
 
 void FecFeCapabilitiesMsg::setMaximumResistance(uint16_t maximumResistance) {
     set16BitValue(maximumResistance, MAXIMUM_RESISTANCE_LSB_BYTE, MAXIMUM_RESISTANCE_MSB_BYTE);
