@@ -4,6 +4,7 @@
 
 // TODO this is a mixture of datapages
 #define EQUIPMENTTYPEBITS_BYTE 1
+#define EQUIPMENTTYPEBITS_MASK 0x0F
 #define ELAPSEDTIME_BYTE 2
 #define DISTANCETRAVELED_BYTE 3
 #define SPEED_LSB_BYTE 4
@@ -21,7 +22,7 @@ FecBaseGeneralMainDataPage<T>::FecBaseGeneralMainDataPage() :
 
 template<class T>
 uint8_t FecBaseGeneralMainDataPage<T>::getEquipmentTypeBits() {
-    return this->get8BitValue(EQUIPMENTTYPEBITS_BYTE);
+    return this->get8BitValue(EQUIPMENTTYPEBITS_BYTE, EQUIPMENTTYPEBITS_MASK);
 }
 
 template<class T>

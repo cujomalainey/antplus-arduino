@@ -126,8 +126,37 @@ void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data) 
 }
 
 void GeneralDataPageHandler(FecGeneralMainDataPage& msg, uintptr_t data) {
+    uint8_t equipment_type = msg.getEquipmentTypeBits();
     Serial.print("Equipment type: ");
-    Serial.println(msg.getEquipmentTypeBits());
+    switch (equipment_type) {
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_GENERAL:
+        Serial.println("General");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_TREADMILL:
+        Serial.println("Treadmill");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_ELLIPTICAL:
+        Serial.println("Elliptical");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_STATIONARYBIKE:
+        Serial.println("Stationary Bike");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_ROWER:
+        Serial.println("Rower");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_CLIMBER:
+        Serial.println("Climber");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_NORDICSKIER:
+        Serial.println("Nordic Skier");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_TRAINER:
+        Serial.println("Trainer");
+        break;
+    default:
+        Serial.println("Unknown");
+        break;
+    }
     Serial.print("Current speed:" );
     Serial.println(msg.getSpeed());
     Serial.print("FE State:");
