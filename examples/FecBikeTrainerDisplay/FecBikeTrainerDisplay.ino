@@ -252,15 +252,65 @@ void TrackResistanceDataPageHandler(FecTrackResistanceDataPage& msg, uintptr_t d
 }
 
 void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data){
-    Serial.print("Trainer status: ");
-    Serial.println(msg.getTrainerStatusBits());
-    if ( msg.getTrainerStatusBits() == 4 )
-    {
-      fec.transmitFecUserConfigurationMsg(9000, 3000);
-      Serial.println("Envoi des informations utilisateurs :");
+    Serial.print("Update Event Count: ");
+    Serial.println(msg.getUpdateEventCount());
+    Serial.print("Instantaneous Cadence: ");
+    uint8_t cadence = msg.getInstantaneousCadence();
+    if (cadence == ANTPLUS_FEC_DATAPAGE_SPECIFICTRAINERDATA_INSTANTANEOUSCADENCE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(cadence);
     }
-    Serial.print("Trainer flag bit: ");
-    Serial.println(msg.getFlagsBits());
+    uint16_t power = msg.getInstantaneousPower();
+    if (power == ANTPLUS_FEC_DATAPAGE_SPECIFICTRAINERDATA_INSTANTANEOUSPOWER_INVALID) {
+        Serial.println("Accumulated Power: Invalid");
+        Serial.println("Instantaneous Power: Invalid");
+    } else {
+        Serial.println("Accumulated Power: ");
+        Serial.print(msg.getAccumulatedPower());
+        Serial.println("Instantaneous Power: ");
+        Serial.print(power);
+    }
+    Serial.print("Bicycle Power Calibration: ");
+    if (msg.getBicyclePowerCalibration())
+    {
+        Serial.println("Required");
+    } else {
+        Serial.println("Complete/Not Required");
+    }
+    Serial.print("Resistance Calibration: ");
+    if (msg.getResistanceCalibration())
+    {
+        Serial.println("Required");
+    } else {
+        Serial.println("Complete/Not Required");
+    }
+    Serial.print("User Configuration: ");
+    if (msg.getUserConfiguration())
+    {
+        Serial.println("Required");
+        fec.transmitFecUserConfigurationMsg(9000, 3000);
+    } else {
+        Serial.println("Complete/Not Required");
+    }
+    Serial.print("Target Power Limits: ");
+    uint8_t limit = msg.getTargetPowerLimits();
+    switch(limit) {
+    case ANTPLUS_FEC_DATAPAGE_SPECIFICTRAINERDATA_TARGETPOWERLIMITS_ATTARGET:
+        Serial.println("Trainer at target power");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_SPECIFICTRAINERDATA_TARGETPOWERLIMITS_SPEEDTOOLOW:
+        Serial.println("User cycling speed is too low");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_SPECIFICTRAINERDATA_TARGETPOWERLIMITS_SPEEDTOOHIGH:
+        Serial.println("User cycling speed is too high");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_SPECIFICTRAINERDATA_TARGETPOWERLIMITS_UNDERTERMINED:
+        Serial.println("Undetermined");
+        break;
+    }
+    printFeState(msg.getFeState());
+    printLapToggleBit(msg.getLapToggleBit());
 }
 
 void FeCapabitiliesDataPageHandler(FecFeCapabilities& msg, uintptr_t data) {
