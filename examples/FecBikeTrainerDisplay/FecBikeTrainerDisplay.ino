@@ -248,16 +248,15 @@ void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data)
 }
 
 void FeCapabitiliesDataPageHandler(FecFeCapabilities& msg, uintptr_t data) {
-    uint8_t bits = msg.getCapabilitiesBitField();
     Serial.print("Max resistance: ");
     Serial.println(msg.getMaximumResistance());
     Serial.print("Fec Capabilities: ");
     Serial.print("  Supports Basic Resistance Mode: ");
-    Serial.println(bits & ANTPLUS_FEC_DATAPAGE_FECAPABILITIES_CAPABILITIESBITFIELD_SUPPORTSBASICRESISTANCEMODE ? "Y" : "N");
+    Serial.println(msg.getBasicResistanceModeSupport() ? "Y" : "N");
     Serial.print("  Supports Target Power Mode: ");
-    Serial.println(bits & ANTPLUS_FEC_DATAPAGE_FECAPABILITIES_CAPABILITIESBITFIELD_SUPPORTSTARGETPOWERMODE ? "Y" : "N");
+    Serial.println(msg.getTargetPowerModeSupport() ? "Y" : "N");
     Serial.print("  Supports Sumulation Mode: ");
-    Serial.println(bits & ANTPLUS_FEC_DATAPAGE_FECAPABILITIES_CAPABILITIESBITFIELD_SUPPORTSSIMULATIONMODE ? "Y" : "N");
+    Serial.println(msg.getSimulationModeSupport() ? "Y" : "N");
 }
 
 void printStatus(uint8_t status) {
