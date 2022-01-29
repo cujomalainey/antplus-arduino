@@ -72,7 +72,7 @@ void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
     profile->setRouter(this);
 }
 
-void AntPlusRouter::removeProfile(BaseProfile *profile) {
+void AntPlusRouter::removeProfile(const BaseProfile *profile) {
     for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
         if (_profiles[i] == profile) {
             removeProfileByChannel(i);

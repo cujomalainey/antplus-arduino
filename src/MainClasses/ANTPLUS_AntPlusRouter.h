@@ -39,7 +39,7 @@ public:
      * Unassigns channel
      * Removes the profile from index
      */
-    void removeProfile(BaseProfile *profile);
+    void removeProfile(const BaseProfile *profile);
     /**
      * Stops a profile at the given channel
      * Unassigns channel
