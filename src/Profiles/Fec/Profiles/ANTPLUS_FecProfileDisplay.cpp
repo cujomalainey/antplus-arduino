@@ -34,11 +34,11 @@ bool ProfileFecDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
         break;
 
     case GENERAL_FE_DATA_NUMBER:
-        called = handleGeneralDataPage(dp);
+        called = handleGeneralFeData(dp);
         break;
 
     case GENERAL_SETTINGS_PAGE_NUMBER:
-        called = handleGeneralSettingsDataPage(dp);
+        called = handleGeneralSettingsPage(dp);
         break;
 
     case TARGET_POWER_NUMBER:
@@ -78,14 +78,14 @@ bool ProfileFecDisplay::handleProductInformation(BaseDataPage<BroadcastData>& da
     return _onProductInformation.call(dp);
 }
 
-bool ProfileFecDisplay::handleGeneralDataPage(BaseDataPage<BroadcastData>& dataPage) {
+bool ProfileFecDisplay::handleGeneralFeData(BaseDataPage<BroadcastData>& dataPage) {
     FecGeneralFeData dp(dataPage);
     return _onFecGeneralFeData.call(dp);
 }
 
-bool ProfileFecDisplay::handleGeneralSettingsDataPage(BaseDataPage<BroadcastData>& dataPage) {
-    FecGeneralSettingsDataPage dp(dataPage);
-    return _onFecGeneralSettingsDataPage.call(dp);
+bool ProfileFecDisplay::handleGeneralSettingsPage(BaseDataPage<BroadcastData>& dataPage) {
+    FecGeneralSettingsPage dp(dataPage);
+    return _onFecGeneralSettingsPage.call(dp);
 }
 bool ProfileFecDisplay::handleTargetPowerDataPage(BaseDataPage<BroadcastData>& dataPage) {
     FecTargetPowerDataPage dp(dataPage);

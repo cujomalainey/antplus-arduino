@@ -23,7 +23,7 @@ void fecBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data);
 void manufacturerInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data);
 void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data);
 void GeneralDataPageHandler(FecGeneralFeData& msg, uintptr_t data);
-void GeneralSettingsDataPageHandler(FecGeneralSettingsDataPage& msg, uintptr_t data);
+void GeneralSettingsDataPageHandler(FecGeneralSettingsPage& msg, uintptr_t data);
 void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data);
 void FeCapabitiliesDataPageHandler(FecFeCapabilities& msg, uintptr_t data);
 
@@ -106,7 +106,6 @@ void loop() {
     }
 }
 
-
 void manufacturerInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data) {
     Serial.print("Manufacturer ID: ");
     Serial.println(msg.getManufacturerID());
@@ -180,13 +179,30 @@ void GeneralDataPageHandler(FecGeneralFeData& msg, uintptr_t data) {
     printLapToggleBit(msg.getLapToggleBit());
 }
 
-void GeneralSettingsDataPageHandler(FecGeneralSettingsDataPage& msg, uintptr_t data) {
+void GeneralSettingsDataPageHandler(FecGeneralSettingsPage& msg, uintptr_t data) {
+    uint8_t cycle_length = msg.getCycleLength();
     Serial.print("Cycle length: ");
-    Serial.println(msg.getCycleLength());
-    Serial.print("Incline value:" );
-    Serial.println(msg.getInclineValue());
-    Serial.print("Resistance level:");
-    Serial.println(msg.getResistanceLevel());
+    if (cycle_length == ANTPLUS_FEC_DATAPAGE_GENERALSETTINGSPAGE_CYCLELENGTH_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(cycle_length);
+    }
+    uint16_t incline = msg.getIncline();
+    Serial.print("Incline value: ");
+    if (incline == ANTPLUS_FEC_DATAPAGE_GENERALSETTINGSPAGE_INCLINE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(incline);
+    }
+    uint8_t resistance = msg.getResistanceLevel();
+    Serial.print("Resistance level: ");
+    if (resistance == ANTPLUS_FEC_DATAPAGE_GENERALSETTINGSPAGE_RESISTANCELEVEL_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(resistance);
+    }
+    printFeState(msg.getFeState());
+    printLapToggleBit(msg.getLapToggleBit());
 }
 
 void printFeState(uint8_t fe_state) {
@@ -226,7 +242,7 @@ void fecBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
 }
 
 void TargetPowerDataPagehandler(FecTargetPowerDataPage& msg, uintptr_t data){
-    Serial.print("Target POWER: ");
+    Serial.print("Target Power: ");
     Serial.println(msg.getTargetPower());
 }
 
