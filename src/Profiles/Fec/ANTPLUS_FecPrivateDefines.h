@@ -19,4 +19,12 @@
 #define FE_CAPABILITIES_NUMBER 54
 #define USER_CONFIGURATION_NUMBER 55
 
+// Field common to some base messages
+#define FESTATE_BYTE        7
+#define FESTATE_MASK        0x70
+#define FESTATE_SHIFT       4
+#define LAPTOGGLEBIT_BYTE   7
+#define LAPTOGGLEBIT_MASK   0x80
+#define LAPTOGGLEBIT_SHIFT  7
+
 #endif // ANTPLUS_FECPROFILEPRIVATEDEFINES_h

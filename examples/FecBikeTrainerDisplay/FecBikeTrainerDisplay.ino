@@ -22,7 +22,7 @@ ProfileFecDisplay fec;
 void fecBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data);
 void manufacturerInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data);
 void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data);
-void GeneralDataPageHandler(FecGeneralMainDataPage& msg, uintptr_t data);
+void GeneralDataPageHandler(FecGeneralFeData& msg, uintptr_t data);
 void GeneralSettingsDataPageHandler(FecGeneralSettingsDataPage& msg, uintptr_t data);
 void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data);
 void FeCapabitiliesDataPageHandler(FecFeCapabilities& msg, uintptr_t data);
@@ -52,7 +52,7 @@ void setup() {
     fec.onDataPage(fecBaseDataPageHandler);
     fec.onManufacturersInformation(manufacturerInformationDataPageHandler);
     fec.onProductInformation(productInformationDataPageHandler);
-    fec.onFecGeneralDataPage(GeneralDataPageHandler);
+    fec.onFecGeneralFeData(GeneralDataPageHandler);
     //fec.onFecGeneralSettingsDataPage(GeneralSettingsDataPageHandler);
     fec.onFecTargetPowerDataPage(TargetPowerDataPagehandler);
     fec.onFecTrackResistanceDataPage(TrackResistanceDataPageHandler);
@@ -125,44 +125,59 @@ void productInformationDataPageHandler(ProductInformation& msg, uintptr_t data) 
     Serial.println(msg.getSerialNumber());
 }
 
-void GeneralDataPageHandler(FecGeneralMainDataPage& msg, uintptr_t data) {
-    uint8_t equipment_type = msg.getEquipmentTypeBits();
+void GeneralDataPageHandler(FecGeneralFeData& msg, uintptr_t data) {
+    uint8_t fe_type = msg.getFeType();
     Serial.print("Equipment type: ");
-    switch (equipment_type) {
-    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_GENERAL:
+    switch (fe_type) {
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_FETYPE_GENERAL:
         Serial.println("General");
         break;
-    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_TREADMILL:
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_FETYPE_TREADMILL:
         Serial.println("Treadmill");
         break;
-    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_ELLIPTICAL:
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_FETYPE_ELLIPTICAL:
         Serial.println("Elliptical");
         break;
-    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_STATIONARYBIKE:
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_FETYPE_STATIONARYBIKE:
         Serial.println("Stationary Bike");
         break;
-    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_ROWER:
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_FETYPE_ROWER:
         Serial.println("Rower");
         break;
-    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_CLIMBER:
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_FETYPE_CLIMBER:
         Serial.println("Climber");
         break;
-    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_NORDICSKIER:
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_FETYPE_NORDICSKIER:
         Serial.println("Nordic Skier");
         break;
-    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_EQUIPMENTTYPEBITFIELD_TRAINER:
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_FETYPE_TRAINER:
         Serial.println("Trainer");
         break;
     default:
         Serial.println("Unknown");
         break;
     }
-    Serial.print("Current speed:" );
-    Serial.println(msg.getSpeed());
-    Serial.print("FE State:");
-    Serial.println(msg.getFEStateBits());
-    Serial.println("Fec Capabilities:");
-    // TODO
+    Serial.print("Elapsed time: ");
+    Serial.println(msg.getElapsedTime());
+    Serial.print("Distance traveled: ");
+    Serial.println(msg.getDistanceTraveled());
+    Serial.print("Current speed: ");
+    uint16_t speed = msg.getSpeed();
+    if (speed == ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_SPEED_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(speed);
+    }
+    Serial.print("Heart Rate: ");
+    uint8_t hr = msg.getHeartRate();
+    if (hr == ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_HEARTRATE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(hr);
+    }
+
+    printFeState(msg.getFeState());
+    printLapToggleBit(msg.getLapToggleBit());
 }
 
 void GeneralSettingsDataPageHandler(FecGeneralSettingsDataPage& msg, uintptr_t data) {
@@ -174,6 +189,34 @@ void GeneralSettingsDataPageHandler(FecGeneralSettingsDataPage& msg, uintptr_t d
     Serial.println(msg.getResistanceLevel());
 }
 
+void printFeState(uint8_t fe_state) {
+    Serial.print("FE State:");
+    switch (fe_state) {
+    case ANTPLUS_FEC_DATAPAGE_FESTATE_RESERVED:
+        Serial.println("Reserved");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_FESTATE_ASLEEP:
+        Serial.println("Asleep / Off");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_FESTATE_READY:
+        Serial.println("Ready");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_FESTATE_INUSE:
+        Serial.println("In Use");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_FESTATE_FINISHED:
+        Serial.println("Finished / Paused");
+        break;
+    default:
+        Serial.println("Unknown/Reserved");
+        break;
+    }
+}
+
+void printLapToggleBit(uint8_t bit) {
+    Serial.print("Lap Toggle Bit: ");
+    Serial.println(bit);
+}
 
 void fecBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
     FecBaseMainDataPage dp = FecBaseMainDataPage(msg);

@@ -79,8 +79,8 @@ bool ProfileFecDisplay::handleProductInformation(BaseDataPage<BroadcastData>& da
 }
 
 bool ProfileFecDisplay::handleGeneralDataPage(BaseDataPage<BroadcastData>& dataPage) {
-    FecGeneralMainDataPage dp(dataPage);
-    return _onFecGeneralDataPage.call(dp);
+    FecGeneralFeData dp(dataPage);
+    return _onFecGeneralFeData.call(dp);
 }
 
 bool ProfileFecDisplay::handleGeneralSettingsDataPage(BaseDataPage<BroadcastData>& dataPage) {

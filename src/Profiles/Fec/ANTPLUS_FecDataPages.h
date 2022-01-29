@@ -1,7 +1,7 @@
 #ifndef ANTPLUS_PROFILEFECDATAPAGES_h
 #define ANTPLUS_PROFILEFECDATAPAGES_h
 
-#include <Profiles/Fec/DataPages/ANTPLUS_FecGeneralMainDataPage.h>
+#include <Profiles/Fec/DataPages/ANTPLUS_FecGeneralFeData.h>
 #include <Profiles/Fec/DataPages/ANTPLUS_FecGeneralSettingsDataPage.h>
 #include <Profiles/Fec/DataPages/ANTPLUS_FecSpecificTrainerData.h>
 #include <Profiles/Fec/DataPages/ANTPLUS_FecBasicResistance.h>
