@@ -17,7 +17,7 @@ uint8_t FecBaseGeneralSettingsPage<T>::getCycleLength() {
 
 template<class T>
 uint16_t FecBaseGeneralSettingsPage<T>::getIncline() {
-    return this->get16BitValue(INCLINE_MSB_BYTE, INCLINE_LSB_BYTE);
+    return this->get16BitValue(INCLINE_LSB_BYTE, INCLINE_MSB_BYTE);
 }
 
 template<class T>
