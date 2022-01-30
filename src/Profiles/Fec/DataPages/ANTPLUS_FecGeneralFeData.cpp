@@ -2,7 +2,7 @@
 #include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
 
 #define FETYPE_BYTE 1
-#define FETYPE_MASK 0x0F
+#define FETYPE_MASK 0x1F
 #define ELAPSEDTIME_BYTE 2
 #define DISTANCETRAVELED_BYTE 3
 #define SPEED_LSB_BYTE 4
