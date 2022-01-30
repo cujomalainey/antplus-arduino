@@ -108,6 +108,35 @@ void loop() {
     }
 }
 
+void printFeState(uint8_t fe_state) {
+    Serial.print("FE State:");
+    switch (fe_state) {
+    case ANTPLUS_FEC_DATAPAGE_FESTATE_RESERVED:
+        Serial.println("Reserved");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_FESTATE_ASLEEP:
+        Serial.println("Asleep / Off");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_FESTATE_READY:
+        Serial.println("Ready");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_FESTATE_INUSE:
+        Serial.println("In Use");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_FESTATE_FINISHED:
+        Serial.println("Finished / Paused");
+        break;
+    default:
+        Serial.println("Unknown/Reserved");
+        break;
+    }
+}
+
+void printLapToggleBit(uint8_t bit) {
+    Serial.print("Lap Toggle Bit: ");
+    Serial.println(bit);
+}
+
 void manufacturerInformationDataPageHandler(ManufacturersInformation& msg, uintptr_t data) {
     Serial.print("Manufacturer ID: ");
     Serial.println(msg.getManufacturerID());
@@ -205,35 +234,6 @@ void GeneralSettingsDataPageHandler(FecGeneralSettingsPage& msg, uintptr_t data)
     }
     printFeState(msg.getFeState());
     printLapToggleBit(msg.getLapToggleBit());
-}
-
-void printFeState(uint8_t fe_state) {
-    Serial.print("FE State:");
-    switch (fe_state) {
-    case ANTPLUS_FEC_DATAPAGE_FESTATE_RESERVED:
-        Serial.println("Reserved");
-        break;
-    case ANTPLUS_FEC_DATAPAGE_FESTATE_ASLEEP:
-        Serial.println("Asleep / Off");
-        break;
-    case ANTPLUS_FEC_DATAPAGE_FESTATE_READY:
-        Serial.println("Ready");
-        break;
-    case ANTPLUS_FEC_DATAPAGE_FESTATE_INUSE:
-        Serial.println("In Use");
-        break;
-    case ANTPLUS_FEC_DATAPAGE_FESTATE_FINISHED:
-        Serial.println("Finished / Paused");
-        break;
-    default:
-        Serial.println("Unknown/Reserved");
-        break;
-    }
-}
-
-void printLapToggleBit(uint8_t bit) {
-    Serial.print("Lap Toggle Bit: ");
-    Serial.println(bit);
 }
 
 void fecBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
