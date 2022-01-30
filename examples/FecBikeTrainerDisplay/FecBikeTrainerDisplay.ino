@@ -50,7 +50,7 @@ void setup() {
     fec.onManufacturersInformation(manufacturerInformationDataPageHandler);
     fec.onProductInformation(productInformationDataPageHandler);
     fec.onFecGeneralFeData(GeneralDataPageHandler);
-    //fec.onFecGeneralSettingsDataPage(GeneralSettingsDataPageHandler);
+    fec.onFecGeneralSettingsPage(GeneralSettingsDataPageHandler);
     fec.onFecTrainerData(SpecificTrainerDataPageHandler);
     fec.onFecFeCapabilities(FeCapabitiliesDataPageHandler);
 
@@ -104,12 +104,11 @@ void loop() {
       FecTargetPowerMsg tp;
       tp.setTargetPower(TargetPower);
       fec.send(tp);
-      Serial.println(TargetPower);
     }
 }
 
 void printFeState(uint8_t fe_state) {
-    Serial.print("FE State:");
+    Serial.print("FE State: ");
     switch (fe_state) {
     case ANTPLUS_FEC_DATAPAGE_FESTATE_RESERVED:
         Serial.println("Reserved");
@@ -205,7 +204,26 @@ void GeneralDataPageHandler(FecGeneralFeData& msg, uintptr_t data) {
     } else {
         Serial.println(hr);
     }
-
+    Serial.print("HR Data Source: ");
+    uint8_t source = msg.getHrDataSource();
+    switch (source) {
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_HRDATASOURCE_INVALID:
+        Serial.println("Invalid");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_HRDATASOURCE_ANTPLUSMONITOR:
+        Serial.println("ANT+ HR Monitor");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_HRDATASOURCE_EMMONITOR:
+        Serial.println("EM Monitor");
+        break;
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_HRDATASOURCE_HANDSCONTACT:
+        Serial.println("Hand Contact");
+        break;
+    }
+    Serial.print("Distance Traveled Enabled: ");
+    Serial.println(msg.getDistanceTraveledEnabled());
+    Serial.print("Virtual Speed Flag: ");
+    Serial.println(msg.getVirtualSpeedFlag());
     printFeState(msg.getFeState());
     printLapToggleBit(msg.getLapToggleBit());
 }
@@ -258,10 +276,10 @@ void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data)
         Serial.println("Accumulated Power: Invalid");
         Serial.println("Instantaneous Power: Invalid");
     } else {
-        Serial.println("Accumulated Power: ");
-        Serial.print(msg.getAccumulatedPower());
-        Serial.println("Instantaneous Power: ");
-        Serial.print(power);
+        Serial.print("Accumulated Power: ");
+        Serial.println(msg.getAccumulatedPower());
+        Serial.print("Instantaneous Power: ");
+        Serial.println(power);
     }
     Serial.print("Bicycle Power Calibration: ");
     if (msg.getBicyclePowerCalibration())
@@ -311,7 +329,7 @@ void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data)
 void FeCapabitiliesDataPageHandler(FecFeCapabilities& msg, uintptr_t data) {
     Serial.print("Max resistance: ");
     Serial.println(msg.getMaximumResistance());
-    Serial.print("Fec Capabilities: ");
+    Serial.println("Fec Capabilities: ");
     Serial.print("  Supports Basic Resistance Mode: ");
     Serial.println(msg.getBasicResistanceModeSupport() ? "Y" : "N");
     Serial.print("  Supports Target Power Mode: ");
