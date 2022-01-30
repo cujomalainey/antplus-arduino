@@ -36,14 +36,14 @@ uint8_t BaseRequestDataPage<T>::getDescriptorByte2() {
 }
 
 template<class T>
-uint8_t BaseRequestDataPage<T>::getRequestedPageCount() {
+uint8_t BaseRequestDataPage<T>::getRequestedTransmissionResponseCount() {
     return this->get8BitValue(
             REQUESTEDTRANSMISSIONRESPONSE_BYTE,
             REQUESTEDTRANSMISSIONRESPONSE_COUNT_MASK);
 }
 
 template<class T>
-uint8_t BaseRequestDataPage<T>::getUseAcknowledgedMsgs() {
+uint8_t BaseRequestDataPage<T>::getRequestedTransmissionUseAcknowledged() {
     return this->get8BitValue(
             REQUESTEDTRANSMISSIONRESPONSE_BYTE,
             REQUESTEDTRANSMISSIONRESPONSE_USEACKNOWLEDGED_MASK,

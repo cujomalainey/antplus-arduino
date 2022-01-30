@@ -13,8 +13,8 @@ public:
     uint16_t getSlaveSerialNumber();
     uint8_t getDescriptorByte1();
     uint8_t getDescriptorByte2();
-    uint8_t getRequestedPageCount();
-    uint8_t getUseAcknowledgedMsgs();
+    uint8_t getRequestedTransmissionResponseCount();
+    uint8_t getRequestedTransmissionUseAcknowledged();
     uint8_t transmitTillAcknowledged();
     uint8_t getRequestedPageNumber();
     uint8_t getCommandType();

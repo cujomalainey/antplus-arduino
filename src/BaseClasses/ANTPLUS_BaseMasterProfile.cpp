@@ -31,9 +31,9 @@ void BaseMasterProfile::handleRequestDataPage(AcknowledgedData& msg) {
         // Datapage requested isn't supported, don't do anything
         return;
     }
-    _requestedCount = dp.getRequestedPageCount();
+    _requestedCount = dp.getRequestedTransmissionResponseCount();
     _requestedPage = dp.getRequestedPageNumber();
-    _isRequestAcknowledged = dp.getUseAcknowledgedMsgs();
+    _isRequestAcknowledged = dp.getRequestedTransmissionUseAcknowledged();
     _requestAcked = !dp.transmitTillAcknowledged();
     // TODO handle command type
 }
