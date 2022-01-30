@@ -1,6 +1,5 @@
 #include <Profiles/Fec/DataPages/ANTPLUS_FecSpecificTrainerData.h>
 #include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
-#include <ANTPLUS_PrivateDefines.h>
 
 #define UPDATEEVENTCOUNT_BYTE 1
 #define INSTANTANEOUSCADENCE_BYTE 2

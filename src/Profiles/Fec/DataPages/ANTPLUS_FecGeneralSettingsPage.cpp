@@ -1,6 +1,5 @@
 #include <Profiles/Fec/DataPages/ANTPLUS_FecGeneralSettingsPage.h>
 #include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
-#include <ANTPLUS_PrivateDefines.h>
 
 #define CYCLE_LENGTH_BYTE 3
 #define INCLINE_LSB_BYTE 4
@@ -44,7 +43,7 @@ FecGeneralSettingsPage::FecGeneralSettingsPage(AntRxDataResponse& dp) :
     FecBaseGeneralSettingsPage<BroadcastData>() {}
 
 FecGeneralSettingsPageMsg::FecGeneralSettingsPageMsg() :
-    FecBaseMainDataPageMsg(GENERAL_SETTINGS_PAGE_NUMBER),
+    FecBaseMainDataPageMsg(ANTPLUS_FEC_DATAPAGE_GENERALSETTINGSPAGE_NUMBER),
     FecBaseGeneralSettingsPage<BroadcastDataMsg>() {
     setCycleLength(ANTPLUS_FEC_DATAPAGE_GENERALSETTINGSPAGE_CYCLELENGTH_INVALID);
     setIncline(ANTPLUS_FEC_DATAPAGE_GENERALSETTINGSPAGE_INCLINE_INVALID);

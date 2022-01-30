@@ -1,6 +1,5 @@
 #include <Profiles/Fec/DataPages/ANTPLUS_FecGeneralFeData.h>
 #include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
-#include <ANTPLUS_PrivateDefines.h>
 
 #define FETYPE_BYTE 1
 #define FETYPE_MASK 0x0F
@@ -83,7 +82,7 @@ FecGeneralFeData::FecGeneralFeData(AntRxDataResponse& dp) :
     FecBaseGeneralFeData<BroadcastData>() {}
 
 FecGeneralFeDataMsg::FecGeneralFeDataMsg() :
-    FecBaseMainDataPageMsg(GENERAL_FE_DATA_NUMBER),
+    FecBaseMainDataPageMsg(ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_NUMBER),
     FecBaseGeneralFeData<BroadcastDataMsg>() {
     setSpeed(ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_SPEED_INVALID);
     setHeartRate(ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_HEARTRATE_INVALID);

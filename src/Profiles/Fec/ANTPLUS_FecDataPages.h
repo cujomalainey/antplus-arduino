@@ -5,8 +5,8 @@
 #include <Profiles/Fec/DataPages/ANTPLUS_FecGeneralSettingsPage.h>
 #include <Profiles/Fec/DataPages/ANTPLUS_FecSpecificTrainerData.h>
 #include <Profiles/Fec/DataPages/ANTPLUS_FecBasicResistance.h>
-#include <Profiles/Fec/DataPages/ANTPLUS_FecTargetPowerDataPage.h>
-#include <Profiles/Fec/DataPages/ANTPLUS_FecTrackResistanceDataPage.h>
+#include <Profiles/Fec/DataPages/ANTPLUS_FecTargetPower.h>
+#include <Profiles/Fec/DataPages/ANTPLUS_FecTrackResistance.h>
 #include <Profiles/Fec/DataPages/ANTPLUS_FecFeCapabilities.h>
 #include <Profiles/Fec/DataPages/ANTPLUS_FecUserConfiguration.h>
 

@@ -27,9 +27,6 @@ void GeneralSettingsDataPageHandler(FecGeneralSettingsPage& msg, uintptr_t data)
 void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data);
 void FeCapabitiliesDataPageHandler(FecFeCapabilities& msg, uintptr_t data);
 
-void TargetPowerDataPagehandler(FecTargetPowerDataPage& msg, uintptr_t data);
-void TrackREsistanceDataPageHandler(FecTrackResistanceDataPage& msg, uintptr_t data);
-
 unsigned long previousMillis = 0;
 const unsigned long interval = 4000;
 int  TargetPower = 50;
@@ -54,8 +51,6 @@ void setup() {
     fec.onProductInformation(productInformationDataPageHandler);
     fec.onFecGeneralFeData(GeneralDataPageHandler);
     //fec.onFecGeneralSettingsDataPage(GeneralSettingsDataPageHandler);
-    fec.onFecTargetPowerDataPage(TargetPowerDataPagehandler);
-    fec.onFecTrackResistanceDataPage(TrackResistanceDataPageHandler);
     fec.onFecTrainerData(SpecificTrainerDataPageHandler);
     fec.onFecFeCapabilities(FeCapabitiliesDataPageHandler);
 
@@ -70,11 +65,16 @@ void setup() {
     Serial.print("Transmisison Type: ");
     Serial.println(fec.getTransmissionType());
     Serial.print("settings user information");
-    fec.transmitFecUserConfigurationMsg(9000, 3000);
+    FecUserConfigurationMsg uc;
+    uc.setUserWeight(9000);
+    uc.setBicycleWeight(3000);
+    fec.send(uc);
     // get fec capabilities
-    // TODO transmit request datapage asking for capabilities
-    Serial.print("Ask for capacity"); // this datapage not always sent by indoor bike trainer
-
+    RequestDataPageMsg rq;
+    rq.setRequestedPageNumber(ANTPLUS_FEC_DATAPAGE_FECAPABILITIES_NUMBER);
+    rq.setCommandType(ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_COMMANDTYPE_REQUESTDATAPAGE);
+    rq.setRequestedTransmissionResponseCount(3);
+    fec.send(rq);
 }
 
 void loop() {
@@ -101,7 +101,9 @@ void loop() {
       }else{
         TargetPower = 100;
       }
-      fec.transmitFecTargetPowerMsg(TargetPower);
+      FecTargetPowerMsg tp;
+      tp.setTargetPower(TargetPower);
+      fec.send(tp);
       Serial.println(TargetPower);
     }
 }
@@ -241,16 +243,6 @@ void fecBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
     Serial.println(dp.getDataPageNumber());
 }
 
-void TargetPowerDataPagehandler(FecTargetPowerDataPage& msg, uintptr_t data){
-    Serial.print("Target Power: ");
-    Serial.println(msg.getTargetPower());
-}
-
-void TrackResistanceDataPageHandler(FecTrackResistanceDataPage& msg, uintptr_t data){
-    Serial.print("Track Resistance: ");
-    Serial.println(msg.getGrade());
-}
-
 void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data){
     Serial.print("Update Event Count: ");
     Serial.println(msg.getUpdateEventCount());
@@ -289,7 +281,10 @@ void SpecificTrainerDataPageHandler(FecSpecificTrainerData& msg, uintptr_t data)
     if (msg.getUserConfiguration())
     {
         Serial.println("Required");
-        fec.transmitFecUserConfigurationMsg(9000, 3000);
+        FecUserConfigurationMsg uc;
+        uc.setUserWeight(9000);
+        uc.setBicycleWeight(3000);
+        fec.send(uc);
     } else {
         Serial.println("Complete/Not Required");
     }

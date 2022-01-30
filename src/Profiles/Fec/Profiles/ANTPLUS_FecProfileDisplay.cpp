@@ -9,19 +9,19 @@ ProfileFecDisplay::ProfileFecDisplay(uint16_t deviceNumber, uint8_t transmission
 }
 
 void ProfileFecDisplay::onBroadcastData(BroadcastData& msg) {
-    BaseDataPage<BroadcastData> dp = BaseDataPage<BroadcastData>(msg);
+    FecBaseMainDataPage dp(msg);
     BaseSlaveProfile::onBroadcastData(msg);
     if (!handleDataPage(dp)) {
         callOnOtherDataPage(msg);
     }
 }
 
-bool ProfileFecDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
+bool ProfileFecDisplay::handleDataPage(FecBaseMainDataPage& dp) {
     uint8_t dataPage = dp.getDataPageNumber();
     bool called = false;
 
     switch (dataPage) {
-    case SPECIFIC_TRAINER_DATA_NUMBER:
+    case ANTPLUS_FEC_DATAPAGE_SPECIFICTRAINERDATA_NUMBER:
         called = handleTrainerData(dp);
         break;
 
@@ -33,19 +33,15 @@ bool ProfileFecDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
         called = handleProductInformation(dp);
         break;
 
-    case GENERAL_FE_DATA_NUMBER:
+    case ANTPLUS_FEC_DATAPAGE_GENERALFEDATA_NUMBER:
         called = handleGeneralFeData(dp);
         break;
 
-    case GENERAL_SETTINGS_PAGE_NUMBER:
+    case ANTPLUS_FEC_DATAPAGE_GENERALSETTINGSPAGE_NUMBER:
         called = handleGeneralSettingsPage(dp);
         break;
 
-    case TARGET_POWER_NUMBER:
-        called = handleTargetPowerDataPage(dp);
-        break;
-
-    case FE_CAPABILITIES_NUMBER:
+    case ANTPLUS_FEC_DATAPAGE_FECAPABILITIES_NUMBER:
         called = handleFeCapabilities(dp);
         break;
     }
@@ -54,7 +50,7 @@ bool ProfileFecDisplay::handleDataPage(BaseDataPage<BroadcastData>& dp) {
 }
 
 void ProfileFecDisplay::onAcknowledgedData(AcknowledgedData& msg) {
-    BaseDataPage<BroadcastData> dp = BaseDataPage<BroadcastData>(msg);
+    FecBaseMainDataPage dp = FecBaseMainDataPage(msg);
     BaseSlaveProfile::onAcknowledgedData(msg);
     if (!handleDataPage(dp)) {
         callOnOtherDataPage(msg);
@@ -68,65 +64,32 @@ void ProfileFecDisplay::setChannelConfig() {
     setSearchTimeout(ANTPLUS_FEC_SEARCHTIMEOUT);
 }
 
-bool ProfileFecDisplay::handleManufacturerInformation(BaseDataPage<BroadcastData>& dataPage) {
+bool ProfileFecDisplay::handleManufacturerInformation(FecBaseMainDataPage& dataPage) {
     ManufacturersInformation dp(dataPage);
     return _onManufacturersInformation.call(dp);
 }
 
-bool ProfileFecDisplay::handleProductInformation(BaseDataPage<BroadcastData>& dataPage) {
+bool ProfileFecDisplay::handleProductInformation(FecBaseMainDataPage& dataPage) {
     ProductInformation dp(dataPage);
     return _onProductInformation.call(dp);
 }
 
-bool ProfileFecDisplay::handleGeneralFeData(BaseDataPage<BroadcastData>& dataPage) {
+bool ProfileFecDisplay::handleGeneralFeData(FecBaseMainDataPage& dataPage) {
     FecGeneralFeData dp(dataPage);
     return _onFecGeneralFeData.call(dp);
 }
 
-bool ProfileFecDisplay::handleGeneralSettingsPage(BaseDataPage<BroadcastData>& dataPage) {
+bool ProfileFecDisplay::handleGeneralSettingsPage(FecBaseMainDataPage& dataPage) {
     FecGeneralSettingsPage dp(dataPage);
     return _onFecGeneralSettingsPage.call(dp);
 }
-bool ProfileFecDisplay::handleTargetPowerDataPage(BaseDataPage<BroadcastData>& dataPage) {
-    FecTargetPowerDataPage dp(dataPage);
-    return _onFecTargetPowerDataPage.call(dp);
-}
 
-bool ProfileFecDisplay::handleFeCapabilities(BaseDataPage<BroadcastData>& dataPage) {
+bool ProfileFecDisplay::handleFeCapabilities(FecBaseMainDataPage& dataPage) {
     FecFeCapabilities dp(dataPage);
     return _onFecFeCapabilities.call(dp);
 }
 
-bool ProfileFecDisplay::transmitFecTargetPowerMsg(uint16_t TargetPower) {
-    FecTargetPowerDataMsg msg;
-    msg.setTargetPower(TargetPower);
-    send(msg);
-    return false;
-}
-
-bool ProfileFecDisplay::transmitFecTrackResistanceMsg(uint16_t TargetGrade) {
-    FecTrackResistanceDataMsg msg;
-    msg.setTargetGrade(TargetGrade);
-    send(msg);
-    return false;
-}
-
-bool ProfileFecDisplay::transmitFecBasicResistanceMsg(uint8_t total_resistance) {
-    FecBasicResistanceMsg msg;
-    msg.setTotalResistance(total_resistance);
-    send(msg);
-    return false;
-}
-
-bool ProfileFecDisplay::transmitFecUserConfigurationMsg(uint16_t UserWeight, uint16_t BikeWeight) {
-    FecUserConfigurationMsg msg;
-    msg.setUserWeight(UserWeight);
-    msg.setBikeWeight(BikeWeight);
-    send(msg);
-    return true;
-}
-
-bool ProfileFecDisplay::handleTrainerData(BaseDataPage<BroadcastData>& dataPage) {
+bool ProfileFecDisplay::handleTrainerData(FecBaseMainDataPage& dataPage) {
     FecSpecificTrainerData dp(dataPage);
     return _onFecSpecificTrainerData.call(dp);
 }

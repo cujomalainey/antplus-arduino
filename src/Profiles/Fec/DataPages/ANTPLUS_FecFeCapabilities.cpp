@@ -11,8 +11,8 @@
 #define SIMULATIONMODESUPPORT_BYTE 7
 #define SIMULATIONMODESUPPORT_MASK 0x4
 #define SIMULATIONMODESUPPORT_SHIFT 2
-#define RESERVED_LSB 1
-#define RESERVED_MSB 4
+#define RESERVED_LSB_BYTE 1
+#define RESERVED_MSB_BYTE 4
 #define RESERVED_VALUE 0xFFFFFFFF
 
 template<class T>
@@ -51,9 +51,9 @@ FecFeCapabilities::FecFeCapabilities(AntRxDataResponse& dp) :
     FecBaseFeCapabilities<BroadcastData>() {}
 
 FecFeCapabilitiesMsg::FecFeCapabilitiesMsg() :
-    FecBaseMainDataPageMsg(FE_CAPABILITIES_NUMBER),
+    FecBaseMainDataPageMsg(ANTPLUS_FEC_DATAPAGE_FECAPABILITIES_NUMBER),
     FecBaseFeCapabilities<BroadcastDataMsg>() {
-    this->set32BitValue(RESERVED_VALUE, RESERVED_LSB, RESERVED_MSB);
+    this->set32BitValue(RESERVED_VALUE, RESERVED_LSB_BYTE, RESERVED_MSB_BYTE);
     setMaximumResistance(ANTPLUS_FEC_DATAPAGE_FECAPABILITIES_MAXIMUM_RESISTANCE_INVALID);
 }
 
