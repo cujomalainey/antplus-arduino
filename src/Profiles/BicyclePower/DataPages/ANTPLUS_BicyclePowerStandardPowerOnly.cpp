@@ -5,6 +5,10 @@
 
 #define UPDATEEVENTCOUNT_BYTE   1
 #define PEDALPOWER_BYTE 2
+#define PEDALPOWER_MASK 0x7F
+#define PEDALDIFFERENTIATION_BYTE 2
+#define PEDALDIFFERENTIATION_MASK 0x80
+#define PEDALDIFFERENTIATION_SHIFT 7
 #define INSTANTANEOUSCADENCE_BYTE 3
 #define ACCUMULATEDPOWER_LSB_BYTE 4
 #define ACCUMULATEDPOWER_MSB_BYTE 5
@@ -16,8 +20,20 @@ BicyclePowerBaseStandardPowerOnly<T>::BicyclePowerBaseStandardPowerOnly() :
     CoreDataPage<T>() {}
 
 template<class T>
+uint8_t BicyclePowerBaseStandardPowerOnly<T>::getUpdateEventCount() {
+    return this->get8BitValue(UPDATEEVENTCOUNT_BYTE);
+}
+
+template<class T>
 uint8_t BicyclePowerBaseStandardPowerOnly<T>::getPedalPower() {
-    return this->get8BitValue(PEDALPOWER_BYTE);
+    return this->get8BitValue(PEDALPOWER_BYTE, PEDALPOWER_MASK);
+}
+
+template<class T>
+uint8_t BicyclePowerBaseStandardPowerOnly<T>::getPedalDifferentiation() {
+    return this->get8BitValue(PEDALDIFFERENTIATION_BYTE,
+            PEDALDIFFERENTIATION_MASK,
+            PEDALDIFFERENTIATION_SHIFT);
 }
 
 template<class T>
@@ -52,13 +68,24 @@ BicyclePowerStandardPowerOnlyMsg::BicyclePowerStandardPowerOnlyMsg() :
 }
 
 void BicyclePowerStandardPowerOnlyMsg::setUpdateEventCount(uint8_t eventCount) {
-    this->set8BitValue(eventCount, UPDATEEVENTCOUNT_BYTE);
+    set8BitValue(eventCount, UPDATEEVENTCOUNT_BYTE);
 }
 
-void BicyclePowerStandardPowerOnlyMsg::setCumulativePowerCount(uint16_t accPower) {
-    this->set16BitValue(accPower, ACCUMULATEDPOWER_LSB_BYTE, ACCUMULATEDPOWER_MSB_BYTE);
+void BicyclePowerStandardPowerOnlyMsg::setPedalPower(uint8_t pedalPower) {
+    set8BitValue(pedalPower, PEDALPOWER_BYTE, PEDALPOWER_MASK);
 }
 
-void BicyclePowerStandardPowerOnlyMsg::setInstantaneousPowerCount(uint16_t power) {
-    this->set16BitValue(power, INSTANTANEOUSPOWER_LSB_BYTE, INSTANTANEOUSPOWER_MSB_BYTE);
+void BicyclePowerStandardPowerOnlyMsg::setPedalDifferentiation(uint8_t differentiation) {
+    set8BitValue(differentiation,
+            PEDALDIFFERENTIATION_BYTE,
+            PEDALDIFFERENTIATION_MASK,
+            PEDALDIFFERENTIATION_SHIFT);
+}
+
+void BicyclePowerStandardPowerOnlyMsg::setAccumulatedPower(uint16_t accPower) {
+    set16BitValue(accPower, ACCUMULATEDPOWER_LSB_BYTE, ACCUMULATEDPOWER_MSB_BYTE);
+}
+
+void BicyclePowerStandardPowerOnlyMsg::setInstantaneousPowerCount(uint16_t instantaneousPower) {
+    set16BitValue(instantaneousPower, INSTANTANEOUSPOWER_LSB_BYTE, INSTANTANEOUSPOWER_MSB_BYTE);
 }
