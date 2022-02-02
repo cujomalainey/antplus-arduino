@@ -41,8 +41,10 @@ BicyclePowerStandardCrankTorque::BicyclePowerStandardCrankTorque(AntRxDataRespon
     BicyclePowerBaseStandardCrankTorque() {}
 
 BicyclePowerStandardCrankTorqueMsg::BicyclePowerStandardCrankTorqueMsg() :
-    BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER),
-    BicyclePowerBaseStandardCrankTorque() {}
+    BicyclePowerBaseMainDataPageMsg(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDCRANKTORQUE_NUMBER),
+    BicyclePowerBaseStandardCrankTorque() {
+    setInstantaneousCadence(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDCRANKTORQUE_INSTANTANEOUSCADENCE_INVALID);
+}
 
 void BicyclePowerStandardCrankTorqueMsg::setCrankTicks(uint8_t ticks) {
     set8BitValue(ticks, CRANKTICKS_BYTE);

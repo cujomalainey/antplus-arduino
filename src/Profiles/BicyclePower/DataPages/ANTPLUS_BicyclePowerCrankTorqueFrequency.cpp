@@ -36,7 +36,7 @@ BicyclePowerCrankTorqueFrequency::BicyclePowerCrankTorqueFrequency(AntRxDataResp
     BicyclePowerBaseCrankTorqueFrequency() {}
 
 BicyclePowerCrankTorqueFrequencyMsg::BicyclePowerCrankTorqueFrequencyMsg() :
-    BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER),
+    BicyclePowerBaseMainDataPageMsg(ANTPLUS_BICYCLEPOWER_DATAPAGES_CRANKTORQUEFREQUENCY_NUMBER),
     BicyclePowerBaseCrankTorqueFrequency() {}
 
 void BicyclePowerCrankTorqueFrequencyMsg::setSlope(uint16_t slope) {

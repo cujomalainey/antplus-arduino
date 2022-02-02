@@ -7,7 +7,6 @@ template<class T>
 class BicyclePowerBaseStandardPowerOnly : virtual public CoreDataPage<T> {
 public:
     BicyclePowerBaseStandardPowerOnly();
-    uint8_t getUpdateEventCount();
     uint8_t getPedalPower();
     uint8_t getPedalDifferentiation();
     uint8_t getInstantaneousCadence();
@@ -23,12 +22,11 @@ public:
 class BicyclePowerStandardPowerOnlyMsg : public BicyclePowerBaseMainDataPageMsg, public BicyclePowerBaseStandardPowerOnly<BroadcastDataMsg> {
 public:
     BicyclePowerStandardPowerOnlyMsg(void);
-    void setUpdateEventCount(uint8_t eventCount);
     void setPedalPower(uint8_t pedalPower);
     void setPedalDifferentiation(uint8_t differentiation);
     void setInstantaneousCadence(uint8_t cadence);
     void setAccumulatedPower(uint16_t accPower);
-    void setInstantaneousPowerCount(uint16_t instantaneousPower);
+    void setInstantaneousPower(uint16_t instantaneousPower);
 };
 
 #endif // ANTPLUS_BICYCLEPOWERSTANDARDPOWERONLY_h

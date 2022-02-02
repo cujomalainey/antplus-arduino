@@ -99,6 +99,14 @@ void loop() {
     router.loop();
 }
 
+void printOrInvalid(uint8_t value, uint8_t invalidValue) {
+    if (value == invalidValue) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(value);
+    }
+}
+
 void batteryStatusDataPageHandler(BatteryStatus& msg, uintptr_t data) {
     Serial.print("Fractional Battery Voltage: ");
     Serial.println(msg.getFractionalBatteryVoltage());
@@ -135,10 +143,17 @@ void bicyclePowerBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
 
 void powerOnlyDataPageHandler(BicyclePowerStandardPowerOnly& msg, uintptr_t data) {
     Serial.print("Pedal Power: ");
-    if (msg.getPedalPower() == ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_PEDALPOWER_NOTUSED) {
+    if (msg.getPedalPower() == ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_PEDALPOWER_NOTUSED &&
+            msg.getPedalDifferentiation()) {
         Serial.println("Not Used");
     } else {
         Serial.println(msg.getPedalPower());
+        Serial.print(" From Pedal: ");
+        if (msg.getPedalDifferentiation() == ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_PEDALDIFFERENTIATION_RIGHT) {
+            Serial.println("Right");
+        } else {
+            Serial.println("Unknown");
+        }
     }
     Serial.print("Instantaneous Cadence: ");
     if (msg.getInstantaneousCadence() == ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_INSTANTANEOUSCADENCE_INVALID) {
@@ -156,7 +171,8 @@ void crankTorqueDataPageHandler(BicyclePowerStandardCrankTorque& msg, uintptr_t 
     Serial.print("Crank Ticks: ");
     Serial.println(msg.getCrankTicks());
     Serial.print("Instantaneous Cadence: ");
-    Serial.println(msg.getInstantaneousCadence());
+    printOrInvalid(msg.getInstantaneousCadence(),
+            ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDCRANKTORQUE_INSTANTANEOUSCADENCE_INVALID);
     Serial.print("Crank Period: ");
     Serial.println(msg.getCrankPeriod());
     Serial.print("Accumulated Torque: ");
@@ -167,7 +183,8 @@ void wheelTorqueDataPageHandler(BicyclePowerStandardWheelTorque& msg, uintptr_t 
     Serial.print("Wheel Ticks: ");
     Serial.println(msg.getWheelTicks());
     Serial.print("Instantaneous Cadence: ");
-    Serial.println(msg.getInstantaneousCadence());
+    printOrInvalid(msg.getInstantaneousCadence(),
+            ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDWHEELTORQUE_INSTANTANEOUSCADENCE_INVALID);
     Serial.print("Wheel Period: ");
     Serial.println(msg.getWheelPeriod());
     Serial.print("Accumulated Torque: ");
@@ -176,13 +193,23 @@ void wheelTorqueDataPageHandler(BicyclePowerStandardWheelTorque& msg, uintptr_t 
 
 void pedalSmoothnessDataPageHandler(BicyclePowerTorqueEffectivenessAndPedalSmoothness& msg, uintptr_t data) {
     Serial.print("Left Torque Effectiveness: ");
-    Serial.println(msg.getLeftTorqueEffectiveness());
+    printOrInvalid(msg.getLeftTorqueEffectiveness(),
+            ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_TORQUEEFFECTIVENESS_INVALID);
     Serial.print("Right Torque Effectiveness: ");
-    Serial.println(msg.getRightTorqueEffectiveness());
-    Serial.print("Left Pedal Smoothness: ");
-    Serial.println(msg.getLeftPedalSmoothness());
-    Serial.print("Right Pedal Smoothness: ");
-    Serial.println(msg.getRightPedalSmoothness());
+    printOrInvalid(msg.getRightTorqueEffectiveness(),
+            ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_TORQUEEFFECTIVENESS_INVALID);
+    if (msg.getRightPedalSmoothness() == ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_RIGHTPEDALSMOOTHNESS_COMBINED) {
+        Serial.print("Combined Pedal Smoothness: ");
+        printOrInvalid(msg.getLeftPedalSmoothness(),
+                ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_PEDALSMOOTHNESS_INVALID);
+    } else {
+        Serial.print("Left Pedal Smoothness: ");
+        printOrInvalid(msg.getLeftPedalSmoothness(),
+                ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_PEDALSMOOTHNESS_INVALID);
+        Serial.print("Right Pedal Smoothness: ");
+        printOrInvalid(msg.getRightPedalSmoothness(),
+                ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_PEDALSMOOTHNESS_INVALID);
+    }
 }
 
 void printStatus(uint8_t status) {

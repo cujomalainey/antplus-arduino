@@ -14,6 +14,7 @@ public:
 class BicyclePowerBaseMainDataPageMsg : public BaseDataPageMsg<BroadcastDataMsg> {
 public:
     explicit BicyclePowerBaseMainDataPageMsg(uint8_t dataPageNumber);
+    void setUpdateEventCount(uint8_t eventCount);
 protected:
     uint8_t _buffer[MESSAGE_SIZE] = {0};
 };

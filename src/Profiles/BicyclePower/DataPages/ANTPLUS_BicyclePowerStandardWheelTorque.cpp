@@ -41,8 +41,10 @@ BicyclePowerStandardWheelTorque::BicyclePowerStandardWheelTorque(AntRxDataRespon
     BicyclePowerBaseStandardWheelTorque() {}
 
 BicyclePowerStandardWheelTorqueMsg::BicyclePowerStandardWheelTorqueMsg() :
-    BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER),
-    BicyclePowerBaseStandardWheelTorque() {}
+    BicyclePowerBaseMainDataPageMsg(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDWHEELTORQUE_NUMBER),
+    BicyclePowerBaseStandardWheelTorque() {
+    setInstantaneousCadence(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDWHEELTORQUE_INSTANTANEOUSCADENCE_INVALID);
+}
 
 void BicyclePowerStandardWheelTorqueMsg::setWheelTicks(uint8_t ticks) {
     set8BitValue(ticks, WHEELTICKS_BYTE);

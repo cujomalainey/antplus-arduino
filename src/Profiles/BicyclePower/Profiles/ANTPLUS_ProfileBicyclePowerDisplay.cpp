@@ -31,19 +31,19 @@ bool ProfileBicyclePowerDisplay::handleDataPage(BicyclePowerBaseMainDataPage& dp
     case COMMON_BATTERYSTATUS_NUMBER:
         called = handleBatteryStatus(dp);
         break;
-    case BICYCLEPOWER_STANDARDPOWERONLY_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_NUMBER:
         called = handleStandardPowerOnly(dp);
         break;
-    case BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDCRANKTORQUE_NUMBER:
         called = handleStandardCrankTorque(dp);
         break;
-    case BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDWHEELTORQUE_NUMBER:
         called = handleStandardWheelTorque(dp);
         break;
-    case BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
         called = handleTorqueEffectivenessAndPedalSmoothness(dp);
         break;
-    case BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_CRANKTORQUEFREQUENCY_NUMBER:
         called = handleCrankTorqueFrequency(dp);
         break;
     }

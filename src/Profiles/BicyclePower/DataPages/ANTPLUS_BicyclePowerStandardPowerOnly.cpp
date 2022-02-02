@@ -3,7 +3,6 @@
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
-#define UPDATEEVENTCOUNT_BYTE   1
 #define PEDALPOWER_BYTE 2
 #define PEDALPOWER_MASK 0x7F
 #define PEDALDIFFERENTIATION_BYTE 2
@@ -18,11 +17,6 @@
 template<class T>
 BicyclePowerBaseStandardPowerOnly<T>::BicyclePowerBaseStandardPowerOnly() :
     CoreDataPage<T>() {}
-
-template<class T>
-uint8_t BicyclePowerBaseStandardPowerOnly<T>::getUpdateEventCount() {
-    return this->get8BitValue(UPDATEEVENTCOUNT_BYTE);
-}
 
 template<class T>
 uint8_t BicyclePowerBaseStandardPowerOnly<T>::getPedalPower() {
@@ -61,14 +55,11 @@ BicyclePowerStandardPowerOnly::BicyclePowerStandardPowerOnly(AntRxDataResponse& 
     BicyclePowerBaseStandardPowerOnly() {}
 
 BicyclePowerStandardPowerOnlyMsg::BicyclePowerStandardPowerOnlyMsg() :
-    BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_STANDARDPOWERONLY_NUMBER),
+    BicyclePowerBaseMainDataPageMsg(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_NUMBER),
     BicyclePowerBaseStandardPowerOnly<BroadcastDataMsg>() {
-    this->set8BitValue(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_PEDALPOWER_NOTUSED, PEDALPOWER_BYTE);
-    this->set8BitValue(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_INSTANTANEOUSCADENCE_INVALID, INSTANTANEOUSCADENCE_BYTE);
-}
-
-void BicyclePowerStandardPowerOnlyMsg::setUpdateEventCount(uint8_t eventCount) {
-    set8BitValue(eventCount, UPDATEEVENTCOUNT_BYTE);
+    setPedalPower(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_PEDALPOWER_NOTUSED);
+    setPedalDifferentiation(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_PEDALDIFFERENTIATION_RIGHT);
+    setInstantaneousCadence(ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_INSTANTANEOUSCADENCE_INVALID);
 }
 
 void BicyclePowerStandardPowerOnlyMsg::setPedalPower(uint8_t pedalPower) {
@@ -82,10 +73,14 @@ void BicyclePowerStandardPowerOnlyMsg::setPedalDifferentiation(uint8_t different
             PEDALDIFFERENTIATION_SHIFT);
 }
 
+void BicyclePowerStandardPowerOnlyMsg::setInstantaneousCadence(uint8_t cadence) {
+    set8BitValue(cadence, INSTANTANEOUSCADENCE_BYTE);
+}
+
 void BicyclePowerStandardPowerOnlyMsg::setAccumulatedPower(uint16_t accPower) {
     set16BitValue(accPower, ACCUMULATEDPOWER_LSB_BYTE, ACCUMULATEDPOWER_MSB_BYTE);
 }
 
-void BicyclePowerStandardPowerOnlyMsg::setInstantaneousPowerCount(uint16_t instantaneousPower) {
+void BicyclePowerStandardPowerOnlyMsg::setInstantaneousPower(uint16_t instantaneousPower) {
     set16BitValue(instantaneousPower, INSTANTANEOUSPOWER_LSB_BYTE, INSTANTANEOUSPOWER_MSB_BYTE);
 }

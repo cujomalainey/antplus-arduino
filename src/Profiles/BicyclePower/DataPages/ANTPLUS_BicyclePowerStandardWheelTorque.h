@@ -8,7 +8,7 @@ class BicyclePowerBaseStandardWheelTorque : virtual public CoreDataPage<T> {
 public:
     BicyclePowerBaseStandardWheelTorque();
     uint8_t getWheelTicks();
-    uint8_t getInstantaneousCadence(); // TODO(is valid check) May not be available, 0xFF indicates invalid
+    uint8_t getInstantaneousCadence();
     uint16_t getWheelPeriod();
     uint16_t getAccumulatedTorque();
 };
@@ -26,7 +26,7 @@ class BicyclePowerStandardWheelTorqueMsg :
 public:
     BicyclePowerStandardWheelTorqueMsg();
     void setWheelTicks(uint8_t ticks);
-    void setInstantaneousCadence(uint8_t cadence); // TODO(is valid check) May not be available, 0xFF indicates invalid
+    void setInstantaneousCadence(uint8_t cadence);
     void setWheelPeriod(uint16_t period);
     void setAccumulatedTorque(uint16_t torque);
 };

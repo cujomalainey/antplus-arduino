@@ -47,7 +47,7 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
     case COMMON_REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
-    case BICYCLEPOWER_GENERALCALIBRATION_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_GENERALCALIBRATION_NUMBER:
         called = handleGeneralCalibration(dp);
         break;
     }
@@ -79,7 +79,7 @@ void ProfileBicyclePowerSensor::transmitNextDataPage() {
         page = getNextTorqueSensorPage();
         break;
     case ANTPLUS_BICYCLEPOWER_FLAGS_SENSORTYPE_CTF:
-        page = BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER;
+        page = ANTPLUS_BICYCLEPOWER_DATAPAGES_CRANKTORQUEFREQUENCY_NUMBER;
         break;
     }
 
@@ -92,14 +92,14 @@ uint8_t ProfileBicyclePowerSensor::getNextPowerOnlySensorPage() {
 
     if ((mod_five == 0) && _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.func) {
         /* Interleave every 5th message if implemented */
-        return BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER;
+        return ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER;
     }
 
     backgroundPage = getBackgroundPage();
     if (backgroundPage) {
         return backgroundPage;
     }
-    return BICYCLEPOWER_STANDARDPOWERONLY_NUMBER;
+    return ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_NUMBER;
 }
 
 uint8_t ProfileBicyclePowerSensor::getNextTorqueSensorPage() {
@@ -108,10 +108,10 @@ uint8_t ProfileBicyclePowerSensor::getNextTorqueSensorPage() {
 
     if (mod_five == 0) {
         /* Interleave every 5th message */
-        return BICYCLEPOWER_STANDARDPOWERONLY_NUMBER;
+        return ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_NUMBER;
     } else if ((mod_five == 1) && _createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.func) {
         /* Interleave every 5th message if implemented */
-        return BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER;
+        return ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER;
     }
 
     backgroundPage = getBackgroundPage();
@@ -120,7 +120,8 @@ uint8_t ProfileBicyclePowerSensor::getNextTorqueSensorPage() {
     }
 
     return FLAGS_SENSORTYPE(_flags) == ANTPLUS_BICYCLEPOWER_FLAGS_SENSORTYPE_TORQUECRANK ?
-        BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER : BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER;
+        ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDCRANKTORQUE_NUMBER :
+        ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDWHEELTORQUE_NUMBER;
 }
 
 
@@ -224,19 +225,19 @@ uint8_t ProfileBicyclePowerSensor::getBackgroundPage() {
 void ProfileBicyclePowerSensor::transmitDataPage(uint8_t page) {
     switch (page) {
     // TODO calibration datapages
-    case BICYCLEPOWER_STANDARDPOWERONLY_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_NUMBER:
         transmitBicyclePowerStandardPowerOnlyMsg();
         break;
-    case BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDWHEELTORQUE_NUMBER:
         transmitBicyclePowerStandardWheelTorqueMsg();
         break;
-    case BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDCRANKTORQUE_NUMBER:
         transmitBicyclePowerStandardCrankTorqueMsg();
         break;
-    case BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
         transmitBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg();
         break;
-    case BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_CRANKTORQUEFREQUENCY_NUMBER:
         transmitBicyclePowerCrankTorqueFrequencyMsg();
         break;
     case COMMON_PRODUCTINFORMATION_NUMBER:
@@ -261,16 +262,16 @@ void ProfileBicyclePowerSensor::setChannelConfig() {
 bool ProfileBicyclePowerSensor::isDataPageValid(uint8_t dataPage) {
     // TODO calibration data pages
     switch (dataPage) {
-    case BICYCLEPOWER_STANDARDPOWERONLY_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDPOWERONLY_NUMBER:
         return FLAGS_SENSORTYPE(_flags) != ANTPLUS_BICYCLEPOWER_FLAGS_SENSORTYPE_CTF;
-    case BICYCLEPOWER_STANDARDWHEELTORQUE_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDWHEELTORQUE_NUMBER:
         return FLAGS_SENSORTYPE(_flags) == ANTPLUS_BICYCLEPOWER_FLAGS_SENSORTYPE_TORQUEWHEEL;
-    case BICYCLEPOWER_STANDARDCRANKTORQUE_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_STANDARDCRANKTORQUE_NUMBER:
         return FLAGS_SENSORTYPE(_flags) == ANTPLUS_BICYCLEPOWER_FLAGS_SENSORTYPE_TORQUECRANK;
-    case BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER:
         return FLAGS_SENSORTYPE(_flags) != ANTPLUS_BICYCLEPOWER_FLAGS_SENSORTYPE_CTF &&
             (bool)_createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.func;
-    case BICYCLEPOWER_CRANKTORQUEFREQUENCY_NUMBER:
+    case ANTPLUS_BICYCLEPOWER_DATAPAGES_CRANKTORQUEFREQUENCY_NUMBER:
         return FLAGS_SENSORTYPE(_flags) == ANTPLUS_BICYCLEPOWER_FLAGS_SENSORTYPE_CTF;
     case COMMON_BATTERYSTATUS_NUMBER:
         return (bool)_createBatteryStatusMsg.func;

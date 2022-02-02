@@ -38,8 +38,13 @@ BicyclePowerTorqueEffectivenessAndPedalSmoothness::BicyclePowerTorqueEffectivene
     BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness() {}
 
 BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg::BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg() :
-    BicyclePowerBaseMainDataPageMsg(BICYCLEPOWER_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER),
-    BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness() {}
+    BicyclePowerBaseMainDataPageMsg(ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_NUMBER),
+    BicyclePowerBaseTorqueEffectivenessAndPedalSmoothness() {
+    setLeftTorqueEffectiveness(ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_TORQUEEFFECTIVENESS_INVALID);
+    setRightTorqueEffectiveness(ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_TORQUEEFFECTIVENESS_INVALID);
+    setLeftPedalSmoothness(ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_PEDALSMOOTHNESS_INVALID);
+    setRightPedalSmoothness(ANTPLUS_BICYCLEPOWER_DATAPAGES_TORQUEEFFECTIVENESSANDPEDALSMOOTHNESS_PEDALSMOOTHNESS_INVALID);
+}
 
 void BicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg::setLeftTorqueEffectiveness(uint8_t effectiveness) {
     set8BitValue(effectiveness, LEFTEFFECTIVENESS_BYTE);

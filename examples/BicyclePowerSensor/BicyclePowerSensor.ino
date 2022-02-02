@@ -114,8 +114,8 @@ void powerOnlyDataPageHandler(BicyclePowerStandardPowerOnlyMsg& msg, uintptr_t d
 
     printDpMsg(16, "Power Only");
     msg.setUpdateEventCount(eventCount++);
-    msg.setCumulativePowerCount(eventCount * 3);
-    msg.setInstantaneousPowerCount(eventCount * 2);
+    msg.setAccumulatedPower(eventCount * 3);
+    msg.setInstantaneousPower(eventCount * 2);
 }
 
 void crankTorqueDataPageHandler(BicyclePowerStandardCrankTorqueMsg& msg, uintptr_t data) {

@@ -9,11 +9,11 @@ BicyclePowerBaseMainDataPage::BicyclePowerBaseMainDataPage(AntRxDataResponse& dp
     BaseDataPage<BroadcastData>(dp) {}
 
 uint8_t BicyclePowerBaseMainDataPage::getDataPageNumber() {
-    return getData(ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+    return this->get8BitValue(ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 
 uint8_t BicyclePowerBaseMainDataPage::getUpdateEventCount() {
-    return getData(UPDATEEVENTCOUNT_BYTE);
+    return this->get8BitValue(UPDATEEVENTCOUNT_BYTE);
 }
 
 BicyclePowerBaseMainDataPageMsg::BicyclePowerBaseMainDataPageMsg(uint8_t dataPageNumber) :
@@ -21,3 +21,7 @@ BicyclePowerBaseMainDataPageMsg::BicyclePowerBaseMainDataPageMsg(uint8_t dataPag
     setDataBuffer(_buffer);
     set8BitValue(dataPageNumber, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 };
+
+void BicyclePowerBaseMainDataPageMsg::setUpdateEventCount(uint8_t eventCount) {
+    set8BitValue(eventCount, UPDATEEVENTCOUNT_BYTE);
+}
