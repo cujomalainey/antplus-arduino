@@ -1,7 +1,9 @@
 #include <CommonDataPages/ANTPLUS_ProductInformation.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
+#define RESERVED_BYTE 1
+#define RESERVED_VALUE 0xFF
 #define SWREVISIONSUPPLEMENTAL_BYTE 2
 #define SWREVISIONMAIN_BYTE 3
 #define SERIALNUMBER_LSB_BYTE 4
@@ -35,11 +37,10 @@ ProductInformation::ProductInformation(AntRxDataResponse& dp) :
 ProductInformationMsg::ProductInformationMsg() :
     BaseDataPageMsg<BroadcastDataMsg>(),
     BaseProductInformation<BroadcastDataMsg>() {
-    // TODO magic numbers
     setDataBuffer(_buffer);
-    set8BitValue(COMMON_PRODUCTINFORMATION_NUMBER, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
-    set8BitValue(0xFF, 1);
-    set8BitValue(0xFF, SWREVISIONSUPPLEMENTAL_BYTE);
+    set8BitValue(ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+    set8BitValue(RESERVED_VALUE, RESERVED_BYTE);
+    set8BitValue(ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_SWREVISIONSUPPLEMENTAL_INVALID, SWREVISIONSUPPLEMENTAL_BYTE);
 }
 
 void ProductInformationMsg::setSWRevisionSupplemental(uint8_t revision) {

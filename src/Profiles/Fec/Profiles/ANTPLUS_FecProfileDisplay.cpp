@@ -1,6 +1,6 @@
 #include <Profiles/Fec/Profiles/ANTPLUS_FecProfileDisplay.h>
 #include <Profiles/Fec/ANTPLUS_FecPrivateDefines.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 
 #define DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
 
@@ -25,11 +25,11 @@ bool ProfileFecDisplay::handleDataPage(FecBaseMainDataPage& dp) {
         called = handleTrainerData(dp);
         break;
 
-    case COMMON_MANUFACTURERSINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
         called = handleManufacturerInformation(dp);
         break;
 
-    case COMMON_PRODUCTINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
         called = handleProductInformation(dp);
         break;
 

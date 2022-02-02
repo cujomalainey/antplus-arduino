@@ -1,5 +1,4 @@
 #include <CommonDataPages/ANTPLUS_RequestDataPage.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
@@ -79,7 +78,7 @@ RequestDataPageMsg::RequestDataPageMsg() :
     setDataBuffer(_buffer);
     setDescriptorByte1(ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_DESCRIPTORBYTE1_INVALID);
     setDescriptorByte2(ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_DESCRIPTORBYTE2_INVALID);
-    set8BitValue(COMMON_REQUESTDATAPAGE_NUMBER, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+    set8BitValue(ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 
 void RequestDataPageMsg::setSlaveSerialNumber(uint16_t serialNumber) {

@@ -1,6 +1,6 @@
 #include <BaseClasses/ANTPLUS_BaseDataPage.h>
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <CommonDataPages/ANTPLUS_RequestDataPage.h>
 
 BaseMasterProfile::BaseMasterProfile(uint16_t deviceNumber, uint8_t transmissionType) : BaseProfile(deviceNumber, transmissionType) {
@@ -20,7 +20,7 @@ void BaseMasterProfile::onAcknowledgedData(AcknowledgedData& msg) {
     BaseProfile::onAcknowledgedData(msg);
     BaseDataPage<AcknowledgedData> dp(msg);
 
-    if (dp.getDataPageNumber() == COMMON_REQUESTDATAPAGE_NUMBER) {
+    if (dp.getDataPageNumber() == ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER) {
         handleRequestDataPage(msg);
     }
 }

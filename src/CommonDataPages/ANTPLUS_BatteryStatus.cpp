@@ -1,5 +1,5 @@
 #include <CommonDataPages/ANTPLUS_BatteryStatus.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 #define RESERVED_BYTE 1
@@ -77,7 +77,7 @@ BatteryStatusMsg::BatteryStatusMsg() :
     BaseDataPageMsg<BroadcastDataMsg>(),
     BaseBatteryStatus<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
-    set8BitValue(COMMON_BATTERYSTATUS_NUMBER, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+    set8BitValue(ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
     set8BitValue(RESERVED_VALUE, RESERVED_BYTE);
 }
 

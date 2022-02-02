@@ -1,7 +1,5 @@
 #include <Profiles/BicycleSpeed/Profiles/ANTPLUS_ProfileBicycleSpeedDisplay.h>
 #include <Profiles/BicycleSpeed/ANTPLUS_BicycleSpeedPrivateDefines.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPages.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
 
 #define DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
 

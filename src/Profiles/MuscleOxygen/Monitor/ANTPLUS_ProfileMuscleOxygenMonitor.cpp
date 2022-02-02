@@ -1,5 +1,5 @@
 #include <Profiles/MuscleOxygen/Monitor/ANTPLUS_ProfileMuscleOxygenMonitor.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 #define MONITOR_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
@@ -25,10 +25,11 @@ void ProfileMuscleOxygenMonitor::setChannelConfig() {
 bool ProfileMuscleOxygenMonitor::isDataPageValid(uint8_t dataPage) {
     switch (dataPage) {
     case MUSCLEOXYGEN_MUSCLEOXYGENDATA_NUMBER:
-    case COMMON_PRODUCTINFORMATION_NUMBER:
-    case COMMON_MANUFACTURERSINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
         return true;
-    case COMMON_BATTERYSTATUS_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
+        // TODO use callback
         return _flags & ANTPLUS_MUSCLEOXYGEN_FLAGS_BATTERYSTATUS_SUPPORTED;
     }
     return false;

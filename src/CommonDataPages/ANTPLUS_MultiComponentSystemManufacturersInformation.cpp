@@ -1,5 +1,5 @@
 #include <CommonDataPages/ANTPLUS_MultiComponentSystemManufacturersInformation.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 #define COMPONENTIDENTIFIER_BYTE 2
@@ -56,7 +56,7 @@ MultiComponentSystemManufacturersInformationMsg::MultiComponentSystemManufacture
     BaseMultiComponentSystemManufacturersInformation<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
     set8BitValue(
-            COMMON_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER,
+            ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER,
             ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
 

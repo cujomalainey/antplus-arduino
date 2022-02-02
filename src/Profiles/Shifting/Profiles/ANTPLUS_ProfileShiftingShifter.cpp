@@ -1,5 +1,5 @@
 #include <Profiles/Shifting/Profiles/ANTPLUS_ProfileShiftingShifter.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <Profiles/Shifting/ANTPLUS_ShiftingPrivateDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
@@ -40,9 +40,9 @@ bool ProfileShiftingShifter::isDataPageValid(uint8_t dataPage)
 {
     switch (dataPage) {
     case ANTPLUS_SHIFTING_DATAPAGE_SHIFTSYSTEMSTATUS_NUMBER:
-    case COMMON_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER:
-    case COMMON_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER:
-    case COMMON_BATTERYSTATUS_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
         return true;
     }
     return false;
@@ -110,7 +110,7 @@ void ProfileShiftingShifter::onAcknowledgedData(AcknowledgedData& msg) {
 
     switch (dataPage) {
 
-    case COMMON_REQUESTDATAPAGE_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
     }
@@ -175,9 +175,9 @@ bool ProfileShiftingShifter::handleRequestDataPage(BaseDataPage<AcknowledgedData
     uint8_t dataPageRequestedNumber = dp.getRequestedPageNumber();
 
     switch (dataPageRequestedNumber) {
-    case COMMON_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER:
-    case COMMON_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER:
-    case COMMON_BATTERYSTATUS_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMPRODUCTINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
         break;
     default:
         // skip check if not multicomponent message

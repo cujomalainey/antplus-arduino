@@ -1,7 +1,7 @@
 #include <Profiles/BicyclePower/Profiles/ANTPLUS_ProfileBicyclePowerSensor.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerDefines.h>
 #include <Profiles/BicyclePower/ANTPLUS_BicyclePowerPrivateDefines.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 #define SENSOR_CHANNELTYPE   CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
@@ -44,7 +44,7 @@ void ProfileBicyclePowerSensor::onAcknowledgedData(AcknowledgedData& msg) {
     BaseMasterProfile::onAcknowledgedData(msg);
     switch (dataPage) {
 
-    case COMMON_REQUESTDATAPAGE_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
     case ANTPLUS_BICYCLEPOWER_DATAPAGES_GENERALCALIBRATION_NUMBER:
@@ -207,15 +207,15 @@ uint8_t ProfileBicyclePowerSensor::getBackgroundPage() {
      * */
 
     if (_patternStep == 118) {
-        return COMMON_MANUFACTURERSINFORMATION_NUMBER;
+        return ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER;
     }
 
     if (_patternStep == 119) {
-        return COMMON_PRODUCTINFORMATION_NUMBER;
+        return ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER;
     }
 
     if ((_patternStep == 33 || _patternStep == 93) && _createBatteryStatusMsg.func) {
-        return COMMON_BATTERYSTATUS_NUMBER;
+        return ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER;
     }
 
     /* we don't have anything to transmit */
@@ -240,13 +240,13 @@ void ProfileBicyclePowerSensor::transmitDataPage(uint8_t page) {
     case ANTPLUS_BICYCLEPOWER_DATAPAGES_CRANKTORQUEFREQUENCY_NUMBER:
         transmitBicyclePowerCrankTorqueFrequencyMsg();
         break;
-    case COMMON_PRODUCTINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
         transmitProductInfomrationMsg();
         break;
-    case COMMON_MANUFACTURERSINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
         transmitManufacturesInformationMsg();
         break;
-    case COMMON_BATTERYSTATUS_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
         transmitBatteryStatusMsg();
         break;
     }
@@ -273,10 +273,10 @@ bool ProfileBicyclePowerSensor::isDataPageValid(uint8_t dataPage) {
             (bool)_createBicyclePowerTorqueEffectivenessAndPedalSmoothnessMsg.func;
     case ANTPLUS_BICYCLEPOWER_DATAPAGES_CRANKTORQUEFREQUENCY_NUMBER:
         return FLAGS_SENSORTYPE(_flags) == ANTPLUS_BICYCLEPOWER_FLAGS_SENSORTYPE_CTF;
-    case COMMON_BATTERYSTATUS_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_NUMBER:
         return (bool)_createBatteryStatusMsg.func;
-    case COMMON_PRODUCTINFORMATION_NUMBER:
-    case COMMON_MANUFACTURERSINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
         return true;
     default:
         return false;

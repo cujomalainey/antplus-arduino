@@ -1,6 +1,6 @@
 #include <Profiles/Environment/Profiles/ANTPLUS_ProfileEnvironmentDisplay.h>
 #include <Profiles/Environment/ANTPLUS_EnvironmentPrivateDefines.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 
 #define DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
 
@@ -35,11 +35,11 @@ bool ProfileEnvironmentDisplay::handleDataPage(EnvironmentBaseDataPage& dp) {
         case ENVIRONMENT_TEMPERATURE_NUMBER:
             called = handleTemperature(dp);
             break;
-        case COMMON_MANUFACTURERSINFORMATION_NUMBER:
+        case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
             // Called Manufacturers Identification in Environment Profile PDF
             called = handleManufacturersInformation(dp);
             break;
-        case COMMON_PRODUCTINFORMATION_NUMBER:
+        case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
             called = handleProductInformation(dp);
             break;
     }

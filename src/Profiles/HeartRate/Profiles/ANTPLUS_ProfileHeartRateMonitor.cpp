@@ -1,7 +1,7 @@
 #include <Profiles/HeartRate/Profiles/ANTPLUS_ProfileHeartRateMonitor.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
 #include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 #define MONITOR_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_TRANSMIT
@@ -45,10 +45,10 @@ void ProfileHeartRateMonitor::onAcknowledgedData(AcknowledgedData& msg) {
 
     switch (dataPage) {
 
-    case COMMON_REQUESTDATAPAGE_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER:
         called = handleRequestDataPage(dp);
         break;
-    case COMMON_MODESETTINGS_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_NUMBER:
         called = handleModeSettings(dp);
         break;
     }

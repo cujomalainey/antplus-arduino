@@ -1,7 +1,7 @@
 #include <Profiles/Lev/Profiles/ANTPLUS_ProfileLevDisplay.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 #include <Profiles/Lev/ANTPLUS_LevDefines.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 
 #define DISPLAY_CHANNELTYPE CHANNEL_TYPE_BIDIRECTIONAL_RECEIVE
 
@@ -56,10 +56,10 @@ bool ProfileLevDisplay::handleDataPage(LevBaseMainDataPage& dp) {
     case LEVCAPABILITIES_NUMBER:
         called = handleCapabilities(dp);
         break;
-    case COMMON_MANUFACTURERSINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
         called = handleManufacturersInformation(dp);
         break;
-    case COMMON_PRODUCTINFORMATION_NUMBER:
+    case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
         called = handleProductInformation(dp);
         break;
     }

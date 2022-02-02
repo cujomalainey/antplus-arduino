@@ -1,5 +1,5 @@
 #include <CommonDataPages/ANTPLUS_ManufacturersInformation.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
 #define HWREVISION_BYTE 3
@@ -42,7 +42,7 @@ ManufacturersInformationMsg::ManufacturersInformationMsg() :
     BaseDataPageMsg<BroadcastDataMsg>(),
     BaseManufacturersInformation<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
-    set8BitValue(COMMON_MANUFACTURERSINFORMATION_NUMBER,
+    set8BitValue(ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER,
             ANTPLUS_DEFAULT_DATAPAGE_BYTE);
     set16BitValue(RESERVED_VALUE, RESERVED_LSB_BYTE, RESERVED_MSB_BYTE);
 }
