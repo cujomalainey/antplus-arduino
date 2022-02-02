@@ -5,7 +5,7 @@
 #include <Profiles/Shifting/ANTPLUS_ShiftingDefines.h>
 
 // Datapages
-#include <Profiles/Shifting/DataPages/ANTPLUS_ProfileShiftingDataPages.h>
+#include <Profiles/Shifting/ANTPLUS_ProfileShiftingDataPages.h>
 
 // Profile Classes
 #include <Profiles/Shifting/Profiles/ANTPLUS_ProfileShiftingShifter.h>

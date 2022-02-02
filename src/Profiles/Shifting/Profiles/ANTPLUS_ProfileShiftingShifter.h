@@ -2,7 +2,7 @@
 #define ANTPLUS_PROFILESHIFTINGSHIFTER_h
 
 #include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
-#include <Profiles/Shifting/DataPages/ANTPLUS_ProfileShiftingDataPages.h>
+#include <Profiles/Shifting/ANTPLUS_ProfileShiftingDataPages.h>
 #include <Profiles/Shifting/ANTPLUS_ShiftingDefines.h>
 #include <CommonDataPages/ANTPLUS_CommonDataPages.h>
 
