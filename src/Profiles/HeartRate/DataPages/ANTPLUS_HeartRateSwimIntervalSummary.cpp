@@ -32,7 +32,6 @@ HeartRateSwimIntervalSummary::HeartRateSwimIntervalSummary(AntRxDataResponse& dp
     HeartRateBaseMainDataPage(dp),
     HeartRateBaseSwimIntervalSummary<BroadcastData>() {}
 
-// TODO add isValid methods
 HeartRateSwimIntervalSummaryMsg::HeartRateSwimIntervalSummaryMsg() :
     HeartRateBaseMainDataPageMsg(HEARTRATE_SWIMINTERVALSUMMARY_NUMBER),
     HeartRateBaseSwimIntervalSummary<BroadcastDataMsg>() {
