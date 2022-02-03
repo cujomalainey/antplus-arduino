@@ -1,6 +1,8 @@
 #include <Profiles/Lev/DataPages/ANTPLUS_LevBatteryInformation.h>
 #include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
 
+#define RESERVED_BYTE                      1
+#define RESERVED_VALUE                     0xFF
 #define CHARGINGCYCLECOUNT_LSB_BYTE        2
 #define CHARGINGCYCLECOUNT_MSB_BYTE        3
 #define CHARGINGCYCLECOUNT_MASK            0x0FFF
@@ -12,26 +14,64 @@
 #define DISTANCEONCURRENTCHARGE_LSB_BYTE   6
 #define DISTANCEONCURRENTCHARGE_MSB_BYTE   7
 
-LevBatteryInformation::LevBatteryInformation(AntRxDataResponse& dp) :
-    LevBaseMainDataPage(dp) {}
+template<class T>
+LevBaseBatteryInformation<T>::LevBaseBatteryInformation() : CoreDataPage<T>() {}
 
-uint16_t LevBatteryInformation::getChargingCycleCount() {
+template<class T>
+uint16_t LevBaseBatteryInformation<T>::getChargingCycleCount() {
     return this->get16BitValue(CHARGINGCYCLECOUNT_LSB_BYTE,
             CHARGINGCYCLECOUNT_MSB_BYTE, CHARGINGCYCLECOUNT_MASK);
 }
 
-// TODO check this in testing
-uint16_t LevBatteryInformation::getFuelConsumption() {
+template<class T>
+uint16_t LevBaseBatteryInformation<T>::getFuelConsumption() {
     return this->get16BitValue(FUELCONSUMPTION_LSB_BYTE,
             FUELCONSUMPTION_MSB_BYTE, FUELCONSUMPTION_MASK,
             FUELCONSUMPTION_SHIFT);
 }
 
-uint8_t LevBatteryInformation::getBatteryVoltage() {
+template<class T>
+uint8_t LevBaseBatteryInformation<T>::getBatteryVoltage() {
     return this->get8BitValue(BATTERYVOLTAGE_BYTE);
 }
 
-uint16_t LevBatteryInformation::getDistanceOnCurrentCharge() {
+template<class T>
+uint16_t LevBaseBatteryInformation<T>::getDistanceOnCurrentCharge() {
     return this->get16BitValue(DISTANCEONCURRENTCHARGE_LSB_BYTE,
+            DISTANCEONCURRENTCHARGE_MSB_BYTE);
+}
+
+template class LevBaseBatteryInformation<BroadcastData>;
+template class LevBaseBatteryInformation<BroadcastDataMsg>;
+
+LevBatteryInformation::LevBatteryInformation(AntRxDataResponse& dp) :
+    LevBaseMainDataPage(dp),
+    LevBaseBatteryInformation<BroadcastData>() {}
+
+LevBatteryInformationMsg::LevBatteryInformationMsg() :
+    LevBaseMainDataPageMsg<BroadcastDataMsg>(BATTERYINFORMATION_NUMBER),
+    LevBaseBatteryInformation<BroadcastDataMsg>() {
+    set8BitValue(RESERVED_VALUE, RESERVED_BYTE);
+}
+
+void LevBatteryInformationMsg::setChargingCycleCount(uint16_t cycleCount) {
+    set16BitValue(cycleCount, CHARGINGCYCLECOUNT_LSB_BYTE,
+            CHARGINGCYCLECOUNT_MSB_BYTE,
+            CHARGINGCYCLECOUNT_MASK);
+}
+
+void LevBatteryInformationMsg::setFuelConsumption(uint16_t consumption) {
+    set16BitValue(consumption, FUELCONSUMPTION_LSB_BYTE,
+            FUELCONSUMPTION_MSB_BYTE,
+            FUELCONSUMPTION_MASK,
+            FUELCONSUMPTION_SHIFT);
+}
+
+void LevBatteryInformationMsg::setBatteryVoltage(uint8_t voltage) {
+    set8BitValue(voltage, BATTERYVOLTAGE_BYTE);
+}
+
+void LevBatteryInformationMsg::setDistanceOnCurrentCharge(uint16_t distance) {
+    set16BitValue(distance, DISTANCEONCURRENTCHARGE_LSB_BYTE,
             DISTANCEONCURRENTCHARGE_MSB_BYTE);
 }
