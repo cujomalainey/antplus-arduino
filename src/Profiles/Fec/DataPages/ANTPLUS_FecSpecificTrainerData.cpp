@@ -89,3 +89,57 @@ template class FecBaseSpecificTrainerData<BroadcastDataMsg>;
 FecSpecificTrainerData::FecSpecificTrainerData(AntRxDataResponse& dp) :
     BaseDataPage<BroadcastData>(dp),
     FecBaseSpecificTrainerData<BroadcastData>() {}
+
+FecSpecificTrainerDataMsg::FecSpecificTrainerDataMsg() :
+    BaseDataPageMsg<BroadcastDataMsg>(),
+    FecBaseSpecificTrainerData<BroadcastDataMsg>() {}
+
+void FecSpecificTrainerDataMsg::setUpdateEventCount(uint8_t eventCount) {
+    set8BitValue(eventCount, UPDATEEVENTCOUNT_BYTE);
+}
+
+void FecSpecificTrainerDataMsg::setInstantaneousCadence(uint8_t cadence) {
+    set8BitValue(cadence, INSTANTANEOUSCADENCE_BYTE);
+}
+
+void FecSpecificTrainerDataMsg::setAccumulatedPower(uint16_t accPower) {
+    set16BitValue(accPower, ACCUMULATEDPOWER_LSB_BYTE,
+            ACCUMULATEDPOWER_MSB_BYTE);
+}
+
+void FecSpecificTrainerDataMsg::setInstantaneousPower(uint16_t intPower) {
+    set16BitValue(intPower, INSTANTANEOUSPOWER_LSB_BYTE,
+            INSTANTANEOUSPOWER_MSB_BYTE,
+            INSTANTANEOUSPOWER_MSB_MASK);
+}
+
+void FecSpecificTrainerDataMsg::setBicyclePowerCalibration(uint8_t powerCalibration) {
+    set8BitValue(powerCalibration, BICYCLEPOWERCALIBRATION_BYTE,
+            BICYCLEPOWERCALIBRATION_MASK,
+            BICYCLEPOWERCALIBRATION_SHIFT);
+}
+
+void FecSpecificTrainerDataMsg::setResistanceCalibration(uint8_t resistanceCalibration) {
+    set8BitValue(resistanceCalibration, RESISTANCECALIBRATION_BYTE,
+            RESISTANCECALIBRATION_MASK,
+            RESISTANCECALIBRATION_SHIFT);
+}
+
+void FecSpecificTrainerDataMsg::setUserConfiguration(uint8_t userConfiguration) {
+    set8BitValue(userConfiguration, USERCONFIGURATION_BYTE,
+            USERCONFIGURATION_MASK,
+            USERCONFIGURATION_SHIFT);
+}
+
+void FecSpecificTrainerDataMsg::setTargetPowerLimits(uint8_t targetPower) {
+    set8BitValue(targetPower, TARGETPOWERLIMITS_BYTE, TARGETPOWERLIMITS_MASK);
+}
+
+void FecSpecificTrainerDataMsg::setFeState(uint8_t feState) {
+    set8BitValue(feState, FESTATE_BYTE, FESTATE_MASK, FESTATE_SHIFT);
+}
+
+void FecSpecificTrainerDataMsg::setLapToggleBit(uint8_t lapToggle) {
+    set8BitValue(lapToggle, LAPTOGGLEBIT_BYTE,
+            LAPTOGGLEBIT_MASK, LAPTOGGLEBIT_SHIFT);
+}
