@@ -20,51 +20,92 @@
 #define CURRENTFRONTGEAR_BYTE          4
 #define CURRENTFRONTGEAR_MASK          0x30
 #define CURRENTFRONTGEAR_SHIFT         4
-#define CURRENTLIGHTMODE_BYTE          4
-#define CURRENTLIGHTMODE_MASK          0xF
+#define DISPLAYCOMMAND_BYTE            4
+#define DISPLAYCOMMANDTURNSIGNALRIGHT_MASK  0x1
+#define DISPLAYCOMMANDTURNSIGNALLEFT_MASK   0x2
+#define DISPLAYCOMMANDTURNSIGNALLEFT_SHIFT  1
+#define DISPLAYCOMMANDLIGHTHIGHBEAM_MASK    0x4
+#define DISPLAYCOMMANDLIGHTHIGHBEAM_SHIFT   2
+#define DISPLAYCOMMANDLIGHTONFOFF_MASK      0x8
+#define DISPLAYCOMMANDLIGHTONFOFF_SHIFT     3
 #define MANUFACTURERID_LSB_BYTE        6
 #define MANUFACTURERID_MSB_BYTE        7
 
-LevDisplayDataMsg::LevDisplayDataMsg() : LevBaseMainDataPageMsg(DISPLAYDATA_NUMBER) {
-    set8BitValue(RESERVED1_VALUE, RESERVED1_BYTE);
-    set8BitValue(RESERVED2_VALUE, RESERVED2_BYTE);
-}
+template<class T>
+LevBaseDisplayData<T>::LevBaseDisplayData() : CoreDataPage<T>() {}
 
-uint16_t LevDisplayDataMsg::getWheelCircumference() {
+template<class T>
+uint16_t LevBaseDisplayData<T>::getWheelCircumference() {
     return this->get16BitValue(WHEELCIRCUMFERENCE_LSB_BYTE,
             WHEELCIRCUMFERENCE_MSB_BYTE, WHEELCIRCUMFERENCE_MASK);
 }
 
-uint8_t LevDisplayDataMsg::getCurrentAssistLevel() {
+template<class T>
+uint8_t LevBaseDisplayData<T>::getCurrentAssistLevel() {
     return this->get8BitValue(CURRENTASSISTLEVEL_BYTE, CURRENTASSISTLEVEL_MASK,
             CURRENTASSISTLEVEL_SHIFT);
 }
 
-uint8_t LevDisplayDataMsg::getCurrentRegenerativeLevel() {
+template<class T>
+uint8_t LevBaseDisplayData<T>::getCurrentRegenerativeLevel() {
     return this->get8BitValue(CURRENTREGENERATIVELEVEL_BYTE,
             CURRENTREGENERATIVELEVEL_MASK);
 }
 
-uint8_t LevDisplayDataMsg::getCurrentRearGear() {
+template<class T>
+uint8_t LevBaseDisplayData<T>::getCurrentRearGear() {
     // This is a 16 bit call because the 4 bits spans 2 bytes
     return (uint8_t)this->get16BitValue(CURRENTREARGEAR_LSB_BYTE,
             CURRENTREARGEAR_MSB_BYTE, CURRENTREARGEAR_MASK,
             CURRENTREARGEAR_SHIFT);
 }
 
-uint8_t LevDisplayDataMsg::getCurrentFrontGear() {
+template<class T>
+uint8_t LevBaseDisplayData<T>::getCurrentFrontGear() {
     return this->get8BitValue(CURRENTFRONTGEAR_BYTE, CURRENTFRONTGEAR_MASK,
             CURRENTFRONTGEAR_SHIFT);
 }
 
-// TODO break apart bitfield
-uint8_t LevDisplayDataMsg::getCurrentLightMode() {
-    return this->get8BitValue(CURRENTLIGHTMODE_BYTE, CURRENTLIGHTMODE_MASK);
+template<class T>
+bool LevBaseDisplayData<T>::getDisplayCommandTurnSignalRight() {
+    return this->get8BitValue(DISPLAYCOMMAND_BYTE,
+            DISPLAYCOMMANDTURNSIGNALRIGHT_MASK);
 }
 
-uint16_t LevDisplayDataMsg::getManufacturerID() {
+template<class T>
+bool LevBaseDisplayData<T>::getDisplayCommandTurnSignalLeft() {
+    return this->get8BitValue(DISPLAYCOMMAND_BYTE,
+            DISPLAYCOMMANDTURNSIGNALLEFT_MASK,
+            DISPLAYCOMMANDTURNSIGNALLEFT_SHIFT);
+}
+
+template<class T>
+bool LevBaseDisplayData<T>::getDisplayCommandLightHighBeam() {
+    return this->get8BitValue(DISPLAYCOMMAND_BYTE,
+            DISPLAYCOMMANDLIGHTHIGHBEAM_MASK,
+            DISPLAYCOMMANDLIGHTHIGHBEAM_SHIFT);
+}
+
+template<class T>
+bool LevBaseDisplayData<T>::getDisplayCommandLightOnOff() {
+    return this->get8BitValue(DISPLAYCOMMAND_BYTE,
+            DISPLAYCOMMANDLIGHTONFOFF_MASK,
+            DISPLAYCOMMANDLIGHTONFOFF_SHIFT);
+}
+
+template<class T>
+uint16_t LevBaseDisplayData<T>::getManufacturerID() {
     return this->get16BitValue(MANUFACTURERID_LSB_BYTE, MANUFACTURERID_MSB_BYTE);
 }
+
+template class LevBaseDisplayData<BroadcastData>;
+template class LevBaseDisplayData<BroadcastDataMsg>;
+
+LevDisplayDataMsg::LevDisplayDataMsg() : LevBaseMainDataPageMsg(DISPLAYDATA_NUMBER) {
+    set8BitValue(RESERVED1_VALUE, RESERVED1_BYTE);
+    set8BitValue(RESERVED2_VALUE, RESERVED2_BYTE);
+}
+
 
 void LevDisplayDataMsg::setWheelCircumference(uint16_t circumference) {
     set16BitValue(circumference, WHEELCIRCUMFERENCE_LSB_BYTE,
@@ -91,8 +132,27 @@ void LevDisplayDataMsg::setCurrentFrontGear(uint8_t gear) {
             CURRENTFRONTGEAR_SHIFT);
 }
 
-void LevDisplayDataMsg::setCurrentLightMode(uint8_t state) {
-    set8BitValue(state, CURRENTLIGHTMODE_BYTE, CURRENTLIGHTMODE_MASK);
+void LevDisplayDataMsg::setDisplayCommandTurnSignalRight(bool rightSignal) {
+    set8BitValue(rightSignal, DISPLAYCOMMAND_BYTE,
+            DISPLAYCOMMANDTURNSIGNALRIGHT_MASK);
+}
+
+void LevDisplayDataMsg::setDisplayCommandTurnSignalLeft(bool leftSignal) {
+    set8BitValue(leftSignal, DISPLAYCOMMAND_BYTE,
+            DISPLAYCOMMANDTURNSIGNALLEFT_MASK,
+            DISPLAYCOMMANDTURNSIGNALLEFT_SHIFT);
+}
+
+void LevDisplayDataMsg::setDisplayCommandLightHighBeam(bool highBeam) {
+    set8BitValue(highBeam, DISPLAYCOMMAND_BYTE,
+            DISPLAYCOMMANDLIGHTHIGHBEAM_MASK,
+            DISPLAYCOMMANDLIGHTHIGHBEAM_SHIFT);
+}
+
+void LevDisplayDataMsg::setDisplayCommandLightOnOff(bool onOff) {
+    set8BitValue(onOff, DISPLAYCOMMAND_BYTE,
+            DISPLAYCOMMANDLIGHTONFOFF_MASK,
+            DISPLAYCOMMANDLIGHTONFOFF_SHIFT);
 }
 
 void LevDisplayDataMsg::setManufacturerID(uint16_t id) {
