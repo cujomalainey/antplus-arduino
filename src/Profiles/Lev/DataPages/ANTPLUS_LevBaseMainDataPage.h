@@ -9,7 +9,8 @@ public:
     explicit LevBaseMainDataPage(AntRxDataResponse& dp);
 };
 
-class LevBaseMainDataPageMsg : public BaseDataPageMsg<AcknowledgedDataMsg> {
+template<class T>
+class LevBaseMainDataPageMsg : public BaseDataPageMsg<T> {
 public:
     explicit LevBaseMainDataPageMsg(uint8_t dataPageNumber);
 protected:

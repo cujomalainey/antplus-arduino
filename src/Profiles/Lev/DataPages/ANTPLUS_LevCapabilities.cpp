@@ -9,21 +9,50 @@
 #define WHEELCIRCUMFERENCE_MSB_BYTE                       4
 #define WHEELCIRCUMFERENCE_MASK                           0xF
 
-LevCapabilities::LevCapabilities(AntRxDataResponse& dp) :
-    LevBaseMainDataPage(dp) {}
+template<class T>
+LevBaseCapabilities<T>::LevBaseCapabilities() : CoreDataPage<T>() {}
 
-uint8_t LevCapabilities::getNumberOfAssistModesSupported() {
+template<class T>
+uint8_t LevBaseCapabilities<T>::getNumberOfAssistModesSupported() {
     return this->get8BitValue(TRAVELMODESSUPPORTED_BYTE,
             TRAVELMODESSUPPORTED_NUMBERASSISTMODES_MASK,
             TRAVELMODESSUPPORTED_NUMBERASSISTMODES_SHIFT);
 }
 
-uint8_t LevCapabilities::getNumberOfRegenerativeModesSupported() {
+template<class T>
+uint8_t LevBaseCapabilities<T>::getNumberOfRegenerativeModesSupported() {
     return this->get8BitValue(TRAVELMODESSUPPORTED_BYTE,
             TRAVELMODESSUPPORTED_NUMBERREGENERATIVEMODES_MASK);
 }
 
-uint16_t LevCapabilities::getWheelCircumference() {
+template<class T>
+uint16_t LevBaseCapabilities<T>::getWheelCircumference() {
     return this->get16BitValue(WHEELCIRCUMFERENCE_LSB_BYTE,
+            WHEELCIRCUMFERENCE_MSB_BYTE, WHEELCIRCUMFERENCE_MASK);
+}
+
+template class LevBaseCapabilities<BroadcastData>;
+template class LevBaseCapabilities<BroadcastDataMsg>;
+
+LevCapabilities::LevCapabilities(AntRxDataResponse& dp) :
+    LevBaseMainDataPage(dp), LevBaseCapabilities<BroadcastData>() {}
+
+LevCapabilitiesMsg::LevCapabilitiesMsg() :
+    LevBaseMainDataPageMsg<BroadcastDataMsg>(LEVCAPABILITIES_NUMBER),
+    LevBaseCapabilities<BroadcastDataMsg>() {}
+
+void LevCapabilitiesMsg::setNumberOfAssistModesSupported(uint8_t modes) {
+    set8BitValue(modes, TRAVELMODESSUPPORTED_BYTE,
+            TRAVELMODESSUPPORTED_NUMBERASSISTMODES_MASK,
+            TRAVELMODESSUPPORTED_NUMBERASSISTMODES_SHIFT);
+}
+
+void LevCapabilitiesMsg::setNumberOfRegenerativeModesSupported(uint8_t modes) {
+    set8BitValue(modes, TRAVELMODESSUPPORTED_BYTE,
+            TRAVELMODESSUPPORTED_NUMBERREGENERATIVEMODES_MASK);
+}
+
+void LevCapabilitiesMsg::setWheelCircumference(uint16_t circumference) {
+    set16BitValue(circumference, WHEELCIRCUMFERENCE_LSB_BYTE,
             WHEELCIRCUMFERENCE_MSB_BYTE, WHEELCIRCUMFERENCE_MASK);
 }

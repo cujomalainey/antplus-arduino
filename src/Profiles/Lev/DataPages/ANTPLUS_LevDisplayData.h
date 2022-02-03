@@ -25,7 +25,7 @@ public:
     explicit LevDisplayData(AntRxDataResponse& dp);
 };
 
-class LevDisplayDataMsg : public LevBaseMainDataPageMsg, public LevBaseDisplayData<BroadcastDataMsg> {
+class LevDisplayDataMsg : public LevBaseMainDataPageMsg<AcknowledgedDataMsg>, public LevBaseDisplayData<AcknowledgedDataMsg> {
 public:
     LevDisplayDataMsg();
     void setWheelCircumference(uint16_t circumference);

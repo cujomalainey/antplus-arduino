@@ -4,8 +4,12 @@
 LevBaseMainDataPage::LevBaseMainDataPage(AntRxDataResponse& dp) :
     BaseDataPage<BroadcastData>(dp) {}
 
-LevBaseMainDataPageMsg::LevBaseMainDataPageMsg(uint8_t dataPageNumber) :
-    BaseDataPageMsg<AcknowledgedDataMsg>() {
-    setDataBuffer(_buffer);
-    set8BitValue(dataPageNumber, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+template<class T>
+LevBaseMainDataPageMsg<T>::LevBaseMainDataPageMsg(uint8_t dataPageNumber) :
+    BaseDataPageMsg<T>() {
+    this->setDataBuffer(_buffer);
+    this->set8BitValue(dataPageNumber, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
 }
+
+template class LevBaseMainDataPageMsg<BroadcastDataMsg>;
+template class LevBaseMainDataPageMsg<AcknowledgedDataMsg>;

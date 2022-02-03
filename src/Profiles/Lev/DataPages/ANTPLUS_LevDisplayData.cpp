@@ -98,10 +98,10 @@ uint16_t LevBaseDisplayData<T>::getManufacturerID() {
     return this->get16BitValue(MANUFACTURERID_LSB_BYTE, MANUFACTURERID_MSB_BYTE);
 }
 
-template class LevBaseDisplayData<BroadcastData>;
-template class LevBaseDisplayData<BroadcastDataMsg>;
+template class LevBaseDisplayData<AcknowledgedData>;
+template class LevBaseDisplayData<AcknowledgedDataMsg>;
 
-LevDisplayDataMsg::LevDisplayDataMsg() : LevBaseMainDataPageMsg(DISPLAYDATA_NUMBER) {
+LevDisplayDataMsg::LevDisplayDataMsg() : LevBaseMainDataPageMsg<AcknowledgedDataMsg>(DISPLAYDATA_NUMBER), LevBaseDisplayData() {
     set8BitValue(RESERVED1_VALUE, RESERVED1_BYTE);
     set8BitValue(RESERVED2_VALUE, RESERVED2_BYTE);
 }
