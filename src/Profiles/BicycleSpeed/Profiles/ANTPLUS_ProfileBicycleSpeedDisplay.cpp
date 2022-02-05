@@ -28,22 +28,22 @@ bool ProfileBicycleSpeedDisplay::handleDataPage(BicycleSpeedBaseMainDataPage& dp
     bool called = false;
 
     switch (dataPage) {
-    case BICYCLESPEED_DEFAULT_NUMBER:
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_DEFAULT_NUMBER:
         called = handleDefault(dp);
         break;
-    case BICYCLESPEED_CUMULATIVEOPERATINGTIME_NUMBER:
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_CUMULATIVEOPERATINGTIME_NUMBER:
         called = handleCumulativeOperatingTime(dp);
         break;
-    case BICYCLESPEED_MANUFACTURERID_NUMBER:
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_MANUFACTURERID_NUMBER:
         called = handleManufacturerID(dp);
         break;
-    case BICYCLESPEED_PRODUCTID_NUMBER:
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_PRODUCTID_NUMBER:
         called = handleProductID(dp);
         break;
-    case BICYCLESPEED_BATTERYSTATUS_NUMBER:
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_BATTERYSTATUS_NUMBER:
         called = handleBatteryStatus(dp);
         break;
-    case BICYCLESPEED_MOTIONANDSPEED_NUMBER:
+    case ANTPLUS_BICYCLESPEED_DATAPAGE_MOTIONANDSPEED_NUMBER:
         called = handleMotionAndSpeed(dp);
         break;
     }
