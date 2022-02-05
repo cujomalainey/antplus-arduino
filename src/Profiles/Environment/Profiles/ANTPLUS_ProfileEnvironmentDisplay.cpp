@@ -29,10 +29,10 @@ bool ProfileEnvironmentDisplay::handleDataPage(EnvironmentBaseDataPage& dp) {
     bool called = false;
 
     switch (dataPage) {
-        case ENVIRONMENT_GENERALINFORMATION_NUMBER:
+        case ANTPLUS_ENVIRONMENT_DATAPAGE_ENVIRONMENT_GENERALINFORMATION_NUMBER:
             called = handleGeneralInformation(dp);
             break;
-        case ENVIRONMENT_TEMPERATURE_NUMBER:
+        case ANTPLUS_ENVIRONMENT_DATAPAGE_ENVIRONMENT_TEMPERATURE_NUMBER:
             called = handleTemperature(dp);
             break;
         case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
