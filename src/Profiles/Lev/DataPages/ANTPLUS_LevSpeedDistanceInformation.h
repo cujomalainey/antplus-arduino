@@ -3,10 +3,22 @@
 
 #include <Profiles/Lev/DataPages/ANTPLUS_LevBaseSpeedDistanceInformation.h>
 
-class LevSpeedDistanceInformation : public LevBaseSpeedDistanceInformation {
+template<class T>
+class LevInternalSpeedDistanceInformation : virtual public CoreDataPage<T> {
+public:
+    LevInternalSpeedDistanceInformation();
+    uint16_t getRemainingRange(); // in km
+};
+
+class LevSpeedDistanceInformation : public LevBaseSpeedDistanceInformation, public LevInternalSpeedDistanceInformation<BroadcastData> {
 public:
     explicit LevSpeedDistanceInformation(AntRxDataResponse& dp);
-    uint16_t getRemainingRange(); // in km
+};
+
+class LevSpeedDistanceInformationMsg : public LevBaseSpeedDistanceInformationMsg, public LevInternalSpeedDistanceInformation<BroadcastDataMsg> {
+public:
+    LevSpeedDistanceInformationMsg();
+    void setRemainingRange(uint16_t remainingRange); // in km
 };
 
 #endif // ANTPLUS_LEVSPEEDDISTANCEINFORMATION_h

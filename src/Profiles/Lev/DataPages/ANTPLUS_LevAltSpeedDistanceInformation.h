@@ -3,10 +3,22 @@
 
 #include <Profiles/Lev/DataPages/ANTPLUS_LevBaseSpeedDistanceInformation.h>
 
-class LevAltSpeedDistanceInformation : public LevBaseSpeedDistanceInformation {
+template<class T>
+class LevBaseAltSpeedDistanceInformation : virtual public CoreDataPage<T> {
+public:
+    LevBaseAltSpeedDistanceInformation();
+    uint16_t getFuelConsumption(); // in Wh/km
+};
+
+class LevAltSpeedDistanceInformation : public LevBaseSpeedDistanceInformation, public LevBaseAltSpeedDistanceInformation<BroadcastData> {
 public:
     explicit LevAltSpeedDistanceInformation(AntRxDataResponse& dp);
-    uint16_t getFuelConsumption(); // in Wh/km
+};
+
+class LevAltSpeedDistanceInformationMsg : public LevBaseSpeedDistanceInformationMsg, public LevBaseAltSpeedDistanceInformation<BroadcastDataMsg> {
+public:
+    LevAltSpeedDistanceInformationMsg();
+    void setFuelConsumption(uint16_t consumption); // in Wh/km
 };
 
 #endif // ANTPLUS_LEVALTSPEEDDISTANCEINFORMATION_h

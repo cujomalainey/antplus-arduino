@@ -6,10 +6,28 @@
 #define REMAININGRANGE_MASK      0x0FFF
 
 /* Speed and Distance */
-LevSpeedDistanceInformation::LevSpeedDistanceInformation(AntRxDataResponse& dp) :
-    LevBaseSpeedDistanceInformation(dp) {}
+template<class T>
+LevInternalSpeedDistanceInformation<T>::LevInternalSpeedDistanceInformation() :
+    CoreDataPage<T>() {}
 
-uint16_t LevSpeedDistanceInformation::getRemainingRange() { // in km
+template<class T>
+uint16_t LevInternalSpeedDistanceInformation<T>::getRemainingRange() { // in km
     return this->get16BitValue(REMAININGRANGE_LSB_BYTE, REMAININGRANGE_MSB_BYTE,
+            REMAININGRANGE_MASK);
+}
+
+template class LevInternalSpeedDistanceInformation<BroadcastData>;
+template class LevInternalSpeedDistanceInformation<BroadcastDataMsg>;
+
+LevSpeedDistanceInformation::LevSpeedDistanceInformation(AntRxDataResponse& dp) :
+    LevBaseSpeedDistanceInformation(dp),
+    LevInternalSpeedDistanceInformation<BroadcastData>() {}
+
+LevSpeedDistanceInformationMsg::LevSpeedDistanceInformationMsg() :
+    LevBaseSpeedDistanceInformationMsg(SPEEDDISTANCEINFORMATION_NUMBER),
+    LevInternalSpeedDistanceInformation<BroadcastDataMsg>() {}
+
+void LevSpeedDistanceInformationMsg::setRemainingRange(uint16_t remainingRange) { // in km
+    set16BitValue(remainingRange, REMAININGRANGE_LSB_BYTE, REMAININGRANGE_MSB_BYTE,
             REMAININGRANGE_MASK);
 }

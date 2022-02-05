@@ -6,12 +6,30 @@
 #define FUELCONSUMPTION_MASK      0x0FFF
 
 /* Alt Speed and Distance */
-LevAltSpeedDistanceInformation::LevAltSpeedDistanceInformation(AntRxDataResponse& dp) :
-    LevBaseSpeedDistanceInformation(dp) {}
+template<class T>
+LevBaseAltSpeedDistanceInformation<T>::LevBaseAltSpeedDistanceInformation() :
+    CoreDataPage<T>() {}
 
-uint16_t LevAltSpeedDistanceInformation::getFuelConsumption() // in Wh/km
+template<class T>
+uint16_t LevBaseAltSpeedDistanceInformation<T>::getFuelConsumption() // in Wh/km
 {
     return this->get16BitValue(FUELCONSUMPTION_LSB_BYTE,
             FUELCONSUMPTION_MSB_BYTE, FUELCONSUMPTION_MASK);
 }
 
+template class LevBaseAltSpeedDistanceInformation<BroadcastData>;
+template class LevBaseAltSpeedDistanceInformation<BroadcastDataMsg>;
+
+LevAltSpeedDistanceInformation::LevAltSpeedDistanceInformation(AntRxDataResponse& dp) :
+    LevBaseSpeedDistanceInformation(dp),
+    LevBaseAltSpeedDistanceInformation<BroadcastData>() {}
+
+LevAltSpeedDistanceInformationMsg::LevAltSpeedDistanceInformationMsg() :
+    LevBaseSpeedDistanceInformationMsg(ALTSPEEDDISTANCEINFORMATION_NUMBER),
+    LevBaseAltSpeedDistanceInformation<BroadcastDataMsg>() {}
+
+void LevAltSpeedDistanceInformationMsg::setFuelConsumption(uint16_t consumption) // in Wh/km
+{
+    set16BitValue(consumption, FUELCONSUMPTION_LSB_BYTE,
+            FUELCONSUMPTION_MSB_BYTE, FUELCONSUMPTION_MASK);
+}

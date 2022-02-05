@@ -8,15 +8,36 @@
 #define LEVSPEED_MASK               0x0FFF
 
 /* Speed and Distance */
-LevBaseSpeedDistanceInformation::LevBaseSpeedDistanceInformation(AntRxDataResponse& dp) :
-    LevBaseMainDataPage(dp) {}
+template<class T>
+LevCoreSpeedDistanceInformation<T>::LevCoreSpeedDistanceInformation() :
+    CoreDataPage<T>() {}
 
-uint32_t LevBaseSpeedDistanceInformation::getOdometer() { // in km
+template<class T>
+uint32_t LevCoreSpeedDistanceInformation<T>::getOdometer() { // in km
     return this->get32BitValue(ODOMETER_LSB_BYTE, ODOMETER_MSB_BYTE);
 }
 
-uint16_t LevBaseSpeedDistanceInformation::getLevSpeed() // in 1/10 km/h
-{
+template<class T>
+uint16_t LevCoreSpeedDistanceInformation<T>::getLevSpeed() { // in 1/10 km/h
     return this->get16BitValue(LEVSPEED_LSB_BYTE, LEVSPEED_MSB_BYTE,
             LEVSPEED_MASK);
+}
+
+template class LevCoreSpeedDistanceInformation<BroadcastData>;
+template class LevCoreSpeedDistanceInformation<BroadcastDataMsg>;
+
+LevBaseSpeedDistanceInformation::LevBaseSpeedDistanceInformation(AntRxDataResponse& dp) :
+    LevBaseMainDataPage(dp),
+    LevCoreSpeedDistanceInformation<BroadcastData>() {}
+
+LevBaseSpeedDistanceInformationMsg::LevBaseSpeedDistanceInformationMsg(uint8_t dataPageNumber) :
+    LevBaseMainDataPageMsg<BroadcastDataMsg>(dataPageNumber),
+    LevCoreSpeedDistanceInformation<BroadcastDataMsg>() {}
+
+void LevBaseSpeedDistanceInformationMsg::setOdometer(uint32_t odometer) {
+    set32BitValue(odometer, ODOMETER_LSB_BYTE, ODOMETER_MSB_BYTE);
+}
+
+void LevBaseSpeedDistanceInformationMsg::setLevSpeed(uint16_t speed) {
+    set16BitValue(speed, LEVSPEED_LSB_BYTE, LEVSPEED_MSB_BYTE, LEVSPEED_MASK);
 }
