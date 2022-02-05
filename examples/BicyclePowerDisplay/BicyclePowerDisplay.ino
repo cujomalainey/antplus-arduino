@@ -43,6 +43,7 @@ void powerOnlyDataPageHandler(BicyclePowerStandardPowerOnly& msg, uintptr_t data
 void crankTorqueDataPageHandler(BicyclePowerStandardCrankTorque& msg, uintptr_t data);
 void wheelTorqueDataPageHandler(BicyclePowerStandardWheelTorque& msg, uintptr_t data);
 void pedalSmoothnessDataPageHandler(BicyclePowerTorqueEffectivenessAndPedalSmoothness& msg, uintptr_t data);
+void crankTorqueFrequencyDataPageHandler(BicyclePowerCrankTorqueFrequency& msg, uintptr_t data);
 
 void bicyclePowerBatteryStatus(uint8_t flags);
 void printStatus(uint8_t status);
@@ -66,7 +67,7 @@ void setup() {
 
     antSerial.begin(BAUD_RATE);
     ant.setSerial(antSerial);
-    delay(15000);
+    delay(5000);
 
     router.setDriver(&ant); // never touch ant again
     router.setAntPlusNetworkKey(NETWORK_KEY);
@@ -83,6 +84,7 @@ void setup() {
     bikePower.onBicyclePowerStandardCrankTorque(crankTorqueDataPageHandler);
     bikePower.onBicyclePowerStandardWheelTorque(wheelTorqueDataPageHandler);
     bikePower.onBicyclePowerTorqueEffectivenessAndPedalSmoothness(pedalSmoothnessDataPageHandler);
+    bikePower.onBicyclePowerCrankTorqueFrequency(crankTorqueFrequencyDataPageHandler);
     bikePower.begin();
     // wait for pair to complete
     uint8_t status = bikePower.waitForPair();
@@ -107,11 +109,30 @@ void printOrInvalid(uint8_t value, uint8_t invalidValue) {
     }
 }
 
+void crankTorqueFrequencyDataPageHandler(BicyclePowerCrankTorqueFrequency& msg, uintptr_t data) {
+    Serial.print("Slope: ");
+    Serial.println(msg.getSlope());
+    Serial.print("Timestamp: ");
+    Serial.println(msg.getTimeStamp());
+    Serial.print("Torque Ticks Stamp: ");
+    Serial.println(msg.getTorqueTicksStamp());
+}
+
 void batteryStatusDataPageHandler(BatteryStatus& msg, uintptr_t data) {
+    Serial.print("Number of Batteries: ");
+    Serial.println(msg.getNumberOfBatteries());
+    Serial.print("Battery Identifier: ");
+    Serial.println(msg.getBatteryIdentifier());
+    Serial.print("Cumulative Operating Time: ");
+    Serial.println(msg.getCumulativeOperatingTime());
     Serial.print("Fractional Battery Voltage: ");
     Serial.println(msg.getFractionalBatteryVoltage());
+    Serial.print("Coarse Battery Voltage: ");
+    Serial.println(msg.getCoarseBatteryVoltage());
     Serial.print("Battery Status: ");
     bicyclePowerBatteryStatus(msg.getBatteryStatus());
+    Serial.print("Cumulative Operating Time Resolution: ");
+    Serial.println(msg.getCumulativeOperatingTimeResolution());
 }
 
 void manufacturerIDDataPageHandler(ManufacturersInformation& msg, uintptr_t data) {
@@ -137,7 +158,10 @@ void bicyclePowerBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {
     Serial.println("===========================");
     Serial.print("DataPage: ");
     Serial.println(dp.getDataPageNumber());
-    Serial.print("Bike Power Event Count: ");
+    if (dp.getDataPageNumber() >= ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER) {
+        return;
+    }
+    Serial.print("Update Event Count: ");
     Serial.println(dp.getUpdateEventCount());
 }
 

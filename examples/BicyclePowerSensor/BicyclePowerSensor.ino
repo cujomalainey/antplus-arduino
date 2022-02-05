@@ -59,7 +59,7 @@ void setup() {
 
     antSerial.begin(BAUD_RATE);
     ant.setSerial(antSerial);
-    delay(15000);
+    delay(5000);
 
     router.setDriver(&ant); // never touch ant again
     router.setAntPlusNetworkKey(NETWORK_KEY);
