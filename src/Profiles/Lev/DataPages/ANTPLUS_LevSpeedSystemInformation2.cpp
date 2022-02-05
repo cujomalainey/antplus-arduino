@@ -7,17 +7,47 @@
 #define BATTERYSOC_BATTERYEMPTY_MASK         0x80
 #define PERCENTASSIST_BYTE                   5
 
-LevSpeedSystemInformation2::LevSpeedSystemInformation2(AntRxDataResponse& dp) :
-    LevBaseSpeedSystemInformation(dp) {}
+template<class T>
+LevBaseSpeedSystemInformation2<T>::LevBaseSpeedSystemInformation2() :
+    CoreDataPage<T>() {}
 
-uint8_t LevSpeedSystemInformation2::getBatterySOC() {
+template<class T>
+uint8_t LevBaseSpeedSystemInformation2<T>::getBatterySOC() {
     return this->get8BitValue(BATTERYSOC_BYTE, BATTERYSOC_STATEOFCHARGE_MASK);
 }
 
-uint8_t LevSpeedSystemInformation2::getBatteryEmptyWarning() {
-    return this->get8BitValue(BATTERYSOC_BYTE, BATTERYSOC_BATTERYEMPTY_MASK, BATTERYSOC_BATTERYEMPTY_SHIFT);
+template<class T>
+uint8_t LevBaseSpeedSystemInformation2<T>::getBatteryEmptyWarning() {
+    return this->get8BitValue(BATTERYSOC_BYTE,
+            BATTERYSOC_BATTERYEMPTY_MASK,
+            BATTERYSOC_BATTERYEMPTY_SHIFT);
 }
 
-uint8_t LevSpeedSystemInformation2::getPercentAssist() {
+template<class T>
+uint8_t LevBaseSpeedSystemInformation2<T>::getPercentAssist() {
     return this->get8BitValue(PERCENTASSIST_BYTE);
+}
+
+template class LevBaseSpeedSystemInformation2<BroadcastData>;
+template class LevBaseSpeedSystemInformation2<BroadcastDataMsg>;
+
+LevSpeedSystemInformation2::LevSpeedSystemInformation2(AntRxDataResponse& dp) :
+    LevBaseSpeedSystemInformation(dp),
+    LevBaseSpeedSystemInformation2<BroadcastData>() {}
+
+LevSpeedSystemInformation2Msg::LevSpeedSystemInformation2Msg() :
+    LevBaseSpeedSystemInformationMsg(SPEEDSYSTEMINFORMATION2_NUMBER),
+    LevBaseSpeedSystemInformation2<BroadcastDataMsg>() {}
+
+void LevSpeedSystemInformation2Msg::setBatterySOC(uint8_t soc) {
+    set8BitValue(soc, BATTERYSOC_BYTE, BATTERYSOC_STATEOFCHARGE_MASK);
+}
+
+void LevSpeedSystemInformation2Msg::setBatteryEmptyWarning(uint8_t warning) {
+    set8BitValue(warning, BATTERYSOC_BYTE, BATTERYSOC_BATTERYEMPTY_MASK,
+            BATTERYSOC_BATTERYEMPTY_SHIFT);
+}
+
+void LevSpeedSystemInformation2Msg::setPercentAssist(uint8_t percent) {
+    set8BitValue(percent, PERCENTASSIST_BYTE);
 }
