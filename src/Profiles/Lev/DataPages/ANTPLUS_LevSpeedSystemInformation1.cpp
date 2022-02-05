@@ -1,5 +1,5 @@
 #include <Profiles/Lev/DataPages/ANTPLUS_LevSpeedSystemInformation1.h>
-#include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
+#include <Profiles/Lev/ANTPLUS_LevDefines.h>
 
 #define TEMPERATURESTATE_BYTE                          1
 #define TEMPERATURESTATE_BATTERYTEMPERATURE_MASK       0x7
@@ -56,7 +56,7 @@ LevSpeedSystemInformation1::LevSpeedSystemInformation1(AntRxDataResponse& dp) :
 }
 
 LevSpeedSystemInformation1Msg::LevSpeedSystemInformation1Msg() :
-    LevBaseSpeedSystemInformationMsg(SPEEDSYSTEMINFORMATION1_NUMBER),
+    LevBaseSpeedSystemInformationMsg(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_NUMBER),
     LevBaseSpeedSystemInformation1<BroadcastDataMsg>() {}
 
 void LevSpeedSystemInformation1Msg::setBatteryTemperatureState(uint8_t state) {

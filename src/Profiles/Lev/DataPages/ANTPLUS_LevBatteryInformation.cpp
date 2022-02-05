@@ -1,5 +1,5 @@
 #include <Profiles/Lev/DataPages/ANTPLUS_LevBatteryInformation.h>
-#include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
+#include <Profiles/Lev/ANTPLUS_LevDefines.h>
 
 #define RESERVED_BYTE                      1
 #define RESERVED_VALUE                     0xFF
@@ -49,7 +49,7 @@ LevBatteryInformation::LevBatteryInformation(AntRxDataResponse& dp) :
     LevBaseBatteryInformation<BroadcastData>() {}
 
 LevBatteryInformationMsg::LevBatteryInformationMsg() :
-    LevBaseMainDataPageMsg<BroadcastDataMsg>(BATTERYINFORMATION_NUMBER),
+    LevBaseMainDataPageMsg<BroadcastDataMsg>(ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_NUMBER),
     LevBaseBatteryInformation<BroadcastDataMsg>() {
     set8BitValue(RESERVED_VALUE, RESERVED_BYTE);
 }

@@ -1,5 +1,5 @@
 #include <Profiles/Lev/DataPages/ANTPLUS_LevCapabilities.h>
-#include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
+#include <Profiles/Lev/ANTPLUS_LevDefines.h>
 
 #define TRAVELMODESSUPPORTED_BYTE                         2
 #define TRAVELMODESSUPPORTED_NUMBERASSISTMODES_MASK       0x38
@@ -38,7 +38,7 @@ LevCapabilities::LevCapabilities(AntRxDataResponse& dp) :
     LevBaseMainDataPage(dp), LevBaseCapabilities<BroadcastData>() {}
 
 LevCapabilitiesMsg::LevCapabilitiesMsg() :
-    LevBaseMainDataPageMsg<BroadcastDataMsg>(LEVCAPABILITIES_NUMBER),
+    LevBaseMainDataPageMsg<BroadcastDataMsg>(ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_NUMBER),
     LevBaseCapabilities<BroadcastDataMsg>() {}
 
 void LevCapabilitiesMsg::setNumberOfAssistModesSupported(uint8_t modes) {

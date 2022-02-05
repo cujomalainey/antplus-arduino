@@ -38,22 +38,22 @@ bool ProfileLevDisplay::handleDataPage(LevBaseMainDataPage& dp) {
 
     switch (dataPage) {
 
-    case SPEEDSYSTEMINFORMATION1_NUMBER:
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_NUMBER:
         called = handleSpeedSystemInformation1(dp);
         break;
-    case SPEEDDISTANCEINFORMATION_NUMBER:
+    case ANTPLUS_LEV_DATAPAGE_SPEEDDISTANCEINFORMATION_NUMBER:
         called = handleSpeedDistanceInformation(dp);
         break;
-    case ALTSPEEDDISTANCEINFORMATION_NUMBER:
+    case ANTPLUS_LEV_DATAPAGE_ALTSPEEDDISTANCEINFORMATION_NUMBER:
         called = handleAltSpeedDistanceInformation(dp);
         break;
-    case SPEEDSYSTEMINFORMATION2_NUMBER:
+    case ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION2_NUMBER:
         called = handleSpeedSystemInformation2(dp);
         break;
-    case BATTERYINFORMATION_NUMBER:
+    case ANTPLUS_LEV_DATAPAGE_BATTERYINFORMATION_NUMBER:
         called = handleBatteryInformation(dp);
         break;
-    case LEVCAPABILITIES_NUMBER:
+    case ANTPLUS_LEV_DATAPAGE_LEVCAPABILITIES_NUMBER:
         called = handleCapabilities(dp);
         break;
     case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:

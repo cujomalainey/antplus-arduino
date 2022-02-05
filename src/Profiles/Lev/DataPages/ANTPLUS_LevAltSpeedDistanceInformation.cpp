@@ -1,5 +1,5 @@
 #include <Profiles/Lev/DataPages/ANTPLUS_LevAltSpeedDistanceInformation.h>
-#include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
+#include <Profiles/Lev/ANTPLUS_LevDefines.h>
 
 #define FUELCONSUMPTION_LSB_BYTE  4
 #define FUELCONSUMPTION_MSB_BYTE  5
@@ -25,7 +25,7 @@ LevAltSpeedDistanceInformation::LevAltSpeedDistanceInformation(AntRxDataResponse
     LevBaseAltSpeedDistanceInformation<BroadcastData>() {}
 
 LevAltSpeedDistanceInformationMsg::LevAltSpeedDistanceInformationMsg() :
-    LevBaseSpeedDistanceInformationMsg(ALTSPEEDDISTANCEINFORMATION_NUMBER),
+    LevBaseSpeedDistanceInformationMsg(ANTPLUS_LEV_DATAPAGE_ALTSPEEDDISTANCEINFORMATION_NUMBER),
     LevBaseAltSpeedDistanceInformation<BroadcastDataMsg>() {}
 
 void LevAltSpeedDistanceInformationMsg::setFuelConsumption(uint16_t consumption) // in Wh/km

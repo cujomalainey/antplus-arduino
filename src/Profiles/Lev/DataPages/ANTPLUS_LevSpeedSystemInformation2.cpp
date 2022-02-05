@@ -1,5 +1,5 @@
 #include <Profiles/Lev/DataPages/ANTPLUS_LevSpeedSystemInformation2.h>
-#include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
+#include <Profiles/Lev/ANTPLUS_LevDefines.h>
 
 #define BATTERYSOC_BYTE                      1
 #define BATTERYSOC_STATEOFCHARGE_MASK        0x7F
@@ -36,7 +36,7 @@ LevSpeedSystemInformation2::LevSpeedSystemInformation2(AntRxDataResponse& dp) :
     LevBaseSpeedSystemInformation2<BroadcastData>() {}
 
 LevSpeedSystemInformation2Msg::LevSpeedSystemInformation2Msg() :
-    LevBaseSpeedSystemInformationMsg(SPEEDSYSTEMINFORMATION2_NUMBER),
+    LevBaseSpeedSystemInformationMsg(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION2_NUMBER),
     LevBaseSpeedSystemInformation2<BroadcastDataMsg>() {}
 
 void LevSpeedSystemInformation2Msg::setBatterySOC(uint8_t soc) {

@@ -1,5 +1,5 @@
 #include <Profiles/Lev/DataPages/ANTPLUS_LevDisplayData.h>
-#include <Profiles/Lev/ANTPLUS_LevPrivateDefines.h>
+#include <Profiles/Lev/ANTPLUS_LevDefines.h>
 
 #define WHEELCIRCUMFERENCE_LSB_BYTE    1
 #define WHEELCIRCUMFERENCE_MSB_BYTE    2
@@ -101,7 +101,9 @@ uint16_t LevBaseDisplayData<T>::getManufacturerID() {
 template class LevBaseDisplayData<AcknowledgedData>;
 template class LevBaseDisplayData<AcknowledgedDataMsg>;
 
-LevDisplayDataMsg::LevDisplayDataMsg() : LevBaseMainDataPageMsg<AcknowledgedDataMsg>(DISPLAYDATA_NUMBER), LevBaseDisplayData() {
+LevDisplayDataMsg::LevDisplayDataMsg() :
+    LevBaseMainDataPageMsg<AcknowledgedDataMsg>(ANTPLUS_LEV_DATAPAGE_DISPLAYDATA_NUMBER),
+    LevBaseDisplayData() {
     set8BitValue(RESERVED1_VALUE, RESERVED1_BYTE);
     set8BitValue(RESERVED2_VALUE, RESERVED2_BYTE);
 }
