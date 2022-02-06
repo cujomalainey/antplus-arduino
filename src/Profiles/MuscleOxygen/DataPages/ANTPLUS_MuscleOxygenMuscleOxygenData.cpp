@@ -58,7 +58,7 @@ uint16_t MuscleOxygenBaseMuscleOxygenData<T>::getCurrentSaturatedHemoglobinPerce
 }
 
 MuscleOxygenMuscleOxygenDataMsg::MuscleOxygenMuscleOxygenDataMsg() :
-    MuscleOxygenBaseMainDataPageMsg(MUSCLEOXYGEN_MUSCLEOXYGENDATA_NUMBER),
+    MuscleOxygenBaseMainDataPageMsg(ANTPLUS_MUSCLEOXYGEN_DATAPAGE_MUSCLEOXYGENDATA_NUMBER),
     MuscleOxygenBaseMuscleOxygenData<BroadcastDataMsg>() {
     setTotalHemoglobinConcentration(
             ANTPLUS_MUSCLEOXYGEN_DATAPAGE_MUSCLEOXYGENDATA_TOTALHEMOGLOBINCONCENTRATION_INVALID);

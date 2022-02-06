@@ -24,7 +24,7 @@ void ProfileMuscleOxygenMonitor::setChannelConfig() {
 
 bool ProfileMuscleOxygenMonitor::isDataPageValid(uint8_t dataPage) {
     switch (dataPage) {
-    case MUSCLEOXYGEN_MUSCLEOXYGENDATA_NUMBER:
+    case ANTPLUS_MUSCLEOXYGEN_DATAPAGE_MUSCLEOXYGENDATA_NUMBER:
     case ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER:
     case ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER:
         return true;

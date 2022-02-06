@@ -1,5 +1,5 @@
 #include <Profiles/MuscleOxygen/DataPages/ANTPLUS_MuscleOxygenCommands.h>
-#include <Profiles/MuscleOxygen/ANTPLUS_MuscleOxygenPrivateDefines.h>
+#include <Profiles/MuscleOxygen/ANTPLUS_MuscleOxygenDefines.h>
 
 #define COMMANDID_BYTE 1
 #define RESERVED_BYTE 2
@@ -36,7 +36,7 @@ MuscleOxygenCommands::MuscleOxygenCommands(AntRxDataResponse& dp) :
     MuscleOxygenBaseCommands<BroadcastData>() {}
 
 MuscleOxygenCommandsMsg::MuscleOxygenCommandsMsg() :
-    MuscleOxygenBaseMainDataPageMsg(MUSCLEOXYGEN_COMMANDS_NUMBER),
+    MuscleOxygenBaseMainDataPageMsg(ANTPLUS_MUSCLEOXYGEN_DATAPAGE_COMMANDS_NUMBER),
     MuscleOxygenBaseCommands<BroadcastDataMsg>() {
     set8BitValue(RESERVED_VALUE, RESERVED_BYTE);
 }
