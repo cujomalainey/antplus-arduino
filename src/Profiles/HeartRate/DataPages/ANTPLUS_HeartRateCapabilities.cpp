@@ -1,5 +1,5 @@
 #include <Profiles/HeartRate/DataPages/ANTPLUS_HeartRateCapabilities.h>
-#include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
 
 #define FEATURESSUPPORTED_BYTE 2
 #define FEATURESENABLED_BYTE   3
@@ -27,7 +27,7 @@ HeartRateCapabilities::HeartRateCapabilities(AntRxDataResponse& dp) :
     HeartRateBaseCapabilities<BroadcastData>() {}
 
 HeartRateCapabilitiesMsg::HeartRateCapabilitiesMsg() :
-    HeartRateBaseMainDataPageMsg(HEARTRATE_CAPABILITIES_NUMBER),
+    HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_CAPABILITIES_NUMBER),
     HeartRateBaseCapabilities<BroadcastDataMsg>() {}
 
 void HeartRateCapabilitiesMsg::setFeaturesSupported(uint8_t supported) {

@@ -1,5 +1,5 @@
 #include <Profiles/HeartRate/DataPages/ANTPLUS_HeartRateBatteryStatus.h>
-#include <Profiles/HeartRate/ANTPLUS_HeartRatePrivateDefines.h>
+#include <Profiles/HeartRate/ANTPLUS_HeartRateDefines.h>
 
 #define BATTERYLEVEL_BYTE 1
 #define FRACTIONALBATTERYVOLTAGE_BYTE 2
@@ -43,8 +43,11 @@ HeartRateBatteryStatus::HeartRateBatteryStatus(AntRxDataResponse& dp) :
     HeartRateBaseBatteryStatus() {}
 
 HeartRateBatteryStatusMsg::HeartRateBatteryStatusMsg() :
-    HeartRateBaseMainDataPageMsg(HEARTRATE_BATTERYSTATUS_NUMBER),
+    HeartRateBaseMainDataPageMsg(ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_NUMBER),
     HeartRateBaseBatteryStatus<BroadcastDataMsg>() {
+    setBatteryLevel(ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYLEVEL_INVALID);
+    setCoarseBatteryVolage(ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_COARSEBATTERYVOLTAGE_INVALID);
+    setBatteryStatus(ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_INVALID);
 }
 
 void HeartRateBatteryStatusMsg::setBatteryLevel(uint8_t level) {

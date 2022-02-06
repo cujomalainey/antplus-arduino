@@ -73,12 +73,44 @@ void loop() {
 void batteryStatusDataPageHandler(HeartRateBatteryStatus& msg, uintptr_t data) {
     Serial.print("Battery Level: ");
     Serial.println(msg.getBatteryLevel());
+    if (msg.getBatteryLevel() == ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYLEVEL_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(msg.getBatteryLevel());
+    }
     Serial.print("Fractional Battery Voltage: ");
     Serial.println(msg.getFractionalBatteryVoltage());
     Serial.print("Coarse Battery Voltage: ");
-    Serial.println(msg.getCoarseBatteryVoltage());
+    if (msg.getCoarseBatteryVoltage() == ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_COARSEBATTERYVOLTAGE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(msg.getCoarseBatteryVoltage());
+    }
     Serial.print("Battery Status: ");
-    Serial.println(msg.getBatteryStatus());
+    uint8_t batteryStatus = msg.getBatteryStatus();
+    switch (batteryStatus) {
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_NEW:
+        Serial.println("New");
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_GOOD:
+        Serial.println("Good");
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_OK:
+        Serial.println("Ok");
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_LOW:
+        Serial.println("Low");
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_CRITICAL:
+        Serial.println("Critical");
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_INVALID:
+        Serial.println("Invalid");
+        break;
+    default:
+        Serial.println("Invalid Value");
+        break;
+    }
 }
 
 void capabilitiesDataPageHandler(HeartRateCapabilities& msg, uintptr_t data) {
