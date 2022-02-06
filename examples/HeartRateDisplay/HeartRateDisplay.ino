@@ -72,7 +72,6 @@ void loop() {
 
 void batteryStatusDataPageHandler(HeartRateBatteryStatus& msg, uintptr_t data) {
     Serial.print("Battery Level: ");
-    Serial.println(msg.getBatteryLevel());
     if (msg.getBatteryLevel() == ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYLEVEL_INVALID) {
         Serial.println("Invalid");
     } else {
