@@ -7,7 +7,7 @@
 #define TRAVELMODESSUPPORTED_NUMBERREGENERATIVEMODES_MASK 0x7
 #define WHEELCIRCUMFERENCE_LSB_BYTE                       3
 #define WHEELCIRCUMFERENCE_MSB_BYTE                       4
-#define WHEELCIRCUMFERENCE_MASK                           0xF
+#define WHEELCIRCUMFERENCE_MASK                           0xFFF
 
 template<class T>
 LevBaseCapabilities<T>::LevBaseCapabilities() : CoreDataPage<T>() {}

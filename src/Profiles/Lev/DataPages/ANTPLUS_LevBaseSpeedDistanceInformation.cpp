@@ -14,7 +14,7 @@ LevCoreSpeedDistanceInformation<T>::LevCoreSpeedDistanceInformation() :
 
 template<class T>
 uint32_t LevCoreSpeedDistanceInformation<T>::getOdometer() { // in km
-    return this->get32BitValue(ODOMETER_LSB_BYTE, ODOMETER_MSB_BYTE);
+    return this->get24BitValue(ODOMETER_LSB_BYTE, ODOMETER_MSB_BYTE);
 }
 
 template<class T>
@@ -35,7 +35,7 @@ LevBaseSpeedDistanceInformationMsg::LevBaseSpeedDistanceInformationMsg(uint8_t d
     LevCoreSpeedDistanceInformation<BroadcastDataMsg>() {}
 
 void LevBaseSpeedDistanceInformationMsg::setOdometer(uint32_t odometer) {
-    set32BitValue(odometer, ODOMETER_LSB_BYTE, ODOMETER_MSB_BYTE);
+    set24BitValue(odometer, ODOMETER_LSB_BYTE, ODOMETER_MSB_BYTE);
 }
 
 void LevBaseSpeedDistanceInformationMsg::setLevSpeed(uint16_t speed) {

@@ -10,6 +10,9 @@
 #define TEMPERATURESTATE_MOTORTEMPERATUREALERT_SHIFT   7
 #define TEMPERATURESTATE_MOTORTEMPERATUREALERT_MASK    0x80
 #define ERRORMESSAGE_BYTE                              5
+#define RESERVED_BYTE 7
+#define RESERVED_MASK 0xF
+#define RESERVED_SHIFT 4
 
 template<class T>
 LevBaseSpeedSystemInformation1<T>::LevBaseSpeedSystemInformation1() :
@@ -57,7 +60,9 @@ LevSpeedSystemInformation1::LevSpeedSystemInformation1(AntRxDataResponse& dp) :
 
 LevSpeedSystemInformation1Msg::LevSpeedSystemInformation1Msg() :
     LevBaseSpeedSystemInformationMsg(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION1_NUMBER),
-    LevBaseSpeedSystemInformation1<BroadcastDataMsg>() {}
+    LevBaseSpeedSystemInformation1<BroadcastDataMsg>() {
+    set8BitValue(RESERVED_BYTE, RESERVED_MASK, RESERVED_SHIFT);
+}
 
 void LevSpeedSystemInformation1Msg::setBatteryTemperatureState(uint8_t state) {
     set8BitValue(state, TEMPERATURESTATE_BYTE,

@@ -7,9 +7,9 @@
 #define CHARGINGCYCLECOUNT_MSB_BYTE        3
 #define CHARGINGCYCLECOUNT_MASK            0x0FFF
 #define FUELCONSUMPTION_LSB_BYTE           4
-#define FUELCONSUMPTION_MSB_BYTE           3
-#define FUELCONSUMPTION_MASK               0xF0
-#define FUELCONSUMPTION_SHIFT              4
+#define FUELCONSUMPTION_MSN_BYTE           3
+#define FUELCONSUMPTION_MSN_MASK           0xF0
+#define FUELCONSUMPTION_MSN_SHIFT          4
 #define BATTERYVOLTAGE_BYTE                5
 #define DISTANCEONCURRENTCHARGE_LSB_BYTE   6
 #define DISTANCEONCURRENTCHARGE_MSB_BYTE   7
@@ -23,11 +23,13 @@ uint16_t LevBaseBatteryInformation<T>::getChargingCycleCount() {
             CHARGINGCYCLECOUNT_MSB_BYTE, CHARGINGCYCLECOUNT_MASK);
 }
 
+// NOTE this a bit inverted field which results in the non-sense below
 template<class T>
 uint16_t LevBaseBatteryInformation<T>::getFuelConsumption() {
-    return this->get16BitValue(FUELCONSUMPTION_LSB_BYTE,
-            FUELCONSUMPTION_MSB_BYTE, FUELCONSUMPTION_MASK,
-            FUELCONSUMPTION_SHIFT);
+    return this->get8BitValue(FUELCONSUMPTION_LSB_BYTE) |
+        (((uint16_t)this->get8BitValue(FUELCONSUMPTION_MSN_BYTE,
+                            FUELCONSUMPTION_MSN_MASK,
+                            FUELCONSUMPTION_MSN_SHIFT)) << BITS_IN_BYTE);
 }
 
 template<class T>
@@ -60,11 +62,12 @@ void LevBatteryInformationMsg::setChargingCycleCount(uint16_t cycleCount) {
             CHARGINGCYCLECOUNT_MASK);
 }
 
+// NOTE this a bit inverted field which results in the non-sense below
 void LevBatteryInformationMsg::setFuelConsumption(uint16_t consumption) {
-    set16BitValue(consumption, FUELCONSUMPTION_LSB_BYTE,
-            FUELCONSUMPTION_MSB_BYTE,
-            FUELCONSUMPTION_MASK,
-            FUELCONSUMPTION_SHIFT);
+    set8BitValue(consumption & 0xFF, FUELCONSUMPTION_LSB_BYTE);
+    set8BitValue(consumption >> BITS_IN_BYTE, FUELCONSUMPTION_MSN_BYTE,
+            FUELCONSUMPTION_MSN_MASK,
+            FUELCONSUMPTION_MSN_SHIFT);
 }
 
 void LevBatteryInformationMsg::setBatteryVoltage(uint8_t voltage) {

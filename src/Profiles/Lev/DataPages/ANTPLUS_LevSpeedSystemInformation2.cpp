@@ -6,6 +6,9 @@
 #define BATTERYSOC_BATTERYEMPTY_SHIFT        7
 #define BATTERYSOC_BATTERYEMPTY_MASK         0x80
 #define PERCENTASSIST_BYTE                   5
+#define RESERVED_BYTE 7
+#define RESERVED_MASK 0xF
+#define RESERVED_SHIFT 4
 
 template<class T>
 LevBaseSpeedSystemInformation2<T>::LevBaseSpeedSystemInformation2() :
@@ -37,7 +40,9 @@ LevSpeedSystemInformation2::LevSpeedSystemInformation2(AntRxDataResponse& dp) :
 
 LevSpeedSystemInformation2Msg::LevSpeedSystemInformation2Msg() :
     LevBaseSpeedSystemInformationMsg(ANTPLUS_LEV_DATAPAGE_SPEEDSYSTEMINFORMATION2_NUMBER),
-    LevBaseSpeedSystemInformation2<BroadcastDataMsg>() {}
+    LevBaseSpeedSystemInformation2<BroadcastDataMsg>() {
+    set8BitValue(RESERVED_BYTE, RESERVED_MASK, RESERVED_SHIFT);
+}
 
 void LevSpeedSystemInformation2Msg::setBatterySOC(uint8_t soc) {
     set8BitValue(soc, BATTERYSOC_BYTE, BATTERYSOC_STATEOFCHARGE_MASK);
