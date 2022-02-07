@@ -173,6 +173,7 @@ void levSpeedSystemInformation2Handler(LevSpeedSystemInformation2& msg, uintptr_
     } else {
         Serial.println(percent);
     }
+    printCommonSpeedSystemInformation(msg);
 }
 
 void levBatteryInformation(LevBatteryInformation& msg, uintptr_t data) {

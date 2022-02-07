@@ -8,7 +8,7 @@
 template<class T>
 class BaseDataPage : virtual public CoreDataPage<T> {
 public:
-    BaseDataPage<T>(AntRxDataResponse& msg);
+    explicit BaseDataPage<T>(AntRxDataResponse& msg);
 #ifndef UNIT_TEST
 protected:
 #endif // UNIT_TEST

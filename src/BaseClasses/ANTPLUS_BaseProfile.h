@@ -98,10 +98,10 @@ protected:
 private:
     void checkProfileStatus();
     AntPlusRouter* _router = NULL;
-    AntCallback<AntRxDataResponse&> _onDataPage;
-    AntCallback<AntRxDataResponse&> _onOtherDataPage;
-    AntCallback<ChannelEventResponse&> _onChannelEvent;
-    AntCallback<ChannelIdResponse&> _onChannelIdResponse;
+    AntCallback<AntRxDataResponse&> _onDataPage = {.func = NULL};
+    AntCallback<AntRxDataResponse&> _onOtherDataPage = {.func = NULL};
+    AntCallback<ChannelEventResponse&> _onChannelEvent = {.func = NULL};
+    AntCallback<ChannelIdResponse&> _onChannelIdResponse = {.func = NULL};
     uint8_t _channel = 0;
     uint8_t _channelType = 0;
     uint16_t _channelPeriod = 0;

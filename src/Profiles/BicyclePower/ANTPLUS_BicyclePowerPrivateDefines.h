@@ -1,0 +1,11 @@
+#ifndef ANTPLUS_BICYCLEPOWERPROFILEPRIVATEDEFINES_h
+#define ANTPLUS_BICYCLEPOWERPROFILEPRIVATEDEFINES_h
+
+#include <Profiles/BicyclePower/ANTPLUS_BicyclePowerDefines.h>
+
+/* Channel Config */
+#define BICYCLEPOWER_CHANNELPERIOD                          8182
+// 30 / 2.5 = 12
+#define BICYCLEPOWER_SEARCHTIMEOUT                          12
+
+#endif // ANTPLUS_BICYCLEPOWERPROFILEPRIVATEDEFINES_h

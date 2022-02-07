@@ -72,7 +72,7 @@ void AntPlusRouter::setProfile(uint8_t channel, BaseProfile* profile) {
     profile->setRouter(this);
 }
 
-void AntPlusRouter::removeProfile(BaseProfile *profile) {
+void AntPlusRouter::removeProfile(const BaseProfile *profile) {
     for (uint8_t i = 0; i < ANTPLUS_MAX_CHANNELS_POSSIBLE; i++) {
         if (_profiles[i] == profile) {
             removeProfileByChannel(i);
@@ -181,19 +181,19 @@ void AntPlusRouter::startRxSearch(void(*callback)(uint16_t, uint8_t, uint8_t, ui
     OpenRxScanMode osm;
     _searchCallback = callback;
     stopAllProfiles();
-    uc.setChannel(0); // TODO magic number (pull from ant-arduino once define is released)
+    uc.setChannel(OPEN_RX_SCAN_MODE_CHANNEL);
     send(uc);
-    ac.setChannel(0);
+    ac.setChannel(OPEN_RX_SCAN_MODE_CHANNEL);
     ac.setChannelType(CHANNEL_TYPE_UNIDIRECTIONAL_RECEIVE);
     ac.setChannelNetwork(ANTPLUS_NETWORKKEY_INDEX);
     send(ac);
-    ci.setChannel(0);
+    ci.setChannel(OPEN_RX_SCAN_MODE_CHANNEL);
     ci.setDeviceNumber(0);
     ci.setDeviceType(0);
     ci.setPairingBit(false);
     ci.setTransmissionType(0);
     send(ci);
-    crf.setChannel(0);
+    crf.setChannel(OPEN_RX_SCAN_MODE_CHANNEL);
     crf.setRfFrequency(ANTPLUS_CHANNEL_FREQUENCY);
     send(crf);
     lb.setConfig(LIB_CONFIG_RSSI | LIB_CONFIG_CHANNEL_ID);
@@ -205,12 +205,12 @@ void AntPlusRouter::stopRxSearch() {
     LibConfig lb;
     CloseChannel cc;
     UnAssignChannel uc;
-    cc.setChannel(0); // TODO magic number (pull from ant-arduino once define is released)
+    cc.setChannel(OPEN_RX_SCAN_MODE_CHANNEL);
     send(cc);
     lb.setConfig(0);
     send(lb);
     flushMessages();
-    uc.setChannel(0);
+    uc.setChannel(OPEN_RX_SCAN_MODE_CHANNEL);
     send(uc);
     // No need to reapply config as it will be sent on next begin call
     _searchCallback = NULL;

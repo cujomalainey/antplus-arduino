@@ -62,8 +62,29 @@ void searchCallback(uint16_t deviceNumber, uint8_t deviceType, uint8_t transmiss
     Serial.print(deviceNumber);
     Serial.print(" Device Type: ");
     switch (deviceType) {
+    case ANTPLUS_BICYCLEPOWER_DEVICETYPE:
+        Serial.println("Bicycle Power");
+        break;
+    case ANTPLUS_BICYCLESPEED_DEVICETYPE:
+        Serial.println("Bicycle Speed");
+        break;
+    case ANTPLUS_ENVIRONMENT_DEVICETYPE:
+        Serial.println("Environment");
+        break;
+    case ANTPLUS_FEC_REALTIMECHANNEL_DEVICETYPE:
+        Serial.println("Realtime Fitness Equiment");
+        break;
     case ANTPLUS_HEARTRATE_DEVICETYPE:
         Serial.println("Heart Rate");
+        break;
+    case ANTPLUS_LEV_DEVICETYPE:
+        Serial.println("Light Electric Vehicle");
+        break;
+    case ANTPLUS_MUSCLEOXYGEN_DEVICETYPE:
+        Serial.println("Muscle Oxygen");
+        break;
+    case ANTPLUS_SHIFTING_DEVICETYPE:
+        Serial.println("Shifting");
         break;
     default:
         Serial.println("Unknown");

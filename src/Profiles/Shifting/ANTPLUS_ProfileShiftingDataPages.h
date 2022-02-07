@@ -1,0 +1,6 @@
+#ifndef ANTPLUS_PROFILESHIFTINGDATAPAGES_h
+#define ANTPLUS_PROFILESHIFTINGDATAPAGES_h
+
+#include <Profiles/Shifting/DataPages/ANTPLUS_ShiftingShiftSystemStatus.h>
+
+#endif // ANTPLUS_PROFILESHIFTINGDATAPAGES_h

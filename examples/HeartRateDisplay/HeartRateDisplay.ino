@@ -72,13 +72,44 @@ void loop() {
 
 void batteryStatusDataPageHandler(HeartRateBatteryStatus& msg, uintptr_t data) {
     Serial.print("Battery Level: ");
-    Serial.println(msg.getBatteryLevel());
+    if (msg.getBatteryLevel() == ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYLEVEL_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(msg.getBatteryLevel());
+    }
     Serial.print("Fractional Battery Voltage: ");
     Serial.println(msg.getFractionalBatteryVoltage());
     Serial.print("Coarse Battery Voltage: ");
-    Serial.println(msg.getCoarseBatteryVoltage());
+    if (msg.getCoarseBatteryVoltage() == ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_COARSEBATTERYVOLTAGE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(msg.getCoarseBatteryVoltage());
+    }
     Serial.print("Battery Status: ");
-    Serial.println(msg.getBatteryStatus());
+    uint8_t batteryStatus = msg.getBatteryStatus();
+    switch (batteryStatus) {
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_NEW:
+        Serial.println("New");
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_GOOD:
+        Serial.println("Good");
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_OK:
+        Serial.println("Ok");
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_LOW:
+        Serial.println("Low");
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_CRITICAL:
+        Serial.println("Critical");
+        break;
+    case ANTPLUS_HEARTRATE_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_INVALID:
+        Serial.println("Invalid");
+        break;
+    default:
+        Serial.println("Invalid Value");
+        break;
+    }
 }
 
 void capabilitiesDataPageHandler(HeartRateCapabilities& msg, uintptr_t data) {
@@ -106,7 +137,11 @@ void manufacturerInformationDataPageHandler(HeartRateManufacturerInformation& ms
 
 void previousHeartBeatDataPageHandler(HeartRatePreviousHeartBeat& dp, uintptr_t data) {
     Serial.print("Manufacturer Specific Byte: ");
-    Serial.println(dp.getManufacturerSpecific());
+    if (dp.getManufacturerSpecific() == ANTPLUS_HEARTRATE_DATAPAGE_PREVIOUSHEARTBEAT_MANUFACTURERSPECIFIC_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(dp.getManufacturerSpecific());
+    }
     Serial.print("Previous Heart Beat Event Time: ");
     Serial.println(dp.getPreviousHeartBeatEventTime());
 }
@@ -122,11 +157,25 @@ void productInformationDataPageHandler(HeartRateProductInformation& msg, uintptr
 
 void swimIntervalSummary(HeartRateSwimIntervalSummary& msg, uintptr_t data) {
     Serial.print("Interval Average Heart Rate: ");
-    Serial.println(msg.getIntervalAverageHeartRate());
+    if (msg.getIntervalAverageHeartRate() == ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_INTERVALAVERAGEHEARTRATE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(msg.getIntervalAverageHeartRate());
+    }
+
     Serial.print("Interval Maximum Heart Rate: ");
-    Serial.println(msg.getIntervalMaximumHeartRate());
+    if (msg.getIntervalMaximumHeartRate() == ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_INTERVALMAXIMUMHEARTRATE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(msg.getIntervalMaximumHeartRate());
+    }
+
     Serial.print("Session Average Heart Rate: ");
-    Serial.println(msg.getSessionAverageHeartRate());
+    if (msg.getSessionAverageHeartRate() == ANTPLUS_HEARTRATE_DATAPAGE_SWIMINTERVALSUMMARY_SESSIONAVERAGEHEARTRATE_INVALID) {
+        Serial.println("Invalid");
+    } else {
+        Serial.println(msg.getSessionAverageHeartRate());
+    }
 }
 
 void heartRateBaseDataPageHandler(AntRxDataResponse& msg, uintptr_t data) {

@@ -1,7 +1,7 @@
-#include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
 #include <BaseClasses/ANTPLUS_BaseDataPage.h>
-#include <CommonDataPages/ANTPLUS_CommonDataPagePrivateDefines.h>
-#include <CommonDataPages/RX/ANTPLUS_RequestDataPage.h>
+#include <BaseClasses/ANTPLUS_BaseMasterProfile.h>
+#include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
+#include <CommonDataPages/ANTPLUS_RequestDataPage.h>
 
 BaseMasterProfile::BaseMasterProfile(uint16_t deviceNumber, uint8_t transmissionType) : BaseProfile(deviceNumber, transmissionType) {
 }
@@ -19,6 +19,7 @@ void BaseMasterProfile::onChannelEventResponse(ChannelEventResponse& msg) {
 void BaseMasterProfile::onAcknowledgedData(AcknowledgedData& msg) {
     BaseProfile::onAcknowledgedData(msg);
     BaseDataPage<AcknowledgedData> dp(msg);
+
     if (dp.getDataPageNumber() == ANTPLUS_COMMON_DATAPAGE_REQUESTDATAPAGE_NUMBER) {
         handleRequestDataPage(msg);
     }
@@ -30,10 +31,11 @@ void BaseMasterProfile::handleRequestDataPage(AcknowledgedData& msg) {
         // Datapage requested isn't supported, don't do anything
         return;
     }
-    _requestedCount = dp.getRequestedPageCount();
+    _requestedCount = dp.getRequestedTransmissionResponseCount();
     _requestedPage = dp.getRequestedPageNumber();
-    _isRequestAcknowledged = dp.getUseAcknowledgedMsgs();
+    _isRequestAcknowledged = dp.getRequestedTransmissionUseAcknowledged();
     _requestAcked = !dp.transmitTillAcknowledged();
+    // TODO handle command type
 }
 
 bool BaseMasterProfile::isRequestedPagePending() {
@@ -48,13 +50,22 @@ uint8_t BaseMasterProfile::getRequestedPage() {
 }
 
 bool BaseMasterProfile::isRequestedPageAcknowledged() {
-    return _isRequestAcknowledged;
+    return _isRequestAcknowledged && _ackMessagesAllowed;
 }
 
 void BaseMasterProfile::begin() {
     BaseProfile::begin();
     // send first datapage manually so we don't transmit 0s
     transmitNextDataPage();
+}
+
+void BaseMasterProfile::invalidateDataPageRequest() {
+    _requestedCount = 0;
+    _requestAcked = true;
+}
+
+void BaseMasterProfile::setAckMessageUsage(bool on) {
+    _ackMessagesAllowed = on;
 }
 
 void BaseMasterProfile::transmitMsg(BaseDataPageMsg<BroadcastDataMsg> &msg) {

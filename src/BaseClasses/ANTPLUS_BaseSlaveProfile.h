@@ -5,9 +5,7 @@
 
 class BaseSlaveProfile : public BaseProfile {
 public:
-    BaseSlaveProfile();
-    BaseSlaveProfile(uint16_t deviceNumber);
-    BaseSlaveProfile(uint16_t deviceNumber, uint8_t transmissionType);
+    explicit BaseSlaveProfile(uint16_t deviceNumber = 0, uint8_t transmissionType = 0);
     /**
      * Will return once the device either pairs or timesout its search
      */
