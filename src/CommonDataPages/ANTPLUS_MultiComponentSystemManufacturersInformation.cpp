@@ -2,6 +2,8 @@
 #include <CommonDataPages/ANTPLUS_CommonDataPageDefines.h>
 #include <ANTPLUS_PrivateDefines.h>
 
+#define RESERVED_BYTE 1
+#define RESERVED_VALUE 0xFF
 #define COMPONENTIDENTIFIER_BYTE 2
 #define COMPONENTIDENTIFIER_NUMBERCOMPONENTS_MASK 0x0F
 #define COMPONENTIDENTIFIER_IDENTIFIER_MASK  0xF0
@@ -58,6 +60,7 @@ MultiComponentSystemManufacturersInformationMsg::MultiComponentSystemManufacture
     set8BitValue(
             ANTPLUS_COMMON_DATAPAGE_MULTICOMPONENTSYSTEMMANUFACTURERSINFORMATION_NUMBER,
             ANTPLUS_DEFAULT_DATAPAGE_BYTE);
+    set8BitValue(RESERVED_VALUE, RESERVED_BYTE);
 }
 
 void MultiComponentSystemManufacturersInformationMsg::setNumberOfComponents(uint8_t count) {

@@ -62,10 +62,15 @@ void shiftSystemStatusMsgHandler(ShiftingShiftSystemStatusMsg& msg, uintptr_t da
     printDpMsg(1, "Shift System Status");
     msg.setTotalNumbersGearFront(1);
     msg.setTotalNumbersGearRear(10);
-
     msg.setCurrentGearFront(1);
     msg.setCurrentGearRear(_gear++ % 10);
     msg.setEventCount(_eventCount++);
+    msg.setInvalidInboardShiftCountRear(2);
+    msg.setInvalidOutboardShiftCountRear(3);
+    msg.setInvalidInboardShiftCountFront(4);
+    msg.setInvalidOutboardShiftCountFront(5);
+    msg.setShiftFailureCountRear(6);
+    msg.setShiftFailureCountFront(7);
 }
 
 void multiComponentSystemManufacturersInformationMsgHandler(MultiComponentSystemManufacturersInformationMsg& msg, uintptr_t data) {
@@ -93,6 +98,6 @@ void batteryStatusMsgHandler(BatteryStatusMsg& msg, uintptr_t data) {
     msg.setCumulativeOperatingTime(123);
     msg.setFractionalBatteryVoltage(12);
     msg.setCoarseBatteryVoltage(12);
-    msg.setBatteryStatus(0); // TODO defines?
-    msg.setCumulativeOperatingTimeResolution(12);
+    msg.setBatteryStatus(ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_BATTERYSTATUS_OK);
+    msg.setCumulativeOperatingTimeResolution(ANTPLUS_COMMON_DATAPAGE_BATTERYSTATUS_CUMULATIVEOPERATINGTIMERESOLUTION_2S);
 }
