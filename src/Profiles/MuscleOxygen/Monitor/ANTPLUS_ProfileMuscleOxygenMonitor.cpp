@@ -40,9 +40,11 @@ void ProfileMuscleOxygenMonitor::transmitNextDataPage() {
         transmitMuscleOxygenMuscleOxygenDataMsg();
     }
     else {
-        if ((_backgroundStep++ % _backgroundStepSize) == 0) {
-            transmitManufacturerInformationMsg();
+        if (++_backgroundStep == _backgroundStepSize) {
             _backgroundStep = 0;
+        }
+        if ((_backgroundStep % _backgroundStepSize) == 0) {
+            transmitManufacturerInformationMsg();
         } else if ((_backgroundStep % _backgroundStepSize) == 1) {
             transmitProductInformationMsg();
         } else if (_flags & ANTPLUS_MUSCLEOXYGEN_FLAGS_BATTERYSTATUS_SUPPORTED) {

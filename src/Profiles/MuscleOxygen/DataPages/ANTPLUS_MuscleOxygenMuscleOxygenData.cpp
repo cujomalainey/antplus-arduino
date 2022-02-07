@@ -4,6 +4,9 @@
 #define EVENTCOUNT_BYTE 1
 #define NOTIFICATIONS_BYTE 2
 #define CAPABILITIES_BYTE 3
+#define ANTFSSUPPORT_MASK 0x01
+#define MEASUREMENTINTERVAL_MASK 0x0E
+#define MEASUREMENTINTERVAL_SHIFT 1
 #define TOTALHEMOGLOBINCONCENTRATION_LSB_BYTE 4
 #define TOTALHEMOGLOBINCONCENTRATION_MSB_BYTE 5
 #define TOTALHEMOGLOBINCONCENTRATION_MASK     0x0FFF
@@ -30,8 +33,15 @@ uint8_t MuscleOxygenBaseMuscleOxygenData<T>::getNotifications() {
 }
 
 template<class T>
-uint8_t MuscleOxygenBaseMuscleOxygenData<T>::getCapabilities() {
-    return this->get8BitValue(CAPABILITIES_BYTE);
+uint8_t MuscleOxygenBaseMuscleOxygenData<T>::getAntFSSupport() {
+    return this->get8BitValue(CAPABILITIES_BYTE, ANTFSSUPPORT_MASK);
+}
+
+template<class T>
+uint8_t MuscleOxygenBaseMuscleOxygenData<T>::getMeasurementInterval() {
+    return this->get8BitValue(CAPABILITIES_BYTE,
+            MEASUREMENTINTERVAL_MASK,
+            MEASUREMENTINTERVAL_SHIFT);
 }
 
 template<class T>
@@ -76,8 +86,14 @@ void MuscleOxygenMuscleOxygenDataMsg::setNotifications(uint8_t notifications) {
     set8BitValue(notifications, NOTIFICATIONS_BYTE);
 }
 
-void MuscleOxygenMuscleOxygenDataMsg::setCapabilities(uint8_t capabilities) {
-    set8BitValue(capabilities, CAPABILITIES_BYTE);
+void MuscleOxygenMuscleOxygenDataMsg::setAntFSSupport(uint8_t support) {
+    set8BitValue(support, CAPABILITIES_BYTE, ANTFSSUPPORT_MASK);
+}
+
+void MuscleOxygenMuscleOxygenDataMsg::setMeasurementInterval(uint8_t interval) {
+    set8BitValue(interval, CAPABILITIES_BYTE,
+            MEASUREMENTINTERVAL_MASK,
+            MEASUREMENTINTERVAL_SHIFT);
 }
 
 void MuscleOxygenMuscleOxygenDataMsg::setTotalHemoglobinConcentration(uint16_t concentration) {

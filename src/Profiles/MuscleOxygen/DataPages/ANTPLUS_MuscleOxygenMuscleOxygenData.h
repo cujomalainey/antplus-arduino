@@ -9,7 +9,8 @@ public:
     MuscleOxygenBaseMuscleOxygenData();
     uint8_t getEventCount();
     uint8_t getNotifications();
-    uint8_t getCapabilities();
+    uint8_t getAntFSSupport();
+    uint8_t getMeasurementInterval();
     uint16_t getTotalHemoglobinConcentration();
     uint16_t getPreviousSaturatedHemoglobinPercentage();
     uint16_t getCurrentSaturatedHemoglobinPercentage();
@@ -20,7 +21,8 @@ public:
     MuscleOxygenMuscleOxygenDataMsg();
     void setEventCount(uint8_t n);
     void setNotifications(uint8_t notficications);
-    void setCapabilities(uint8_t capabilities);
+    void setAntFSSupport(uint8_t support);
+    void setMeasurementInterval(uint8_t interval);
     void setTotalHemoglobinConcentration(uint16_t concentration);
     void setPreviousSaturatedHemoglobinPercentage(uint16_t percent);
     void setCurrentSaturatedHemoglobinPercentage(uint16_t percent);

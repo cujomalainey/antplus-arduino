@@ -48,28 +48,40 @@ void loop() {
     router.loop();
 }
 
+void printDpMsg(int dp, const char* s) {
+    Serial.print("Sending DataPage: ");
+    Serial.print(dp);
+    Serial.print(" - ");
+    Serial.println(s);
+}
+
 void moxyCreateMsgHandler(MuscleOxygenMuscleOxygenDataMsg& msg, uintptr_t data)
 {
     const int lo = 500, hi = 2500;
     static uint16_t _c = lo;
     static uint8_t _eventCount = 0;
 
+    printDpMsg(ANTPLUS_SHIFTING_DATAPAGE_SHIFTSYSTEMSTATUS_NUMBER, "Muscle Oxygen Data");
     // demo data
     msg.setTotalHemoglobinConcentration(_c);
     msg.setCurrentSaturatedHemoglobinPercentage(_c++/4);
     msg.setEventCount(_eventCount++);
+    msg.setAntFSSupport(ANTPLUS_MUSCLEOXYGEN_DATAPAGE_MUSCLEOXYGENDATA_CAPABILITIES_ANTFSSUPPORT_SUPPORTED);
+    msg.setMeasurementInterval(ANTPLUS_MUSCLEOXYGEN_DATAPAGE_MUSCLEOXYGENDATA_CAPABILITIES_MEASUREMENTINTERVAL_1S);
 
     if (_c > hi)
         _c = lo;
 }
 
 void moxyCreateManufacturerInformationMsg(ManufacturersInformationMsg& msg, uintptr_t data) {
+    printDpMsg(ANTPLUS_COMMON_DATAPAGE_MANUFACTURERSINFORMATION_NUMBER, "Manufacturers Information");
     msg.setHWRevision(0x01);
     msg.setManufacturerId(0x1234);
     msg.setModelNumber(0x0001);
 }
 
 void moxyCreateProductInformationMsg(ProductInformationMsg& msg, uintptr_t data) {
+    printDpMsg(ANTPLUS_COMMON_DATAPAGE_PRODUCTINFORMATION_NUMBER, "Product Information");
     msg.setSerialNumber(0x12345678);
     msg.setSWRevisionMain(0x01);
     msg.setSWRevisionSupplemental(0x00);
