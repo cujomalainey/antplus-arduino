@@ -24,7 +24,7 @@ public:
 
 class LevBaseSpeedSystemInformationMsg : public LevBaseMainDataPageMsg<BroadcastDataMsg>, public LevCoreSpeedSystemInformation<BroadcastDataMsg> {
 public:
-    LevBaseSpeedSystemInformationMsg(uint8_t dataPageNumber);
+    explicit LevBaseSpeedSystemInformationMsg(uint8_t dataPageNumber);
     void setCurrentRegenerativeLevel(uint8_t level);
     void setCurrentAssistLevel(uint8_t level);
     void setSystemState(uint8_t state);

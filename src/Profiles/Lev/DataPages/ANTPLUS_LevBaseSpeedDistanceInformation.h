@@ -18,7 +18,7 @@ public:
 
 class LevBaseSpeedDistanceInformationMsg : public LevBaseMainDataPageMsg<BroadcastDataMsg>, public LevCoreSpeedDistanceInformation<BroadcastDataMsg> {
 public:
-    LevBaseSpeedDistanceInformationMsg(uint8_t dataPageNumber);
+    explicit LevBaseSpeedDistanceInformationMsg(uint8_t dataPageNumber);
     void setOdometer(uint32_t odometer); // in km
     void setLevSpeed(uint16_t speed); // in 1/10 km/h
 };
