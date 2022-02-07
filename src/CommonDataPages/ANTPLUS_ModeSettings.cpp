@@ -3,7 +3,7 @@
 #include <ANTPLUS_PrivateDefines.h>
 
 #define SPORTSMODE_BYTE     7
-#define RESERVED_BYTE       0xFF
+#define RESERVED_VALUE       0xFF
 
 template<class T>
 BaseModeSettings<T>::BaseModeSettings() : CoreDataPage<T>() {}
@@ -25,12 +25,12 @@ ModeSettingsMsg::ModeSettingsMsg() :
     BaseModeSettings<BroadcastDataMsg>() {
     setDataBuffer(_buffer);
     set8BitValue(ANTPLUS_COMMON_DATAPAGE_MODESETTINGS_NUMBER, ANTPLUS_DEFAULT_DATAPAGE_BYTE);
-    set8BitValue(RESERVED_BYTE, 1);
-    set8BitValue(RESERVED_BYTE, 2);
-    set8BitValue(RESERVED_BYTE, 3);
-    set8BitValue(RESERVED_BYTE, 4);
-    set8BitValue(RESERVED_BYTE, 5);
-    set8BitValue(RESERVED_BYTE, 6);
+    set8BitValue(RESERVED_VALUE, 1);
+    set8BitValue(RESERVED_VALUE, 2);
+    set8BitValue(RESERVED_VALUE, 3);
+    set8BitValue(RESERVED_VALUE, 4);
+    set8BitValue(RESERVED_VALUE, 5);
+    set8BitValue(RESERVED_VALUE, 6);
 }
 
 void ModeSettingsMsg::setSportMode(uint8_t sportsMode) {
