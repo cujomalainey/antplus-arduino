@@ -6,14 +6,6 @@ An Implementation of the Ant+ Network on top of [ant-arduino](https://github.com
 [![Build and Tests](https://github.com/cujomalainey/antplus-arduino/workflows/Build%20and%20Tests/badge.svg?branch=master&event=push)](https://github.com/cujomalainey/antplus-arduino/actions)
 [![BCH compliance](https://bettercodehub.com/edge/badge/cujomalainey/antplus-arduino?branch=master)](https://bettercodehub.com/)
 
-## News
-
-* 6/28/2020 v2.0.0 of ant-arduino released with support for mbed and softdevices
-* 8/20/2019 v1.0.0 released, master profiles now are available
-* 10/1/2017 v0.1.0 Version released, library added to managers
-* 9/24/2017 Proof of concept complete (for system design)
-* 9/4/2017 Project Started
-
 ## Roadmap
 
 * Build support for non-ANT+ channel interfacing
