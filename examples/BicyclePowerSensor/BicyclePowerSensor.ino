@@ -116,6 +116,9 @@ void powerOnlyDataPageHandler(BicyclePowerStandardPowerOnlyMsg& msg, uintptr_t d
     msg.setUpdateEventCount(eventCount++);
     msg.setAccumulatedPower(eventCount * 3);
     msg.setInstantaneousPower(eventCount * 2);
+    msg.setPedalPower(eventCount % 101);
+    msg.setPedalDifferentiation(eventCount / 3);
+    msg.setInstantaneousCadence(eventCount);
 }
 
 void crankTorqueDataPageHandler(BicyclePowerStandardCrankTorqueMsg& msg, uintptr_t data) {
