@@ -85,7 +85,7 @@ See [ant-arduino](https://github.com/cujomalainey/ant-arduino#configuration)
 
 ## Questions/Feedback
 
-Questions about this project should be posted to http://groups.google.com/group/antplus-api?pli=1 Be sure to provide as much detail as possible (e.g. what radios, firmware versions, configuration and code).
+Questions about this project should be posted to Github Discussion. Be sure to provide as much detail as possible (e.g. what radios, firmware versions, configuration and code).
 
 ## Consulting/Commercial Licenses
 At the current time there is zero support for commercial usage. Contact me via email if you are looking to use this code commercially.
