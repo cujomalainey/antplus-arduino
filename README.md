@@ -15,7 +15,7 @@ An Implementation of the Ant+ Network on top of [ant-arduino](https://github.com
 ## Example
 I have created several sketches of configuring the radio with the ant-arduino library. You can find these in the examples folder. Here's an example of configuring a channel with a NRF51 radio:
 
-```
+```c++
 AntWithCallbacks ant = AntWithCallbacks();
 AntPlusRouter router = AntPlusRouter();
 ProfileHeartRateMonitor hr = ProfileHeartRateMonitor(WILDCARD_DEVICE);
